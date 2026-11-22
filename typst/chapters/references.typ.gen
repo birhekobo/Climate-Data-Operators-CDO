@@ -1,0 +1,806 @@
+= References and Further Resources
+<references-and-further-resources>
+== Learning Objectives
+<learning-objectives>
+After reviewing this reference module, you will be able to:
+
+- Locate official CDO documentation and operator references
+- Identify appropriate climate data sources for your research
+- Understand NetCDF and GRIB data conventions
+- Access key software tools for climate data analysis
+- Troubleshoot common CDO issues
+- Follow best practices for climate data processing
+
+== A. Official CDO Documentation
+<a.-official-cdo-documentation>
+=== A.1 Primary CDO Resources
+<a.1-primary-cdo-resources>
+#figure(
+  align(center)[#table(
+    columns: (25.64%, 41.03%, 33.33%),
+    align: (auto,auto,auto,),
+    table.header([Resource], [URL / Location], [Description],),
+    table.hline(),
+    [CDO
+    Homepage], [https:\/\/code.mpimet.mpg.de/projects/cdo], [Project
+    page, downloads, documentation],
+    [CDO User
+    Guide], [https:\/\/code.mpimet.mpg.de/projects/cdo/embedded/index.html], [Complete
+    reference manual],
+    [CDO Git Repository], [https:\/\/github.com/MPI-MagDE/cdo], [Source
+    code and issue tracker],
+    [CDO Mailing
+    List], [https:\/\/code.mpimet.mpg.de/projects/cdo/lists], [User
+    support and announcements],
+  )]
+  , kind: table
+  )
+
+=== A.2 CDO Operator Categories
+<a.2-cdo-operator-categories>
+The complete CDO operator reference is organized into these categories:
+
+#figure(
+  align(center)[#table(
+    columns: (23.81%, 30.95%, 45.24%),
+    align: (auto,auto,auto,),
+    table.header([Category], [Description], [Example Operators],),
+    table.hline(),
+    [File Operations], [File manipulation, metadata], [`copy`, `info`,
+    `show`, `nmlist`],
+    [Selection], [Selecting data subsets], [`selname`, `seldate`,
+    `sellonlatbox`],
+    [Comparison], [Binary and relational], [`eq`, `ne`, `gt`, `lt`,
+    `ge`, `le`],
+    [Arithmetic], [Mathematical operations], [`add`, `sub`, `mul`,
+    `div`, `sqrt`],
+    [Statistics], [Statistical operators], [`mean`, `std`, `timpctl`,
+    `histcount`],
+    [Temporal], [Time dimension operations], [`daymean`, `monmean`,
+    `ymonsub`],
+    [Spatial], [Grid and space operations], [`remapbil`, `griddes`,
+    `fldmean`],
+    [Ensemble], [Multi-file statistics], [`ensmean`, `ensstd`,
+    `enspctl`],
+    [Vertical], [Level operations], [`vertmean`, `vertint`, `mlev`],
+    [Climate Indices], [Dedicated index operators], [`eca_fd`,
+    `eca_cdd`, `eca_r10mm`],
+  )]
+  , kind: table
+  )
+
+== B. NetCDF Documentation and CF Conventions
+<b.-netcdf-documentation-and-cf-conventions>
+=== B.1 NetCDF Resources
+<b.1-netcdf-resources>
+- #strong[NetCDF Official Site];:
+  https:\/\/www.unidata.ucar.edu/software/netcdf/
+- #strong[NetCDF User Guide];:
+  https:\/\/docs.unidata.ucar.edu/netcdf-c/current/
+- #strong[NetCDF Operators (NCO)];: http:\/\/nco.sourceforge.net/
+- #strong[NCO User Guide];: https:\/\/nco.readthedocs.io/en/latest/
+
+=== B.2 CF Conventions
+<b.2-cf-conventions>
+The Climate and Forecast (CF) conventions are the standard for climate
+and forecast data stored in NetCDF format.
+
+- #strong[CF Conventions Homepage];: https:\/\/cfconventions.org/
+- #strong[CF Metadata Conventions (PDF)];:
+  https:\/\/cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html
+- #strong[Standard Variable Names];:
+  https:\/\/cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html
+
+`{note} Always verify that your NetCDF files follow CF conventions. CDO and most climate analysis tools rely on CF-compliant metadata for correct operation.`
+
+=== B.3 Key CF Concepts
+<b.3-key-cf-concepts>
+- #strong[Coordinate variables];: Latitude (`lat`), longitude (`lon`),
+  time (`time`), vertical (`lev`/`plev`)
+- #strong[Standard names];: Standardized variable names like
+  `air_temperature`, `precipitation_amount`
+- #strong[Units];: CF-compliant units (K for temperature, kg m-2 s-1 for
+  precipitation rate, etc.)
+- #strong[Bounds];: Cell boundaries for grid cells and time intervals
+- #strong[Cell methods];: Description of how data was processed (e.g.,
+  `time: mean`)
+
+```bash
+# Check CF compliance of a file
+cdo nmlist temperature.nc | findstr "standard_name"
+cdo nmlist temperature.nc | findstr "units"
+cdo nmlist temperature.nc | findstr "cell_methods"
+```
+
+== C. GRIB Documentation and WMO Standards
+<c.-grib-documentation-and-wmo-standards>
+=== C.1 GRIB Resources
+<c.1-grib-resources>
+- #strong[GRIB Specification (WMO)];: https:\/\/github.com/wmo-im/GRIB2
+- #strong[ECMWF GRIB Guide];:
+  https:\/\/confluence.ecmwf.int/display/UDOC/GRIB+data+files
+- #strong[cfgrib (Python GRIB reader)];:
+  https:\/\/github.com/ecmwf/cfgrib
+
+=== C.2 Working with GRIB in CDO
+<c.2-working-with-grib-in-cdo>
+```bash
+# Get GRIB information
+cdo sinfo grib_file.grib
+
+# Convert GRIB to NetCDF
+cdo -f nc copy grib_file.grib netcdf_file.nc
+
+# Select GRIB parameters by shortName
+cdo selname,t grib_file.grib temperature.grib
+
+# Select by GRIB level
+cdo sellev,500 pressure_level.grib
+```
+
+#raw("{warning} GRIB files can contain multiple parameters, levels, and time steps in a single file. Always use `cdo sinfo` to understand the file structure before processing.")
+
+=== C.3 Key GRIB Concepts
+<c.3-key-grib-concepts>
+- #strong[GRIB Edition];: GRIB1 (older, limited), GRIB2 (current
+  standard)
+- #strong[Parameter];: Variable identified by parameter number (e.g.,
+  130 = temperature in GRIB1)
+- #strong[Level type];: Pressure level, surface, height above ground,
+  etc.
+- #strong[Data representation];: Grid type (regular lat-lon, Gaussian,
+  reduced Gaussian)
+- #strong[Bits per value];: Precision of packed data (more bits = higher
+  precision)
+
+== D. Climate Data Sources
+<d.-climate-data-sources>
+=== D.1 Reanalysis Datasets
+<d.1-reanalysis-datasets>
+#figure(
+  align(center)[#table(
+    columns: (19.15%, 21.28%, 25.53%, 17.02%, 17.02%),
+    align: (auto,auto,auto,auto,auto,),
+    table.header([Dataset], [Provider], [Resolution], [Period], [Access],),
+    table.hline(),
+    [ERA5], [ECMWF], [0.25
+    degree], [1940-present], [https:\/\/cds.climate.copernicus.eu],
+    [ERA-Interim], [ECMWF], [0.75
+    degree], [1979-2019], [https:\/\/apps.ecmwf.int/datasets],
+    [MERRA-2], [NASA GMAO], [0.5 x 0.625
+    degree], [1980-present], [https:\/\/disc.gsfc.nasa.gov],
+    [JRA-55], [JMA], [0.5625
+    degree], [1958-present], [https:\/\/jra.kishou.go.jp],
+    [NCEP/NCAR Reanalysis], [NOAA], [2.5
+    degree], [1948-present], [https:\/\/psl.noaa.gov/data/reanalysis],
+    [CFSR], [NOAA], [0.5
+    degree], [1979-present], [https:\/\/cfs.ncep.noaa.gov],
+  )]
+  , kind: table
+  )
+
+`{tip} ERA5 is generally preferred for most applications due to its high resolution, long record, and comprehensive validation. It has largely replaced ERA-Interim.`
+
+=== D.2 Gridded Observation Datasets
+<d.2-gridded-observation-datasets>
+#figure(
+  align(center)[#table(
+    columns: (19.15%, 21.28%, 25.53%, 17.02%, 17.02%),
+    align: (auto,auto,auto,auto,auto,),
+    table.header([Dataset], [Variable], [Resolution], [Period], [Access],),
+    table.hline(),
+    [CRU TS], [Temperature, precipitation], [0.5
+    degree], [1901-present], [https:\/\/crudata.uea.ac.uk/cru/data/hrg],
+    [GPCC], [Precipitation], [1.0/0.5/0.25
+    degree], [1891-present], [https:\/\/www.dwd.de/gpcc],
+    [GPCP], [Precipitation], [2.5/1.0
+    degree], [1979-present], [https:\/\/psl.noaa.gov/data/gridded/gpcp],
+    [CHIRPS], [Precipitation], [0.05
+    degree], [1981-present], [https:\/\/www.chc.ucsb.edu/data/chirps],
+    [CMAP], [Precipitation], [2.5
+    degree], [1979-present], [https:\/\/psl.noaa.gov/data/gridded],
+    [GISTEMP], [Temperature], [2 x 2
+    degree], [1880-present], [https:\/\/data.giss.nasa.gov/gistemp],
+    [HadCRUT5], [Temperature], [5
+    degree], [1850-present], [https:\/\/www.metoffice.gov.uk/hadobs],
+  )]
+  , kind: table
+  )
+
+=== D.3 CMIP6 and Climate Projections
+<d.3-cmip6-and-climate-projections>
+- #strong[CMIP6 Data Archive (ESGF)];:
+  https:\/\/esgf-node.llnl.gov/projects/esgf-llnl/
+- #strong[CDS CMIP6 Access];:
+  https:\/\/cds.climate.copernicus.eu/cdsapp\#!/dataset/projections-cmip6
+- #strong[CMIP6 Model Documentation];:
+  https:\/\/wcrp-cmip.github.io/CMIP6\_CVs/
+- #strong[CMIP6 ScenarioMIP];: https:\/\/esgf-node.llnl.gov/search/cmip6
+
+```bash
+# ESGF search and download tools
+# Option 1: CDS API (Python)
+# Option 2: esgf-pyclient (Python)
+# Option 3: synda (command line)
+```
+
+=== D.4 Regional Climate Data
+<d.4-regional-climate-data>
+#figure(
+  align(center)[#table(
+    columns: (22.86%, 25.71%, 28.57%, 22.86%),
+    align: (auto,auto,auto,auto,),
+    table.header([Region], [Dataset], [Provider], [Access],),
+    table.hline(),
+    [Europe], [E-OBS], [KNMI], [https:\/\/www.ecad.eu],
+    [Africa], [ARC2], [NOAA], [https:\/\/psl.noaa.gov/data/gridded/data.arc2.html],
+    [Africa], [ENACTS], [IRI], [https:\/\/iri.columbia.edu/resources/enacts],
+    [Asia], [APHRODITE], [Chuo
+    University], [http:\/\/www.chikyu.ac.jp/precip],
+    [South America], [PISCO], [SENAMHI
+    Peru], [https:\/\/pisco.iri.columbia.edu],
+    [Global], [WorldClim], [UC Berkeley], [https:\/\/www.worldclim.org],
+  )]
+  , kind: table
+  )
+
+== E. Books and Papers on Climate Data Analysis
+<e.-books-and-papers-on-climate-data-analysis>
+=== E.1 Essential Reading
+<e.1-essential-reading>
+- #strong[Wilks, D.S. (2019)];: "Statistical Methods in the Atmospheric
+  Sciences" (4th ed.), Academic Press. #emph[The definitive reference
+  for climate statistics.]
+- #strong[von Storch, H. & Zwiers, F.W. (1999)];: "Statistical Analysis
+  in Climate Research", Cambridge University Press. #emph[Comprehensive
+  statistical methods for climate data.]
+- #strong[Hartmann, D.L. (2016)];: "Global Physical Climatology" (2nd
+  ed.), Elsevier. #emph[Fundamental climate science background.]
+
+=== E.2 CDO-Specific Publications
+<e.2-cdo-specific-publications>
+- #strong[Schulzweida, U. (2023)];: "CDO User Guide",
+  https:\/\/code.mpimet.mpg.de/projects/cdo/embedded/index.html
+- #strong[Schulzweida, U. (2019)];: "CDO - Climate Data Operators",
+  https:\/\/doi.org/10.5281/zenodo.3539275
+
+=== E.3 Climate Extremes References
+<e.3-climate-extremes-references>
+- #strong[ETCCDI Indices];: https:\/\/www.wcrp-climate.org/etccdi
+- #strong[IPCC AR6 WG1 (2021)];: "Climate Change 2021: The Physical
+  Science Basis", Cambridge University Press.
+- #strong[Sillmann, J. et al.~(2013)];: "Climate extremes indices in the
+  CMIP5 multimodel ensemble", JGR Atmospheres, 118, 1718-1732.
+- #strong[Zhang, X. et al.~(2011)];: "Indices for monitoring changes in
+  extremes based on daily temperature and precipitation data", WIREs
+  Climate Change, 2, 851-870.
+
+`{note} The ETCCDI indices (described in Module 10) are the internationally accepted standard for climate extreme analysis. Always cite the relevant ETCCDI documentation when using these indices.`
+
+== F. Software Tools for Climate Data
+<f.-software-tools-for-climate-data>
+=== F.1 CDO Alternatives and Complements
+<f.1-cdo-alternatives-and-complements>
+#figure(
+  align(center)[#table(
+    columns: (15.38%, 33.33%, 25.64%, 25.64%),
+    align: (auto,auto,auto,auto,),
+    table.header([Tool], [Description], [Language], [Best For],),
+    table.hline(),
+    [#strong[NCO];], [NetCDF Operators], [C, CLI], [NetCDF file
+    manipulation, metadata editing],
+    [#strong[NCL];], [NCAR Command Language], [NCL Script], [Plotting,
+    analysis (legacy)],
+    [#strong[Ferret];], [Ocean/atmosphere analysis], [Ferret
+    Script], [Subsetting, regridding, visualization],
+    [#strong[Panoply];], [NetCDF viewer], [Java GUI], [Quick data
+    inspection, basic plots],
+    [#strong[Climate Data Store Toolbox];], [CDS tools], [Python], [ERA5
+    data access and analysis],
+    [#strong[xarray];], [Labeled arrays], [Python], [Flexible analysis,
+    integration with Python ecosystem],
+    [#strong[Iris];], [CF-compliant analysis], [Python], [CF-focused
+    climate analysis],
+    [#strong[cf-python];], [CF data model], [Python], [CF conventions
+    implementation],
+    [#strong[cfgrib];], [GRIB to Python], [Python], [Reading GRIB files
+    in Python],
+    [#strong[ecCodes];], [GRIB/BUFR
+    toolkit], [C/Python], [Encoding/decoding GRIB and BUFR],
+  )]
+  , kind: table
+  )
+
+=== F.2 Installation Commands
+<f.2-installation-commands>
+```bash
+# Conda environment (recommended for Python tools)
+conda create -n climate python=3.11
+conda activate climate
+conda install -c conda-forge cdo nco xarray netcdf4 matplotlib cartopy
+conda install -c conda-forge plotly pandas numpy jupyter
+
+# CDO standalone (Windows via conda)
+conda install -c conda-forge cdo
+
+# CDO on Ubuntu/Debian
+sudo apt-get install cdo
+
+# CDO on macOS
+brew install cdo
+```
+
+=== F.3 Python Environment Setup
+<f.3-python-environment-setup>
+```python
+# requirements.txt for climate analysis
+"""
+cdo
+xarray>=2023.0
+netCDF4
+matplotlib>=3.5
+cartopy>=0.20
+numpy
+pandas
+plotly
+jupyter
+scipy
+cfgrib
+cdsapi
+"""
+```
+
+== G. Glossary of Terms
+<g.-glossary-of-terms>
+#figure(
+  align(center)[#table(
+    columns: (33.33%, 66.67%),
+    align: (auto,auto,),
+    table.header([Term], [Definition],),
+    table.hline(),
+    [#strong[Anomaly];], [Deviation of a value from its climatological
+    mean],
+    [#strong[CF Conventions];], [Climate and Forecast metadata
+    conventions for NetCDF],
+    [#strong[Climatology];], [Long-term average of a climate variable
+    (usually 30 years)],
+    [#strong[CMIP];], [Coupled Model Intercomparison Project],
+    [#strong[Ensemble];], [Collection of model runs with different
+    initial conditions or physics],
+    [#strong[ESGF];], [Earth System Grid Federation - CMIP data
+    distribution],
+    [#strong[ETCCDI];], [Expert Team on Climate Change Detection and
+    Indices],
+    [#strong[GRIB];], [GRIdded Binary - WMO standard format for
+    meteorological data],
+    [#strong[NetCDF];], [Network Common Data Form - self-describing
+    scientific data format],
+    [#strong[Reanalysis];], [Gridded dataset combining observations with
+    model forecasts via data assimilation],
+    [#strong[Regridding];], [Interpolating data from one grid to
+    another],
+    [#strong[Remapping];], [Same as regridding (CDO terminology)],
+    [#strong[SPI];], [Standardized Precipitation Index],
+    [#strong[Trend];], [Long-term change in a variable, usually computed
+    by linear regression],
+    [#strong[Unstructured Grid];], [Grid without regular spatial
+    structure (e.g., triangular mesh)],
+  )]
+  , kind: table
+  )
+
+== H. Frequently Asked Questions (FAQ)
+<h.-frequently-asked-questions-faq>
+=== H.1 General CDO Questions
+<h.1-general-cdo-questions>
+#strong[Q: CDO says "Error: Unsupported grid type" - what does this
+mean?] A: Your file may use a grid type that CDO does not support for
+the requested operation. Try `cdo griddes` to see the grid type. For
+reduced Gaussian or unstructured grids, remap to a regular grid first.
+
+#strong[Q: How do I process very large files without running out of
+memory?] A: Use the `-L` flag for large-file mode, process data in
+chunks by year or variable, and use piped operations to avoid
+intermediate files.
+
+#strong[Q: What is the difference between `cdo mean` and `cdo timmean`?]
+A: `mean` averages over ALL dimensions. `timmean` averages only over the
+time dimension, preserving spatial structure.
+
+#strong[Q: How do I select a specific variable from a multi-variable
+file?] A: Use `cdo selname,varname input.nc output.nc` or
+`cdo selvar,varname input.nc output.nc`.
+
+#strong[Q: CDO is slow on my Windows machine. What can I do?] A: Use the
+`-P N` flag for parallel processing. Install via conda-forge (better
+optimization). Use pipes. Consider Windows Subsystem for Linux (WSL).
+
+=== H.2 Data-Specific Questions
+<h.2-data-specific-questions>
+#strong[Q: My NetCDF file has longitude values from 0 to 360. How do I
+convert to -180 to 180?] A: Use
+`cdo sellonlatbox,-180,180,-90,90 input.nc output.nc` or
+`cdo remapbil,r360x180 input.nc output.nc`.
+
+#strong[Q: How do I handle missing values in CDO?] A: CDO automatically
+recognizes missing values from the NetCDF `_FillValue` or missing\_value
+attribute. You can set missing values with `cdo setmissval,new_value`.
+
+#strong[Q: What do I do if my time axis is in "days since …" but I need
+dates?] A: CDO automatically interprets time units. Use `cdo showdate`
+to see calendar dates, `cdo showtime` for times.
+
+#strong[Q: My GRIB file won't load in CDO. What's wrong?] A: Check if
+ecCodes is installed (CDO needs it for GRIB2). Try `cdo -v` to verify
+GRIB support. Convert to NetCDF first.
+
+=== H.3 Error Troubleshooting
+<h.3-error-troubleshooting>
+#strong[Q: "Segmentation fault" when running CDO - what now?] A: This
+usually indicates a memory issue. Try: reduce parallel threads, add `-L`
+flag, process smaller chunks, update CDO to latest version.
+
+#strong[Q: "Error: Too many open files"] A: Increase your system's open
+file limit. On Linux: `ulimit -n 4096`. In pipes, ensure each operator
+completes before the next starts.
+
+#strong[Q: "Error: cdo remapbil: Input file contains grid cell corners?
+Use remapycon instead?"] A: This happens when the input has curvilinear
+coordinates. Try `remapycon` (conservative remapping for curvilinear
+grids) or preprocess with `cdo setgridtype,regular`.
+
+== I. Best Practices Checklist
+<i.-best-practices-checklist>
+=== I.1 Data Management
+<i.1-data-management>
+- ☐ Use descriptive filenames (e.g., `era5_t2m_1980_2020_monthly.nc`)
+- ☐ Keep raw data separate from processed data
+- ☐ Document processing steps in scripts (not manual commands)
+- ☐ Use version control (git) for analysis scripts
+- ☐ Maintain a data inventory (what, where, when, how)
+- ☐ Compress large files with `-z zip_5`
+- ☐ Verify data integrity after download (checksums)
+
+=== I.2 Workflow Practices
+<i.2-workflow-practices>
+- ☐ Always use `-O` flag in scripts (overwrite without prompting)
+- ☐ Use `-P N` for CPU-intensive operations
+- ☐ Pre-compute remapping weights when processing multiple files
+- ☐ Chain operations with pipes to avoid intermediate files
+- ☐ Log all processing steps with timestamps
+- ☐ Use error handling (`set -euo pipefail` in bash)
+- ☐ Test pipelines on small subsets before full data runs
+
+=== I.3 Quality Assurance
+<i.3-quality-assurance>
+- ☐ Inspect data with `cdo info` before processing
+- ☐ Check for missing values and outliers
+- ☐ Verify time axis with `cdo showdate`
+- ☐ Check grid description with `cdo griddes`
+- ☐ Validate results against known values or benchmarks
+- ☐ Document assumptions and thresholds used
+- ☐ Cross-check with independent datasets
+
+=== I.4 Reproducibility
+<i.4-reproducibility>
+- ☐ Save all processing commands in version-controlled scripts
+- ☐ Record software versions (CDO, Python libraries)
+- ☐ Document data sources with DOIs or access dates
+- ☐ Use random seeds where applicable
+- ☐ Package results with scripts and data citations
+- ☐ Create README files explaining the workflow
+
+== J. References Cited Throughout the Course
+<j.-references-cited-throughout-the-course>
+=== Module 1-3: Introduction and File Operations
+<module-1-3-introduction-and-file-operations>
+- CDO Project Page: https:\/\/code.mpimet.mpg.de/projects/cdo
+- NetCDF Format: https:\/\/www.unidata.ucar.edu/software/netcdf/
+- CF Conventions: https:\/\/cfconventions.org/
+
+=== Module 4: Data Selection
+<module-4-data-selection>
+- CDO Selection Operators:
+  https:\/\/code.mpimet.mpg.de/projects/cdo/embedded/index.html\#x1-480004.2
+- GRIB Parameter Database: https:\/\/apps.ecmwf.int/codes/grib/param-db/
+
+=== Module 5: Arithmetic Operations
+<module-5-arithmetic-operations>
+- CDO Expression Syntax:
+  https:\/\/code.mpimet.mpg.de/projects/cdo/embedded/index.html\#x1-700005.2
+
+=== Module 6: Comparison and Conditional Operators
+<module-6-comparison-and-conditional-operators>
+- CDO Comparison Operators:
+  https:\/\/code.mpimet.mpg.de/projects/cdo/embedded/index.html\#x1-610005.2
+
+=== Module 7: Temporal Operators
+<module-7-temporal-operators>
+- Schulzweida, U. (2023). Temporal Statistics. CDO User Guide.
+- Trenberth, K.E. (1983). What are the Seasons? BAMS, 64, 1276-1282.
+
+=== Module 8: Spatial Operators
+<module-8-spatial-operators>
+- Jones, P.W. (1999). First- and Second-Order Conservative Remapping
+  Schemes. MWR, 127, 2204-2210.
+- CDO Remapping Documentation:
+  https:\/\/code.mpimet.mpg.de/projects/cdo/embedded/index.html\#x1-870006.2
+
+=== Module 9: Statistical Operators
+<module-9-statistical-operators>
+- Wilks, D.S. (2019). Statistical Methods in the Atmospheric Sciences
+  (4th ed.). Academic Press.
+- CDO Statistics Documentation:
+  https:\/\/code.mpimet.mpg.de/projects/cdo/embedded/index.html\#x1-580005.2
+
+=== Module 10: Climate Indices and Extremes
+<module-10-climate-indices-and-extremes>
+- ETCCDI Indices: https:\/\/www.wcrp-climate.org/etccdi
+- Zhang, X. et al.~(2011). Indices for monitoring changes in extremes.
+  WIREs Climate Change, 2, 851-870.
+- Sillmann, J. et al.~(2013). Climate extremes indices in CMIP5. JGR
+  Atmospheres, 118, 1718-1732.
+- McKee, T.B. et al.~(1993). The relationship of drought frequency and
+  duration to time scales. AMS Conference.
+
+=== Module 11: Advanced Workflows and Automation
+<module-11-advanced-workflows-and-automation>
+- xarray Documentation: https:\/\/docs.xarray.dev/
+- Cartopy Documentation: https:\/\/scitools.org.uk/cartopy/
+- Plotly Documentation: https:\/\/plotly.com/python/
+- CDS API: https:\/\/cds.climate.copernicus.eu/api-how-to
+
+=== Module 12: Capstone Projects
+<module-12-capstone-projects>
+- GPCC Precipitation Data: https:\/\/www.dwd.de/gpcc
+- CHIRPS Precipitation Data: https:\/\/www.chc.ucsb.edu/data/chirps
+- CRU TS Temperature Data: https:\/\/crudata.uea.ac.uk/cru/data/hrg
+- ERA5 Reanalysis: https:\/\/cds.climate.copernicus.eu
+- CMIP6 Data: https:\/\/esgf-node.llnl.gov/projects/esgf-llnl/
+
+== K. Online Resources and Communities
+<k.-online-resources-and-communities>
+=== K.1 Forums and Q&A
+<k.1-forums-and-qa>
+- #strong[CDO Mailing List];:
+  https:\/\/code.mpimet.mpg.de/projects/cdo/lists - Official user
+  support
+- #strong[Stack Overflow (cdo tag)];:
+  https:\/\/stackoverflow.com/questions/tagged/cdo - Community Q&A
+- #strong[ResearchGate CDO Topics];:
+  https:\/\/www.researchgate.net/topics - Climate data analysis
+  discussions
+- #strong[GitHub Discussions];:
+  https:\/\/github.com/MPI-MagDE/cdo/discussions - Community discussions
+
+=== K.2 Tutorials and Courses
+<k.2-tutorials-and-courses>
+- #strong[CDO Examples Gallery];:
+  https:\/\/code.mpimet.mpg.de/projects/cdo/wiki/Examples - Official
+  examples
+- #strong[NCAR CDO Tutorial];:
+  https:\/\/www.cgd.ucar.edu/cert/cdo\_tutorial.pdf - Comprehensive
+  tutorial
+- #strong[ECMWF CDO Training];:
+  https:\/\/confluence.ecmwf.int/display/CUSF - ECMWF ODB/CDO resources
+- #strong[YouTube Tutorials];: Search "CDO climate data operators" for
+  video walkthroughs
+
+=== K.3 Blogs and Articles
+<k.3-blogs-and-articles>
+- #strong[Climate Data Guide (NCAR)];:
+  https:\/\/climatedataguide.ucar.edu - Dataset reviews and guidance
+- #strong[RealClimate];: https:\/\/www.realclimate.org - Climate science
+  commentary
+- #strong[Carbon Brief];: https:\/\/www.carbonbrief.org - Climate
+  science explained
+- #strong[Climate Lab Book];: https:\/\/www.climate-lab-book.ac.uk -
+  Visualization and analysis examples
+
+=== K.4 Conferences and Workshops
+<k.4-conferences-and-workshops>
+- #strong[EGU General Assembly];: https:\/\/www.egu.eu - Annual European
+  geosciences conference
+- #strong[AGU Fall Meeting];: https:\/\/www.agu.org/annual-meeting -
+  Major US geosciences meeting
+- #strong[NCAR CDO Workshops];: Periodic training sessions organized by
+  NCAR
+- #strong[ECMWF Annual Seminar];: https:\/\/www.ecmwf.int - Annual
+  meteorological seminars
+
+=== K.5 Data Portals
+<k.5-data-portals>
+- #strong[Copernicus Climate Data Store];:
+  https:\/\/cds.climate.copernicus.eu
+- #strong[NASA Earthdata];: https:\/\/earthdata.nasa.gov
+- #strong[NOAA PSL Data];: https:\/\/psl.noaa.gov/data
+- #strong[IRI Data Library];: https:\/\/iridl.ldeo.columbia.edu
+- #strong[World Bank Climate Data];:
+  https:\/\/climateknowledgeportal.worldbank.org
+
+== L. Troubleshooting Guide
+<l.-troubleshooting-guide>
+=== L.1 Installation Problems
+<l.1-installation-problems>
+#strong[Problem: CDO not found after installation]
+
+```bash
+# Check if installed
+cdo --version
+# If not found, add to PATH
+export PATH=/path/to/cdo/bin:$PATH   # Linux/macOS
+# On Windows, ensure conda environment is activated
+conda activate climate
+```
+
+#strong[Problem: GRIB support missing]
+
+```bash
+# Check GRIB support
+cdo -v | findstr grib
+# Install ecCodes alongside CDO
+conda install -c conda-forge cdo eccodes
+```
+
+#strong[Problem: Compilation errors (building from source)] Check
+dependencies: zlib, hdf5, netcdf-c, eccodes, proj, udunits.
+
+```bash
+sudo apt-get install libhdf5-dev libnetcdf-dev libeccodes-dev   # Ubuntu
+brew install hdf5 netcdf eccodes                                  # macOS
+```
+
+=== L.2 Runtime Errors
+<l.2-runtime-errors>
+#strong[Problem: "Segmentation fault (core dumped)"] - Cause: Usually
+memory exhaustion or incompatible file format - Solution: Use `-L` flag,
+reduce threads with `-P 2`, process smaller chunks
+
+#strong[Problem: "Unsupported grid type"] - Cause: Reduced Gaussian,
+curvilinear, or unstructured grid - Solution: Convert to regular grid
+first with `cdo remapbil,r360x180`
+
+#strong[Problem: "Time axis not monotonic"] - Cause: File contains
+unsorted or duplicate time steps - Solution: Use `cdo sorttimestamp` or
+`cdo mergetime` to fix
+
+#strong[Problem: "Operator not found"] - Cause: Typo or operator not
+available in your CDO version - Solution: Check spelling, update CDO, or
+use alternative operator
+
+#strong[Problem: "Too many open files"] - Cause: System file descriptor
+limit reached - Solution: Increase limit: `ulimit -n 10000`
+(Linux/macOS)
+
+=== L.3 Data Issues
+<l.3-data-issues>
+#strong[Problem: Missing values not recognized]
+
+```bash
+# Set missing value explicitly
+cdo setmissval,-999 data.nc fixed.nc
+```
+
+#strong[Problem: Longitude range 0-360 vs -180 to 180 mismatch]
+
+```bash
+# Convert 0-360 to -180 to 180
+cdo sellonlatbox,-180,180,-90,90 data_360.nc data_180.nc
+```
+
+#strong[Problem: Inconsistent time units between files]
+
+```bash
+# CDO may fail when merging files with different time units
+# Use setreftime to standardize
+cdo setreftime,1900-01-01,00:00:00,days file1.nc file1_fixed.nc
+```
+
+#strong[Problem: Variables renamed or missing expected names]
+
+```bash
+# Find available variables
+cdo showname data.nc
+# Rename if needed
+cdo chname,old_var,new_var data.nc renamed.nc
+```
+
+=== L.4 Performance Troubleshooting
+<l.4-performance-troubleshooting>
+#strong[Issue: CDO is very slow] - Use `-P N` with appropriate N (number
+of cores) - Avoid intermediate files -- use pipes - Check disk speed
+(SSD recommended for large files) - Use `-f nc4 -z zip_1` for faster
+compression - Precompute remapping weights
+
+#strong[Issue: Out of memory] - Use `-L` flag for large-file mode -
+Process in temporal chunks (e.g., year by year) - Select only needed
+variables with `selname` - Use `-f nc4` which is more memory-efficient
+than classic NetCDF
+
+== M. Key CDO Commands Quick Reference
+<m.-key-cdo-commands-quick-reference>
+```bash
+# File Information
+cdo infov file.nc              # Variable info with statistics
+cdo sinfo file.grib             # GRIB file structure
+cdo griddes file.nc             # Grid description
+cdo showdate file.nc            # Time steps as dates
+cdo showyear file.nc            # Years present
+cdo nmlist file.nc              # NetCDF metadata dump
+
+# Selection
+cdo selname,tas file.nc out.nc  # Select variable
+cdo seldate,2000-01-01 file.nc  # Select by date
+cdo sellonlatbox,lon1,lon2,lat1,lat2 file.nc  # Spatial crop
+cdo seltimestep,1/10 file.nc    # Select timesteps 1-10
+
+# Temporal
+cdo daymean file.nc out.nc      # Daily mean
+cdo monmean file.nc out.nc      # Monthly mean
+cdo yearmean file.nc out.nc     # Annual mean
+cdo ymonmean file.nc out.nc     # Monthly climatology
+cdo ymonsub file.nc out.nc      # Monthly anomaly
+
+# Spatial
+cdo fldmean file.nc out.nc      # Spatial mean
+cdo remapbil,target.nc src.nc out.nc  # Bilinear remap
+cdo genbil,target.nc src.nc w.nc     # Generate weights
+
+# Statistics
+cdo timmean file.nc out.nc      # Temporal mean
+cdo timpctl,90 file.nc min.nc max.nc out.nc  # 90th percentile
+cdo ensmean f1.nc f2.nc f3.nc out.nc  # Ensemble mean
+
+# Indices
+cdo yearsum -ltc,0 tn.nc fd.nc  # Frost days
+cdo yearmax -runsum,5 pr.nc rx5day.nc  # Max 5-day precip
+```
+
+#raw("{tip} Save this quick reference as a cheat sheet. The most commonly used CDO operators are: `selname`, `sellonlatbox`, `seldate`, `fldmean`, `timmean`, `monmean`, `yearmean`, `ymonsub`, `remapbil`, `ensmean`, and `output`.")
+
+== N. Version Information
+<n.-version-information>
+```bash
+# Check your CDO version
+cdo --version
+
+# Check installed components (NetCDF, GRIB, etc.)
+cdo -v
+
+# Check Python library versions
+python -c "import xarray; print(xarray.__version__)"
+python -c "import cartopy; print(cartopy.__version__)"
+python -c "import matplotlib; print(matplotlib.__version__)"
+```
+
+`{note} This course was written for CDO version 2.x. Most commands are also compatible with CDO 1.9.x, but some newer operators may not be available. Check the CDO changelog for version-specific features.`
+
+== O. Contributing and Feedback
+<o.-contributing-and-feedback>
+This training course is maintained by the course authors. Contributions,
+corrections, and suggestions are welcome.
+
+- #strong[Course Repository];: \[Course URL / GitHub link\]
+- #strong[Issue Tracker];: \[Link to issue tracker\]
+- #strong[License];: CC BY 4.0 International
+
+`{warning} The examples in this course use sample data paths and filenames. Adapt these paths to your local data organization. All commands have been tested but results may vary depending on CDO version, operating system, and data characteristics.`
+
+== Summary of References
+<summary-of-references>
+This reference module provides:
+
+- Complete documentation and links for CDO, NetCDF, GRIB, and CF
+  conventions
+- Comprehensive list of climate data sources (reanalysis, observations,
+  projections)
+- FAQ section addressing common CDO errors and solutions
+- Best practices checklist for data management and reproducibility
+- Glossary of key climate data terminology
+- Quick reference of most frequently used CDO commands
+- All references cited throughout the 12-module course
+
+`{tip} Bookmark this reference module for quick access during your climate data analysis work. The best practices checklist (Section I) is particularly useful when setting up new analysis projects.`
+
+This concludes the Climate Data Operators (CDO) Training Course. Thank
+you for your dedication to learning climate data analysis.

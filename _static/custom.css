@@ -1,0 +1,7 @@
+/* Emphasize the author byline and copyright line in the site footer. */
+footer .component-author,
+footer p.component-author,
+footer .copyright,
+footer p.copyright {
+  font-weight: 700 !important;
+}

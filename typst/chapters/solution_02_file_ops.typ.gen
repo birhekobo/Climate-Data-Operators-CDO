@@ -1,0 +1,150 @@
+= Solution 2: File Operations
+<solution-2-file-operations>
+== Task 1: Merge Multiple Files
+<task-1-merge-multiple-files>
+=== Command:
+<command>
+```bash
+cdo mergetime ../datasets/tas_2000.nc ../datasets/tas_2001.nc ../datasets/tas_2002.nc \
+              ../datasets/tas_2003.nc ../datasets/tas_2004.nc ../datasets/tas_2005.nc \
+              merged.nc
+```
+
+Or with a wildcard:
+
+```bash
+cdo mergetime ../datasets/tas_2???.nc merged.nc
+```
+
+=== Answers:
+<answers>
++ #strong[Number of time steps:] 72 (6 years × 12 months)
++ #strong[Time range:] 2000-01-01 to 2005-12-01
++ #strong[Difference between `mergetime` and `merge`:]
+  - `mergetime` concatenates files along the time dimension (assumes
+    same variables/grid)
+  - `merge` combines files with #strong[different variables] (joins
+    along the variable/field dimension)
+  - Use `mergetime` for time-slices, `merge` for different variables on
+    the same time axis
++ #strong[Does `cdo copy` change file size?] Generally no (unless used
+  with compression flags like `-z zip`). `copy` just copies the data
+  with the same encoding.
+
+#line(length: 100%, stroke: 0.5pt)
+
+== Task 2: Split a File by Year and Month
+<task-2-split-a-file-by-year-and-month>
+=== Commands:
+<commands>
+```bash
+cdo splityear ../datasets/tas_sample.nc tas_year_
+cdo splitmon ../datasets/tas_sample.nc tas_mon_
+cdo splitsel,1 ../datasets/tas_sample.nc tas_step_
+```
+
+=== Answers:
+<answers-1>
++ #strong[splityear produces:] 31 files (one per year, 1980--2010). Each
+  contains 12 monthly time steps.
++ #strong[splitmon produces:] 12 files (one per month). Each contains 31
+  time steps (one for each year).
++ #strong[Naming patterns:]
+  - `splityear`: `tas_year_1980.nc`, `tas_year_1981.nc`, …
+  - `splitmon`: `tas_mon_01.nc`, `tas_mon_02.nc`, … (01 = January)
+  - `splitsel`: `tas_step_001.nc`, `tas_step_002.nc`, …
++ #strong[Split by season:] Use `splitseas`. Produces 4 files per year
+  (DJF, MAM, JJA, SON).
+
+#line(length: 100%, stroke: 0.5pt)
+
+== Task 3: Select and Drop Variables
+<task-3-select-and-drop-variables>
+=== Commands:
+<commands-1>
+```bash
+cdo selname,tas ../datasets/tas_sample.nc tas_only.nc
+cdo delname,tas ../datasets/tas_sample.nc without_tas.nc
+```
+
+=== Answers:
+<answers-2>
++ #strong[Drop the only variable:] CDO will produce an error --- the
+  output file would be empty (no variables).
++ #strong[Select multiple variables:]
+  `cdo selname,tas,pr,psl input.nc output.nc`
++ #strong[`selname` vs `selcode`:]
+  - `selname` selects by variable name (e.g., `tas`, `pr`)
+  - `selcode` selects by GRIB code number (e.g., 167 = 2m temperature,
+    172 = precipitation)
+
+#line(length: 100%, stroke: 0.5pt)
+
+== Task 4: Rename Variables
+<task-4-rename-variables>
+=== Command:
+<command-1>
+```bash
+cdo chname,tas,temperature ../datasets/tas_sample.nc renamed.nc
+```
+
+=== Answers:
+<answers-3>
++ #strong[Does renaming change data values?] No --- it only modifies the
+  variable name in the metadata.
++ #strong[Does it preserve all metadata attributes?] Yes --- all
+  attributes (units, long\_name, etc.) are preserved. Only the variable
+  name string is changed.
++ #strong[Rename multiple variables:]
+  `cdo chname,tas,temp,pr,precip input.nc output.nc`
+
+#line(length: 100%, stroke: 0.5pt)
+
+== Task 5: Compress at Different Levels
+<task-5-compress-at-different-levels>
+=== Commands:
+<commands-2>
+```bash
+cdo -z zip_1 copy ../datasets/tas_sample.nc tas_zip1.nc
+cdo -z zip_5 copy ../datasets/tas_sample.nc tas_zip5.nc
+cdo -z zip_9 copy ../datasets/tas_sample.nc tas_zip9.nc
+```
+
+=== Typical size comparison (sample file \~50 MB uncompressed):
+<typical-size-comparison-sample-file-50-mb-uncompressed>
+#figure(
+  align(center)[#table(
+    columns: 3,
+    align: (auto,auto,auto,),
+    table.header([Level], [File Size], [Ratio],),
+    table.hline(),
+    [none], [50 MB], [1.00],
+    [zip\_1], [18 MB], [0.36],
+    [zip\_5], [15 MB], [0.30],
+    [zip\_9], [14 MB], [0.28],
+  )]
+  , kind: table
+  )
+
+=== Answers:
+<answers-4>
++ #strong[Size reduction:] Level 1 gives significant reduction; levels
+  5--9 give diminishing returns.
++ #strong[Compression is lossless] --- decompressed data is
+  bit-identical to the original.
++ #strong[Trade-off of level 9:] Slightly better compression but
+  significantly slower read/write times. Level 4--6 is usually
+  recommended for the best balance.
++ #strong[Other compression methods:] CDO supports `szip` (SZIP), `grib`
+  (GRIB packing), and `shap` (bit-shaving). Check with
+  `cdo --help | grep -i compress`.
+
+#line(length: 100%, stroke: 0.5pt)
+
+== Bonus Challenge
+<bonus-challenge>
+=== One-liner:
+<one-liner>
+```bash
+cdo -z zip_6 -chname,tas,temperature -selyear,2000/2005 ../datasets/tas_sample.nc final_output.nc
+```

@@ -1,0 +1,38 @@
+title: "Climate Data Operators (CDO): Complete Training"
+author: Birhanu Asmerom, Department of Physics, Wollo University
+exclude_patterns:
+  - .myst/**
+  - node_modules/**
+logo: assets/logo.png
+copyright: "2026"
+repository:
+  url: https://github.com/climate-data-science/Climate-Data-Operators-CDO
+  path_to_book: .
+  branch: main
+html:
+  use_issues_button: true
+  use_repository_button: true
+  use_edit_page_button: true
+  favicon: assets/favicon.ico
+  home_page_in_nav: true
+  extra_navbar: ""
+  analytics:
+    google_analytics_id: ""
+  extra_footer: ""
+launch_buttons:
+  binderhub_url: https://mybinder.org
+  colab_url: https://colab.research.google.com
+  notebook_interface: jupyterlab
+sphinx:
+  config:
+    html_show_copyright: true
+    html_css_files: ["custom.css"]
+    html_extra_path: ["docs", "typst/pdf"]
+    bibtex_bibfiles: ["book/references.bib"]
+    bibtex_reference_style: author_year
+  extra_extensions:
+    - sphinx_exercise
+    - sphinx_togglebutton
+    - sphinxcontrib.mermaid
+    - sphinx_proof
+    - sphinxcontrib.bibtex

@@ -1,0 +1,28 @@
+name: cdo-training
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - cdo=2.4.0
+  - nco=5.2.0
+  - netcdf4=1.6.*
+  - xarray=2024.*
+  - numpy=1.26.*
+  - pandas=2.2.*
+  - matplotlib=3.8.*
+  - cartopy=0.22.*
+  - jupyter=1.0.*
+  - jupyterlab=4.*
+  - nbformat=5.*
+  - nbconvert=7.*
+  - mystmd=1.*
+  - pip
+  - pip:
+    - pygmt
+    - plotly
+    - cdsapi
+    - ecmwf-api-client
+    - ipykernel
+    - jupyter-book
+    - ghp-import

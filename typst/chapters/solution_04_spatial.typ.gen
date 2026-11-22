@@ -1,0 +1,192 @@
+= Solution 4: Spatial Analysis
+<solution-4-spatial-analysis>
+== Task 1: Crop Data to a Specific Region
+<task-1-crop-data-to-a-specific-region>
+=== Commands:
+<commands>
+```bash
+cdo sellonlatbox,-20,50,-35,40 ../datasets/tas_sample.nc tas_africa.nc
+cdo sellonlatbox,-10,40,35,70 ../datasets/tas_sample.nc tas_europe.nc
+```
+
+=== Answers:
+<answers>
++ #strong[Boundary inclusivity:] `sellonlatbox` uses #strong[inclusive]
+  boundaries --- grid cells with centers exactly on the boundary are
+  included.
++ #strong[0--360 longitude:] The operator `sellonlatbox` works with
+  \-180/180 longitude. For 0--360 data, use `sellonlatbox` with the same
+  syntax (CDO automatically converts). Alternatively, use
+  `sellonlatbox2` for data that spans the 0 meridian.
++ #strong[Crop using a mask file:] Use `cdo maskregion` with a shapefile
+  or a mask field: `cdo maskregion,region_id input.nc output.nc`
+
+#line(length: 100%, stroke: 0.5pt)
+
+#figure(image("../../assets/sol04_task1_crop.png"),
+  caption: [
+    Africa and Europe crop boxes from `sellonlatbox` shown on the real
+    global temperature field.
+  ]
+)
+
+== Task 2: Regrid from 1° to 2° Resolution
+<task-2-regrid-from-1-to-2-resolution>
+=== Target grid file (`target_grid.txt`):
+<target-grid-file-target_grid.txt>
+```
+gridtype = lonlat
+xsize = 180
+ysize = 90
+xfirst = -179.0
+xinc = 2.0
+yfirst = -89.0
+yinc = 2.0
+```
+
+=== Command:
+<command>
+```bash
+cdo remapbil,target_grid.txt ../datasets/tas_sample.nc tas_2deg_bil.nc
+```
+
+=== Answers:
+<answers-1>
++ #strong[Grid cell comparison:]
+  - Original: 360 × 180 = 64,800 cells
+  - 2° grid: 180 × 90 = 16,200 cells
+  - Reduction: 75% fewer cells
++ #strong[Global mean change:] The global mean should be well-preserved
+  with bilinear interpolation (small diff), but conservative remapping
+  would preserve it even more precisely.
++ #strong[Check new grid:] `cdo griddes tas_2deg_bil.nc`
+
+#line(length: 100%, stroke: 0.5pt)
+
+#figure(image("../../assets/sol04_task2_regrid.png"),
+  caption: [
+    Original reanalysis grid and the 2° target grid produced by bilinear
+    interpolation.
+  ]
+)
+
+== Task 3: Compare Bilinear vs Conservative Remapping
+<task-3-compare-bilinear-vs-conservative-remapping>
+=== Commands:
+<commands-1>
+```bash
+cdo remapbil,target_grid.txt ../datasets/tas_sample.nc tas_bil.nc
+cdo remapcon,target_grid.txt ../datasets/tas_sample.nc tas_con.nc
+cdo remapnn,target_grid.txt ../datasets/tas_sample.nc tas_nn.nc
+cdo sub tas_bil.nc tas_con.nc tas_diff_bil_con.nc
+cdo fldmean tas_diff_bil_con.nc
+```
+
+=== Answers:
+<answers-2>
++ #strong[Differences between methods:]
+  - #strong[Bilinear (remapbil):] Weighted average of 4 nearest grid
+    points. Smooth, good for continuous fields like temperature.
+  - #strong[Conservative (remapcon):] Area-weighted average that
+    preserves the global integral. Best for flux fields (precipitation,
+    energy).
+  - #strong[Nearest-neighbor (remapnn):] Assigns value of closest grid
+    cell. Fast, preserves original value distribution, good for
+    categorical data.
++ #strong[Best use cases:]
+  - Smooth variables (temperature, pressure): bilinear
+  - Fluxes/precipitation: conservative
+  - Categorical/land-use: nearest-neighbor
++ #strong[Conservative remapping preserves integrals] because each
+  target cell value is the area-weighted average of overlapping source
+  cell fractions. The total integrated value over the domain is
+  conserved.
++ #strong[When to use nearest-neighbor:] For categorical data (land
+  mask, soil type), when speed is critical, or when preserving exact
+  original values is important.
++ #strong[Largest differences:] Typically over complex terrain
+  (mountainous regions) and at coastlines, where smoothing differs most
+  between methods.
+
+#line(length: 100%, stroke: 0.5pt)
+
+#figure(image("../../assets/sol04_task3_remap_compare.png"),
+  caption: [
+    Bilinear, conservative-style and nearest-neighbour remapping
+    compared on real temperature data, with their difference field.
+  ]
+)
+
+== Task 4: Compute Regional Averages
+<task-4-compute-regional-averages>
+=== Commands:
+<commands-2>
+```bash
+cdo fldmean ../datasets/tas_sample.nc tas_global.nc
+cdo fldmean -sellonlatbox,0,359,-23.5,23.5 ../datasets/tas_sample.nc tas_tropics.nc
+cdo fldmean -sellonlatbox,0,359,23.5,90 ../datasets/tas_sample.nc tas_nh_extratropics.nc
+cdo fldmean -sellonlatbox,0,359,-90,-23.5 ../datasets/tas_sample.nc tas_sh_extratropics.nc
+```
+
+=== Answers:
+<answers-3>
++ #strong[Highest mean temperature:] The tropics (23.5S--23.5N) have the
+  highest mean temperature due to maximum solar insolation.
++ #strong[Does `fldmean` apply area weighting?] Yes, by default
+  `fldmean` applies #strong[cosine-of-latitude] weighting. Verify by
+  checking: `cdo fldmean` vs `cdo fldmean -weights` --- area-weighted
+  gives more weight to equatorial cells.
++ #strong[Unweighted average:] Use `fldavg` (arithmetic mean, no area
+  weighting).
++ #strong[`fldmean` vs `fldsum`:]
+  - `fldmean`: area-weighted spatial average (unit preserved)
+  - `fldsum`: area-weighted spatial sum (units \* m² or scaled)
+  - `fldsum` is useful for computing total precipitation over a region
+
+#line(length: 100%, stroke: 0.5pt)
+
+#figure(image("../../assets/sol04_task4_regional_means.png"),
+  caption: [
+    Area-weighted regional means: global, tropics and both extratropics,
+    from real reanalysis data.
+  ]
+)
+
+== Bonus Challenge
+<bonus-challenge>
+=== Commands:
+<commands-3>
+```bash
+# Create 5° grid
+cat > grid_5deg.txt << 'EOF'
+gridtype = lonlat
+xsize = 72
+ysize = 36
+xfirst = -177.5
+xinc = 5.0
+yfirst = -87.5
+yinc = 5.0
+EOF
+
+cdo remapcon,grid_5deg.txt tas_africa.nc tas_5deg.nc
+cdo zonmean tas_5deg.nc tas_zonal.nc
+```
+
+=== Python zonal mean plot:
+<python-zonal-mean-plot>
+```python
+import xarray as xr; import matplotlib.pyplot as plt
+ds = xr.open_dataset('tas_zonal.nc')
+plt.figure(figsize=(8, 4))
+plt.plot(ds.lat, ds.tas.mean('time'), 'b-')
+plt.xlabel('Latitude'); plt.ylabel('Temperature (K)')
+plt.title('Zonal Mean Temperature')
+plt.grid(alpha=0.3); plt.tight_layout()
+plt.savefig('zonal_mean.png', dpi=150)
+```
+
+#figure(image("../../assets/sol04_bonus_zonal_mean.png"),
+  caption: [
+    Zonal mean temperature by latitude from the real reanalysis field.
+  ]
+)

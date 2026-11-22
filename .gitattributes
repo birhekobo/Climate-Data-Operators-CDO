@@ -1,0 +1,2 @@
+# Large NetCDF datasets are stored with Git LFS.
+*.nc filter=lfs diff=lfs merge=lfs -text

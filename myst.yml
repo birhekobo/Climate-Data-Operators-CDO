@@ -1,0 +1,97 @@
+version: 1
+project:
+  id: cdo-training
+  title: 'Climate Data Operators (CDO): Complete Training'
+  description: A comprehensive, project-based training course for climate data processing, analysis, and visualization using
+    CDO.
+  keywords:
+  - CDO
+  - climate
+  - data
+  - netcdf
+  - grib
+  - training
+  authors:
+  - name: Birhanu Asmerom, Department of Physics, Wollo University
+  github: https://github.com/climate-data-science/Climate-Data-Operators-CDO
+  subject: Climate Data Analysis
+  venue: Online
+  date: 2026-07-11
+  license:
+    code: MIT
+    content: CC-BY-4.0
+  open_access: true
+  toc:
+  - file: book/introduction.md
+  - title: Getting Started
+    children:
+    - file: book/installation.md
+    - file: book/basics.md
+  - title: Core CDO Skills
+    children:
+    - file: book/operators.md
+    - file: book/netcdf.md
+    - file: book/grib.md
+  - title: Analysis Techniques
+    children:
+    - file: book/temporal.md
+    - file: book/spatial.md
+    - file: book/statistics.md
+    - file: book/climate_indices.md
+  - title: Advanced Topics
+    children:
+    - file: book/workflows.md
+    - file: book/projects.md
+  - title: Reference
+    children:
+    - file: book/references.md
+  - title: Exercises
+    children:
+    - file: exercises/exercise_01_intro.md
+    - file: exercises/exercise_02_file_ops.md
+    - file: exercises/exercise_03_temporal.md
+    - file: exercises/exercise_04_spatial.md
+    - file: exercises/exercise_05_statistics.md
+  - title: Notebooks
+    children:
+    - file: notebooks/01_intro_to_cdo.ipynb
+    - file: notebooks/02_temporal_analysis.ipynb
+    - file: notebooks/03_spatial_analysis.ipynb
+    - file: notebooks/04_statistics_and_indices.ipynb
+    - file: notebooks/05_python_cdo_workflow.ipynb
+    - file: notebooks/06_visualization.ipynb
+  - title: Projects
+    children:
+    - file: projects/project_01_rainfall_trend.md
+    - file: projects/project_02_temperature_trend.md
+    - file: projects/project_03_drought_index.md
+    - file: projects/project_04_climate_extremes.md
+    - file: projects/project_05_era5_pipeline.md
+    - file: projects/project_06_cmip6_analysis.md
+    - file: projects/project_07_climate_dashboard.md
+  - title: Quizzes
+    children:
+    - file: quizzes/quiz_01.md
+    - file: quizzes/quiz_02.md
+    - file: quizzes/quiz_03.md
+    - file: quizzes/quiz_04.md
+    - file: quizzes/quiz_05.md
+  - title: Solutions
+    children:
+    - file: solutions/solution_01_intro.md
+    - file: solutions/solution_02_file_ops.md
+    - file: solutions/solution_03_temporal.md
+    - file: solutions/solution_04_spatial.md
+    - file: solutions/solution_05_statistics.md
+  - title: Course Overview
+    children:
+    - file: README.md
+  bibliography: book/references.bib
+site:
+  template: .myst/book-theme
+  options:
+    logo: assets/logo.png
+    favicon: assets/favicon.ico
+    home_page_in_nav: true
+    navigation_depth: 4
+    collapse_navigation: false

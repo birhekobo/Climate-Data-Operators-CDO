@@ -1,0 +1,67 @@
+format: jb-book
+root: book/introduction
+parts:
+  - caption: Getting Started
+    chapters:
+    - file: book/installation
+    - file: book/basics
+  - caption: Core CDO Skills
+    chapters:
+    - file: book/operators
+    - file: book/netcdf
+    - file: book/grib
+  - caption: Analysis Techniques
+    chapters:
+    - file: book/temporal
+    - file: book/spatial
+    - file: book/statistics
+    - file: book/climate_indices
+  - caption: Advanced Topics
+    chapters:
+    - file: book/workflows
+    - file: book/projects
+  - caption: Reference
+    chapters:
+    - file: book/references
+
+  - caption: Exercises
+    chapters:
+    - file: exercises/exercise_01_intro
+    - file: exercises/exercise_02_file_ops
+    - file: exercises/exercise_03_temporal
+    - file: exercises/exercise_04_spatial
+    - file: exercises/exercise_05_statistics
+  - caption: Notebooks
+    chapters:
+    - file: notebooks/01_intro_to_cdo
+    - file: notebooks/02_temporal_analysis
+    - file: notebooks/03_spatial_analysis
+    - file: notebooks/04_statistics_and_indices
+    - file: notebooks/05_python_cdo_workflow
+    - file: notebooks/06_visualization
+  - caption: Projects
+    chapters:
+    - file: projects/project_01_rainfall_trend
+    - file: projects/project_02_temperature_trend
+    - file: projects/project_03_drought_index
+    - file: projects/project_04_climate_extremes
+    - file: projects/project_05_era5_pipeline
+    - file: projects/project_06_cmip6_analysis
+    - file: projects/project_07_climate_dashboard
+  - caption: Quizzes
+    chapters:
+    - file: quizzes/quiz_01
+    - file: quizzes/quiz_02
+    - file: quizzes/quiz_03
+    - file: quizzes/quiz_04
+    - file: quizzes/quiz_05
+  - caption: Solutions
+    chapters:
+    - file: solutions/solution_01_intro
+    - file: solutions/solution_02_file_ops
+    - file: solutions/solution_03_temporal
+    - file: solutions/solution_04_spatial
+    - file: solutions/solution_05_statistics
+  - caption: Course Overview
+    chapters:
+    - file: README

@@ -1,0 +1,13 @@
+cdo>=2.4.0
+xarray>=2024.0.0
+netCDF4>=1.6.0
+numpy>=1.26.0
+pandas>=2.2.0
+matplotlib>=3.8.0
+cartopy>=0.22.0
+jupyter-book>=1.0.0
+pygmt>=0.11.0
+plotly>=5.18.0
+cdsapi>=0.6.0
+mystmd>=1.0.0
+ipykernel>=6.0.0

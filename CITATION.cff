@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: "Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization"
+message: "If you use this course, please cite it as below."
+type: educational-resource
+authors:
+  - name: "Climate Data Science Community"
+    email: "cdo-training@climatescience.org"
+date-released: "2025-01-15"
+version: "1.0.0"
+url: "https://github.com/climate-data-science/Climate-Data-Operators-CDO"

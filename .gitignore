@@ -1,0 +1,17 @@
+# Build outputs (published separately to the gh-pages branch)
+_build/
+output/
+
+# Generated Python caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# JavaScript dependencies (regenerate with npm install)
+.myst/book-theme/node_modules/
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+*.swp
