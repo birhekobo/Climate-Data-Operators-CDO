@@ -6,7 +6,7 @@ exclude_patterns:
 logo: assets/logo.png
 copyright: "2026"
 repository:
-  url: https://github.com/climate-data-science/Climate-Data-Operators-CDO
+  url: https://github.com/birhekobo/Climate-Data-Operators-CDO
   path_to_book: .
   branch: main
 html:

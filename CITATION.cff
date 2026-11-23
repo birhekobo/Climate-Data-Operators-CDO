@@ -3,8 +3,8 @@ title: "Climate Data Operators (CDO): Complete Training for Climate Data Process
 message: "If you use this course, please cite it as below."
 type: educational-resource
 authors:
-  - name: "Climate Data Science Community"
+  - name: "Birhanu Asmerom"
     email: "cdo-training@climatescience.org"
 date-released: "2025-01-15"
 version: "1.0.0"
-url: "https://github.com/climate-data-science/Climate-Data-Operators-CDO"
+url: "https://github.com/birhekobo/Climate-Data-Operators-CDO"

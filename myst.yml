@@ -13,7 +13,7 @@ project:
   - training
   authors:
   - name: Birhanu Asmerom, Department of Physics, Wollo University
-  github: https://github.com/climate-data-science/Climate-Data-Operators-CDO
+  github: https://github.com/birhekobo/Climate-Data-Operators-CDO
   subject: Climate Data Analysis
   venue: Online
   date: 2026-07-11
