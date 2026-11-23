@@ -1,0 +1,1831 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Module 12: Capstone Projects &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/projects';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="References and Further Resources" href="references.html" />
+    <link rel="prev" title="Module 11: Advanced Workflows and Automation" href="workflows.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./book/projects.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fbook/projects.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/projects.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 12: Capstone Projects</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-1-rainfall-trend-analysis">Project 1: Rainfall Trend Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-workflow">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-outputs">Expected Outputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-criteria">Evaluation Criteria</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-2-temperature-trend-mapping">Project 2: Temperature Trend Mapping</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-3-drought-index-computation">Project 3: Drought Index Computation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-4-climate-extremes-detection">Project 4: Climate Extremes Detection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-5-era5-data-processing-pipeline">Project 5: ERA5 Data Processing Pipeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-6-cmip6-multi-model-analysis">Project 6: CMIP6 Multi-Model Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-7-climate-dashboard">Project 7: Climate Dashboard</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-8-automated-climate-report-generator">Project 8: Automated Climate Report Generator</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id27">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capstone-project-quiz">Capstone Project Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-12-capstone-projects">
+<h1>Module 12: Capstone Projects<a class="headerlink" href="#module-12-capstone-projects" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After completing this module, you will be able to:</p>
+<ul class="simple">
+<li><p>Apply CDO operators to real-world climate data analysis problems</p></li>
+<li><p>Design and execute complete data processing workflows from raw data to results</p></li>
+<li><p>Integrate CDO with visualization tools for publication-quality figures</p></li>
+<li><p>Analyze trends, extremes, and climate indices independently</p></li>
+<li><p>Troubleshoot and debug CDO workflows in practical scenarios</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<p>This module assumes you have completed all previous modules (1-11). You should be comfortable with CDO operators, bash scripting, and basic Python visualization. Data files for each project are available in the course data repository.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You are expected to complete at least 2 of the 8 capstone projects. Each project is designed to be completed in 2-4 hours. Projects build on skills from specific modules as noted in each project description.</p>
+</div>
+</section>
+<section id="project-1-rainfall-trend-analysis">
+<h2>Project 1: Rainfall Trend Analysis<a class="headerlink" href="#project-1-rainfall-trend-analysis" title="Link to this heading">#</a></h2>
+<p>Analyze long-term rainfall trends using GPCC or CHIRPS data.</p>
+<section id="objectives">
+<h3>Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Compute annual and seasonal precipitation totals from monthly data</p></li>
+<li><p>Analyze spatial and temporal trends</p></li>
+<li><p>Identify regions with significant increasing or decreasing precipitation</p></li>
+<li><p>Visualize trends as maps and time series</p></li>
+</ul>
+</section>
+<section id="data-requirements">
+<h3>Data Requirements<a class="headerlink" href="#data-requirements" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>GPCC monthly precipitation (1.0 degree, 1901-2020) or CHIRPS (0.05 degree, 1981-present)</p></li>
+<li><p>Available from: <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data">https://climatedataguide.ucar.edu/climate-data</a> or <a class="reference external" href="https://www.chc.ucsb.edu/data/chirps">https://www.chc.ucsb.edu/data/chirps</a></p></li>
+</ul>
+</section>
+<section id="step-by-step-workflow">
+<h3>Step-by-Step Workflow<a class="headerlink" href="#step-by-step-workflow" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Download and inspect data</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>info<span class="w"> </span>gpcc_precip.nc
+cdo<span class="w"> </span>griddes<span class="w"> </span>gpcc_precip.nc
+cdo<span class="w"> </span>showyear<span class="w"> </span>gpcc_precip.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Compute annual totals</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearsum<span class="w"> </span>gpcc_precip.nc<span class="w"> </span>annual_precip.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Compute seasonal totals (e.g., MAM for East Africa long rains)</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>seasum<span class="w"> </span>-selseas,2<span class="w"> </span>gpcc_precip.nc<span class="w"> </span>mam_precip.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><strong>Compute linear trend</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>trend<span class="w"> </span>annual_precip.nc<span class="w"> </span>intercept.nc<span class="w"> </span>slope.nc
+cdo<span class="w"> </span>mulc,10<span class="w"> </span>slope.nc<span class="w"> </span>trend_per_decade.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p><strong>Statistical significance test</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>timstd<span class="w"> </span>annual_precip.nc<span class="w"> </span>std.nc
+cdo<span class="w"> </span>div<span class="w"> </span>slope.nc<span class="w"> </span>std.nc<span class="w"> </span>t_stat.nc
+cdo<span class="w"> </span>gtc,2<span class="w"> </span>-abs<span class="w"> </span>t_stat.nc<span class="w"> </span>significant.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p><strong>Visualize in Python</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;trend_per_decade.nc&quot;</span><span class="p">)</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;significant.nc&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mi">20</span><span class="p">))</span>
+
+<span class="n">trend_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">sig_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sig</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">ds</span><span class="p">[</span><span class="n">trend_var</span><span class="p">]</span> <span class="o">*</span> <span class="n">sig</span><span class="p">[</span><span class="n">sig_var</span><span class="p">],</span>
+                  <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+                  <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;BrBG&quot;</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Precipitation Trend (mm/decade)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Annual Precipitation Trend (1901-2020)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;precip_trend.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="fig-project-01">
+<img alt="../_images/project_01_rainfall_trend.png" src="../_images/project_01_rainfall_trend.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Real CHIRPS results for Project 1: precipitation trend map (mm/decade), annual time series with fitted trend, regional trend comparison, and monthly climatology.</span><a class="headerlink" href="#fig-project-01" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="expected-outputs">
+<h3>Expected Outputs<a class="headerlink" href="#expected-outputs" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Map of precipitation trends (mm/decade) with hatching for significance</p></li>
+<li><p>Time series of annual precipitation with trend line</p></li>
+<li><p>Table of regional trends with confidence intervals</p></li>
+</ul>
+</section>
+<section id="evaluation-criteria">
+<h3>Evaluation Criteria<a class="headerlink" href="#evaluation-criteria" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Correct computation of annual and seasonal totals (20%)</p></li>
+<li><p>Appropriate trend calculation (25%)</p></li>
+<li><p>Statistical significance testing (20%)</p></li>
+<li><p>Quality of visualizations (20%)</p></li>
+<li><p>Interpretation of results (15%)</p></li>
+</ul>
+<div class="exercise admonition" id="ex-projects-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 120 </span></p>
+<section id="exercise-content">
+<p>Complete Project 1. Identify three regions with the strongest drying trends and three with the strongest wetting trends. Discuss possible climate drivers.</p>
+</section>
+</div>
+</section>
+</section>
+<section id="project-2-temperature-trend-mapping">
+<h2>Project 2: Temperature Trend Mapping<a class="headerlink" href="#project-2-temperature-trend-mapping" title="Link to this heading">#</a></h2>
+<p>Analyze surface temperature trends using CRU TS or ERA5 data.</p>
+<section id="id1">
+<h3>Objectives<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Compute annual and seasonal temperature means</p></li>
+<li><p>Calculate spatial temperature trends</p></li>
+<li><p>Create publication-quality trend maps</p></li>
+<li><p>Compare trends across seasons</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Data Requirements<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>CRU TS monthly temperature (0.5 degree, 1901-2020) or ERA5 monthly means (0.25 degree, 1940-present)</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Step-by-Step Workflow<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Compute annual and seasonal means</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearmean<span class="w"> </span>cru_temperature.nc<span class="w"> </span>annual_temp.nc
+cdo<span class="w"> </span>seasmean<span class="w"> </span>cru_temperature.nc<span class="w"> </span>seasonal_temp.nc
+cdo<span class="w"> </span>selseas,3<span class="w"> </span>seasonal_temp.nc<span class="w"> </span>jja_temp.nc
+cdo<span class="w"> </span>selseas,1<span class="w"> </span>seasonal_temp.nc<span class="w"> </span>djf_temp.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Compute trends</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>trend<span class="w"> </span>annual_temp.nc<span class="w"> </span>annual_intercept.nc<span class="w"> </span>annual_slope.nc
+cdo<span class="w"> </span>mulc,10<span class="w"> </span>annual_slope.nc<span class="w"> </span>annual_trend_per_dec.nc
+
+cdo<span class="w"> </span>trend<span class="w"> </span>jja_temp.nc<span class="w"> </span>jja_intercept.nc<span class="w"> </span>jja_slope.nc
+cdo<span class="w"> </span>mulc,10<span class="w"> </span>jja_slope.nc<span class="w"> </span>jja_trend_per_dec.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Regional averaging</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>fldmean<span class="w"> </span>-sellonlatbox,-10,40,30,70<span class="w"> </span>annual_temp.nc<span class="w"> </span>europe_annual.nc
+cdo<span class="w"> </span>fldmean<span class="w"> </span>-sellonlatbox,32,52,-5,15<span class="w"> </span>annual_temp.nc<span class="w"> </span>horn_africa_annual.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><strong>Visualize</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;annual_trend_per_dec.nc&quot;</span><span class="p">)</span>
+<span class="n">trend_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+                          <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mi">0</span><span class="p">)})</span>
+
+<span class="c1"># Global</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">ds</span><span class="p">[</span><span class="n">trend_var</span><span class="p">],</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span>
+                  <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Global Temperature Trend (C/decade)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="c1"># Arctic-focused</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">],</span> <span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">ds</span><span class="p">[</span><span class="n">trend_var</span><span class="p">],</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span>
+                  <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Arctic Amplification Detail&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;temperature_trends.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="fig-project-02">
+<img alt="../_images/project_02_temperature_trend.png" src="../_images/project_02_temperature_trend.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Real NCEP/DOE Reanalysis-2 results for Project 2: global warming trend map, regional temperature time series, latitude-band and seasonal warming rates, and Arctic amplification.</span><a class="headerlink" href="#fig-project-02" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id4">
+<h3>Expected Outputs<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Annual and seasonal trend maps</p></li>
+<li><p>Time series for selected regions</p></li>
+<li><p>Comparison of warming rates across seasons</p></li>
+</ul>
+<div class="exercise admonition" id="ex-projects-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 121 </span></p>
+<section id="exercise-content">
+<p>Complete Project 2. Discuss the spatial pattern of warming: which regions are warming fastest? Is there evidence of Arctic amplification?</p>
+</section>
+</div>
+</section>
+</section>
+<section id="project-3-drought-index-computation">
+<h2>Project 3: Drought Index Computation<a class="headerlink" href="#project-3-drought-index-computation" title="Link to this heading">#</a></h2>
+<p>Compute the Standardized Precipitation Index (SPI) to identify drought periods.</p>
+<section id="id5">
+<h3>Objectives<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Compute SPI at multiple timescales (SPI-1, SPI-3, SPI-6, SPI-12)</p></li>
+<li><p>Identify major drought events</p></li>
+<li><p>Map drought severity</p></li>
+<li><p>Analyze drought frequency trends</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>Data Requirements<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Monthly precipitation data, 30+ years (GPCC, CRU, or CHIRPS)</p></li>
+</ul>
+</section>
+<section id="background">
+<h3>Background<a class="headerlink" href="#background" title="Link to this heading">#</a></h3>
+<p>SPI is a widely used drought index that quantifies precipitation deficits at different timescales. Positive SPI values indicate wet conditions, negative values indicate dry conditions. SPI &lt; -1 is moderate drought, SPI &lt; -1.5 is severe drought, SPI &lt; -2 is extreme drought.</p>
+</section>
+<section id="id7">
+<h3>Step-by-Step Workflow<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Compute running sums for different timescales</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># SPI-3: 3-month running sum</span>
+cdo<span class="w"> </span>runsum,3<span class="w"> </span>monthly_precip.nc<span class="w"> </span>precip_3mon.nc
+
+<span class="c1"># SPI-6: 6-month running sum</span>
+cdo<span class="w"> </span>runsum,6<span class="w"> </span>monthly_precip.nc<span class="w"> </span>precip_6mon.nc
+
+<span class="c1"># SPI-12: 12-month running sum</span>
+cdo<span class="w"> </span>runsum,12<span class="w"> </span>monthly_precip.nc<span class="w"> </span>precip_12mon.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Standardize (compute Z-scores)</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sub<span class="w"> </span>precip_3mon.nc<span class="w"> </span>-timmean<span class="w"> </span>precip_3mon.nc<span class="w"> </span>anom_3mon.nc
+cdo<span class="w"> </span>div<span class="w"> </span>anom_3mon.nc<span class="w"> </span>-timstd<span class="w"> </span>precip_3mon.nc<span class="w"> </span>spi_3mon.nc
+
+cdo<span class="w"> </span>sub<span class="w"> </span>precip_12mon.nc<span class="w"> </span>-timmean<span class="w"> </span>precip_12mon.nc<span class="w"> </span>anom_12mon.nc
+cdo<span class="w"> </span>div<span class="w"> </span>anom_12mon.nc<span class="w"> </span>-timstd<span class="w"> </span>precip_12mon.nc<span class="w"> </span>spi_12mon.nc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a simplified SPI approximation. The full SPI uses a gamma distribution fit, which typically requires specialized software or R/Python packages. The Z-score approach captures the essential drought signal for most applications.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Identify drought events</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Moderate drought (SPI &lt; -1)</span>
+cdo<span class="w"> </span>ltc,-1<span class="w"> </span>spi_12mon.nc<span class="w"> </span>moderate_drought.nc
+cdo<span class="w"> </span>yearsum<span class="w"> </span>moderate_drought.nc<span class="w"> </span>drought_months_per_year.nc
+
+<span class="c1"># Severe drought (SPI &lt; -1.5)</span>
+cdo<span class="w"> </span>ltc,-1.5<span class="w"> </span>spi_12mon.nc<span class="w"> </span>severe_drought.nc
+cdo<span class="w"> </span>yearsum<span class="w"> </span>severe_drought.nc<span class="w"> </span>severe_drought_months.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><strong>Map drought frequency</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>timsum<span class="w"> </span>-ltc,-1<span class="w"> </span>spi_12mon.nc<span class="w"> </span>total_drought_months.nc
+cdo<span class="w"> </span>div<span class="w"> </span>total_drought_months.nc<span class="w"> </span>-ntime<span class="w"> </span>spi_12mon.nc<span class="w"> </span>drought_fraction.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p><strong>Time series extraction</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>fldmean<span class="w"> </span>spi_12mon.nc<span class="w"> </span>regional_spi.nc
+cdo<span class="w"> </span>output<span class="w"> </span>regional_spi.nc
+</pre></div>
+</div>
+<figure class="align-default" id="fig-project-03">
+<img alt="../_images/project_03_drought_index.png" src="../_images/project_03_drought_index.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Real CHIRPS results for Project 3: SPI at 3/6/12-month timescales, spatial frequency of drought months, the most severe drought years, and SPI-12 wet/dry episodes.</span><a class="headerlink" href="#fig-project-03" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id8">
+<h3>Expected Outputs<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>SPI time series at multiple timescales</p></li>
+<li><p>Maps of drought frequency</p></li>
+<li><p>Identification of major drought years</p></li>
+<li><p>Trend in drought frequency</p></li>
+</ul>
+<div class="exercise admonition" id="ex-projects-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 122 </span></p>
+<section id="exercise-content">
+<p>Complete Project 3. For your region of interest, identify the three most severe drought events in the record. How does SPI-3 compare to SPI-12 in terms of drought detection?</p>
+</section>
+</div>
+</section>
+</section>
+<section id="project-4-climate-extremes-detection">
+<h2>Project 4: Climate Extremes Detection<a class="headerlink" href="#project-4-climate-extremes-detection" title="Link to this heading">#</a></h2>
+<p>Compute ETCCDI climate extreme indices and analyze their trends.</p>
+<section id="id9">
+<h3>Objectives<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Compute 5+ ETCCDI extreme indices for temperature and precipitation</p></li>
+<li><p>Analyze trends in extreme event frequency</p></li>
+<li><p>Compare extreme indices across regions</p></li>
+<li><p>Create summary figures</p></li>
+</ul>
+</section>
+<section id="id10">
+<h3>Data Requirements<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Daily minimum temperature (TN)</p></li>
+<li><p>Daily maximum temperature (TX)</p></li>
+<li><p>Daily mean temperature (TG)</p></li>
+<li><p>Daily precipitation (PR)</p></li>
+<li><p>Minimum 30 years of daily data</p></li>
+</ul>
+</section>
+<section id="id11">
+<h3>Step-by-Step Workflow<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Temperature extremes</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Frost days (TN &lt; 0C)</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-ltc,0<span class="w"> </span>daily_tn.nc<span class="w"> </span>fd.nc
+
+<span class="c1"># Summer days (TX &gt; 25C)</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gtc,25<span class="w"> </span>daily_tx.nc<span class="w"> </span>su.nc
+
+<span class="c1"># Tropical nights (TN &gt; 20C)</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gtc,20<span class="w"> </span>daily_tn.nc<span class="w"> </span>tr.nc
+
+<span class="c1"># Warm spell duration (WSDI approximation)</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gec,1<span class="w"> </span>-runsum,6<span class="w"> </span>-ge<span class="w"> </span>daily_tx.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-ydaypctl,90<span class="w"> </span>daily_tx.nc<span class="w"> </span>-ydaymin<span class="w"> </span>daily_tx.nc<span class="w"> </span>-ydaymax<span class="w"> </span>daily_tx.nc<span class="w"> </span>wsdi.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Precipitation extremes</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Max 1-day precipitation</span>
+cdo<span class="w"> </span>yearmax<span class="w"> </span>daily_precip.nc<span class="w"> </span>rx1day.nc
+
+<span class="c1"># Max 5-day precipitation</span>
+cdo<span class="w"> </span>yearmax<span class="w"> </span>-runsum,5<span class="w"> </span>daily_precip.nc<span class="w"> </span>rx5day.nc
+
+<span class="c1"># Heavy precipitation days (PR &gt;= 10mm)</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gec,10<span class="w"> </span>daily_precip.nc<span class="w"> </span>r10mm.nc
+
+<span class="c1"># Simple Daily Intensity Index</span>
+cdo<span class="w"> </span>div<span class="w"> </span>-yearsum<span class="w"> </span>-gec,1<span class="w"> </span>daily_precip.nc<span class="w"> </span>-yearsum<span class="w"> </span>-gec,1<span class="w"> </span>daily_precip.nc<span class="w"> </span>sdii.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Trend analysis</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>index<span class="w"> </span><span class="k">in</span><span class="w"> </span>fd.nc<span class="w"> </span>su.nc<span class="w"> </span>rx1day.nc<span class="w"> </span>rx5day.nc<span class="w"> </span>r10mm.nc<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="nv">basename</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$index</span><span class="s2">&quot;</span><span class="w"> </span>.nc<span class="k">)</span>
+<span class="w">  </span>cdo<span class="w"> </span>trend<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$index</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">basename</span><span class="si">}</span><span class="s2">_intercept.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">basename</span><span class="si">}</span><span class="s2">_trend.nc&quot;</span>
+<span class="w">  </span>cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">basename</span><span class="si">}</span><span class="s2">_trend.nc&quot;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><strong>Visualization dashboard</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">indices</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Frost Days&quot;</span><span class="p">:</span> <span class="s2">&quot;fd.nc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Summer Days&quot;</span><span class="p">:</span> <span class="s2">&quot;su.nc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Rx1day&quot;</span><span class="p">:</span> <span class="s2">&quot;rx1day.nc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Rx5day&quot;</span><span class="p">:</span> <span class="s2">&quot;rx5day.nc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;R10mm&quot;</span><span class="p">:</span> <span class="s2">&quot;r10mm.nc&quot;</span>
+<span class="p">}</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">indices</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="n">var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">])</span>
+    <span class="n">ts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;extremes_dashboard.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="fig-project-04">
+<img alt="../_images/project_04_climate_extremes.png" src="../_images/project_04_climate_extremes.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Real reanalysis and CHIRPS results for Project 4: multiple extreme-index time series, linear trends, maximum monthly precipitation, and warm-month frequency by decade.</span><a class="headerlink" href="#fig-project-04" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id12">
+<h3>Expected Outputs<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Time series of 5+ extreme indices</p></li>
+<li><p>Trend values with significance</p></li>
+<li><p>Comparison of index behavior across regions</p></li>
+</ul>
+<div class="exercise admonition" id="ex-projects-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 123 </span></p>
+<section id="exercise-content">
+<p>Complete Project 4. How have extreme indices changed over your study period? Is there evidence of increasing heat extremes and heavy precipitation?</p>
+</section>
+</div>
+</section>
+</section>
+<section id="project-5-era5-data-processing-pipeline">
+<h2>Project 5: ERA5 Data Processing Pipeline<a class="headerlink" href="#project-5-era5-data-processing-pipeline" title="Link to this heading">#</a></h2>
+<p>Build a complete automated pipeline from ERA5 data download to climate summary.</p>
+<section id="id13">
+<h3>Objectives<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Download ERA5 data using the CDS API</p></li>
+<li><p>Process with CDO operators</p></li>
+<li><p>Generate automated climate summaries</p></li>
+<li><p>Create a dashboard of key climate variables</p></li>
+</ul>
+</section>
+<section id="id14">
+<h3>Data Requirements<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>CDS API access (register at <a class="reference external" href="https://cds.climate.copernicus.eu">https://cds.climate.copernicus.eu</a>)</p></li>
+<li><p>Python with cdsapi library installed</p></li>
+</ul>
+</section>
+<section id="id15">
+<h3>Step-by-Step Workflow<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Download script (Python)</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cdsapi</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">cdsapi</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+
+<span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;2m_temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;total_precipitation&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;10m_u_component_of_wind&quot;</span><span class="p">,</span> <span class="s2">&quot;10m_v_component_of_wind&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="s2">&quot;reanalysis-era5-single-levels-monthly-means&quot;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s2">&quot;product_type&quot;</span><span class="p">:</span> <span class="s2">&quot;monthly_averaged_reanalysis&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;variable&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">var</span><span class="p">],</span>
+        <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1981</span><span class="p">,</span> <span class="mi">2021</span><span class="p">)],</span>
+        <span class="s2">&quot;month&quot;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)],</span>
+        <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;netcdf&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+    <span class="p">},</span> <span class="sa">f</span><span class="s2">&quot;era5_</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Processing pipeline (bash)</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+mkdir<span class="w"> </span>-p<span class="w"> </span>output
+
+<span class="k">for</span><span class="w"> </span>var<span class="w"> </span><span class="k">in</span><span class="w"> </span>2m_temperature<span class="w"> </span>total_precipitation<span class="w"> </span>10m_u_component_of_wind<span class="w"> </span>10m_v_component_of_wind<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing </span><span class="nv">$var</span><span class="s2">...&quot;</span>
+
+<span class="w">  </span><span class="c1"># Regrid to common grid</span>
+<span class="w">  </span>cdo<span class="w"> </span>-P<span class="w"> </span><span class="m">4</span><span class="w"> </span>-O<span class="w"> </span>remapbil,r360x180<span class="w"> </span><span class="s2">&quot;era5_</span><span class="si">${</span><span class="nv">var</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="s2">&quot;output/regridded_</span><span class="si">${</span><span class="nv">var</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+
+<span class="w">  </span><span class="c1"># Climatology</span>
+<span class="w">  </span>cdo<span class="w"> </span>-O<span class="w"> </span>ymonmean<span class="w"> </span><span class="s2">&quot;output/regridded_</span><span class="si">${</span><span class="nv">var</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="s2">&quot;output/clim_</span><span class="si">${</span><span class="nv">var</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+
+<span class="w">  </span><span class="c1"># Anomalies</span>
+<span class="w">  </span>cdo<span class="w"> </span>-O<span class="w"> </span>ymonsub<span class="w"> </span><span class="s2">&quot;output/regridded_</span><span class="si">${</span><span class="nv">var</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="s2">&quot;output/clim_</span><span class="si">${</span><span class="nv">var</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="s2">&quot;output/anom_</span><span class="si">${</span><span class="nv">var</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Climate summary report generator</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="c1"># Extract summary statistics</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span>
+    <span class="s2">&quot;cdo&quot;</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="s2">&quot;-fldmean&quot;</span><span class="p">,</span> <span class="s2">&quot;-timmean&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;output/regridded_2m_temperature.nc&quot;</span>
+<span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">mean_temp</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span>
+    <span class="s2">&quot;cdo&quot;</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="s2">&quot;-fldsum&quot;</span><span class="p">,</span> <span class="s2">&quot;-timsum&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;output/regridded_total_precipitation.nc&quot;</span>
+<span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">total_precip</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+<span class="n">summary</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;mean_temperature_C&quot;</span><span class="p">:</span> <span class="n">mean_temp</span> <span class="o">-</span> <span class="mf">273.15</span><span class="p">,</span>
+    <span class="s2">&quot;total_precipitation_m&quot;</span><span class="p">:</span> <span class="n">total_precip</span><span class="p">,</span>
+    <span class="s2">&quot;period&quot;</span><span class="p">:</span> <span class="s2">&quot;1981-2020&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;Europe&quot;</span>
+<span class="p">}</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;climate_summary.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">summary</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean Temperature: </span><span class="si">{</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;mean_temperature_C&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Precipitation: </span><span class="si">{</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;total_precipitation_m&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">m&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="fig-project-05">
+<img alt="../_images/project_05_reanalysis_pipeline.png" src="../_images/project_05_reanalysis_pipeline.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Project 5 pipeline illustrated with real NCEP/NOAA data: processing workflow, JJA temperature climatology, global temperature anomalies, and 10 m zonal wind climatology.</span><a class="headerlink" href="#fig-project-05" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id16">
+<h3>Expected Outputs<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Automated data download and processing pipeline</p></li>
+<li><p>Gridded climatology and anomaly files</p></li>
+<li><p>Climate summary JSON/CSV with key statistics</p></li>
+<li><p>Dashboard-ready visualization files</p></li>
+</ul>
+<div class="exercise admonition" id="ex-projects-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 124 </span></p>
+<section id="exercise-content">
+<p>Complete Project 5. Automate the entire pipeline so it runs with a single command. Include error handling and logging.</p>
+</section>
+</div>
+</section>
+</section>
+<section id="project-6-cmip6-multi-model-analysis">
+<h2>Project 6: CMIP6 Multi-Model Analysis<a class="headerlink" href="#project-6-cmip6-multi-model-analysis" title="Link to this heading">#</a></h2>
+<p>Download and analyze CMIP6 climate projections.</p>
+<section id="id17">
+<h3>Objectives<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Download CMIP6 data for multiple models</p></li>
+<li><p>Regrid all models to a common grid</p></li>
+<li><p>Compute multi-model ensemble mean and spread</p></li>
+<li><p>Analyze projected changes</p></li>
+</ul>
+</section>
+<section id="id18">
+<h3>Data Requirements<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>CMIP6 data (available via ESGF or CDS API)</p></li>
+<li><p>Minimum 3-5 models for both historical and SSP scenarios</p></li>
+<li><p>Variable: tas (surface temperature) or pr (precipitation)</p></li>
+</ul>
+</section>
+<section id="id19">
+<h3>Step-by-Step Workflow<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Organize data</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>cmip6_data/<span class="o">{</span>historical,ssp585<span class="o">}</span>
+<span class="c1"># Place model files in appropriate directories</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Regrid all models to common grid</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">TARGET_GRID</span><span class="o">=</span><span class="s2">&quot;r360x180&quot;</span>
+<span class="nv">MODELS</span><span class="o">=</span><span class="s2">&quot;model_A model_B model_C model_D model_E&quot;</span>
+
+<span class="k">for</span><span class="w"> </span>model<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$MODELS</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span>cdo<span class="w"> </span>-O<span class="w"> </span>remapbil,<span class="nv">$TARGET_GRID</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;cmip6_data/historical/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_tas.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;processed/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_historical.nc&quot;</span>
+
+<span class="w">  </span>cdo<span class="w"> </span>-O<span class="w"> </span>remapbil,<span class="nv">$TARGET_GRID</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;cmip6_data/ssp585/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_tas.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;processed/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_ssp585.nc&quot;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Compute multi-model statistics</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Historical ensemble</span>
+cdo<span class="w"> </span>ensmean<span class="w"> </span>processed/*_historical.nc<span class="w"> </span>mme_historical.nc
+cdo<span class="w"> </span>ensstd<span class="w"> </span>processed/*_historical.nc<span class="w"> </span>spread_historical.nc
+
+<span class="c1"># Future ensemble</span>
+cdo<span class="w"> </span>ensmean<span class="w"> </span>processed/*_ssp585.nc<span class="w"> </span>mme_ssp585.nc
+cdo<span class="w"> </span>ensstd<span class="w"> </span>processed/*_ssp585.nc<span class="w"> </span>spread_ssp585.nc
+
+<span class="c1"># Change (future minus historical)</span>
+cdo<span class="w"> </span>sub<span class="w"> </span>mme_ssp585.nc<span class="w"> </span>mme_historical.nc<span class="w"> </span>change.nc
+
+<span class="c1"># Signal-to-noise ratio</span>
+cdo<span class="w"> </span>div<span class="w"> </span>change.nc<span class="w"> </span>spread_historical.nc<span class="w"> </span>snr.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><strong>Model agreement mask</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For each model, compute change sign</span>
+<span class="k">for</span><span class="w"> </span>model<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$MODELS</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span>cdo<span class="w"> </span>gec,0<span class="w"> </span>-sub<span class="w"> </span><span class="s2">&quot;processed/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_ssp585.nc&quot;</span><span class="w"> </span><span class="s2">&quot;processed/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_historical.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;sign_</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># Fraction of models agreeing on warming</span>
+cdo<span class="w"> </span>ensmean<span class="w"> </span>sign_*.nc<span class="w"> </span>agreement.nc
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p><strong>Visualize</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;change.nc&quot;</span><span class="p">)</span>
+<span class="n">agreement</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;agreement.nc&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Left: temperature change</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">change_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">ds</span><span class="p">[</span><span class="n">change_var</span><span class="p">],</span>
+                  <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+                  <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlOrRd&quot;</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Temperature Change (2081-2100 minus 1981-2010)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="p">)</span>
+
+<span class="c1"># Right: model agreement</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">agree_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">agreement</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">agreement</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">agreement</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">agreement</span><span class="p">[</span><span class="n">agree_var</span><span class="p">],</span>
+                   <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+                   <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlGn&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Model Agreement Fraction&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fraction&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;cmip6_analysis.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="fig-project-06">
+<img alt="../_images/project_06_ensemble_analysis.png" src="../_images/project_06_ensemble_analysis.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Project 6 multi-member analysis using six real annual reanalysis fields: ensemble mean, ensemble spread, warming agreement, and annual global mean with spread.</span><a class="headerlink" href="#fig-project-06" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id20">
+<h3>Expected Outputs<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Multi-model ensemble mean maps</p></li>
+<li><p>Model spread / uncertainty maps</p></li>
+<li><p>Model agreement maps</p></li>
+<li><p>Time series of projected changes</p></li>
+</ul>
+<div class="exercise admonition" id="ex-projects-6">
+
+<p class="admonition-title"><span class="caption-number">Exercise 125 </span></p>
+<section id="exercise-content">
+<p>Complete Project 6. Compare the warming projected by different models. Which regions show the highest model agreement? Which show the most uncertainty?</p>
+</section>
+</div>
+</section>
+</section>
+<section id="project-7-climate-dashboard">
+<h2>Project 7: Climate Dashboard<a class="headerlink" href="#project-7-climate-dashboard" title="Link to this heading">#</a></h2>
+<p>Create an interactive climate data dashboard using Plotly and CDO.</p>
+<section id="id21">
+<h3>Objectives<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Process multiple climate variables with CDO</p></li>
+<li><p>Generate interactive visualizations with Plotly</p></li>
+<li><p>Create a cohesive dashboard layout</p></li>
+<li><p>Allow user interaction (zoom, select regions)</p></li>
+</ul>
+</section>
+<section id="id22">
+<h3>Data Requirements<a class="headerlink" href="#id22" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Processed data from any previous project</p></li>
+<li><p>Python with Plotly, dash (optional), and xarray</p></li>
+</ul>
+</section>
+<section id="id23">
+<h3>Step-by-Step Workflow<a class="headerlink" href="#id23" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Process data with CDO</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prepare data for dashboard</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>fldmean<span class="w"> </span>-ymonsub<span class="w"> </span>-monmean<span class="w"> </span>-daymean<span class="w"> </span>hourly_temp.nc<span class="w"> </span>global_anom.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>fldmean<span class="w"> </span>-selregion,1<span class="w"> </span>temperature.nc<span class="w"> </span>region1.nc
+cdo<span class="w"> </span>output<span class="w"> </span>global_anom.nc<span class="w"> </span>&gt;<span class="w"> </span>timeseries_data.csv
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>CSV export for dashboard</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>outputts<span class="w"> </span>temperature.nc<span class="w"> </span>&gt;<span class="w"> </span>temperature_timeseries.csv
+cdo<span class="w"> </span>outputf,%7.3f,1<span class="w"> </span>-fldmean<span class="w"> </span>temperature.nc<span class="w"> </span>&gt;<span class="w"> </span>global_mean.csv
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Interactive dashboard with Plotly</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">from</span> <span class="nn">plotly.subplots</span> <span class="kn">import</span> <span class="n">make_subplots</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Sample dashboard with subplots</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;timeseries_data.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">])</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span>
+    <span class="n">rows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">subplot_titles</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Temperature Anomaly&quot;</span><span class="p">,</span> <span class="s2">&quot;Precipitation (Regional)&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Frost Days Trend&quot;</span><span class="p">,</span> <span class="s2">&quot;Extreme Heat Days&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Temperature Map&quot;</span><span class="p">,</span> <span class="s2">&quot;Seasonal Cycle&quot;</span><span class="p">),</span>
+    <span class="n">specs</span><span class="o">=</span><span class="p">[[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;scatter&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;scatter&quot;</span><span class="p">}],</span>
+           <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;scatter&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;scatter&quot;</span><span class="p">}],</span>
+           <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;scatter&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;scatter&quot;</span><span class="p">}]]</span>
+<span class="p">)</span>
+
+<span class="c1"># Time series</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+               <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Global Anomaly&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)),</span>
+    <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="c1"># Add more traces for other panels...</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Climate Data Dashboard&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span>
+    <span class="n">hovermode</span><span class="o">=</span><span class="s2">&quot;x unified&quot;</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;climate_dashboard.html&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dashboard saved to climate_dashboard.html&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="fig-project-07">
+<img alt="../_images/project_07_climate_dashboard.png" src="../_images/project_07_climate_dashboard.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Project 7 dashboard assembled from real datasets: temperature time series, precipitation bars, global temperature map, and seasonal cycle.</span><a class="headerlink" href="#fig-project-07" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id24">
+<h3>Expected Outputs<a class="headerlink" href="#id24" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Interactive HTML dashboard file</p></li>
+<li><p>Multiple panels showing different variables</p></li>
+<li><p>Responsive design with hover information</p></li>
+</ul>
+<div class="exercise admonition" id="ex-projects-7">
+
+<p class="admonition-title"><span class="caption-number">Exercise 126 </span></p>
+<section id="exercise-content">
+<p>Complete Project 7. Add at least 4 panels to your dashboard showing different climate variables or indices. Include both time series and spatial representation if possible.</p>
+</section>
+</div>
+</section>
+</section>
+<section id="project-8-automated-climate-report-generator">
+<h2>Project 8: Automated Climate Report Generator<a class="headerlink" href="#project-8-automated-climate-report-generator" title="Link to this heading">#</a></h2>
+<p>Create a bash script that generates a complete climate report automatically.</p>
+<section id="id25">
+<h3>Objectives<a class="headerlink" href="#id25" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Automate data processing from raw files to formatted report</p></li>
+<li><p>Generate summary statistics</p></li>
+<li><p>Create figures automatically</p></li>
+<li><p>Output a self-contained report</p></li>
+</ul>
+</section>
+<section id="id26">
+<h3>Step-by-Step Workflow<a class="headerlink" href="#id26" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Master processing script</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="c1"># Configuration</span>
+<span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">&quot;data&quot;</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;report_</span><span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span><span class="s2">&quot;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Climate Report Generator ===&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Output: </span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+
+<span class="c1"># Compute statistics</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Computing temperature statistics...&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>fldmean<span class="w"> </span>-yearmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/temperature.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/global_temp.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>timmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/temperature.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/clim_mean.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>timstd<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/temperature.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/clim_std.nc&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Computing precipitation statistics...&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>yearsum<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/precipitation.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/annual_precip.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>fldmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/annual_precip.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/global_precip.nc&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Computing extremes...&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>yearsum<span class="w"> </span>-ltc,0<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/tmin.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/frost_days.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>yearsum<span class="w"> </span>-gtc,25<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/tmax.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/summer_days.nc&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;All statistics computed.&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Python figure generation</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="c1"># Generate all figures</span>
+<span class="n">figures</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Figure 1: Global temperature</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;report/global_temp.nc&quot;</span><span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="s2">&quot;b-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Global Mean Temperature&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Temperature (C)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;report/fig1_temperature.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;fig1_temperature.png&quot;</span><span class="p">)</span>
+
+<span class="c1"># Figure 2: Frost days</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;report/frost_days.nc&quot;</span><span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span> <span class="k">if</span> <span class="s2">&quot;time&quot;</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">dims</span> <span class="k">else</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)),</span> <span class="n">ts</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Annual Frost Days&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frost Days&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;report/fig2_frost_days.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;fig2_frost_days.png&quot;</span><span class="p">)</span>
+
+<span class="c1"># Figure 3: Precipitation</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;report/global_precip.nc&quot;</span><span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="s2">&quot;g-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Annual Precipitation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Precipitation (mm)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;report/fig3_precipitation.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;fig3_precipitation.png&quot;</span><span class="p">)</span>
+
+<span class="c1"># Generate summary JSON</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;period&quot;</span><span class="p">:</span> <span class="s2">&quot;1981-2020&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;total_figures&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">figures</span><span class="p">),</span>
+    <span class="s2">&quot;figure_files&quot;</span><span class="p">:</span> <span class="n">figures</span>
+<span class="p">}</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;report/summary.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">summary</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">figures</span><span class="p">)</span><span class="si">}</span><span class="s2"> figures&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>HTML report assembly</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/report.html&quot;</span><span class="w"> </span><span class="s">&lt;&lt; &#39;HTML_EOF&#39;</span>
+<span class="s">&lt;!DOCTYPE html&gt;</span>
+<span class="s">&lt;html&gt;</span>
+<span class="s">&lt;head&gt;</span>
+<span class="s">  &lt;title&gt;Climate Report&lt;/title&gt;</span>
+<span class="s">  &lt;style&gt;</span>
+<span class="s">    body { font-family: Arial; max-width: 900px; margin: auto; padding: 20px; }</span>
+<span class="s">    img { max-width: 100%; margin: 10px 0; }</span>
+<span class="s">    h1 { color: #2c3e50; }</span>
+<span class="s">    .figure { margin: 20px 0; }</span>
+<span class="s">  &lt;/style&gt;</span>
+<span class="s">&lt;/head&gt;</span>
+<span class="s">&lt;body&gt;</span>
+<span class="s">  &lt;h1&gt;Automated Climate Report&lt;/h1&gt;</span>
+<span class="s">  &lt;p&gt;Generated on: $(date)&lt;/p&gt;</span>
+<span class="s">  &lt;hr&gt;</span>
+
+<span class="s">  &lt;h2&gt;1. Temperature Analysis&lt;/h2&gt;</span>
+<span class="s">  &lt;div class=&quot;figure&quot;&gt;</span>
+<span class="s">    &lt;img src=&quot;fig1_temperature.png&quot; alt=&quot;Temperature&quot;&gt;</span>
+<span class="s">  &lt;/div&gt;</span>
+
+<span class="s">  &lt;h2&gt;2. Frost Days&lt;/h2&gt;</span>
+<span class="s">  &lt;div class=&quot;figure&quot;&gt;</span>
+<span class="s">    &lt;img src=&quot;fig2_frost_days.png&quot; alt=&quot;Frost Days&quot;&gt;</span>
+<span class="s">  &lt;/div&gt;</span>
+
+<span class="s">  &lt;h2&gt;3. Precipitation&lt;/h2&gt;</span>
+<span class="s">  &lt;div class=&quot;figure&quot;&gt;</span>
+<span class="s">    &lt;img src=&quot;fig3_precipitation.png&quot; alt=&quot;Precipitation&quot;&gt;</span>
+<span class="s">  &lt;/div&gt;</span>
+
+<span class="s">  &lt;hr&gt;</span>
+<span class="s">  &lt;p&gt;Report generated by Automated Climate Report Generator&lt;/p&gt;</span>
+<span class="s">&lt;/body&gt;</span>
+<span class="s">&lt;/html&gt;</span>
+<span class="s">HTML_EOF</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Report generated: </span><span class="nv">$OUTPUT_DIR</span><span class="s2">/report.html&quot;</span>
+</pre></div>
+</div>
+<figure class="align-default" id="fig-project-08">
+<img alt="../_images/project_08_climate_report.png" src="../_images/project_08_climate_report.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Project 8 automated-report output built from real datasets: temperature time series, trend map, precipitation time series, and a summary-statistics panel.</span><a class="headerlink" href="#fig-project-08" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id27">
+<h3>Expected Outputs<a class="headerlink" href="#id27" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Self-contained HTML report with embedded figures</p></li>
+<li><p>Summary statistics in JSON/CSV format</p></li>
+<li><p>Reproducible pipeline script</p></li>
+</ul>
+<div class="exercise admonition" id="ex-projects-8">
+
+<p class="admonition-title"><span class="caption-number">Exercise 127 </span></p>
+<section id="exercise-content">
+<p>Complete Project 8. Run the complete report generator on a new dataset. Verify that the report is self-contained and can be opened in any browser.</p>
+</section>
+</div>
+</section>
+</section>
+<section id="capstone-project-quiz">
+<h2>Capstone Project Quiz<a class="headerlink" href="#capstone-project-quiz" title="Link to this heading">#</a></h2>
+<div class="exercise admonition" id="q-projects-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 128 </span> (Question 1)</p>
+<section id="exercise-content">
+<p>When computing SPI at the 12-month timescale, what does a value of -1.8 indicate?</p>
+<p>a) Near-normal conditions
+b) Moderate drought
+c) Severe drought
+d) Extreme drought</p>
+</section>
+</div>
+<div class="solution admonition" id="book/projects-solution-9">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-projects-1"> Exercise 128 (Question 1)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>c</strong>. SPI &lt; -1.5 indicates severe drought. SPI &lt; -2 indicates extreme drought. -1.8 falls in the severe drought category.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-projects-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 129 </span> (Question 2)</p>
+<section id="exercise-content">
+<p>In multi-model ensemble analysis, what does the model agreement fraction of 0.8 mean?</p>
+<p>a) 80% of models show the same magnitude of change
+b) 80% of models agree on the sign of change (e.g., warming)
+c) Model results are 80% accurate compared to observations
+d) The ensemble spread is 80% of the mean</p>
+</section>
+</div>
+<div class="solution admonition" id="book/projects-solution-11">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-projects-2"> Exercise 129 (Question 2)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. Model agreement fraction measures the proportion of models showing the same direction of change. A value of 0.8 means 4 out of 5 models show warming, for example.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-projects-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 130 </span> (Question 3)</p>
+<section id="exercise-content">
+<p>Which tool is most appropriate for creating an interactive climate dashboard?</p>
+<p>a) Matplotlib
+b) Cartopy
+c) Plotly
+d) NCL</p>
+</section>
+</div>
+<div class="solution admonition" id="book/projects-solution-13">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-projects-3"> Exercise 130 (Question 3)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>c</strong>. Plotly is specifically designed for interactive visualizations with zoom, pan, and hover capabilities. Matplotlib and Cartopy create static images. NCL is a legacy tool.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-projects-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 131 </span> (Question 4)</p>
+<section id="exercise-content">
+<p>In Project 5 (ERA5 pipeline), what is the first step in the data workflow?</p>
+<p>a) Computing anomalies
+b) Regridding to a common grid
+c) Downloading data via the CDS API
+d) Creating visualizations</p>
+</section>
+</div>
+<div class="solution admonition" id="book/projects-solution-15">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-projects-4"> Exercise 131 (Question 4)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>c</strong>. The first step is always data acquisition. In the ERA5 pipeline, this means using the CDS API to download the raw data before any processing steps.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-projects-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 132 </span> (Question 5)</p>
+<section id="exercise-content">
+<p>What is the key advantage of the automated report generator in Project 8?</p>
+<p>a) It produces higher quality figures than manual methods
+b) It can be run on new data to consistently produce the same analysis
+c) It requires no input data
+d) It replaces the need for any CDO commands</p>
+</section>
+</div>
+<div class="solution admonition" id="book/projects-solution-17">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-projects-5"> Exercise 132 (Question 5)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. The automated report generator provides reproducibility – running it on any compatible dataset produces consistent, comparable output every time. This is essential for operational climate monitoring.</p>
+</section>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this capstone module, you applied CDO skills to eight real-world climate data analysis projects:</p>
+<ul class="simple">
+<li><p><strong>Project 1</strong>: Rainfall trend analysis with significance testing</p></li>
+<li><p><strong>Project 2</strong>: Temperature trend mapping with seasonal analysis</p></li>
+<li><p><strong>Project 3</strong>: Drought index computation (SPI)</p></li>
+<li><p><strong>Project 4</strong>: ETCCDI climate extremes detection</p></li>
+<li><p><strong>Project 5</strong>: Automated ERA5 data processing pipeline</p></li>
+<li><p><strong>Project 6</strong>: CMIP6 multi-model ensemble analysis</p></li>
+<li><p><strong>Project 7</strong>: Interactive climate dashboard with Plotly</p></li>
+<li><p><strong>Project 8</strong>: Automated climate report generator</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The projects in this module are designed to be building blocks for your own research. Combine elements from multiple projects: use the ERA5 pipeline (Project 5) to download data, compute extremes (Project 4), and generate an automated report (Project 8). The skills you have learned throughout this course will serve you well in climate data analysis.</p>
+</div>
+<p>Congratulations on completing all 12 modules of the Climate Data Operators (CDO) Training course!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="workflows.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Module 11: Advanced Workflows and Automation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="references.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References and Further Resources</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-1-rainfall-trend-analysis">Project 1: Rainfall Trend Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-workflow">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-outputs">Expected Outputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-criteria">Evaluation Criteria</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-2-temperature-trend-mapping">Project 2: Temperature Trend Mapping</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-3-drought-index-computation">Project 3: Drought Index Computation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-4-climate-extremes-detection">Project 4: Climate Extremes Detection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-5-era5-data-processing-pipeline">Project 5: ERA5 Data Processing Pipeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-6-cmip6-multi-model-analysis">Project 6: CMIP6 Multi-Model Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-7-climate-dashboard">Project 7: Climate Dashboard</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-8-automated-climate-report-generator">Project 8: Automated Climate Report Generator</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">Step-by-Step Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id27">Expected Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capstone-project-quiz">Capstone Project Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

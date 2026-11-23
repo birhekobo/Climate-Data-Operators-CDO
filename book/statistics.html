@@ -1,0 +1,1582 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Module 9: Statistical Operators &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/statistics';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 10: Climate Indices and Extremes" href="climate_indices.html" />
+    <link rel="prev" title="Module 8: Spatial Operators" href="spatial.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./book/statistics.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fbook/statistics.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/statistics.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 9: Statistical Operators</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-statistics">9.1 Basic Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-and-average">9.1.1 Mean and Average</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#median">9.1.2 Median</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-and-minimum">9.1.3 Maximum and Minimum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sum">9.1.4 Sum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-deviation-and-variance">9.1.5 Standard Deviation and Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#range">9.1.6 Range</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-basic-operators">9.1.7 Comparison of Basic Operators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-statistics">9.2 Ensemble Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-mean">9.2.1 Ensemble Mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-ensemble-operators">9.2.2 Other Ensemble Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-spread-analysis">9.2.3 Ensemble Spread Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-percentiles">9.2.4 Ensemble Percentiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wildcard-processing">9.2.5 Wildcard Processing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-variable-temporal-statistics">9.3 Multi-Variable (Temporal) Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-mean">9.3.1 Time Mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-max-min-and-sum">9.3.2 Time Max, Min, and Sum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-standard-deviation-and-variance">9.3.3 Time Standard Deviation and Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-range-and-median">9.3.4 Time Range and Median</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-percentiles">9.3.5 Temporal Percentiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-percentile-climatology">9.3.6 Daily Percentile Climatology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monthly-percentile-climatology">9.3.7 Monthly Percentile Climatology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-temporal-statistics">9.3.8 Summary of Temporal Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentiles-and-histograms">9.4 Percentiles and Histograms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-count">9.4.1 Histogram Count</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-frequency">9.4.2 Histogram Frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-distribution-functions">9.4.3 Empirical Distribution Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extreme-value-analysis">9.4.4 Extreme Value Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-statistics">9.5 Multi-Model Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-ensemble-mean">9.5.1 Multi-Model Ensemble Mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-spread">9.5.2 Multi-Model Spread</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-agreement">9.5.3 Model Agreement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-to-noise-ratio">9.5.4 Signal-to-Noise Ratio</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-quality-control">9.6 Statistical Quality Control</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detecting-outliers">9.6.1 Detecting Outliers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-for-missing-data">9.6.2 Checking for Missing Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-consistency-checks">9.6.3 Temporal Consistency Checks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflow-examples">9.7 Practical Workflow Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-year-statistical-summary">9.7.1 Multi-Year Statistical Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-forecast-verification">9.7.2 Ensemble Forecast Verification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-extremes">9.7.3 Seasonal Extremes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-significance">9.7.4 Trend Significance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">9.8 Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-1-multi-year-statistics">Exercise 9.1: Multi-Year Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-2-ensemble-statistics">Exercise 9.2: Ensemble Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-3-percentile-analysis">Exercise 9.3: Percentile Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-4-histogram-analysis">Exercise 9.4: Histogram Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-5-statistical-downscaling-verification">Exercise 9.5: Statistical Downscaling Verification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">9.9 Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-9-statistical-operators">
+<h1>Module 9: Statistical Operators<a class="headerlink" href="#module-9-statistical-operators" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After completing this module, you will be able to:</p>
+<ul class="simple">
+<li><p>Compute basic statistical measures (mean, median, min, max, sum, std, var, range) over any dimension</p></li>
+<li><p>Calculate ensemble statistics across multiple model runs or members</p></li>
+<li><p>Apply temporal statistics (time mean, time max, time std, time sum)</p></li>
+<li><p>Compute percentiles and histogram statistics</p></li>
+<li><p>Perform multi-model ensemble analysis</p></li>
+<li><p>Use statistics for climate data quality control</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<p>This module assumes you have completed Modules 1-8 and are comfortable with basic CDO commands, file operations, and data selection.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will need both single-file datasets and multi-file ensembles for the examples. The course data repository contains sample files including CMIP6-style output with multiple ensemble members.</p>
+</div>
+<figure class="align-default" id="fig-statistics-timeseries">
+<img alt="../_images/fig_global_timeseries.png" src="../_images/fig_global_timeseries.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">A real temperature time series used to demonstrate temporal statistics, anomalies, and trend analysis with CDO and Python.</span><a class="headerlink" href="#fig-statistics-timeseries" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="basic-statistics">
+<h2>9.1 Basic Statistics<a class="headerlink" href="#basic-statistics" title="Link to this heading">#</a></h2>
+<p>Basic statistical operators in CDO compute aggregate values over the entire dataset, collapsing all dimensions.</p>
+<section id="mean-and-average">
+<h3>9.1.1 Mean and Average<a class="headerlink" href="#mean-and-average" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>mean<span class="w"> </span>temperature.nc<span class="w"> </span>mean_temp.nc
+cdo<span class="w"> </span>avg<span class="w"> </span>temperature.nc<span class="w"> </span>avg_temp.nc
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">avg</span></code> operators are identical — both compute the arithmetic mean over all grid points and time steps.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code class="docutils literal notranslate"><span class="pre">mean</span></code> is the most commonly used CDO operator. It is often the final step in a pipeline, producing a single value or profile from a multidimensional field.</p>
+</div>
+</section>
+<section id="median">
+<h3>9.1.2 Median<a class="headerlink" href="#median" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>median<span class="w"> </span>temperature.nc<span class="w"> </span>median_temp.nc
+</pre></div>
+</div>
+<p>The median is less sensitive to outliers than the mean. For skewed distributions (e.g., precipitation), the median can be more representative.</p>
+</section>
+<section id="maximum-and-minimum">
+<h3>9.1.3 Maximum and Minimum<a class="headerlink" href="#maximum-and-minimum" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>max<span class="w"> </span>temperature.nc<span class="w"> </span>max_temp.nc<span class="w">           </span><span class="c1"># global maximum</span>
+cdo<span class="w"> </span>min<span class="w"> </span>temperature.nc<span class="w"> </span>min_temp.nc<span class="w">           </span><span class="c1"># global minimum</span>
+cdo<span class="w"> </span>fldmax<span class="w"> </span>temperature.nc<span class="w"> </span>max_per_time.nc<span class="w">     </span><span class="c1"># spatial max at each time</span>
+cdo<span class="w"> </span>yearmax<span class="w"> </span>temperature.nc<span class="w"> </span>annual_max.nc<span class="w">      </span><span class="c1"># annual maximum</span>
+cdo<span class="w"> </span>daymax<span class="w"> </span>temperature.nc<span class="w"> </span>daily_max.nc<span class="w">        </span><span class="c1"># daily maximum</span>
+</pre></div>
+</div>
+<div class="exercise admonition" id="ex-statistics-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 81 </span></p>
+<section id="exercise-content">
+<p>Find the absolute maximum temperature in your dataset and determine when and where it occurs.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-statistics-1"> Exercise 81</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>output<span class="w"> </span>-max<span class="w"> </span>temperature.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-timmax<span class="w"> </span>-fldmax<span class="w"> </span>temperature.nc
+</pre></div>
+</div>
+<p>Combine <code class="docutils literal notranslate"><span class="pre">fldmax</span></code> and <code class="docutils literal notranslate"><span class="pre">timmax</span></code> to find the spatial location and time of the absolute maximum.</p>
+</section>
+</div>
+</section>
+<section id="sum">
+<h3>9.1.4 Sum<a class="headerlink" href="#sum" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sum<span class="w"> </span>precipitation.nc<span class="w"> </span>total_precip.nc
+cdo<span class="w"> </span>yearsum<span class="w"> </span>precipitation.nc<span class="w"> </span>annual_total.nc
+cdo<span class="w"> </span>monsum<span class="w"> </span>precipitation.nc<span class="w"> </span>monthly_total.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sum</span></code> operator is dimension-dependent. For precipitation, <code class="docutils literal notranslate"><span class="pre">sum</span></code> over time gives total accumulation. For temperature, summing over time is rarely physically meaningful.</p>
+</div>
+</section>
+<section id="standard-deviation-and-variance">
+<h3>9.1.5 Standard Deviation and Variance<a class="headerlink" href="#standard-deviation-and-variance" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>std<span class="w"> </span>temperature.nc<span class="w"> </span>std_temp.nc<span class="w">           </span><span class="c1"># population standard deviation</span>
+cdo<span class="w"> </span>var<span class="w"> </span>temperature.nc<span class="w"> </span>var_temp.nc<span class="w">           </span><span class="c1"># population variance</span>
+</pre></div>
+</div>
+<p>For sample statistics (n-1 denominator):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>std1<span class="w"> </span>temperature.nc<span class="w"> </span>std_sample.nc<span class="w">        </span><span class="c1"># sample standard deviation</span>
+cdo<span class="w"> </span>var1<span class="w"> </span>temperature.nc<span class="w"> </span>var_sample.nc<span class="w">        </span><span class="c1"># sample variance</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CDO distinguishes between population statistics (<code class="docutils literal notranslate"><span class="pre">std</span></code>, <code class="docutils literal notranslate"><span class="pre">var</span></code>) and sample statistics (<code class="docutils literal notranslate"><span class="pre">std1</span></code>, <code class="docutils literal notranslate"><span class="pre">var1</span></code>). Population stats use N in the denominator; sample stats use N-1. For large climate datasets, the difference is negligible.</p>
+</div>
+</section>
+<section id="range">
+<h3>9.1.6 Range<a class="headerlink" href="#range" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>range<span class="w"> </span>temperature.nc<span class="w"> </span>range_temp.nc
+</pre></div>
+</div>
+<p>The range is simply <code class="docutils literal notranslate"><span class="pre">max</span> <span class="pre">-</span> <span class="pre">min</span></code> and provides a quick measure of the total variability in the dataset.</p>
+</section>
+<section id="comparison-of-basic-operators">
+<h3>9.1.7 Comparison of Basic Operators<a class="headerlink" href="#comparison-of-basic-operators" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Use Case</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mean</span></code></p></td>
+<td><p>Arithmetic mean</p></td>
+<td><p>Average temperature/pressure</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">avg</span></code></p></td>
+<td><p>Alias for mean</p></td>
+<td><p>Same as mean</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">median</span></code></p></td>
+<td><p>Median (50th percentile)</p></td>
+<td><p>Skewed distributions (precip)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max</span></code></p></td>
+<td><p>Maximum value</p></td>
+<td><p>Extremes, peak temperature</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">min</span></code></p></td>
+<td><p>Minimum value</p></td>
+<td><p>Extremes, minimum temperature</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sum</span></code></p></td>
+<td><p>Sum of values</p></td>
+<td><p>Total precipitation, accumulation</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">std</span></code></p></td>
+<td><p>Population std deviation</p></td>
+<td><p>Variability (N denominator)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">var</span></code></p></td>
+<td><p>Population variance</p></td>
+<td><p>Variability squared (N denom)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">std1</span></code></p></td>
+<td><p>Sample std deviation</p></td>
+<td><p>Small sample variability</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">var1</span></code></p></td>
+<td><p>Sample variance</p></td>
+<td><p>Small sample variance</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">range</span></code></p></td>
+<td><p>Max minus min</p></td>
+<td><p>Total spread</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="ensemble-statistics">
+<h2>9.2 Ensemble Statistics<a class="headerlink" href="#ensemble-statistics" title="Link to this heading">#</a></h2>
+<p>Ensemble operators combine multiple input files, computing statistics across the “ensemble member” dimension.</p>
+<section id="ensemble-mean">
+<h3>9.2.1 Ensemble Mean<a class="headerlink" href="#ensemble-mean" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ensmean<span class="w"> </span>model1.nc<span class="w"> </span>model2.nc<span class="w"> </span>model3.nc<span class="w"> </span>ens_mean.nc
+</pre></div>
+</div>
+<p>This computes the mean across all input files at each grid point and time step.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code class="docutils literal notranslate"><span class="pre">ensmean</span></code> is widely used in climate science to compute multi-model ensemble means, which typically outperform any single model in forecast skill.</p>
+</div>
+</section>
+<section id="other-ensemble-operators">
+<h3>9.2.2 Other Ensemble Operators<a class="headerlink" href="#other-ensemble-operators" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ensmax<span class="w"> </span>model1.nc<span class="w"> </span>model2.nc<span class="w"> </span>model3.nc<span class="w"> </span>ens_max.nc<span class="w">     </span><span class="c1"># ensemble maximum</span>
+cdo<span class="w"> </span>ensmin<span class="w"> </span>model1.nc<span class="w"> </span>model2.nc<span class="w"> </span>model3.nc<span class="w"> </span>ens_min.nc<span class="w">     </span><span class="c1"># ensemble minimum</span>
+cdo<span class="w"> </span>ensstd<span class="w"> </span>model1.nc<span class="w"> </span>model2.nc<span class="w"> </span>model3.nc<span class="w"> </span>ens_std.nc<span class="w">     </span><span class="c1"># ensemble std dev</span>
+cdo<span class="w"> </span>ensvar<span class="w"> </span>model1.nc<span class="w"> </span>model2.nc<span class="w"> </span>model3.nc<span class="w"> </span>ens_var.nc<span class="w">     </span><span class="c1"># ensemble variance</span>
+cdo<span class="w"> </span>ensrange<span class="w"> </span>model1.nc<span class="w"> </span>model2.nc<span class="w"> </span>model3.nc<span class="w"> </span>ens_range.nc<span class="w"> </span><span class="c1"># ensemble range</span>
+cdo<span class="w"> </span>ensmedian<span class="w"> </span>model1.nc<span class="w"> </span>model2.nc<span class="w"> </span>model3.nc<span class="w"> </span>ens_median.nc
+</pre></div>
+</div>
+</section>
+<section id="ensemble-spread-analysis">
+<h3>9.2.3 Ensemble Spread Analysis<a class="headerlink" href="#ensemble-spread-analysis" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ensmean<span class="w"> </span>m1.nc<span class="w"> </span>m2.nc<span class="w"> </span>m3.nc<span class="w"> </span>m4.nc<span class="w"> </span>m5.nc<span class="w"> </span>ens_mean.nc
+cdo<span class="w"> </span>ensstd<span class="w"> </span>m1.nc<span class="w"> </span>m2.nc<span class="w"> </span>m3.nc<span class="w"> </span>m4.nc<span class="w"> </span>m5.nc<span class="w"> </span>ens_std.nc
+cdo<span class="w"> </span>div<span class="w"> </span>ens_std.nc<span class="w"> </span>ens_mean.nc<span class="w"> </span>cv.nc<span class="w">      </span><span class="c1"># coefficient of variation</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ensemble spread (standard deviation) measures inter-model or inter-member uncertainty. A large spread indicates low confidence in the ensemble mean.</p>
+</div>
+</section>
+<section id="ensemble-percentiles">
+<h3>9.2.4 Ensemble Percentiles<a class="headerlink" href="#ensemble-percentiles" title="Link to this heading">#</a></h3>
+<p>Using <code class="docutils literal notranslate"><span class="pre">enspctl</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>enspctl,10<span class="w"> </span>m1.nc<span class="w"> </span>m2.nc<span class="w"> </span>m3.nc<span class="w"> </span>m4.nc<span class="w"> </span>m5.nc<span class="w"> </span>p10.nc<span class="w">  </span><span class="c1"># 10th percentile</span>
+cdo<span class="w"> </span>enspctl,50<span class="w"> </span>m1.nc<span class="w"> </span>m2.nc<span class="w"> </span>m3.nc<span class="w"> </span>m4.nc<span class="w"> </span>m5.nc<span class="w"> </span>p50.nc<span class="w">  </span><span class="c1"># median</span>
+cdo<span class="w"> </span>enspctl,90<span class="w"> </span>m1.nc<span class="w"> </span>m2.nc<span class="w"> </span>m3.nc<span class="w"> </span>m4.nc<span class="w"> </span>m5.nc<span class="w"> </span>p90.nc<span class="w">  </span><span class="c1"># 90th percentile</span>
+</pre></div>
+</div>
+<div class="exercise admonition" id="ex-statistics-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 82 </span></p>
+<section id="exercise-content">
+<p>Compute the ensemble mean, 10th percentile, and 90th percentile from 10 ensemble members. Visualize the spread as a shaded region in a time series plot.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-statistics-2"> Exercise 82</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ensmean<span class="w"> </span>mem01.nc<span class="w"> </span>mem02.nc<span class="w"> </span>mem03.nc<span class="w"> </span>mem04.nc<span class="w"> </span>mem05.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>mem06.nc<span class="w"> </span>mem07.nc<span class="w"> </span>mem08.nc<span class="w"> </span>mem09.nc<span class="w"> </span>mem10.nc<span class="w"> </span>ens_mean.nc
+cdo<span class="w"> </span>enspctl,10<span class="w"> </span>mem*.nc<span class="w"> </span>p10.nc
+cdo<span class="w"> </span>enspctl,90<span class="w"> </span>mem*.nc<span class="w"> </span>p90.nc
+</pre></div>
+</div>
+<p>The 10th-90th percentile range characterizes the ensemble spread and can be plotted as a shaded envelope around the ensemble mean.</p>
+</section>
+</div>
+</section>
+<section id="wildcard-processing">
+<h3>9.2.5 Wildcard Processing<a class="headerlink" href="#wildcard-processing" title="Link to this heading">#</a></h3>
+<p>For many ensemble members, use wildcards:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ensmean<span class="w"> </span>member_*.nc<span class="w"> </span>ensemble_mean.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When using wildcards, ensure the files are sorted correctly. CDO processes them in alphabetical order. For numeric sorting (member_01, member_02, … member_10), use leading zeros in filenames.</p>
+</div>
+</section>
+</section>
+<section id="multi-variable-temporal-statistics">
+<h2>9.3 Multi-Variable (Temporal) Statistics<a class="headerlink" href="#multi-variable-temporal-statistics" title="Link to this heading">#</a></h2>
+<p>Temporal operators compute statistics along the time dimension only, preserving spatial structure.</p>
+<section id="time-mean">
+<h3>9.3.1 Time Mean<a class="headerlink" href="#time-mean" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>timmean<span class="w"> </span>temperature.nc<span class="w"> </span>clim_mean.nc
+</pre></div>
+</div>
+<p>This is equivalent to <code class="docutils literal notranslate"><span class="pre">mean</span></code> but only collapses the time dimension, leaving spatial dimensions intact.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>timmean<span class="w"> </span>monthly_data.nc<span class="w"> </span>monthly_clim.nc<span class="w">          </span><span class="c1"># mean over all months</span>
+cdo<span class="w"> </span>timmean<span class="w"> </span>-selmonth,1<span class="w"> </span>monthly_data.nc<span class="w"> </span>jan_clim.nc<span class="w">  </span><span class="c1"># mean January only</span>
+</pre></div>
+</div>
+</section>
+<section id="time-max-min-and-sum">
+<h3>9.3.2 Time Max, Min, and Sum<a class="headerlink" href="#time-max-min-and-sum" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>timmax<span class="w"> </span>temperature.nc<span class="w"> </span>max_at_each_grid.nc<span class="w">         </span><span class="c1"># max at each grid point</span>
+cdo<span class="w"> </span>timmin<span class="w"> </span>temperature.nc<span class="w"> </span>min_at_each_grid.nc<span class="w">         </span><span class="c1"># min at each grid point</span>
+cdo<span class="w"> </span>timsum<span class="w"> </span>precipitation.nc<span class="w"> </span>total_at_each_grid.nc<span class="w">     </span><span class="c1"># accumulation at each point</span>
+</pre></div>
+</div>
+</section>
+<section id="time-standard-deviation-and-variance">
+<h3>9.3.3 Time Standard Deviation and Variance<a class="headerlink" href="#time-standard-deviation-and-variance" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>timstd<span class="w"> </span>temperature.nc<span class="w"> </span>interannual_std.nc<span class="w">          </span><span class="c1"># temporal std</span>
+cdo<span class="w"> </span>timvar<span class="w"> </span>temperature.nc<span class="w"> </span>interannual_var.nc<span class="w">          </span><span class="c1"># temporal variance</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code class="docutils literal notranslate"><span class="pre">timstd</span></code> shows where interannual variability is largest. For temperature, this is typically over continents at high latitudes and over the mid-latitude storm tracks.</p>
+</div>
+</section>
+<section id="time-range-and-median">
+<h3>9.3.4 Time Range and Median<a class="headerlink" href="#time-range-and-median" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>timrange<span class="w"> </span>temperature.nc<span class="w"> </span>range_at_each_grid.nc<span class="w">     </span><span class="c1"># temporal range</span>
+cdo<span class="w"> </span>timmedian<span class="w"> </span>temperature.nc<span class="w"> </span>median_at_each_grid.nc<span class="w">   </span><span class="c1"># temporal median</span>
+</pre></div>
+</div>
+</section>
+<section id="temporal-percentiles">
+<h3>9.3.5 Temporal Percentiles<a class="headerlink" href="#temporal-percentiles" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>timpctl,10<span class="w"> </span>temperature.nc<span class="w"> </span>p10.nc<span class="w">                  </span><span class="c1"># 10th percentile</span>
+cdo<span class="w"> </span>timpctl,50<span class="w"> </span>temperature.nc<span class="w"> </span>p50.nc<span class="w">                  </span><span class="c1"># 50th percentile (median)</span>
+cdo<span class="w"> </span>timpctl,90<span class="w"> </span>temperature.nc<span class="w"> </span>p90.nc<span class="w">                  </span><span class="c1"># 90th percentile</span>
+cdo<span class="w"> </span>timpctl,95<span class="w"> </span>temperature.nc<span class="w"> </span>p95.nc<span class="w">                  </span><span class="c1"># 95th percentile</span>
+cdo<span class="w"> </span>timpctl,99<span class="w"> </span>temperature.nc<span class="w"> </span>p99.nc<span class="w">                  </span><span class="c1"># 99th percentile</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">timpctl</span></code> operator requires an additional file specifying the percentile number. For example, <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">timpctl,90</span> <span class="pre">temperature.nc</span> <span class="pre">temperature.nc</span> <span class="pre">p90.nc</span></code> — the second <code class="docutils literal notranslate"><span class="pre">temperature.nc</span></code> provides the number of timesteps.</p>
+</div>
+<p>Actually, the correct syntax is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>timpctl,90<span class="w"> </span>temperature.nc<span class="w"> </span>-timmin<span class="w"> </span>temperature.nc<span class="w"> </span>-timmax<span class="w"> </span>temperature.nc<span class="w"> </span>p90.nc
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">timpctl</span></code> operator requires both the minimum and maximum as separate inputs.</p>
+</section>
+<section id="daily-percentile-climatology">
+<h3>9.3.6 Daily Percentile Climatology<a class="headerlink" href="#daily-percentile-climatology" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ydaypctl,90<span class="w"> </span>temperature.nc<span class="w"> </span>-ydaymin<span class="w"> </span>temperature.nc<span class="w"> </span>-ydaymax<span class="w"> </span>temperature.nc<span class="w"> </span>p90_clim.nc
+</pre></div>
+</div>
+</section>
+<section id="monthly-percentile-climatology">
+<h3>9.3.7 Monthly Percentile Climatology<a class="headerlink" href="#monthly-percentile-climatology" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ymonpctl,90<span class="w"> </span>temperature.nc<span class="w"> </span>-ymonmin<span class="w"> </span>temperature.nc<span class="w"> </span>-ymonmax<span class="w"> </span>temperature.nc<span class="w"> </span>p90_clim.nc
+</pre></div>
+</div>
+<div class="exercise admonition" id="ex-statistics-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 83 </span></p>
+<section id="exercise-content">
+<p>Compute the 90th percentile of daily maximum temperature for each calendar month from a multi-year dataset.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-5">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-statistics-3"> Exercise 83</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ymonpctl,90<span class="w"> </span>daily_tmax.nc<span class="w"> </span>-ymonmin<span class="w"> </span>daily_tmax.nc<span class="w"> </span>-ymonmax<span class="w"> </span>daily_tmax.nc<span class="w"> </span>tmax90_clim.nc
+</pre></div>
+</div>
+<p>This produces 12 maps showing the 90th percentile daily maximum temperature for each month.</p>
+</section>
+</div>
+</section>
+<section id="summary-of-temporal-statistics">
+<h3>9.3.8 Summary of Temporal Statistics<a class="headerlink" href="#summary-of-temporal-statistics" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Result Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">timmean</span></code></p></td>
+<td><p>Mean over time</p></td>
+<td><p>(lat, lon)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">timmax</span></code></p></td>
+<td><p>Maximum over time</p></td>
+<td><p>(lat, lon)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">timmin</span></code></p></td>
+<td><p>Minimum over time</p></td>
+<td><p>(lat, lon)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">timsum</span></code></p></td>
+<td><p>Sum over time</p></td>
+<td><p>(lat, lon)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">timstd</span></code></p></td>
+<td><p>Std deviation over time</p></td>
+<td><p>(lat, lon)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">timvar</span></code></p></td>
+<td><p>Variance over time</p></td>
+<td><p>(lat, lon)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">timrange</span></code></p></td>
+<td><p>Range (max-min) over time</p></td>
+<td><p>(lat, lon)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">timmedian</span></code></p></td>
+<td><p>Median over time</p></td>
+<td><p>(lat, lon)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">timpctl</span></code></p></td>
+<td><p>Percentile over time</p></td>
+<td><p>(lat, lon)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ydaypctl</span></code></p></td>
+<td><p>Daily percentile climatology</p></td>
+<td><p>(day, lat, lon)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ymonpctl</span></code></p></td>
+<td><p>Monthly percentile climatology</p></td>
+<td><p>(mon, lat, lon)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="percentiles-and-histograms">
+<h2>9.4 Percentiles and Histograms<a class="headerlink" href="#percentiles-and-histograms" title="Link to this heading">#</a></h2>
+<p>CDO provides histogram operators for analyzing the distribution of values.</p>
+<section id="histogram-count">
+<h3>9.4.1 Histogram Count<a class="headerlink" href="#histogram-count" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>histcount<span class="w"> </span>temperature.nc<span class="w"> </span>histogram.nc
+</pre></div>
+</div>
+<p>This counts the number of grid cells in each value bin. By default, CDO creates 10 equal-width bins.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>histcount,20<span class="w"> </span>temperature.nc<span class="w"> </span>histogram_20bins.nc<span class="w">   </span><span class="c1"># 20 bins</span>
+cdo<span class="w"> </span>histcount,5,-10,40<span class="w"> </span>temperature.nc<span class="w"> </span>custom_bins.nc<span class="w">   </span><span class="c1"># 5 bins from -10 to 40</span>
+</pre></div>
+</div>
+</section>
+<section id="histogram-frequency">
+<h3>9.4.2 Histogram Frequency<a class="headerlink" href="#histogram-frequency" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>histfreq<span class="w"> </span>temperature.nc<span class="w"> </span>hist_freq.nc<span class="w">               </span><span class="c1"># as fraction (0-1)</span>
+cdo<span class="w"> </span>histfreq,15<span class="w"> </span>temperature.nc<span class="w"> </span>hist_15bins.nc
+</pre></div>
+</div>
+</section>
+<section id="empirical-distribution-functions">
+<h3>9.4.3 Empirical Distribution Functions<a class="headerlink" href="#empirical-distribution-functions" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>vertsum<span class="w"> </span>-histfreq,50<span class="w"> </span>temperature.nc<span class="w"> </span>distribution.nc
+</pre></div>
+</div>
+</section>
+<section id="extreme-value-analysis">
+<h3>9.4.4 Extreme Value Analysis<a class="headerlink" href="#extreme-value-analysis" title="Link to this heading">#</a></h3>
+<p>Use percentiles to define thresholds for extremes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the 95th percentile threshold</span>
+cdo<span class="w"> </span>timpctl,95<span class="w"> </span>temperature.nc<span class="w"> </span>-timmin<span class="w"> </span>temperature.nc<span class="w"> </span>-timmax<span class="w"> </span>temperature.nc<span class="w"> </span>threshold.nc
+
+<span class="c1"># Count exceedances</span>
+cdo<span class="w"> </span>ge<span class="w"> </span>temperature.nc<span class="w"> </span>threshold.nc<span class="w"> </span>exceedances.nc
+cdo<span class="w"> </span>timsum<span class="w"> </span>exceedances.nc<span class="w"> </span>n_exceedances.nc
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ge</span></code> operator sets grid cells to 1 where the value is greater than or equal to the threshold, and 0 otherwise. Summing these over time gives the count of extreme events.</p>
+</div>
+</section>
+</section>
+<section id="multi-model-statistics">
+<h2>9.5 Multi-Model Statistics<a class="headerlink" href="#multi-model-statistics" title="Link to this heading">#</a></h2>
+<p>Multi-model analysis is essential for climate projections and uncertainty quantification.</p>
+<section id="multi-model-ensemble-mean">
+<h3>9.5.1 Multi-Model Ensemble Mean<a class="headerlink" href="#multi-model-ensemble-mean" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ensmean<span class="w"> </span>modelA.nc<span class="w"> </span>modelB.nc<span class="w"> </span>modelC.nc<span class="w"> </span>modelD.nc<span class="w"> </span>modelE.nc<span class="w"> </span>mme_mean.nc
+</pre></div>
+</div>
+</section>
+<section id="multi-model-spread">
+<h3>9.5.2 Multi-Model Spread<a class="headerlink" href="#multi-model-spread" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ensstd<span class="w"> </span>modelA.nc<span class="w"> </span>modelB.nc<span class="w"> </span>modelC.nc<span class="w"> </span>modelD.nc<span class="w"> </span>modelE.nc<span class="w"> </span>mme_spread.nc
+</pre></div>
+</div>
+</section>
+<section id="model-agreement">
+<h3>9.5.3 Model Agreement<a class="headerlink" href="#model-agreement" title="Link to this heading">#</a></h3>
+<p>Compute the fraction of models agreeing on the sign of change:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute change for each model</span>
+cdo<span class="w"> </span>sub<span class="w"> </span>modelA_future.nc<span class="w"> </span>modelA_historical.nc<span class="w"> </span>change_A.nc
+cdo<span class="w"> </span>sub<span class="w"> </span>modelB_future.nc<span class="w"> </span>modelB_historical.nc<span class="w"> </span>change_B.nc
+<span class="c1"># ... etc.</span>
+
+<span class="c1"># Sign agreement (1 if positive, 0 if negative)</span>
+cdo<span class="w"> </span>gec,0<span class="w"> </span>change_A.nc<span class="w"> </span>sign_A.nc
+<span class="c1"># ...</span>
+cdo<span class="w"> </span>ensmean<span class="w"> </span>sign_A.nc<span class="w"> </span>sign_B.nc<span class="w"> </span>sign_C.nc<span class="w"> </span>agreement.nc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An agreement value of 0.8 means 80% of models show a positive change. Values above 0.67 are often considered robust in the IPCC assessment reports.</p>
+</div>
+</section>
+<section id="signal-to-noise-ratio">
+<h3>9.5.4 Signal-to-Noise Ratio<a class="headerlink" href="#signal-to-noise-ratio" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ensmean<span class="w"> </span>model*.nc<span class="w"> </span>mme_mean.nc
+cdo<span class="w"> </span>ensstd<span class="w"> </span>model*.nc<span class="w"> </span>mme_std.nc
+cdo<span class="w"> </span>div<span class="w"> </span>mme_mean.nc<span class="w"> </span>mme_std.nc<span class="w"> </span>snr.nc
+</pre></div>
+</div>
+<p>A signal-to-noise ratio &gt; 1 indicates that the multi-model mean is larger than the inter-model spread.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Multi-model spread does not capture all sources of uncertainty. Structural biases common to all models will not appear in the ensemble spread.</p>
+</div>
+</section>
+</section>
+<section id="statistical-quality-control">
+<h2>9.6 Statistical Quality Control<a class="headerlink" href="#statistical-quality-control" title="Link to this heading">#</a></h2>
+<p>Statistical operators can identify data quality issues.</p>
+<section id="detecting-outliers">
+<h3>9.6.1 Detecting Outliers<a class="headerlink" href="#detecting-outliers" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute mean and std</span>
+cdo<span class="w"> </span>timmean<span class="w"> </span>temperature.nc<span class="w"> </span>mean.nc
+cdo<span class="w"> </span>timstd<span class="w"> </span>temperature.nc<span class="w"> </span>std.nc
+
+<span class="c1"># Define thresholds (mean +/- 4*std)</span>
+cdo<span class="w"> </span>sub<span class="w"> </span>mean.nc<span class="w"> </span>-mulc,4<span class="w"> </span>std.nc<span class="w"> </span>lower_thresh.nc
+cdo<span class="w"> </span>add<span class="w"> </span>mean.nc<span class="w"> </span>-mulc,4<span class="w"> </span>std.nc<span class="w"> </span>upper_thresh.nc
+
+<span class="c1"># Find values outside range</span>
+cdo<span class="w"> </span>lt<span class="w"> </span>temperature.nc<span class="w"> </span>lower_thresh.nc<span class="w"> </span>too_low.nc
+cdo<span class="w"> </span>gt<span class="w"> </span>temperature.nc<span class="w"> </span>upper_thresh.nc<span class="w"> </span>too_high.nc
+cdo<span class="w"> </span>add<span class="w"> </span>too_low.nc<span class="w"> </span>too_high.nc<span class="w"> </span>outliers.nc
+</pre></div>
+</div>
+</section>
+<section id="checking-for-missing-data">
+<h3>9.6.2 Checking for Missing Data<a class="headerlink" href="#checking-for-missing-data" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>info<span class="w"> </span>temperature.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>find<span class="w"> </span><span class="s2">&quot;miss&quot;</span><span class="w">     </span><span class="c1"># count missing values per variable</span>
+cdo<span class="w"> </span>timsum<span class="w"> </span>-eqc,-999<span class="w"> </span>temperature.nc<span class="w"> </span>missing_count.nc
+</pre></div>
+</div>
+</section>
+<section id="temporal-consistency-checks">
+<h3>9.6.3 Temporal Consistency Checks<a class="headerlink" href="#temporal-consistency-checks" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check for unrealistic jumps (&gt;5°C between consecutive days)</span>
+cdo<span class="w"> </span>sub<span class="w"> </span>-shifttime,1day<span class="w"> </span>temperature.nc<span class="w"> </span>temperature.nc<span class="w"> </span>diff.nc
+cdo<span class="w"> </span>gt<span class="w"> </span>-abs<span class="w"> </span>diff.nc<span class="w"> </span><span class="m">5</span><span class="w"> </span>unrealistic_jumps.nc
+cdo<span class="w"> </span>timsum<span class="w"> </span>unrealistic_jumps.nc<span class="w"> </span>n_jumps.nc
+</pre></div>
+</div>
+<div class="exercise admonition" id="ex-statistics-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 84 </span></p>
+<section id="exercise-content">
+<p>Perform a quality control check on a temperature dataset: flag any daily grid cell value that differs by more than 10°C from the monthly mean at that location.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-7">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-statistics-4"> Exercise 84</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute monthly mean</span>
+cdo<span class="w"> </span>monmean<span class="w"> </span>temperature.nc<span class="w"> </span>monthly_mean.nc
+
+<span class="c1"># Expand monthly mean back to daily resolution</span>
+cdo<span class="w"> </span>inttime,monthly_mean.nc<span class="w"> </span>daily_mean.nc
+
+<span class="c1"># Compute difference</span>
+cdo<span class="w"> </span>sub<span class="w"> </span>temperature.nc<span class="w"> </span>daily_mean.nc<span class="w"> </span>diff.nc
+
+<span class="c1"># Flag outliers</span>
+cdo<span class="w"> </span>gt<span class="w"> </span>-abs<span class="w"> </span>diff.nc<span class="w"> </span><span class="m">10</span><span class="w"> </span>flag.nc
+cdo<span class="w"> </span>timsum<span class="w"> </span>flag.nc<span class="w"> </span>total_flags.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+</section>
+<section id="practical-workflow-examples">
+<h2>9.7 Practical Workflow Examples<a class="headerlink" href="#practical-workflow-examples" title="Link to this heading">#</a></h2>
+<section id="multi-year-statistical-summary">
+<h3>9.7.1 Multi-Year Statistical Summary<a class="headerlink" href="#multi-year-statistical-summary" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>timmean<span class="w"> </span>temperature.nc<span class="w"> </span>longterm_mean.nc
+cdo<span class="w"> </span>timstd<span class="w"> </span>temperature.nc<span class="w"> </span>interannual_std.nc
+cdo<span class="w"> </span>timpctl,5<span class="w"> </span>temperature.nc<span class="w"> </span>-timmin<span class="w"> </span>temperature.nc<span class="w"> </span>-timmax<span class="w"> </span>temperature.nc<span class="w"> </span>p5.nc
+cdo<span class="w"> </span>timpctl,95<span class="w"> </span>temperature.nc<span class="w"> </span>-timmin<span class="w"> </span>temperature.nc<span class="w"> </span>-timmax<span class="w"> </span>temperature.nc<span class="w"> </span>p95.nc
+</pre></div>
+</div>
+</section>
+<section id="ensemble-forecast-verification">
+<h3>9.7.2 Ensemble Forecast Verification<a class="headerlink" href="#ensemble-forecast-verification" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Observation vs ensemble mean</span>
+cdo<span class="w"> </span>sub<span class="w"> </span>observation.nc<span class="w"> </span>-ensmean<span class="w"> </span>mem01.nc<span class="w"> </span>mem02.nc<span class="w"> </span>...<span class="w"> </span>mem10.nc<span class="w"> </span>bias.nc
+
+<span class="c1"># Ensemble spread</span>
+cdo<span class="w"> </span>ensstd<span class="w"> </span>mem01.nc<span class="w"> </span>mem02.nc<span class="w"> </span>...<span class="w"> </span>mem10.nc<span class="w"> </span>spread.nc
+
+<span class="c1"># Ratio of bias to spread</span>
+cdo<span class="w"> </span>div<span class="w"> </span>-abs<span class="w"> </span>bias.nc<span class="w"> </span>spread.nc<span class="w"> </span>normalized_bias.nc
+</pre></div>
+</div>
+</section>
+<section id="seasonal-extremes">
+<h3>9.7.3 Seasonal Extremes<a class="headerlink" href="#seasonal-extremes" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 90th percentile for each season</span>
+cdo<span class="w"> </span>seasmean<span class="w"> </span>-ymonpctl,90<span class="w"> </span>temperature.nc<span class="w"> </span>-ymonmin<span class="w"> </span>temperature.nc<span class="w"> </span>-ymonmax<span class="w"> </span>temperature.nc<span class="w"> </span>seasonal_p90.nc
+</pre></div>
+</div>
+</section>
+<section id="trend-significance">
+<h3>9.7.4 Trend Significance<a class="headerlink" href="#trend-significance" title="Link to this heading">#</a></h3>
+<p>Compute the linear trend and its statistical significance:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>trend<span class="w"> </span>temperature.nc<span class="w"> </span>intercept.nc<span class="w"> </span>slope.nc
+cdo<span class="w"> </span>timstd<span class="w"> </span>temperature.nc<span class="w"> </span>variability.nc
+cdo<span class="w"> </span>div<span class="w"> </span>slope.nc<span class="w"> </span>variability.nc<span class="w"> </span>t_stat.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="hands-on-exercises">
+<h2>9.8 Hands-On Exercises<a class="headerlink" href="#hands-on-exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-9-1-multi-year-statistics">
+<h3>Exercise 9.1: Multi-Year Statistics<a class="headerlink" href="#exercise-9-1-multi-year-statistics" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-statistics-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 85 </span></p>
+<section id="exercise-content">
+<p>Using a 30-year daily temperature dataset:</p>
+<ol class="arabic simple">
+<li><p>Compute the long-term mean temperature</p></li>
+<li><p>Compute the interannual standard deviation</p></li>
+<li><p>Compute the 5th and 95th percentiles</p></li>
+<li><p>Identify grid points where the 95th percentile exceeds 35°C</p></li>
+</ol>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-9">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-statistics-5"> Exercise 85</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>timmean<span class="w"> </span>temperature.nc<span class="w"> </span>clim_mean.nc
+cdo<span class="w"> </span>timstd<span class="w"> </span>temperature.nc<span class="w"> </span>clim_std.nc
+cdo<span class="w"> </span>timpctl,5<span class="w"> </span>temperature.nc<span class="w"> </span>-timmin<span class="w"> </span>temperature.nc<span class="w"> </span>-timmax<span class="w"> </span>temperature.nc<span class="w"> </span>p5.nc
+cdo<span class="w"> </span>timpctl,95<span class="w"> </span>temperature.nc<span class="w"> </span>-timmin<span class="w"> </span>temperature.nc<span class="w"> </span>-timmax<span class="w"> </span>temperature.nc<span class="w"> </span>p95.nc
+cdo<span class="w"> </span>gtc,35<span class="w"> </span>p95.nc<span class="w"> </span>hot_spots.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-fldsum<span class="w"> </span>hot_spots.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-9-2-ensemble-statistics">
+<h3>Exercise 9.2: Ensemble Statistics<a class="headerlink" href="#exercise-9-2-ensemble-statistics" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-statistics-6">
+
+<p class="admonition-title"><span class="caption-number">Exercise 86 </span></p>
+<section id="exercise-content">
+<p>Given 10 CMIP6 model outputs for 2081-2100 temperature under SSP5-8.5:</p>
+<ol class="arabic simple">
+<li><p>Compute the multi-model ensemble mean</p></li>
+<li><p>Compute the ensemble standard deviation (model spread)</p></li>
+<li><p>Compute the signal-to-noise ratio</p></li>
+<li><p>Which regions have SNR &gt; 2?</p></li>
+</ol>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-11">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-statistics-6"> Exercise 86</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ensmean<span class="w"> </span>cmip6_model_*.nc<span class="w"> </span>mme_mean.nc
+cdo<span class="w"> </span>ensstd<span class="w"> </span>cmip6_model_*.nc<span class="w"> </span>mme_spread.nc
+cdo<span class="w"> </span>div<span class="w"> </span>mme_mean.nc<span class="w"> </span>mme_spread.nc<span class="w"> </span>snr.nc
+cdo<span class="w"> </span>gtc,2<span class="w"> </span>snr.nc<span class="w"> </span>robust_regions.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-fldsum<span class="w"> </span>robust_regions.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-9-3-percentile-analysis">
+<h3>Exercise 9.3: Percentile Analysis<a class="headerlink" href="#exercise-9-3-percentile-analysis" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-statistics-7">
+
+<p class="admonition-title"><span class="caption-number">Exercise 87 </span></p>
+<section id="exercise-content">
+<p>Compute the 90th percentile of daily precipitation for each month. Then count the number of days exceeding this threshold in each year. How has the frequency of extreme precipitation days changed?</p>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-13">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-statistics-7"> Exercise 87</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute threshold</span>
+cdo<span class="w"> </span>ymonpctl,90<span class="w"> </span>daily_precip.nc<span class="w"> </span>-ymonmin<span class="w"> </span>daily_precip.nc<span class="w"> </span>-ymonmax<span class="w"> </span>daily_precip.nc<span class="w"> </span>p90_clim.nc
+
+<span class="c1"># For each year, count exceedances</span>
+<span class="k">for</span><span class="w"> </span>year<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1990</span><span class="w"> </span><span class="m">2020</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span>cdo<span class="w"> </span>timsum<span class="w"> </span>-ge<span class="w"> </span>-selyear,<span class="nv">$year</span><span class="w"> </span>daily_precip.nc<span class="w"> </span>p90_clim.nc<span class="w"> </span><span class="s2">&quot;exceed_</span><span class="nv">$year</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># Combine and analyze trend</span>
+cdo<span class="w"> </span>ensmean<span class="w"> </span>exceed_*.nc<span class="w"> </span>trend_exceed.nc
+cdo<span class="w"> </span>trend<span class="w"> </span>exceed_*.nc<span class="w"> </span>intercept.nc<span class="w"> </span>slope.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>slope.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-9-4-histogram-analysis">
+<h3>Exercise 9.4: Histogram Analysis<a class="headerlink" href="#exercise-9-4-histogram-analysis" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-statistics-8">
+
+<p class="admonition-title"><span class="caption-number">Exercise 88 </span></p>
+<section id="exercise-content">
+<p>Generate a histogram of global temperature values from a climate model. Compare histograms for 1850-1900 (pre-industrial) vs 1995-2014 (present-day). How has the distribution shifted?</p>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-15">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-statistics-8"> Exercise 88</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>selyear,1850/1900<span class="w"> </span>temperature.nc<span class="w"> </span>preindustrial.nc
+cdo<span class="w"> </span>selyear,1995/2014<span class="w"> </span>temperature.nc<span class="w"> </span>present.nc
+
+cdo<span class="w"> </span>histcount,50<span class="w"> </span>preindustrial.nc<span class="w"> </span>hist_pre.nc
+cdo<span class="w"> </span>histcount,50<span class="w"> </span>present.nc<span class="w"> </span>hist_present.nc
+
+cdo<span class="w"> </span>fldmean<span class="w"> </span>-histfreq,50<span class="w"> </span>preindustrial.nc<span class="w"> </span>histfreq_pre.nc
+cdo<span class="w"> </span>fldmean<span class="w"> </span>-histfreq,50<span class="w"> </span>present.nc<span class="w"> </span>histfreq_present.nc
+</pre></div>
+</div>
+<p>The distribution for the present period is shifted toward warmer values, and the tail of hot extremes has extended.</p>
+</section>
+</div>
+</section>
+<section id="exercise-9-5-statistical-downscaling-verification">
+<h3>Exercise 9.5: Statistical Downscaling Verification<a class="headerlink" href="#exercise-9-5-statistical-downscaling-verification" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-statistics-9">
+
+<p class="admonition-title"><span class="caption-number">Exercise 89 </span></p>
+<section id="exercise-content">
+<p>Given a coarse-resolution dataset and a high-resolution reference:</p>
+<ol class="arabic simple">
+<li><p>Compute the mean bias (coarse minus reference)</p></li>
+<li><p>Compute the spatial correlation between the two datasets</p></li>
+<li><p>Compute the root-mean-square error (RMSE)</p></li>
+</ol>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-17">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-statistics-9"> Exercise 89</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bias</span>
+cdo<span class="w"> </span>sub<span class="w"> </span>coarse_data.nc<span class="w"> </span>reference_data.nc<span class="w"> </span>bias.nc
+
+<span class="c1"># Differences for RMSE</span>
+cdo<span class="w"> </span>sqr<span class="w"> </span>-sub<span class="w"> </span>coarse_data.nc<span class="w"> </span>reference_data.nc<span class="w"> </span>sqr_diff.nc
+cdo<span class="w"> </span>fldmean<span class="w"> </span>sqr_diff.nc<span class="w"> </span>mse.nc
+cdo<span class="w"> </span>sqrt<span class="w"> </span>mse.nc<span class="w"> </span>rmse.nc
+
+<span class="c1"># The RMSE combines bias and pattern error into a single metric.</span>
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+</section>
+<section id="quiz">
+<h2>9.9 Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<div class="exercise admonition" id="q-statistics-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 90 </span> (Question 1)</p>
+<section id="exercise-content">
+<p>What is the difference between <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">timmean</span></code>?</p>
+<p>a) They are identical operators
+b) <code class="docutils literal notranslate"><span class="pre">mean</span></code> collapses all dimensions, <code class="docutils literal notranslate"><span class="pre">timmean</span></code> collapses only the time dimension
+c) <code class="docutils literal notranslate"><span class="pre">timmean</span></code> is faster for large datasets
+d) <code class="docutils literal notranslate"><span class="pre">mean</span></code> works on files, <code class="docutils literal notranslate"><span class="pre">timmean</span></code> works on streams</p>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-19">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-statistics-1"> Exercise 90 (Question 1)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">mean</span></code> averages over all non-record dimensions (time, spatial, vertical), producing a single value per variable. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">timmean</span></code> averages only over the time dimension, preserving spatial structure.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-statistics-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 91 </span> (Question 2)</p>
+<section id="exercise-content">
+<p>When computing ensemble statistics, what does <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">ensstd</span></code> represent?</p>
+<p>a) The standard deviation of values within each grid cell across time
+b) The standard deviation of values across ensemble members at each grid cell and time step
+c) The temporal standard deviation of the ensemble mean
+d) The spatial standard deviation averaged across ensemble members</p>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-21">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-statistics-2"> Exercise 91 (Question 2)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">ensstd</span></code> computes the standard deviation across all input files (ensemble members) at each grid cell and each time step. It measures inter-model or inter-member spread.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-statistics-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 92 </span> (Question 3)</p>
+<section id="exercise-content">
+<p>Which operator would you use to compute the 90th percentile of daily temperature for each calendar day across 30 years?</p>
+<p>a) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">timpctl,90</span></code>
+b) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">ymonpctl,90</span></code>
+c) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">ydaypctl,90</span></code>
+d) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">enspctl,90</span></code></p>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-23">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-statistics-3"> Exercise 92 (Question 3)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>c</strong>. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">ydaypctl,90</span></code> computes the 90th percentile for each calendar day (1-366) across all years. <code class="docutils literal notranslate"><span class="pre">timpctl</span></code> would give a single 90th percentile map, not a daily climatology.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-statistics-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 93 </span> (Question 4)</p>
+<section id="exercise-content">
+<p>What is the ensemble mean of model projections primarily used for?</p>
+<p>a) Identifying which model performs best
+b) Reducing random errors and producing a more robust estimate than any single model
+c) Computing the maximum possible future change
+d) Removing all uncertainty from climate projections</p>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-25">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-statistics-4"> Exercise 93 (Question 4)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. The multi-model ensemble mean typically outperforms any single model because random errors from different models tend to cancel out. However, it cannot remove systematic biases common to all models.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-statistics-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 94 </span> (Question 5)</p>
+<section id="exercise-content">
+<p>If you want to count the number of days exceeding 35°C at each grid point, which sequence of CDO commands would you use?</p>
+<p>a) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">timmean</span> <span class="pre">-gtc,35</span> <span class="pre">temperature.nc</span></code>
+b) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">gtc,35</span> <span class="pre">temperature.nc</span> <span class="pre">exceed.nc</span> <span class="pre">&amp;&amp;</span> <span class="pre">cdo</span> <span class="pre">timsum</span> <span class="pre">exceed.nc</span></code>
+c) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">timsum</span> <span class="pre">-gec,35</span> <span class="pre">temperature.nc</span></code>
+d) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">histfreq</span> <span class="pre">temperature.nc</span></code></p>
+</section>
+</div>
+<div class="solution admonition" id="book/statistics-solution-27">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-statistics-5"> Exercise 94 (Question 5)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong> (or equivalently <strong>c</strong>). <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">gtc,35</span></code> creates a mask (1 where &gt; 35, 0 elsewhere). <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">timsum</span></code> sums this over time to get counts. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">timsum</span> <span class="pre">-gec,35</span> <span class="pre">temperature.nc</span></code> does the same in one pipeline step. Option <strong>a</strong> computes the mean of the mask, not the count. Option <strong>d</strong> creates a histogram, not an exceedance count.</p>
+</section>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this module, you learned about CDO’s comprehensive statistical capabilities:</p>
+<ul class="simple">
+<li><p><strong>Basic statistics</strong>: <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">median</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">std</span></code>, <code class="docutils literal notranslate"><span class="pre">var</span></code>, <code class="docutils literal notranslate"><span class="pre">range</span></code> for simple aggregations</p></li>
+<li><p><strong>Ensemble statistics</strong>: <code class="docutils literal notranslate"><span class="pre">ensmean</span></code>, <code class="docutils literal notranslate"><span class="pre">ensmax</span></code>, <code class="docutils literal notranslate"><span class="pre">ensmin</span></code>, <code class="docutils literal notranslate"><span class="pre">ensstd</span></code>, <code class="docutils literal notranslate"><span class="pre">ensvar</span></code>, <code class="docutils literal notranslate"><span class="pre">ensrange</span></code>, <code class="docutils literal notranslate"><span class="pre">ensmedian</span></code>, <code class="docutils literal notranslate"><span class="pre">enspctl</span></code> for multi-file analysis</p></li>
+<li><p><strong>Temporal statistics</strong>: <code class="docutils literal notranslate"><span class="pre">timmean</span></code>, <code class="docutils literal notranslate"><span class="pre">timmax</span></code>, <code class="docutils literal notranslate"><span class="pre">timmin</span></code>, <code class="docutils literal notranslate"><span class="pre">timstd</span></code>, <code class="docutils literal notranslate"><span class="pre">timvar</span></code>, <code class="docutils literal notranslate"><span class="pre">timsum</span></code>, <code class="docutils literal notranslate"><span class="pre">timpctl</span></code> for time-reduced fields</p></li>
+<li><p><strong>Percentile climatologies</strong>: <code class="docutils literal notranslate"><span class="pre">ydaypctl</span></code>, <code class="docutils literal notranslate"><span class="pre">ymonpctl</span></code> for extreme value thresholds</p></li>
+<li><p><strong>Histograms</strong>: <code class="docutils literal notranslate"><span class="pre">histcount</span></code>, <code class="docutils literal notranslate"><span class="pre">histfreq</span></code> for distribution analysis</p></li>
+<li><p><strong>Multi-model analysis</strong>: Ensemble mean and spread for projections and uncertainty quantification</p></li>
+<li><p><strong>Quality control</strong>: Outlier detection, consistency checks using statistical operators</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Statistical operators in CDO are building blocks that can be chained in powerful ways. A single pipeline can compute extreme event frequencies, multi-model consensus maps, or detect data quality issues. Invest time in understanding the operator combinations — they will save you hours of scripting in other languages.</p>
+</div>
+<p>Proceed to Module 10 to learn about climate indices and extreme event detection using CDO.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="spatial.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Module 8: Spatial Operators</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="climate_indices.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Module 10: Climate Indices and Extremes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-statistics">9.1 Basic Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-and-average">9.1.1 Mean and Average</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#median">9.1.2 Median</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-and-minimum">9.1.3 Maximum and Minimum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sum">9.1.4 Sum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-deviation-and-variance">9.1.5 Standard Deviation and Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#range">9.1.6 Range</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-basic-operators">9.1.7 Comparison of Basic Operators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-statistics">9.2 Ensemble Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-mean">9.2.1 Ensemble Mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-ensemble-operators">9.2.2 Other Ensemble Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-spread-analysis">9.2.3 Ensemble Spread Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-percentiles">9.2.4 Ensemble Percentiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wildcard-processing">9.2.5 Wildcard Processing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-variable-temporal-statistics">9.3 Multi-Variable (Temporal) Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-mean">9.3.1 Time Mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-max-min-and-sum">9.3.2 Time Max, Min, and Sum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-standard-deviation-and-variance">9.3.3 Time Standard Deviation and Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-range-and-median">9.3.4 Time Range and Median</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-percentiles">9.3.5 Temporal Percentiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-percentile-climatology">9.3.6 Daily Percentile Climatology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monthly-percentile-climatology">9.3.7 Monthly Percentile Climatology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-temporal-statistics">9.3.8 Summary of Temporal Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentiles-and-histograms">9.4 Percentiles and Histograms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-count">9.4.1 Histogram Count</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-frequency">9.4.2 Histogram Frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-distribution-functions">9.4.3 Empirical Distribution Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extreme-value-analysis">9.4.4 Extreme Value Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-statistics">9.5 Multi-Model Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-ensemble-mean">9.5.1 Multi-Model Ensemble Mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-spread">9.5.2 Multi-Model Spread</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-agreement">9.5.3 Model Agreement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-to-noise-ratio">9.5.4 Signal-to-Noise Ratio</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-quality-control">9.6 Statistical Quality Control</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detecting-outliers">9.6.1 Detecting Outliers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-for-missing-data">9.6.2 Checking for Missing Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-consistency-checks">9.6.3 Temporal Consistency Checks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflow-examples">9.7 Practical Workflow Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-year-statistical-summary">9.7.1 Multi-Year Statistical Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-forecast-verification">9.7.2 Ensemble Forecast Verification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-extremes">9.7.3 Seasonal Extremes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-significance">9.7.4 Trend Significance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">9.8 Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-1-multi-year-statistics">Exercise 9.1: Multi-Year Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-2-ensemble-statistics">Exercise 9.2: Ensemble Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-3-percentile-analysis">Exercise 9.3: Percentile Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-4-histogram-analysis">Exercise 9.4: Histogram Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-5-statistical-downscaling-verification">Exercise 9.5: Statistical Downscaling Verification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">9.9 Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

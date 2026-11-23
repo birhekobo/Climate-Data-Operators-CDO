@@ -1,0 +1,806 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'README';</script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Solution 5: Statistics and Climate Indices" href="solutions/solution_05_statistics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="book/introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="book/introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="book/installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="book/operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="book/temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="book/workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="book/references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="projects/project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./README.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/README.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description">Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-modules">Course Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tech-stack">Tech Stack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-structure">Project Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="climate-data-operators-cdo-complete-training-for-climate-data-processing-analysis-and-visualization">
+<h1>Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization<a class="headerlink" href="#climate-data-operators-cdo-complete-training-for-climate-data-processing-analysis-and-visualization" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://www.python.org/"><img alt="Python" src="https://img.shields.io/badge/Python-3.11-blue?logo=python" /></a>
+<a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo"><img alt="CDO" src="https://img.shields.io/badge/CDO-2.4.0-green?logo=linux" /></a>
+<a class="reference external" href="https://nco.sourceforge.net/"><img alt="NCO" src="https://img.shields.io/badge/NCO-5.2.0-orange" /></a>
+<a class="reference external" href="https://jupyterbook.org/"><img alt="Jupyter Book" src="https://img.shields.io/badge/Jupyter%20Book-1.0-red?logo=jupyter" /></a>
+<a class="reference external" href="https://mystmd.org/"><img alt="MyST" src="https://img.shields.io/badge/MyST-1.0-purple" /></a>
+<a class="reference download internal" download="" href="_downloads/9879d6db96fd29134fc802214163b95a/LICENSE"><span class="xref download myst"><img alt="MIT License" src="https://img.shields.io/badge/License-MIT-yellow" /></span></a>
+<a class="reference download internal" download="" href="_downloads/b7cb75ca59993a879e29bed8cd8469b8/environment.yml"><span class="xref download myst"><img alt="Conda" src="https://img.shields.io/badge/conda--forge-cdo--training-success?logo=anaconda" /></span></a></p>
+<p>A comprehensive, project-based training course for processing, analyzing, and visualizing climate data using the Climate Data Operators (CDO) toolkit.</p>
+<hr class="docutils" />
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading">#</a></h2>
+<p>This course provides a structured learning path from foundational CDO commands to advanced climate data workflows. Designed for researchers, students, and professionals working with climate model outputs, reanalysis datasets, and observational data, it covers NetCDF and GRIB file handling, temporal and spatial analysis, statistical methods, and real-world climate index computation.</p>
+<p>All material is delivered via interactive Jupyter Notebooks, rendered as a static website with Jupyter Book.</p>
+</section>
+<section id="course-modules">
+<h2>Course Modules<a class="headerlink" href="#course-modules" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>Topics</p></th>
+<th class="head"><p>File</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Introduction</p></td>
+<td><p>Course overview, learning objectives</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">book/introduction.md</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Installation</p></td>
+<td><p>CDO setup, conda environment, verification</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">book/installation.md</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>CDO Basics</p></td>
+<td><p>File info, metadata, operators overview</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">book/basics.md</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Core Operators</p></td>
+<td><p>Select, merge, split, remap, math</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">book/operators.md</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>NetCDF Operations</p></td>
+<td><p>Attributes, dimensions, variables, CF conventions</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">book/netcdf.md</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>GRIB Operations</p></td>
+<td><p>GRIB edition 1 &amp; 2, parameter conversion</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">book/grib.md</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Temporal Analysis</p></td>
+<td><p>Time series, seasonal/diurnal cycles, anomalies</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">book/temporal.md</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Spatial Analysis</p></td>
+<td><p>Regional extraction, regridding, masks</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">book/spatial.md</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Statistics</p></td>
+<td><p>Climatologies, percentiles, correlations</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">book/statistics.md</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Climate Indices</p></td>
+<td><p>Heat waves, drought indices, ETCCDI</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">book/climate_indices.md</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Workflows</p></td>
+<td><p>Automation, shell scripts, parallel processing</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">book/workflows.md</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Projects</p></td>
+<td><p>Guided case studies with real datasets</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">book/projects.md</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>References</p></td>
+<td><p>Bibliography, dataset sources, further reading</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">book/references.md</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Basic command-line experience</p></li>
+<li><p>Familiarity with climate data formats (NetCDF / GRIB) is helpful but not required</p></li>
+<li><p>A computer running Linux, macOS, or Windows (WSL recommended for Windows)</p></li>
+</ul>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>Create the conda environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
+conda<span class="w"> </span>activate<span class="w"> </span>cdo-training
+</pre></div>
+</div>
+<p>Verify the installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>--version
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import xarray; print(xarray.__version__)&quot;</span>
+</pre></div>
+</div>
+<p>To install via pip only:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+<section id="learning-outcomes">
+<h2>Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading">#</a></h2>
+<p>By the end of this course you will be able to:</p>
+<ul class="simple">
+<li><p>Navigate and manipulate NetCDF and GRIB files with CDO</p></li>
+<li><p>Perform temporal and spatial subsetting, aggregation, and regridding</p></li>
+<li><p>Compute climate indices (e.g., heat wave duration, drought indices)</p></li>
+<li><p>Automate large-scale data processing workflows</p></li>
+<li><p>Visualize climate data with Matplotlib, Cartopy, and PyGMT</p></li>
+<li><p>Build and publish interactive training materials with Jupyter Book</p></li>
+</ul>
+</section>
+<section id="tech-stack">
+<h2>Tech Stack<a class="headerlink" href="#tech-stack" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Climate Data Operators (CDO)</strong> — command-line climate data processing</p></li>
+<li><p><strong>NCO</strong> — netCDF Operators for file-level manipulation</p></li>
+<li><p><strong>xarray</strong> — labeled multi-dimensional arrays in Python</p></li>
+<li><p><strong>Matplotlib / Cartopy / PyGMT</strong> — visualization and mapping</p></li>
+<li><p><strong>Jupyter Book / MyST</strong> — documentation and publishing</p></li>
+<li><p><strong>Conda / pip</strong> — environment management</p></li>
+</ul>
+</section>
+<section id="project-structure">
+<h2>Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Climate-Data-Operators-CDO/
+├── README.md
+├── LICENSE
+├── CITATION.cff
+├── environment.yml
+├── requirements.txt
+├── myst.yml
+├── _toc.yml
+├── _config.yml
+├── book/
+│   ├── introduction.md
+│   ├── installation.md
+│   ├── basics.md
+│   ├── operators.md
+│   ├── netcdf.md
+│   ├── grib.md
+│   ├── temporal.md
+│   ├── spatial.md
+│   ├── statistics.md
+│   ├── climate_indices.md
+│   ├── workflows.md
+│   ├── projects.md
+│   ├── references.md
+│   └── references.bib
+├── assets/
+│   ├── logo.png
+│   └── favicon.ico
+├── notebooks/
+├── data/
+│   ├── real_temperature.nc        # Real NCEP/DOE Reanalysis-2 temperature field
+│   ├── real_temp.nc               # Real temperature subset (notebook 01)
+│   ├── real_monthly_temp.nc       # Real monthly temperature (notebook 02)
+│   ├── real_spatial_temp.nc       # Real spatial temperature (notebook 03)
+│   ├── real_climate_indices.nc    # Real temperature + CHIRPS precipitation (notebook 04)
+│   └── real_visualization_data.nc # Real temperature + precipitation (notebook 06)
+└── docs/
+</pre></div>
+</div>
+<p>All files under <code class="docutils literal notranslate"><span class="pre">data/</span></code> are derived from real observational or reanalysis datasets
+(NCEP/DOE Reanalysis-2 and CHIRPS). No synthetic fields are included.</p>
+</section>
+<section id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">#</a></h2>
+<p>Contributions are welcome. Please open an issue or submit a pull request on <a class="reference external" href="https://github.com/climate-data-science/Climate-Data-Operators-CDO">GitHub</a>.</p>
+<ol class="arabic simple">
+<li><p>Fork the repository</p></li>
+<li><p>Create a feature branch (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">feature/my-feature</span></code>)</p></li>
+<li><p>Commit your changes (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-am</span> <span class="pre">'Add</span> <span class="pre">my</span> <span class="pre">feature'</span></code>)</p></li>
+<li><p>Push to the branch (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">feature/my-feature</span></code>)</p></li>
+<li><p>Open a Pull Request</p></li>
+</ol>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
+<p>This course material is licensed under the MIT License — see the <a class="reference download internal" download="" href="_downloads/9879d6db96fd29134fc802214163b95a/LICENSE"><span class="xref download myst">LICENSE</span></a> file for details.<br />
+Course content is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>.</p>
+</section>
+<section id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Link to this heading">#</a></h2>
+<p>If you use this course in your work, please cite it as:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@misc</span><span class="p">{</span><span class="nl">cdo_training_2025</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w">       </span><span class="p">=</span><span class="w"> </span><span class="s">{Climate Data Science Community}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{{Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization}}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">         </span><span class="p">=</span><span class="w"> </span><span class="s">{2025}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">version</span><span class="w">      </span><span class="p">=</span><span class="w"> </span><span class="s">{1.0.0}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="w">          </span><span class="p">=</span><span class="w"> </span><span class="s">{https://github.com/climate-data-science/Climate-Data-Operators-CDO}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p align="center">
+  <b>Climate Data Science Community</b> — <a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO">github.com/climate-data-science/Climate-Data-Operators-CDO</a>
+</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="solutions/solution_05_statistics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Solution 5: Statistics and Climate Indices</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description">Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-modules">Course Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tech-stack">Tech Stack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-structure">Project Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

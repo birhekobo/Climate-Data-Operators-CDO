@@ -1,0 +1,1477 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Project 1: Rainfall Trend Analysis &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'projects/project_01_rainfall_trend';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Project 2: Temperature Trend Mapping" href="project_02_temperature_trend.html" />
+    <link rel="prev" title="Climate Data Visualization" href="../notebooks/06_visualization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../book/introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../book/introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./projects/project_01_rainfall_trend.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fprojects/project_01_rainfall_trend.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/projects/project_01_rainfall_trend.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Project 1: Rainfall Trend Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">Data Requirements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-dataset-chirps-monthly-precipitation">Primary Dataset: CHIRPS Monthly Precipitation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-gpcc-monthly-precipitation">Alternative: GPCC Monthly Precipitation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-sample-data">Real Sample Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-workflow">Step-by-Step Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-inspection">Step 1: Data Inspection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-crop-to-ethiopia-region">Step 2: Crop to Ethiopia Region</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-compute-annual-precipitation-totals">Step 3: Compute Annual Precipitation Totals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-compute-seasonal-totals">Step 4: Compute Seasonal Totals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-calculate-anomalies">Step 5: Calculate Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-spatial-averaging">Step 6: Spatial Averaging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-trend-analysis">Step 7: Trend Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-trend-operator">CDO Trend Operator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-significance-testing">Statistical Significance Testing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-statistics">Trend Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-visualization">Step 8: Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-plot-python">Time Series Plot (Python)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-map-python">Trend Map (Python)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-cycle-plot">Seasonal Cycle Plot</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-contribution-stacked-bar-chart">Seasonal Contribution Stacked Bar Chart</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-bash-workflow-script">Complete Bash Workflow Script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-outputs">Expected Outputs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-map">1. Trend Map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#annual-time-series">2. Annual Time Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-cycle">3. Seasonal Cycle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-contribution">4. Seasonal Contribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics-table">5. Summary Statistics Table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-guidance">Interpretation Guidance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-look-for">What to Look For</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-questions-to-answer">Key Questions to Answer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls">Common Pitfalls</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-criteria">Evaluation Criteria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-activities">Extension Activities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-options">Advanced Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-project-integration">Cross-Project Integration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="project-1-rainfall-trend-analysis">
+<h1>Project 1: Rainfall Trend Analysis<a class="headerlink" href="#project-1-rainfall-trend-analysis" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>This project guides you through a complete rainfall trend analysis workflow using Climate Data Operators (CDO). You will process monthly precipitation data, compute annual and seasonal totals, analyze trends, and create publication-quality visualizations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Estimated time</strong>: 3-4 hours
+<strong>Prerequisites</strong>: Modules 1-8 (CDO basics, temporal operators, statistics, spatial operations, scripting)</p>
+</div>
+</section>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After completing this project, you will be able to:</p>
+<ul class="simple">
+<li><p>Download and inspect CHIRPS or GPCC precipitation data</p></li>
+<li><p>Subset data to a region of interest using CDO spatial operators</p></li>
+<li><p>Compute annual and seasonal precipitation totals</p></li>
+<li><p>Calculate anomalies relative to a climatological baseline</p></li>
+<li><p>Perform linear trend analysis on gridded data</p></li>
+<li><p>Create trend maps and time series visualizations</p></li>
+<li><p>Interpret rainfall trends in the context of climate variability</p></li>
+</ul>
+</section>
+<section id="data-requirements">
+<h2>Data Requirements<a class="headerlink" href="#data-requirements" title="Link to this heading">#</a></h2>
+<section id="primary-dataset-chirps-monthly-precipitation">
+<h3>Primary Dataset: CHIRPS Monthly Precipitation<a class="headerlink" href="#primary-dataset-chirps-monthly-precipitation" title="Link to this heading">#</a></h3>
+<p>CHIRPS (Climate Hazards Group InfraRed Precipitation with Station data) provides global precipitation data from 1981 to present at 0.05 degree resolution.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Variable</strong></p></td>
+<td><p>Precipitation (mm/month)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Spatial resolution</strong></p></td>
+<td><p>0.05 degrees (~5 km)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Temporal coverage</strong></p></td>
+<td><p>1981 - present</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Temporal resolution</strong></p></td>
+<td><p>Monthly</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Domain</strong></p></td>
+<td><p>Global (50S - 50N)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Source</strong></p></td>
+<td><p><a class="reference external" href="https://www.chc.ucsb.edu/data/chirps">https://www.chc.ucsb.edu/data/chirps</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="alternative-gpcc-monthly-precipitation">
+<h3>Alternative: GPCC Monthly Precipitation<a class="headerlink" href="#alternative-gpcc-monthly-precipitation" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Variable</strong></p></td>
+<td><p>Precipitation (mm/month)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Spatial resolution</strong></p></td>
+<td><p>1.0 degree</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Temporal coverage</strong></p></td>
+<td><p>1901 - 2020</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Source</strong></p></td>
+<td><p><a class="reference external" href="https://climatedataguide.ucar.edu/climate-data">https://climatedataguide.ucar.edu/climate-data</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="real-sample-data">
+<h3>Real Sample Data<a class="headerlink" href="#real-sample-data" title="Link to this heading">#</a></h3>
+<p>This course ships with real CHIRPS monthly precipitation for Ethiopia (<code class="docutils literal notranslate"><span class="pre">../datasets/chirps_ethiopia.nc</span></code>, 1981-2020). Use it directly:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inspect the real CHIRPS field supplied with the course</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>../datasets/chirps_ethiopia.nc
+cdo<span class="w"> </span>griddes<span class="w"> </span>../datasets/chirps_ethiopia.nc
+
+<span class="c1"># Derive annual totals and a monthly climatology from the real data</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>../datasets/chirps_ethiopia.nc<span class="w"> </span>chirps_annual.nc
+cdo<span class="w"> </span>ymonmean<span class="w"> </span>../datasets/chirps_ethiopia.nc<span class="w"> </span>chirps_climatology.nc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All figures and results in this project are produced from the real CHIRPS dataset. For other regions, download real CHIRPS or GPCC data rather than generating artificial fields.</p>
+</div>
+</section>
+</section>
+<section id="step-by-step-workflow">
+<h2>Step-by-Step Workflow<a class="headerlink" href="#step-by-step-workflow" title="Link to this heading">#</a></h2>
+<section id="step-1-data-inspection">
+<h3>Step 1: Data Inspection<a class="headerlink" href="#step-1-data-inspection" title="Link to this heading">#</a></h3>
+<p>Before processing, inspect your data to understand its structure:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic file information</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>chirps_monthly.nc
+
+<span class="c1"># Grid description</span>
+cdo<span class="w"> </span>griddes<span class="w"> </span>chirps_monthly.nc
+
+<span class="c1"># Time information</span>
+cdo<span class="w"> </span>showyear<span class="w"> </span>chirps_monthly.nc
+cdo<span class="w"> </span>showtimestamp<span class="w"> </span>chirps_monthly.nc
+
+<span class="c1"># Variable information</span>
+cdo<span class="w"> </span>vardes<span class="w"> </span>chirps_monthly.nc
+
+<span class="c1"># Global metadata</span>
+cdo<span class="w"> </span>-s<span class="w"> </span>infov<span class="w"> </span>chirps_monthly.nc
+</pre></div>
+</div>
+<p>Expected output from <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">sinfo</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   File format: NetCDF
+   -1 : Institut Source   T Steptype Levels Num    Points Num Dtype : Parameter name
+    1 : unknown  unknown  v instant     1   1  ?   7203600  F32  : precip
+   Grid coordinates:
+     1 : lonlat                     : points=7203600 (7200x1001)
+                        lon : -179.975 to 179.975 degrees east
+                        lat : -50.025 to 50.025 degrees north
+   Vertical coordinates : 1
+   Time coordinate : 480 steps
+   RefTime = 1981-01-01
+   Timesteps in file:
+        1981-01-01  1981-02-01  1981-03-01  ...  2020-12-01
+</pre></div>
+</div>
+</section>
+<section id="step-2-crop-to-ethiopia-region">
+<h3>Step 2: Crop to Ethiopia Region<a class="headerlink" href="#step-2-crop-to-ethiopia-region" title="Link to this heading">#</a></h3>
+<p>Ethiopia is located approximately between 3N-15N latitude and 33E-48E longitude.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define Ethiopia bounding box</span>
+<span class="c1"># Format: sellonlatbox,lon1,lon2,lat1,lat2</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>sellonlatbox,33,48,3,15<span class="w"> </span>chirps_monthly.nc<span class="w"> </span>ethiopia_precip.nc
+
+<span class="c1"># Verify the subset</span>
+cdo<span class="w"> </span>griddes<span class="w"> </span>ethiopia_precip.nc
+cdo<span class="w"> </span>sinfo<span class="w"> </span>ethiopia_precip.nc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sellonlatbox</span></code> operator selects a rectangular region by longitude/latitude bounds. Always verify your region after cropping.</p>
+</div>
+<p>For a more precise subset using a shapefile (if available):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using a shapefile mask for Ethiopia</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>maskregion,ethiopia.shp<span class="w"> </span>chirps_monthly.nc<span class="w"> </span>ethiopia_masked.nc
+
+<span class="c1"># If shapefile not available, use a latitude/longitude box with land mask</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>sellonlatbox,33,48,3,15<span class="w"> </span>chirps_monthly.nc<span class="w"> </span>ethiopia_precip.nc
+</pre></div>
+</div>
+</section>
+<section id="step-3-compute-annual-precipitation-totals">
+<h3>Step 3: Compute Annual Precipitation Totals<a class="headerlink" href="#step-3-compute-annual-precipitation-totals" title="Link to this heading">#</a></h3>
+<p>Annual totals show year-to-year variability in precipitation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute annual sums</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>yearsum<span class="w"> </span>ethiopia_precip.nc<span class="w"> </span>annual_precip.nc
+
+<span class="c1"># Inspect annual totals</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>annual_precip.nc
+cdo<span class="w"> </span>showyear<span class="w"> </span>annual_precip.nc
+
+<span class="c1"># Extract time series for a specific grid point (e.g., Addis Ababa ~9N, 38.7E)</span>
+cdo<span class="w"> </span>output<span class="w"> </span>-selindexbox,114,114,120,120<span class="w"> </span>annual_precip.nc<span class="w"> </span>&gt;<span class="w"> </span>addis_annual.txt
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code class="docutils literal notranslate"><span class="pre">yearsum</span></code> sums all timesteps within each calendar year. Ensure your data covers complete years.</p>
+</div>
+<p>Compute decadal averages for a broader perspective:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Decadal averages</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>runmean,10<span class="w"> </span>annual_precip.nc<span class="w"> </span>decadal_precip.nc
+
+<span class="c1"># Compare first and last decades</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>timmean<span class="w"> </span>-seltimestep,1,10<span class="w"> </span>annual_precip.nc<span class="w"> </span>first_decade.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>timmean<span class="w"> </span>-seltimestep,31,40<span class="w"> </span>annual_precip.nc<span class="w"> </span>last_decade.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>sub<span class="w"> </span>last_decade.nc<span class="w"> </span>first_decade.nc<span class="w"> </span>decade_diff.nc
+</pre></div>
+</div>
+</section>
+<section id="step-4-compute-seasonal-totals">
+<h3>Step 4: Compute Seasonal Totals<a class="headerlink" href="#step-4-compute-seasonal-totals" title="Link to this heading">#</a></h3>
+<p>For Ethiopia, key seasons are:</p>
+<ul class="simple">
+<li><p><strong>MAM</strong> (March-May): Short rains / Belg season</p></li>
+<li><p><strong>JJAS</strong> (June-September): Long rains / Kiremt season (main rainy season)</p></li>
+<li><p><strong>OND</strong> (October-December): Post-rains / Bega dry season onset</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seasonal sums (using CDO season numbering: DJF=1, MAM=2, JJA=3, SON=4)</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>seasum<span class="w"> </span>-selseas,2<span class="w"> </span>ethiopia_precip.nc<span class="w"> </span>mam_precip.nc<span class="w">   </span><span class="c1"># MAM (short rains)</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>seasum<span class="w"> </span>-selseas,3<span class="w"> </span>ethiopia_precip.nc<span class="w"> </span>jja_precip.nc<span class="w">   </span><span class="c1"># JJA (long rains)</span>
+
+<span class="c1"># Alternative: select specific months manually</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>yearsum<span class="w"> </span>-selmonth,3/5<span class="w"> </span>ethiopia_precip.nc<span class="w"> </span>mam_manual.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>yearsum<span class="w"> </span>-selmonth,6/9<span class="w"> </span>ethiopia_precip.nc<span class="w"> </span>jjas_manual.nc
+
+<span class="c1"># Compare seasonal contributions</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>mam_precip.nc<span class="w"> </span>&gt;<span class="w"> </span>mam_timeseries.txt
+cdo<span class="w"> </span>-O<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>jjas_manual.nc<span class="w"> </span>&gt;<span class="w"> </span>jjas_timeseries.txt
+cdo<span class="w"> </span>-O<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>annual_precip.nc<span class="w"> </span>&gt;<span class="w"> </span>annual_timeseries.txt
+</pre></div>
+</div>
+<p>Check seasonal fraction of annual total:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># JJAS fraction of annual total</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>div<span class="w"> </span>jjas_manual.nc<span class="w"> </span>annual_precip.nc<span class="w"> </span>jjas_fraction.nc
+
+<span class="c1"># Regions where JJAS &gt; 70% of annual rainfall</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>gec,0.7<span class="w"> </span>jjas_fraction.nc<span class="w"> </span>jjas_dominant.nc
+
+<span class="c1"># Spatial average of fraction</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>jjas_fraction.nc
+</pre></div>
+</div>
+</section>
+<section id="step-5-calculate-anomalies">
+<h3>Step 5: Calculate Anomalies<a class="headerlink" href="#step-5-calculate-anomalies" title="Link to this heading">#</a></h3>
+<p>Anomalies are calculated relative to a reference period (typically 1981-2010 for WMO standard):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute monthly climatology (1981-2010)</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>selyear,1981/2010<span class="w"> </span>ethiopia_precip.nc<span class="w"> </span>ref_period.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>ymonmean<span class="w"> </span>ref_period.nc<span class="w"> </span>clim_monthly.nc
+
+<span class="c1"># Verify climatology</span>
+cdo<span class="w"> </span>output<span class="w"> </span>clim_monthly.nc
+
+<span class="c1"># Compute monthly anomalies</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>ymonsub<span class="w"> </span>ethiopia_precip.nc<span class="w"> </span>clim_monthly.nc<span class="w"> </span>precip_anom_monthly.nc
+
+<span class="c1"># Annual anomaly</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>yearsum<span class="w"> </span>precip_anom_monthly.nc<span class="w"> </span>annual_anom.nc
+
+<span class="c1"># Spatial average of annual anomaly</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>annual_anom.nc<span class="w"> </span>&gt;<span class="w"> </span>anomaly_timeseries.txt
+
+<span class="c1"># Identify extreme years (anomaly &gt; 1 std or &lt; -1 std)</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>timstd<span class="w"> </span>annual_anom.nc<span class="w"> </span>anomaly_std.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>gtc,1<span class="w"> </span>-div<span class="w"> </span>annual_anom.nc<span class="w"> </span>anomaly_std.nc<span class="w"> </span>positive_anom_mask.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>ltc,-1<span class="w"> </span>-div<span class="w"> </span>annual_anom.nc<span class="w"> </span>anomaly_std.nc<span class="w"> </span>negative_anom_mask.nc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The WMO standard reference period is 1981-2010. When enough data is available, use this period for consistency with other studies.</p>
+</div>
+</section>
+<section id="step-6-spatial-averaging">
+<h3>Step 6: Spatial Averaging<a class="headerlink" href="#step-6-spatial-averaging" title="Link to this heading">#</a></h3>
+<p>Compute regional averages for trend analysis:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Area-weighted spatial average over Ethiopia</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>fldmean<span class="w"> </span>annual_precip.nc<span class="w"> </span>ethiopia_annual_mean.nc
+cdo<span class="w"> </span>output<span class="w"> </span>ethiopia_annual_mean.nc<span class="w"> </span>&gt;<span class="w"> </span>ethiopia_annual_timeseries.csv
+
+<span class="c1"># Sub-regional averages</span>
+<span class="c1"># Northern highlands (Tigray)</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>fldmean<span class="w"> </span>-sellonlatbox,36,40,12,15<span class="w"> </span>annual_precip.nc<span class="w"> </span>north_mean.nc
+<span class="c1"># Central highlands (Amhara, Oromia)</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>fldmean<span class="w"> </span>-sellonlatbox,37,42,7,12<span class="w"> </span>annual_precip.nc<span class="w"> </span>central_mean.nc
+<span class="c1"># Lowland regions (Somali, Afar)</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>fldmean<span class="w"> </span>-sellonlatbox,42,48,3,12<span class="w"> </span>annual_precip.nc<span class="w"> </span>east_mean.nc
+
+<span class="c1"># Output all regional means</span>
+cdo<span class="w"> </span>output<span class="w"> </span>north_mean.nc<span class="w"> </span>&gt;<span class="w"> </span>north_timeseries.csv
+cdo<span class="w"> </span>output<span class="w"> </span>central_mean.nc<span class="w"> </span>&gt;<span class="w"> </span>central_timeseries.csv
+cdo<span class="w"> </span>output<span class="w"> </span>east_mean.nc<span class="w"> </span>&gt;<span class="w"> </span>east_timeseries.csv
+</pre></div>
+</div>
+</section>
+<section id="step-7-trend-analysis">
+<h3>Step 7: Trend Analysis<a class="headerlink" href="#step-7-trend-analysis" title="Link to this heading">#</a></h3>
+<section id="cdo-trend-operator">
+<h4>CDO Trend Operator<a class="headerlink" href="#cdo-trend-operator" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Linear trend on grid cells</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>trend<span class="w"> </span>annual_precip.nc<span class="w"> </span>intercept.nc<span class="w"> </span>slope.nc
+
+<span class="c1"># Convert slope to mm/decade (multiply by 10 for 40 years of data? No - trend gives per timestep)</span>
+<span class="c1"># For annual data, slope is already in mm/year</span>
+<span class="c1"># Multiply by 10 for mm/decade</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>mulc,10<span class="w"> </span>slope.nc<span class="w"> </span>trend_per_decade.nc
+
+<span class="c1"># For seasonal trends</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>trend<span class="w"> </span>mam_precip.nc<span class="w"> </span>mam_intercept.nc<span class="w"> </span>mam_slope.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>mulc,10<span class="w"> </span>mam_slope.nc<span class="w"> </span>mam_trend.nc
+
+cdo<span class="w"> </span>-O<span class="w"> </span>trend<span class="w"> </span>jjas_manual.nc<span class="w"> </span>jjas_intercept.nc<span class="w"> </span>jjas_slope.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>mulc,10<span class="w"> </span>jjas_slope.nc<span class="w"> </span>jjas_trend.nc
+</pre></div>
+</div>
+</section>
+<section id="statistical-significance-testing">
+<h4>Statistical Significance Testing<a class="headerlink" href="#statistical-significance-testing" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute t-statistic for significance testing</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>timstd<span class="w"> </span>annual_precip.nc<span class="w"> </span>std_annual.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>div<span class="w"> </span>slope.nc<span class="w"> </span>std_annual.nc<span class="w"> </span>t_stat.nc
+
+<span class="c1"># Two-tailed t-test at 95% confidence</span>
+<span class="c1"># For n=40 years, critical value ~2.02 (df=38)</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>gtc,2.02<span class="w"> </span>-abs<span class="w"> </span>t_stat.nc<span class="w"> </span>significant.nc
+
+<span class="c1"># Mask non-significant trends</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>mul<span class="w"> </span>trend_per_decade.nc<span class="w"> </span>significant.nc<span class="w"> </span>sig_trend.nc
+
+<span class="c1"># Count significant pixels</span>
+cdo<span class="w"> </span>output<span class="w"> </span>-fldsum<span class="w"> </span>-gtc,0<span class="w"> </span>significant.nc
+
+<span class="c1"># Mann-Kendall trend test alternative (using Python)</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The t-test provides a first-order significance estimate. For more robust results, consider the Mann-Kendall test or field significance tests.</p>
+</div>
+</section>
+<section id="trend-statistics">
+<h4>Trend Statistics<a class="headerlink" href="#trend-statistics" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Spatially averaged trend</span>
+cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>trend_per_decade.nc
+
+<span class="c1"># Regional trend extraction</span>
+cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>-sellonlatbox,33,48,3,15<span class="w"> </span>trend_per_decade.nc
+
+<span class="c1"># Percentage of area with significant positive/negative trends</span>
+cdo<span class="w"> </span>output<span class="w"> </span>-fldsum<span class="w"> </span>-mulc,100<span class="w"> </span>-gtc,0<span class="w"> </span>significant.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="step-8-visualization">
+<h3>Step 8: Visualization<a class="headerlink" href="#step-8-visualization" title="Link to this heading">#</a></h3>
+<section id="time-series-plot-python">
+<h4>Time Series Plot (Python)<a class="headerlink" href="#time-series-plot-python" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Read annual precipitation time series</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;ethiopia_annual_timeseries.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;precip&quot;</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">)</span>
+
+<span class="c1"># Read anomaly time series</span>
+<span class="n">anom</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;anomaly_timeseries.txt&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;anom&quot;</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">)</span>
+
+<span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1981</span><span class="p">,</span> <span class="mi">2021</span><span class="p">)</span>
+
+<span class="c1"># Linear regression</span>
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;precip&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">trend_line</span> <span class="o">=</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">years</span> <span class="o">+</span> <span class="n">intercept</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Annual precipitation</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;precip&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Annual Precipitation&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">trend_line</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Trend: </span><span class="si">{</span><span class="n">slope</span><span class="o">*</span><span class="mi">10</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> mm/decade&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;precip&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mean: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;precip&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> mm/yr&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Precipitation (mm/yr)&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ethiopia Annual Precipitation (1981-2020)&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Anomalies</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;crimson&quot;</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;forestgreen&quot;</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">anom</span><span class="p">[</span><span class="s2">&quot;anom&quot;</span><span class="p">]]</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">anom</span><span class="p">[</span><span class="s2">&quot;anom&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Precipitation Anomaly (mm)&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Annual Precipitation Anomaly (ref: 1981-2010)&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;ethiopia_precip_timeseries.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Figure saved: ethiopia_precip_timeseries.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="trend-map-python">
+<h4>Trend Map (Python)<a class="headerlink" href="#trend-map-python" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Load CDO outputs</span>
+<span class="n">trend</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;trend_per_decade.nc&quot;</span><span class="p">)</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;significant.nc&quot;</span><span class="p">)</span>
+
+<span class="n">trend_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">trend</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">sig_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sig</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Apply significance mask</span>
+<span class="n">trend_masked</span> <span class="o">=</span> <span class="n">trend</span><span class="p">[</span><span class="n">trend_var</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sig</span><span class="p">[</span><span class="n">sig_var</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="c1"># Trend map</span>
+<span class="n">levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">trend</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">trend</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">trend_masked</span><span class="p">,</span>
+                  <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+                  <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;BrBG&quot;</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add hatching for significance</span>
+<span class="n">sig_plot</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">sig</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">sig</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">sig</span><span class="p">[</span><span class="n">sig_var</span><span class="p">],</span>
+                        <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="n">hatches</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;///&quot;</span><span class="p">],</span>
+                        <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">OCEAN</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAKES</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ethiopia outline (approximate)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span> <span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span>
+                    <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Precipitation Trend (mm/decade)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Annual Precipitation Trend Over Ethiopia (1981-2020)</span><span class="se">\n</span><span class="s2">Hatching indicates 95</span><span class="si">% s</span><span class="s2">ignificance&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;ethiopia_trend_map.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Figure saved: ethiopia_trend_map.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="seasonal-cycle-plot">
+<h4>Seasonal Cycle Plot<a class="headerlink" href="#seasonal-cycle-plot" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Load monthly climatology</span>
+<span class="n">clim</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;clim_monthly.nc&quot;</span><span class="p">)</span>
+<span class="n">clim_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">clim</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">monthly_mean</span> <span class="o">=</span> <span class="n">clim</span><span class="p">[</span><span class="n">clim_var</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">])</span>
+
+<span class="n">months</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Jan&quot;</span><span class="p">,</span> <span class="s2">&quot;Feb&quot;</span><span class="p">,</span> <span class="s2">&quot;Mar&quot;</span><span class="p">,</span> <span class="s2">&quot;Apr&quot;</span><span class="p">,</span> <span class="s2">&quot;May&quot;</span><span class="p">,</span> <span class="s2">&quot;Jun&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Jul&quot;</span><span class="p">,</span> <span class="s2">&quot;Aug&quot;</span><span class="p">,</span> <span class="s2">&quot;Sep&quot;</span><span class="p">,</span> <span class="s2">&quot;Oct&quot;</span><span class="p">,</span> <span class="s2">&quot;Nov&quot;</span><span class="p">,</span> <span class="s2">&quot;Dec&quot;</span><span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+<span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">monthly_mean</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+              <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;navy&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Highlight seasons</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>  <span class="c1"># MAM</span>
+    <span class="n">bars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+    <span class="n">bars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]:</span>  <span class="c1"># JJAS</span>
+    <span class="n">bars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s2">&quot;forestgreen&quot;</span><span class="p">)</span>
+    <span class="n">bars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Precipitation (mm/month)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ethiopia Monthly Precipitation Climatology (1981-2010)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Add season labels</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">monthly_mean</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">*</span><span class="mf">0.9</span><span class="p">,</span> <span class="s2">&quot;Belg</span><span class="se">\n</span><span class="s2">(Short Rains)&quot;</span><span class="p">,</span>
+        <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">monthly_mean</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">*</span><span class="mf">0.9</span><span class="p">,</span> <span class="s2">&quot;Kiremt</span><span class="se">\n</span><span class="s2">(Long Rains)&quot;</span><span class="p">,</span>
+        <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;ethiopia_seasonal_cycle.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Figure saved: ethiopia_seasonal_cycle.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="seasonal-contribution-stacked-bar-chart">
+<h4>Seasonal Contribution Stacked Bar Chart<a class="headerlink" href="#seasonal-contribution-stacked-bar-chart" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Load seasonal data</span>
+<span class="n">mam</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;mam_precip.nc&quot;</span><span class="p">)</span>
+<span class="n">jjas</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;jjas_manual.nc&quot;</span><span class="p">)</span>
+<span class="n">annual</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;annual_precip.nc&quot;</span><span class="p">)</span>
+
+<span class="n">mam_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mam</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">jjas_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">jjas</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ann_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">annual</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">mam_mean</span> <span class="o">=</span> <span class="n">mam</span><span class="p">[</span><span class="n">mam_var</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">values</span>
+<span class="n">jjas_mean</span> <span class="o">=</span> <span class="n">jjas</span><span class="p">[</span><span class="n">jjas_var</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">values</span>
+<span class="n">annual_mean</span> <span class="o">=</span> <span class="n">annual</span><span class="p">[</span><span class="n">ann_var</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Other seasons</span>
+<span class="n">other</span> <span class="o">=</span> <span class="n">annual_mean</span> <span class="o">-</span> <span class="n">mam_mean</span> <span class="o">-</span> <span class="n">jjas_mean</span>
+
+<span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1981</span><span class="p">,</span> <span class="mi">2021</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">mam_mean</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MAM (Short Rains)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">jjas_mean</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">mam_mean</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;JJAS (Long Rains)&quot;</span><span class="p">,</span>
+       <span class="n">color</span><span class="o">=</span><span class="s2">&quot;forestgreen&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">mam_mean</span> <span class="o">+</span> <span class="n">jjas_mean</span><span class="p">,</span>
+       <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Other Months&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightblue&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Precipitation (mm/yr)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Seasonal Contribution to Annual Precipitation in Ethiopia&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">annual_mean</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;seasonal_contribution.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Figure saved: seasonal_contribution.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="complete-bash-workflow-script">
+<h2>Complete Bash Workflow Script<a class="headerlink" href="#complete-bash-workflow-script" title="Link to this heading">#</a></h2>
+<p>Save the following as <code class="docutils literal notranslate"><span class="pre">rainfall_trend_analysis.sh</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Rainfall Trend Analysis Pipeline</span>
+<span class="c1"># Climate Data Operators (CDO) Training</span>
+<span class="c1"># =============================================================================</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="c1"># Configuration</span>
+<span class="nv">INPUT_DATA</span><span class="o">=</span><span class="s2">&quot;chirps_monthly.nc&quot;</span>
+<span class="nv">REGION</span><span class="o">=</span><span class="s2">&quot;33,48,3,15&quot;</span><span class="w">   </span><span class="c1"># Ethiopia: lon1,lon2,lat1,lat2</span>
+<span class="nv">REF_START</span><span class="o">=</span><span class="m">1981</span>
+<span class="nv">REF_END</span><span class="o">=</span><span class="m">2010</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;rainfall_output&quot;</span>
+
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Rainfall Trend Analysis ===&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Input: </span><span class="nv">$INPUT_DATA</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Region: Ethiopia (</span><span class="nv">$REGION</span><span class="s2">)&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Reference period: </span><span class="nv">$REF_START</span><span class="s2">-</span><span class="nv">$REF_END</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;================================&quot;</span>
+
+<span class="c1"># Step 1: Crop to region</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[1/7] Cropping to region...&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>sellonlatbox,<span class="nv">$REGION</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT_DATA</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ethiopia_precip.nc&quot;</span>
+
+<span class="c1"># Step 2: Annual totals</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[2/7] Computing annual totals...&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>yearsum<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ethiopia_precip.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/annual_precip.nc&quot;</span>
+
+<span class="c1"># Step 3: Seasonal totals</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[3/7] Computing seasonal totals...&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>seasum<span class="w"> </span>-selseas,2<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ethiopia_precip.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/mam_precip.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>yearsum<span class="w"> </span>-selmonth,6/9<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ethiopia_precip.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/jjas_precip.nc&quot;</span>
+
+<span class="c1"># Step 4: Climatology and anomalies</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[4/7] Computing climatology...&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>selyear,<span class="si">${</span><span class="nv">REF_START</span><span class="si">}</span>/<span class="si">${</span><span class="nv">REF_END</span><span class="si">}</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ethiopia_precip.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ref_period.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>ymonmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ref_period.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/clim_monthly.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>ymonsub<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ethiopia_precip.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/clim_monthly.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/precip_anom.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>yearsum<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/precip_anom.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/annual_anom.nc&quot;</span>
+
+<span class="c1"># Step 5: Spatial averages</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[5/7] Computing spatial averages...&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>fldmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/annual_precip.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ethiopia_mean.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>fldmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/mam_precip.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/mam_mean.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>fldmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/jjas_precip.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/jjas_mean.nc&quot;</span>
+
+<span class="c1"># Step 6: Trend analysis</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[6/7] Computing trends...&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>trend<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/annual_precip.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/intercept.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/slope.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>mulc,10<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/slope.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/trend_per_decade.nc&quot;</span>
+
+<span class="c1"># Significance testing</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>timstd<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/annual_precip.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/std.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>div<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/slope.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/std.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/tstat.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>gtc,2.02<span class="w"> </span>-abs<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/tstat.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/significant.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>mul<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/trend_per_decade.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/significant.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/sig_trend.nc&quot;</span>
+
+<span class="c1"># Step 7: Export data for visualization</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[7/7] Exporting time series...&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>output<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ethiopia_mean.nc&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/annual_timeseries.csv&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>output<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/annual_anom.nc&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/anomaly_timeseries.csv&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Analysis Complete ===&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Output directory: </span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Report trend summary:&quot;</span>
+cdo<span class="w"> </span>-s<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/trend_per_decade.nc&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="expected-outputs">
+<h2>Expected Outputs<a class="headerlink" href="#expected-outputs" title="Link to this heading">#</a></h2>
+<section id="trend-map">
+<h3>1. Trend Map<a class="headerlink" href="#trend-map" title="Link to this heading">#</a></h3>
+<p>A spatial map showing precipitation trends (mm/decade) across Ethiopia with:</p>
+<ul class="simple">
+<li><p>Brown colors for drying trends</p></li>
+<li><p>Green colors for wetting trends</p></li>
+<li><p>Hatching or stippling for statistically significant areas (p &lt; 0.05)</p></li>
+<li><p>Coastlines and country borders</p></li>
+</ul>
+</section>
+<section id="annual-time-series">
+<h3>2. Annual Time Series<a class="headerlink" href="#annual-time-series" title="Link to this heading">#</a></h3>
+<p>A bar/line plot showing:</p>
+<ul class="simple">
+<li><p>Annual precipitation totals for each year</p></li>
+<li><p>Linear trend line overlaid</p></li>
+<li><p>Mean value reference line</p></li>
+<li><p>Anomaly bars colored by sign (positive/negative)</p></li>
+</ul>
+</section>
+<section id="seasonal-cycle">
+<h3>3. Seasonal Cycle<a class="headerlink" href="#seasonal-cycle" title="Link to this heading">#</a></h3>
+<p>A bar chart showing:</p>
+<ul class="simple">
+<li><p>Mean monthly precipitation climatology</p></li>
+<li><p>Color-coded seasons (MAM, JJAS, other)</p></li>
+<li><p>Season labels highlighting rainy seasons</p></li>
+</ul>
+</section>
+<section id="seasonal-contribution">
+<h3>4. Seasonal Contribution<a class="headerlink" href="#seasonal-contribution" title="Link to this heading">#</a></h3>
+<p>A stacked bar chart showing:</p>
+<ul class="simple">
+<li><p>Annual precipitation broken down by season</p></li>
+<li><p>Relative contribution of long rains, short rains, and other months</p></li>
+</ul>
+</section>
+<section id="summary-statistics-table">
+<h3>5. Summary Statistics Table<a class="headerlink" href="#summary-statistics-table" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Statistic</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mean annual precipitation</p></td>
+<td><p>~850 mm/yr (Ethiopia average)</p></td>
+</tr>
+<tr class="row-odd"><td><p>JJAS contribution</p></td>
+<td><p>~65-75% of annual total</p></td>
+</tr>
+<tr class="row-even"><td><p>MAM contribution</p></td>
+<td><p>~15-25% of annual total</p></td>
+</tr>
+<tr class="row-odd"><td><p>Trend (mm/decade)</p></td>
+<td><p>Variable by region</p></td>
+</tr>
+<tr class="row-even"><td><p>% area with significant trend</p></td>
+<td><p>Computed from analysis</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="interpretation-guidance">
+<h2>Interpretation Guidance<a class="headerlink" href="#interpretation-guidance" title="Link to this heading">#</a></h2>
+<section id="what-to-look-for">
+<h3>What to Look For<a class="headerlink" href="#what-to-look-for" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Spatial patterns</strong>: Are there coherent regions of drying or wetting? Do trends follow topographic features (highlands vs. lowlands)?</p></li>
+<li><p><strong>Seasonal contrasts</strong>: Is the trend driven by the long rains (JJAS) or short rains (MAM)? Different seasons may show different trends.</p></li>
+<li><p><strong>Interannual variability</strong>: Look at the time series — are there multi-year drought periods? Are extreme years becoming more frequent?</p></li>
+<li><p><strong>Significance</strong>: Focus interpretation on areas where trends are statistically significant. Non-significant trends may be due to natural variability.</p></li>
+</ol>
+</section>
+<section id="key-questions-to-answer">
+<h3>Key Questions to Answer<a class="headerlink" href="#key-questions-to-answer" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Has annual precipitation increased or decreased over Ethiopia since 1981?</p></li>
+<li><p>Which seasons contribute most to the observed trend?</p></li>
+<li><p>Are there regional differences between the highlands and lowlands?</p></li>
+<li><p>How does the magnitude of the trend compare to natural variability?</p></li>
+</ul>
+</section>
+<section id="common-pitfalls">
+<h3>Common Pitfalls<a class="headerlink" href="#common-pitfalls" title="Link to this heading">#</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p><strong>Short records</strong>: Trends computed from short records (&lt;30 years) may not reflect long-term climate change</p></li>
+<li><p><strong>Serial correlation</strong>: Annual precipitation is often autocorrelated, which can inflate trend significance</p></li>
+<li><p><strong>Spatial correlation</strong>: Nearby grid cells are not independent; consider field significance</p></li>
+<li><p><strong>Data quality</strong>: CHIRPS performs better in some regions than others; check validation studies</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="evaluation-criteria">
+<h2>Evaluation Criteria<a class="headerlink" href="#evaluation-criteria" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Criterion</p></th>
+<th class="head"><p>Weight</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDO commands</p></td>
+<td><p>25%</p></td>
+<td><p>Correct use of spatial, temporal, and statistical operators</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data processing</p></td>
+<td><p>20%</p></td>
+<td><p>Proper workflow ordering, temporary file management</p></td>
+</tr>
+<tr class="row-even"><td><p>Trend analysis</p></td>
+<td><p>20%</p></td>
+<td><p>Correct trend computation and significance testing</p></td>
+</tr>
+<tr class="row-odd"><td><p>Visualization</p></td>
+<td><p>20%</p></td>
+<td><p>Clear, publication-quality figures with proper labels</p></td>
+</tr>
+<tr class="row-even"><td><p>Interpretation</p></td>
+<td><p>15%</p></td>
+<td><p>Insightful analysis of results, discussion of limitations</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="extension-activities">
+<h2>Extension Activities<a class="headerlink" href="#extension-activities" title="Link to this heading">#</a></h2>
+<section id="advanced-options">
+<h3>Advanced Options<a class="headerlink" href="#advanced-options" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Mann-Kendall trend test</strong>: Implement a non-parametric trend test using Python</p></li>
+<li><p><strong>EOF analysis</strong>: Use CDO <code class="docutils literal notranslate"><span class="pre">eof</span></code> operator to identify dominant modes of variability</p></li>
+<li><p><strong>Comparison with ENSO</strong>: Correlate rainfall anomalies with ENSO indices (Niño 3.4)</p></li>
+<li><p><strong>CMIP6 future projections</strong>: Compare historical trends with CMIP6 model projections</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: EOF analysis of precipitation anomalies</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>eof,3<span class="w"> </span>annual_anom.nc<span class="w"> </span>eof_pattern.nc<span class="w"> </span>eof_timeseries.nc
+
+<span class="c1"># Example: Correlate with ENSO</span>
+<span class="c1"># First extract Niño 3.4 index, then:</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>timcor<span class="w"> </span>annual_anom.nc<span class="w"> </span>nino34_annual.nc<span class="w"> </span>enso_correlation.nc
+</pre></div>
+</div>
+</section>
+<section id="cross-project-integration">
+<h3>Cross-Project Integration<a class="headerlink" href="#cross-project-integration" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use the rainfall data processed here as input for <strong>Project 3 (Drought Index Computation)</strong></p></li>
+<li><p>Compare with <strong>Project 6 (CMIP6 Multi-Model Analysis)</strong> to contextualize observed trends</p></li>
+<li><p>Include results in <strong>Project 8 (Automated Climate Report Generator)</strong></p></li>
+</ul>
+<div class="exercise admonition" id="projects/project_01_rainfall_trend-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 133 </span></p>
+<section id="exercise-content">
+<p>Complete the rainfall trend analysis. Produce the trend map, time series, and a one-page summary of your findings. Identify three regions with the strongest drying trends and three with the strongest wetting trends. Discuss possible climate drivers.</p>
+</section>
+</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Funk, C., et al. (2015). The climate hazards infrared precipitation with stations — a new environmental record for monitoring extremes. Scientific Data, 2, 150066.</p></li>
+<li><p>Schneider, U., et al. (2014). GPCC’s new land surface precipitation climatology based on quality-controlled in situ data. Journal of Climate, 27(12), 4631-4650.</p></li>
+<li><p>WMO (2017). WMO Guidelines on the Calculation of Climate Normals. WMO-No. 1203.</p></li>
+<li><p>CDO Documentation: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo">https://code.mpimet.mpg.de/projects/cdo</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./projects"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../notebooks/06_visualization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Climate Data Visualization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="project_02_temperature_trend.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Project 2: Temperature Trend Mapping</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">Data Requirements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-dataset-chirps-monthly-precipitation">Primary Dataset: CHIRPS Monthly Precipitation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-gpcc-monthly-precipitation">Alternative: GPCC Monthly Precipitation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-sample-data">Real Sample Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-workflow">Step-by-Step Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-inspection">Step 1: Data Inspection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-crop-to-ethiopia-region">Step 2: Crop to Ethiopia Region</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-compute-annual-precipitation-totals">Step 3: Compute Annual Precipitation Totals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-compute-seasonal-totals">Step 4: Compute Seasonal Totals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-calculate-anomalies">Step 5: Calculate Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-spatial-averaging">Step 6: Spatial Averaging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-trend-analysis">Step 7: Trend Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-trend-operator">CDO Trend Operator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-significance-testing">Statistical Significance Testing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-statistics">Trend Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-visualization">Step 8: Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-plot-python">Time Series Plot (Python)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-map-python">Trend Map (Python)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-cycle-plot">Seasonal Cycle Plot</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-contribution-stacked-bar-chart">Seasonal Contribution Stacked Bar Chart</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-bash-workflow-script">Complete Bash Workflow Script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-outputs">Expected Outputs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-map">1. Trend Map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#annual-time-series">2. Annual Time Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-cycle">3. Seasonal Cycle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-contribution">4. Seasonal Contribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics-table">5. Summary Statistics Table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-guidance">Interpretation Guidance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-look-for">What to Look For</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-questions-to-answer">Key Questions to Answer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls">Common Pitfalls</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-criteria">Evaluation Criteria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-activities">Extension Activities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-options">Advanced Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-project-integration">Cross-Project Integration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

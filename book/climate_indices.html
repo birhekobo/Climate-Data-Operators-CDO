@@ -1,0 +1,1627 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Module 10: Climate Indices and Extremes &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/climate_indices';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 11: Advanced Workflows and Automation" href="workflows.html" />
+    <link rel="prev" title="Module 9: Statistical Operators" href="statistics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./book/climate_indices.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fbook/climate_indices.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/climate_indices.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 10: Climate Indices and Extremes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-indices">10.1 Temperature Indices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-anomalies">10.1.1 Temperature Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frost-days-fd">10.1.2 Frost Days (FD)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-days-id">10.1.3 Ice Days (ID)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tropical-nights-tr">10.1.4 Tropical Nights (TR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summer-days-su">10.1.5 Summer Days (SU)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#growing-season-length-gsl">10.1.6 Growing Season Length (GSL)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heatwave-duration-index-hwdi">10.1.7 Heatwave Duration Index (HWDI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cold-spell-duration-index-csdi">10.1.8 Cold Spell Duration Index (CSDI)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precipitation-indices">10.2 Precipitation Indices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rainfall-anomalies">10.2.1 Rainfall Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consecutive-dry-days-cdd">10.2.2 Consecutive Dry Days (CDD)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consecutive-wet-days-cwd">10.2.3 Consecutive Wet Days (CWD)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#very-heavy-precipitation-days">10.2.4 Very Heavy Precipitation Days</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-1-day-precipitation-rx1day">10.2.5 Maximum 1-Day Precipitation (Rx1day)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-5-day-precipitation-rx5day">10.2.6 Maximum 5-Day Precipitation (Rx5day)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-daily-intensity-index-sdii">10.2.7 Simple Daily Intensity Index (SDII)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precipitation-fraction-above-thresholds">10.2.8 Precipitation Fraction Above Thresholds</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#etccdi-climate-change-detection-indices">10.3 ETCCDI Climate Change Detection Indices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-based-etccdi-indices">10.3.1 Temperature-Based ETCCDI Indices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-percentile-indices">10.3.2 Temperature Percentile Indices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precipitation-based-etccdi-indices">10.3.3 Precipitation-Based ETCCDI Indices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prcptot-and-r95p">10.3.4 PRCPTOT and R95p</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wet-day-percentile-threshold-r95p-approach">10.3.5 Wet Day Percentile Threshold (R95p approach)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-approaches">10.4 Computation Approaches</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-cdo-operators-directly">10.4.1 Using CDO Operators Directly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-cdo-expr-for-complex-expressions">10.4.2 Using <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">expr</span></code> for Complex Expressions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-expressions">10.4.3 Compound Expressions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chaining-for-complex-indices-complete-wsdi-example">10.4.4 Chaining for Complex Indices: Complete WSDI Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripting-for-complex-logic">10.4.5 Scripting for Complex Logic</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-and-annual-aggregation">10.5 Seasonal and Annual Aggregation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#annual-aggregation">10.5.1 Annual Aggregation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-aggregation">10.5.2 Seasonal Aggregation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-decadal-trends">10.5.3 Multi-Decadal Trends</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflow-examples">10.6 Practical Workflow Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-etccdi-analysis-workflow">10.6.1 Complete ETCCDI Analysis Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regional-extreme-analysis">10.6.2 Regional Extreme Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-indices-across-datasets">10.6.3 Comparing Indices Across Datasets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">10.7 Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-1-frost-days-analysis">Exercise 10.1: Frost Days Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-2-growing-season-length">Exercise 10.2: Growing Season Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-3-consecutive-dry-days">Exercise 10.3: Consecutive Dry Days</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-4-heatwave-index-wsdi">Exercise 10.4: Heatwave Index (WSDI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-5-precipitation-intensity-index">Exercise 10.5: Precipitation Intensity Index</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">10.8 Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-10-climate-indices-and-extremes">
+<h1>Module 10: Climate Indices and Extremes<a class="headerlink" href="#module-10-climate-indices-and-extremes" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After completing this module, you will be able to:</p>
+<ul class="simple">
+<li><p>Define and compute temperature-based climate indices (frost days, tropical nights, heatwaves, etc.)</p></li>
+<li><p>Compute precipitation-based indices (CDD, CWD, SDII, Rx1day, Rx5day, etc.)</p></li>
+<li><p>Implement the full set of ETCCDI climate change detection indices</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">expr</span></code> for complex index calculations</p></li>
+<li><p>Aggregate extreme indices to seasonal and annual time scales</p></li>
+<li><p>Interpret the physical meaning of each index</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<p>This module assumes you have completed Modules 1-9. You should be comfortable with temporal selection, spatial operators, statistics, and working with daily temperature (TG, TN, TX) and precipitation (RR) data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ETCCDI indices require daily data: <strong>TG</strong> (mean temperature), <strong>TN</strong> (minimum temperature), <strong>TX</strong> (maximum temperature), and <strong>PR</strong> (precipitation). Ensure your data follows this convention or adjust variable names accordingly.</p>
+</div>
+<figure class="align-default" id="fig-seasonal-cycle">
+<img alt="../_images/fig_seasonal_cycle.png" src="../_images/fig_seasonal_cycle.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Observed seasonal cycle over Ethiopia from CHIRPS precipitation and NCEP/DOE reanalysis temperature, illustrating the climate indices discussed in this module.</span><a class="headerlink" href="#fig-seasonal-cycle" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-ethiopia-season-map">
+<img alt="../_images/fig_ethiopia_season_map.png" src="../_images/fig_ethiopia_season_map.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Real CHIRPS seasonal precipitation climatology over Ethiopia: <strong>Belgi</strong> (February-May), <strong>Kiremt</strong> (June-September), <strong>Bega</strong> (October-January), and the annual total. The maps show how the seasonal indices computed in this module are spatially distributed, with the main Kiremt rainy season dominating most of the country.</span><a class="headerlink" href="#fig-ethiopia-season-map" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="temperature-indices">
+<h2>10.1 Temperature Indices<a class="headerlink" href="#temperature-indices" title="Link to this heading">#</a></h2>
+<p>Temperature extremes have significant impacts on human health, agriculture, and ecosystems.</p>
+<section id="temperature-anomalies">
+<h3>10.1.1 Temperature Anomalies<a class="headerlink" href="#temperature-anomalies" title="Link to this heading">#</a></h3>
+<p>Temperature anomalies measure deviation from a reference climatology.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute monthly anomalies</span>
+cdo<span class="w"> </span>ymonsub<span class="w"> </span>monthly_temperature.nc<span class="w"> </span>monthly_anomaly.nc
+
+<span class="c1"># Standardized anomalies</span>
+cdo<span class="w"> </span>div<span class="w"> </span>-ymonsub<span class="w"> </span>monthly_temperature.nc<span class="w"> </span>-ymonstd<span class="w"> </span>monthly_temperature.nc<span class="w"> </span>standardized_anomaly.nc
+</pre></div>
+</div>
+</section>
+<section id="frost-days-fd">
+<h3>10.1.2 Frost Days (FD)<a class="headerlink" href="#frost-days-fd" title="Link to this heading">#</a></h3>
+<p>A frost day is defined as a day when the daily minimum temperature (TN) falls below 0°C.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>timsum<span class="w"> </span>-ltc,0<span class="w"> </span>daily_tmin.nc<span class="w"> </span>frost_days.nc
+</pre></div>
+</div>
+<p>Annual frost days:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearsum<span class="w"> </span>-ltc,0<span class="w"> </span>daily_tmin.nc<span class="w"> </span>annual_frost_days.nc
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Frost days are important for agriculture (growing season length) and infrastructure (road maintenance, heating demand).</p>
+</div>
+</section>
+<section id="ice-days-id">
+<h3>10.1.3 Ice Days (ID)<a class="headerlink" href="#ice-days-id" title="Link to this heading">#</a></h3>
+<p>An ice day occurs when the daily maximum temperature (TX) remains below 0°C.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearsum<span class="w"> </span>-ltc,0<span class="w"> </span>daily_tmax.nc<span class="w"> </span>ice_days.nc
+</pre></div>
+</div>
+</section>
+<section id="tropical-nights-tr">
+<h3>10.1.4 Tropical Nights (TR)<a class="headerlink" href="#tropical-nights-tr" title="Link to this heading">#</a></h3>
+<p>A tropical night occurs when the daily minimum temperature (TN) exceeds 20°C.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearsum<span class="w"> </span>-gtc,20<span class="w"> </span>daily_tmin.nc<span class="w"> </span>tropical_nights.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The 20°C threshold is a standard definition, but regional definitions may vary. In some studies, tropical nights are defined as TN &gt; 25°C for tropical regions.</p>
+</div>
+</section>
+<section id="summer-days-su">
+<h3>10.1.5 Summer Days (SU)<a class="headerlink" href="#summer-days-su" title="Link to this heading">#</a></h3>
+<p>A summer day occurs when the daily maximum temperature (TX) exceeds 25°C.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearsum<span class="w"> </span>-gtc,25<span class="w"> </span>daily_tmax.nc<span class="w"> </span>summer_days.nc
+</pre></div>
+</div>
+</section>
+<section id="growing-season-length-gsl">
+<h3>10.1.6 Growing Season Length (GSL)<a class="headerlink" href="#growing-season-length-gsl" title="Link to this heading">#</a></h3>
+<p>The growing season length is defined as the period between the first occurrence of at least 6 consecutive days with TG &gt; 5°C (spring) and the first occurrence of at least 6 consecutive days with TG &lt; 5°C in autumn.</p>
+<p>This is more complex to compute with CDO alone and typically requires scripting. A simplified approach:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Days with mean temperature &gt; 5°C</span>
+cdo<span class="w"> </span>gec,5<span class="w"> </span>daily_tmean.nc<span class="w"> </span>above_5.nc
+
+<span class="c1"># Growing season: count from first to last above-5 day each year</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>above_5.nc<span class="w"> </span>gsl_simple.nc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The simplified GSL (<code class="docutils literal notranslate"><span class="pre">yearsum</span></code> of days above threshold) is a reasonable approximation in many regions, though it differs from the strict ETCCDI definition requiring 6 consecutive days.</p>
+</div>
+</section>
+<section id="heatwave-duration-index-hwdi">
+<h3>10.1.7 Heatwave Duration Index (HWDI)<a class="headerlink" href="#heatwave-duration-index-hwdi" title="Link to this heading">#</a></h3>
+<p>A heatwave is defined as at least 6 consecutive days with TX &gt; 5°C above the daily climatological mean.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute daily climatology of TX</span>
+cdo<span class="w"> </span>ydaymean<span class="w"> </span>daily_tmax.nc<span class="w"> </span>tx_clim.nc
+
+<span class="c1"># Compute threshold (climatology + 5°C)</span>
+cdo<span class="w"> </span>addc,5<span class="w"> </span>tx_clim.nc<span class="w"> </span>threshold.nc
+
+<span class="c1"># Identify exceedances</span>
+cdo<span class="w"> </span>ge<span class="w"> </span>daily_tmax.nc<span class="w"> </span>threshold.nc<span class="w"> </span>exceed.nc
+
+<span class="c1"># Running sum to find consecutive exceedances</span>
+cdo<span class="w"> </span>runsum,6<span class="w"> </span>exceed.nc<span class="w"> </span>hw.nc
+
+<span class="c1"># Days that are part of at least 6-day heatwave</span>
+cdo<span class="w"> </span>gec,1<span class="w"> </span>hw.nc<span class="w"> </span>heatwave_days.nc
+cdo<span class="w"> </span>yearsum<span class="w"> </span>heatwave_days.nc<span class="w"> </span>annual_hwd.nc
+</pre></div>
+</div>
+</section>
+<section id="cold-spell-duration-index-csdi">
+<h3>10.1.8 Cold Spell Duration Index (CSDI)<a class="headerlink" href="#cold-spell-duration-index-csdi" title="Link to this heading">#</a></h3>
+<p>Similar to HWDI but for cold spells: at least 6 consecutive days with TN &lt; 5°C below the climatological mean.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ydaymean<span class="w"> </span>daily_tmin.nc<span class="w"> </span>tn_clim.nc
+cdo<span class="w"> </span>subc,5<span class="w"> </span>tn_clim.nc<span class="w"> </span>threshold.nc
+cdo<span class="w"> </span>le<span class="w"> </span>daily_tmin.nc<span class="w"> </span>threshold.nc<span class="w"> </span>cold.nc
+cdo<span class="w"> </span>runsum,6<span class="w"> </span>cold.nc<span class="w"> </span>csdi.nc
+cdo<span class="w"> </span>gec,1<span class="w"> </span>csdi.nc<span class="w"> </span>cold_spell_days.nc
+cdo<span class="w"> </span>yearsum<span class="w"> </span>cold_spell_days.nc<span class="w"> </span>annual_csdi.nc
+</pre></div>
+</div>
+<div class="exercise admonition" id="ex-climate_indices-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 95 </span></p>
+<section id="exercise-content">
+<p>Compute the trend in frost days per decade for your region over the last 50 years.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/climate_indices-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-climate_indices-1"> Exercise 95</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearsum<span class="w"> </span>-ltc,0<span class="w"> </span>daily_tmin.nc<span class="w"> </span>annual_fd.nc
+cdo<span class="w"> </span>trend<span class="w"> </span>annual_fd.nc<span class="w"> </span>intercept.nc<span class="w"> </span>slope.nc
+cdo<span class="w"> </span>mulc,10<span class="w"> </span>slope.nc<span class="w"> </span>trend_per_decade.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>trend_per_decade.nc
+</pre></div>
+</div>
+<p>A negative trend indicates fewer frost days, consistent with warming.</p>
+</section>
+</div>
+</section>
+</section>
+<section id="precipitation-indices">
+<h2>10.2 Precipitation Indices<a class="headerlink" href="#precipitation-indices" title="Link to this heading">#</a></h2>
+<p>Precipitation extremes are directly relevant to flood and drought risk.</p>
+<section id="rainfall-anomalies">
+<h3>10.2.1 Rainfall Anomalies<a class="headerlink" href="#rainfall-anomalies" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ymonsub<span class="w"> </span>monthly_precip.nc<span class="w"> </span>monthly_anomaly.nc
+cdo<span class="w"> </span>div<span class="w"> </span>monthly_anomaly.nc<span class="w"> </span>-ymonmean<span class="w"> </span>monthly_precip.nc<span class="w"> </span>fractional_anomaly.nc
+</pre></div>
+</div>
+</section>
+<section id="consecutive-dry-days-cdd">
+<h3>10.2.2 Consecutive Dry Days (CDD)<a class="headerlink" href="#consecutive-dry-days-cdd" title="Link to this heading">#</a></h3>
+<p>The maximum length of consecutive dry days (daily precipitation &lt; 1mm).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identify dry days (PR &lt; 1mm)</span>
+cdo<span class="w"> </span>ltc,1<span class="w"> </span>daily_precip.nc<span class="w"> </span>dry_days.nc
+
+<span class="c1"># Running product to find consecutive dry streaks</span>
+cdo<span class="w"> </span>runsum,365<span class="w"> </span>dry_days.nc<span class="w"> </span>cdd.nc
+
+<span class="c1"># Maximum length per year</span>
+cdo<span class="w"> </span>yearmax<span class="w"> </span>cdd.nc<span class="w"> </span>annual_max_cdd.nc
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In the CDD definition, a “dry day” is typically PR &lt; 1mm. The maximum number of consecutive dry days in a year is the CDD index. A 365-day window is used to capture any possible streak within the year.</p>
+</div>
+</section>
+<section id="consecutive-wet-days-cwd">
+<h3>10.2.3 Consecutive Wet Days (CWD)<a class="headerlink" href="#consecutive-wet-days-cwd" title="Link to this heading">#</a></h3>
+<p>The maximum length of consecutive wet days (daily precipitation &gt;= 1mm).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>gec,1<span class="w"> </span>daily_precip.nc<span class="w"> </span>wet_days.nc
+cdo<span class="w"> </span>runsum,365<span class="w"> </span>wet_days.nc<span class="w"> </span>cwd.nc
+cdo<span class="w"> </span>yearmax<span class="w"> </span>cwd.nc<span class="w"> </span>annual_max_cwd.nc
+</pre></div>
+</div>
+</section>
+<section id="very-heavy-precipitation-days">
+<h3>10.2.4 Very Heavy Precipitation Days<a class="headerlink" href="#very-heavy-precipitation-days" title="Link to this heading">#</a></h3>
+<p>Days with precipitation exceeding specific thresholds:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearsum<span class="w"> </span>-gec,10<span class="w"> </span>daily_precip.nc<span class="w"> </span>r10mm.nc<span class="w">     </span><span class="c1"># &gt; 10mm days</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gec,20<span class="w"> </span>daily_precip.nc<span class="w"> </span>r20mm.nc<span class="w">     </span><span class="c1"># &gt; 20mm days</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gec,50<span class="w"> </span>daily_precip.nc<span class="w"> </span>r50mm.nc<span class="w">     </span><span class="c1"># &gt; 50mm days</span>
+</pre></div>
+</div>
+<div class="exercise admonition" id="ex-climate_indices-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 96 </span></p>
+<section id="exercise-content">
+<p>Compute the frequency of very heavy precipitation days (&gt; 20mm) for each season over the last 30 years.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/climate_indices-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-climate_indices-2"> Exercise 96</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute seasonal counts</span>
+cdo<span class="w"> </span>seasum<span class="w"> </span>-gec,20<span class="w"> </span>daily_precip.nc<span class="w"> </span>seasonal_heavy.nc
+
+<span class="c1"># Compute climatology</span>
+cdo<span class="w"> </span>yseasmean<span class="w"> </span>seasonal_heavy.nc<span class="w"> </span>clim_heavy.nc
+cdo<span class="w"> </span>output<span class="w"> </span>clim_heavy.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="maximum-1-day-precipitation-rx1day">
+<h3>10.2.5 Maximum 1-Day Precipitation (Rx1day)<a class="headerlink" href="#maximum-1-day-precipitation-rx1day" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearmax<span class="w"> </span>daily_precip.nc<span class="w"> </span>rx1day.nc
+</pre></div>
+</div>
+<p>For each calendar year:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearmax<span class="w"> </span>daily_precip.nc<span class="w"> </span>annual_rx1day.nc
+</pre></div>
+</div>
+</section>
+<section id="maximum-5-day-precipitation-rx5day">
+<h3>10.2.6 Maximum 5-Day Precipitation (Rx5day)<a class="headerlink" href="#maximum-5-day-precipitation-rx5day" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>runsum,5<span class="w"> </span>daily_precip.nc<span class="w"> </span>prec5day.nc
+cdo<span class="w"> </span>yearmax<span class="w"> </span>prec5day.nc<span class="w"> </span>rx5day.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Rx5day is sensitive to the definition of a “day”. Ensure your daily data is consistent (e.g., 00-00 UTC or 06-06 UTC accumulation).</p>
+</div>
+</section>
+<section id="simple-daily-intensity-index-sdii">
+<h3>10.2.7 Simple Daily Intensity Index (SDII)<a class="headerlink" href="#simple-daily-intensity-index-sdii" title="Link to this heading">#</a></h3>
+<p>The mean precipitation amount on wet days (PR &gt;= 1mm).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Total precipitation on wet days</span>
+cdo<span class="w"> </span>monsum<span class="w"> </span>-gec,1<span class="w"> </span>daily_precip.nc<span class="w"> </span>wet_total.nc
+
+<span class="c1"># Count of wet days</span>
+cdo<span class="w"> </span>monsum<span class="w"> </span>-gec,1<span class="w"> </span>daily_precip.nc<span class="w"> </span>wet_count.nc
+
+<span class="c1"># SDII</span>
+cdo<span class="w"> </span>div<span class="w"> </span>wet_total.nc<span class="w"> </span>wet_count.nc<span class="w"> </span>sdii.nc
+</pre></div>
+</div>
+</section>
+<section id="precipitation-fraction-above-thresholds">
+<h3>10.2.8 Precipitation Fraction Above Thresholds<a class="headerlink" href="#precipitation-fraction-above-thresholds" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fraction of total precipitation from events &gt; 20mm</span>
+cdo<span class="w"> </span>div<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-monsum<span class="w"> </span>-gec,20<span class="w"> </span>daily_precip.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-monsum<span class="w"> </span>daily_precip.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>fraction_heavy.nc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The fraction of total precipitation from heavy events is a key indicator of precipitation extremes. Increasing fractions indicate that more precipitation falls in heavy events, increasing flood risk.</p>
+</div>
+</section>
+</section>
+<section id="etccdi-climate-change-detection-indices">
+<h2>10.3 ETCCDI Climate Change Detection Indices<a class="headerlink" href="#etccdi-climate-change-detection-indices" title="Link to this heading">#</a></h2>
+<p>The Expert Team on Climate Change Detection and Indices (ETCCDI) defined a core set of 27 indices for climate extreme analysis.</p>
+<section id="temperature-based-etccdi-indices">
+<h3>10.3.1 Temperature-Based ETCCDI Indices<a class="headerlink" href="#temperature-based-etccdi-indices" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Index</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>CDO Command</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FD</p></td>
+<td><p>Frost Days</p></td>
+<td><p>TN &lt; 0°C</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">yearsum</span> <span class="pre">-ltc,0</span> <span class="pre">tn.nc</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>SU</p></td>
+<td><p>Summer Days</p></td>
+<td><p>TX &gt; 25°C</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">yearsum</span> <span class="pre">-gtc,25</span> <span class="pre">tx.nc</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>ID</p></td>
+<td><p>Ice Days</p></td>
+<td><p>TX &lt; 0°C</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">yearsum</span> <span class="pre">-ltc,0</span> <span class="pre">tx.nc</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>TR</p></td>
+<td><p>Tropical Nights</p></td>
+<td><p>TN &gt; 20°C</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">yearsum</span> <span class="pre">-gtc,20</span> <span class="pre">tn.nc</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>GSL</p></td>
+<td><p>Growing Season Length</p></td>
+<td><p>First to last span of &gt;5°C for &gt;6 days</p></td>
+<td><p>See GSL subsection</p></td>
+</tr>
+<tr class="row-odd"><td><p>TXx</p></td>
+<td><p>Max TX</p></td>
+<td><p>Monthly maximum TX</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">monmax</span> <span class="pre">tx.nc</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>TNx</p></td>
+<td><p>Max TN</p></td>
+<td><p>Monthly maximum TN</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">monmax</span> <span class="pre">tn.nc</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>TXn</p></td>
+<td><p>Min TX</p></td>
+<td><p>Monthly minimum TX</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">monmin</span> <span class="pre">tx.nc</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>TNn</p></td>
+<td><p>Min TN</p></td>
+<td><p>Monthly minimum TN</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">monmin</span> <span class="pre">tn.nc</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>TN10p</p></td>
+<td><p>Cold nights</p></td>
+<td><p>Days with TN &lt; 10th percentile</p></td>
+<td><p>Requires percentile computation</p></td>
+</tr>
+<tr class="row-even"><td><p>TX10p</p></td>
+<td><p>Cold days</p></td>
+<td><p>Days with TX &lt; 10th percentile</p></td>
+<td><p>Requires percentile computation</p></td>
+</tr>
+<tr class="row-odd"><td><p>TN90p</p></td>
+<td><p>Warm nights</p></td>
+<td><p>Days with TN &gt; 90th percentile</p></td>
+<td><p>Requires percentile computation</p></td>
+</tr>
+<tr class="row-even"><td><p>TX90p</p></td>
+<td><p>Warm days</p></td>
+<td><p>Days with TX &gt; 90th percentile</p></td>
+<td><p>Requires percentile computation</p></td>
+</tr>
+<tr class="row-odd"><td><p>WSDI</p></td>
+<td><p>Warm spell duration</p></td>
+<td><p>&gt;6 days with TX &gt; 90th percentile</p></td>
+<td><p>Requires consecutive day logic</p></td>
+</tr>
+<tr class="row-even"><td><p>CSDI</p></td>
+<td><p>Cold spell duration</p></td>
+<td><p>&gt;6 days with TN &lt; 10th percentile</p></td>
+<td><p>Requires consecutive day logic</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="temperature-percentile-indices">
+<h3>10.3.2 Temperature Percentile Indices<a class="headerlink" href="#temperature-percentile-indices" title="Link to this heading">#</a></h3>
+<p>To compute TN10p (cold night frequency):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute 10th percentile threshold for a 5-day window centered on each day</span>
+cdo<span class="w"> </span>ydaypctl,10<span class="w"> </span>tn.nc<span class="w"> </span>-ydaymin<span class="w"> </span>tn.nc<span class="w"> </span>-ydaymax<span class="w"> </span>tn.nc<span class="w"> </span>tn10_thresh.nc
+
+<span class="c1"># Count days below threshold</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-lt<span class="w"> </span>tn.nc<span class="w"> </span>tn10_thresh.nc<span class="w"> </span>tn10p.nc
+</pre></div>
+</div>
+<p>For TX90p (warm day frequency):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ydaypctl,90<span class="w"> </span>tx.nc<span class="w"> </span>-ydaymin<span class="w"> </span>tx.nc<span class="w"> </span>-ydaymax<span class="w"> </span>tx.nc<span class="w"> </span>tx90_thresh.nc
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gt<span class="w"> </span>tx.nc<span class="w"> </span>tx90_thresh.nc<span class="w"> </span>tx90p.nc
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>ETCCDI specifies a 5-day window for percentile calculation (i.e., the percentile is computed from all values within ±2 days of the target calendar date across all years). CDO’s <code class="docutils literal notranslate"><span class="pre">ydaypctl</span></code> uses all available years for the specific calendar day, which is a close approximation.</p>
+</div>
+</section>
+<section id="precipitation-based-etccdi-indices">
+<h3>10.3.3 Precipitation-Based ETCCDI Indices<a class="headerlink" href="#precipitation-based-etccdi-indices" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Index</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>CDO Command</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RX1day</p></td>
+<td><p>Max 1-day precipitation</p></td>
+<td><p>Monthly max 1-day precipitation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">monmax</span> <span class="pre">pr.nc</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>RX5day</p></td>
+<td><p>Max 5-day precipitation</p></td>
+<td><p>Monthly max 5-day precipitation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">monmax</span> <span class="pre">-runsum,5</span> <span class="pre">pr.nc</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>SDII</p></td>
+<td><p>Simple Daily Intensity Index</p></td>
+<td><p>Mean precipitation on wet days</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">div</span> <span class="pre">-monsum</span> <span class="pre">-gec,1</span> <span class="pre">pr.nc</span> <span class="pre">-monsum</span> <span class="pre">-gec,1</span> <span class="pre">pr.nc</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD</p></td>
+<td><p>Consecutive Dry Days</p></td>
+<td><p>Max consecutive dry days</p></td>
+<td><p>See CDD subsection</p></td>
+</tr>
+<tr class="row-even"><td><p>CWD</p></td>
+<td><p>Consecutive Wet Days</p></td>
+<td><p>Max consecutive wet days</p></td>
+<td><p>See CWD subsection</p></td>
+</tr>
+<tr class="row-odd"><td><p>R10mm</p></td>
+<td><p>Heavy precipitation days</p></td>
+<td><p>Days with PR &gt;= 10mm</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">yearsum</span> <span class="pre">-gec,10</span> <span class="pre">pr.nc</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>R20mm</p></td>
+<td><p>Very heavy precipitation days</p></td>
+<td><p>Days with PR &gt;= 20mm</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">yearsum</span> <span class="pre">-gec,20</span> <span class="pre">pr.nc</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>PRCPTOT</p></td>
+<td><p>Total wet-day precipitation</p></td>
+<td><p>Annual total from wet days</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">yearsum</span> <span class="pre">-gec,1</span> <span class="pre">pr.nc</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>R95p</p></td>
+<td><p>Very wet days precipitation</p></td>
+<td><p>Precipitation from days &gt; 95th percentile</p></td>
+<td><p>Requires percentile threshold</p></td>
+</tr>
+<tr class="row-odd"><td><p>R99p</p></td>
+<td><p>Extremely wet days</p></td>
+<td><p>Precipitation from days &gt; 99th percentile</p></td>
+<td><p>Requires percentile threshold</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="prcptot-and-r95p">
+<h3>10.3.4 PRCPTOT and R95p<a class="headerlink" href="#prcptot-and-r95p" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># PRCPTOT: total precipitation on wet days</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gec,1<span class="w"> </span>daily_precip.nc<span class="w"> </span>prcptot.nc
+
+<span class="c1"># R95p: total from very wet days (&gt; 95th percentile of wet-day amounts)</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-ge<span class="w"> </span>-selvar,pr<span class="w"> </span>daily_precip.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-timselpctl,95<span class="w"> </span>daily_precip.nc<span class="w"> </span>-timmin<span class="w"> </span>daily_precip.nc<span class="w"> </span>-timmax<span class="w"> </span>daily_precip.nc<span class="w"> </span>r95p.nc
+</pre></div>
+</div>
+</section>
+<section id="wet-day-percentile-threshold-r95p-approach">
+<h3>10.3.5 Wet Day Percentile Threshold (R95p approach)<a class="headerlink" href="#wet-day-percentile-threshold-r95p-approach" title="Link to this heading">#</a></h3>
+<p>The recommended approach uses the 95th percentile of wet-day (PR &gt;= 1mm) precipitation amounts from the reference period:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract wet days from reference period</span>
+cdo<span class="w"> </span>gec,1<span class="w"> </span>-selyear,1961/1990<span class="w"> </span>daily_precip.nc<span class="w"> </span>wet_ref.nc
+
+<span class="c1"># Compute 95th percentile threshold</span>
+cdo<span class="w"> </span>timpctl,95<span class="w"> </span>wet_ref.nc<span class="w"> </span>-timmin<span class="w"> </span>wet_ref.nc<span class="w"> </span>-timmax<span class="w"> </span>wet_ref.nc<span class="w"> </span>r95p_thresh.nc
+
+<span class="c1"># Apply to full period</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-ge<span class="w"> </span>daily_precip.nc<span class="w"> </span>r95p_thresh.nc<span class="w"> </span>annual_r95p.nc
+</pre></div>
+</div>
+<div class="exercise admonition" id="ex-climate_indices-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 97 </span></p>
+<section id="exercise-content">
+<p>Compute R95p (total precipitation from very wet days) for the period 1991-2020, using 1961-1990 as the reference period. Compare with PRCPTOT.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/climate_indices-solution-5">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-climate_indices-3"> Exercise 97</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reference period threshold</span>
+cdo<span class="w"> </span>timpctl,95<span class="w"> </span>-gec,1<span class="w"> </span>-selyear,1961/1990<span class="w"> </span>daily_precip.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-timmin<span class="w"> </span>-gec,1<span class="w"> </span>-selyear,1961/1990<span class="w"> </span>daily_precip.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-timmax<span class="w"> </span>-gec,1<span class="w"> </span>-selyear,1961/1990<span class="w"> </span>daily_precip.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>r95p_thresh.nc
+
+<span class="c1"># Annual values</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-ge<span class="w"> </span>daily_precip.nc<span class="w"> </span>r95p_thresh.nc<span class="w"> </span>r95p_annual.nc
+
+<span class="c1"># Fraction of total</span>
+cdo<span class="w"> </span>div<span class="w"> </span>r95p_annual.nc<span class="w"> </span>-yearsum<span class="w"> </span>daily_precip.nc<span class="w"> </span>r95p_fraction.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>r95p_fraction.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+</section>
+<section id="computation-approaches">
+<h2>10.4 Computation Approaches<a class="headerlink" href="#computation-approaches" title="Link to this heading">#</a></h2>
+<section id="using-cdo-operators-directly">
+<h3>10.4.1 Using CDO Operators Directly<a class="headerlink" href="#using-cdo-operators-directly" title="Link to this heading">#</a></h3>
+<p>Many indices can be computed with a single CDO pipeline:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearsum<span class="w"> </span>-ltc,0<span class="w"> </span>-selname,tn<span class="w"> </span>daily.nc<span class="w"> </span>frost_days.nc
+</pre></div>
+</div>
+</section>
+<section id="using-cdo-expr-for-complex-expressions">
+<h3>10.4.2 Using <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">expr</span></code> for Complex Expressions<a class="headerlink" href="#using-cdo-expr-for-complex-expressions" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">expr</span></code> operator allows arbitrary arithmetic expressions from CDO’s internal function library:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>expr,<span class="s2">&quot;frost_days = TN &lt; 0 ? 1 : 0&quot;</span><span class="w"> </span>daily.nc<span class="w"> </span>frost_days_mask.nc
+</pre></div>
+</div>
+<p>More complex:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>expr,<span class="s2">&quot;heatwave = (TX &gt; (tx90pth + 5)) ? 1 : 0&quot;</span><span class="w"> </span>daily.nc<span class="w"> </span>hw_mask.nc
+</pre></div>
+</div>
+</section>
+<section id="compound-expressions">
+<h3>10.4.3 Compound Expressions<a class="headerlink" href="#compound-expressions" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>expr,<span class="s2">&quot;su25 = TX &gt; 25; tr20 = TN &gt; 20; heatday = (TX &gt; 35 &amp;&amp; TN &gt; 20) ? 1 : 0&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>combined.nc<span class="w"> </span>heat_metrics.nc
+</pre></div>
+</div>
+</section>
+<section id="chaining-for-complex-indices-complete-wsdi-example">
+<h3>10.4.4 Chaining for Complex Indices: Complete WSDI Example<a class="headerlink" href="#chaining-for-complex-indices-complete-wsdi-example" title="Link to this heading">#</a></h3>
+<p>Warm spell duration index (WSDI):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1: Compute daily TX 90th percentile for a 5-day window</span>
+cdo<span class="w"> </span>ydaypctl,90<span class="w"> </span>tx.nc<span class="w"> </span>-ydaymin<span class="w"> </span>tx.nc<span class="w"> </span>-ydaymax<span class="w"> </span>tx.nc<span class="w"> </span>tx90.nc
+
+<span class="c1"># Step 2: Identify days exceeding the threshold</span>
+cdo<span class="w"> </span>ge<span class="w"> </span>tx.nc<span class="w"> </span>tx90.nc<span class="w"> </span>exceed.nc
+
+<span class="c1"># Step 3: Find spells of at least 6 consecutive days</span>
+cdo<span class="w"> </span>runsum,6<span class="w"> </span>exceed.nc<span class="w"> </span>wsdi_spells.nc
+
+<span class="c1"># Step 4: Mask days that are part of a warm spell</span>
+cdo<span class="w"> </span>gec,1<span class="w"> </span>wsdi_spells.nc<span class="w"> </span>warm_spell_days.nc
+
+<span class="c1"># Step 5: Sum per year</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>warm_spell_days.nc<span class="w"> </span>wsdi_yearly.nc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The WSDI counts the total number of days per year that are part of warm spells (≥6 consecutive days with TX &gt; 90th percentile).</p>
+</div>
+</section>
+<section id="scripting-for-complex-logic">
+<h3>10.4.5 Scripting for Complex Logic<a class="headerlink" href="#scripting-for-complex-logic" title="Link to this heading">#</a></h3>
+<p>Some indices require logic that is difficult to express purely in CDO. A hybrid bash+CDO approach:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Example: compute heatwave days per year</span>
+<span class="k">for</span><span class="w"> </span>year<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1990</span><span class="w"> </span><span class="m">2020</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span>cdo<span class="w"> </span>selyear,<span class="nv">$year</span><span class="w"> </span>daily_tx.nc<span class="w"> </span><span class="s2">&quot;tx_</span><span class="nv">$year</span><span class="s2">.nc&quot;</span>
+<span class="w">  </span>cdo<span class="w"> </span>timsum<span class="w"> </span>-ge<span class="w"> </span>tx_<span class="nv">$year</span>.nc<span class="w"> </span>-addc,5<span class="w"> </span>-ydaymean<span class="w"> </span>tx_<span class="nv">$year</span>.nc<span class="w"> </span><span class="s2">&quot;hw_</span><span class="nv">$year</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+cdo<span class="w"> </span>ensmean<span class="w"> </span>hw_*.nc<span class="w"> </span>mean_heatwave.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="seasonal-and-annual-aggregation">
+<h2>10.5 Seasonal and Annual Aggregation<a class="headerlink" href="#seasonal-and-annual-aggregation" title="Link to this heading">#</a></h2>
+<section id="annual-aggregation">
+<h3>10.5.1 Annual Aggregation<a class="headerlink" href="#annual-aggregation" title="Link to this heading">#</a></h3>
+<p>Most extreme indices are reported as annual values:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearsum<span class="w"> </span>-ltc,0<span class="w"> </span>tn.nc<span class="w"> </span>fd_annual.nc<span class="w">           </span><span class="c1"># frost days per year</span>
+cdo<span class="w"> </span>yearmax<span class="w"> </span>-runsum,5<span class="w"> </span>pr.nc<span class="w"> </span>rx5day_annual.nc<span class="w">     </span><span class="c1"># max 5-day precip per year</span>
+cdo<span class="w"> </span>yearmean<span class="w"> </span>-selhour,12<span class="w"> </span>temperature.nc<span class="w"> </span>noon_temp.nc<span class="w">  </span><span class="c1"># mean noon temperature</span>
+</pre></div>
+</div>
+</section>
+<section id="seasonal-aggregation">
+<h3>10.5.2 Seasonal Aggregation<a class="headerlink" href="#seasonal-aggregation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seasonal frost days</span>
+cdo<span class="w"> </span>seasum<span class="w"> </span>-ltc,0<span class="w"> </span>tn.nc<span class="w"> </span>fd_seasonal.nc
+
+<span class="c1"># Seasonal heaviest 5-day precipitation</span>
+cdo<span class="w"> </span>seasmax<span class="w"> </span>-runsum,5<span class="w"> </span>pr.nc<span class="w"> </span>rx5day_seasonal.nc
+</pre></div>
+</div>
+</section>
+<section id="multi-decadal-trends">
+<h3>10.5.3 Multi-Decadal Trends<a class="headerlink" href="#multi-decadal-trends" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Trend in annual frost days</span>
+cdo<span class="w"> </span>trend<span class="w"> </span>fd_annual.nc<span class="w"> </span>intercept.nc<span class="w"> </span>slope.nc
+cdo<span class="w"> </span>mulc,10<span class="w"> </span>slope.nc<span class="w"> </span>fd_trend_per_decade.nc
+
+<span class="c1"># Significance test (simple t-statistic)</span>
+cdo<span class="w"> </span>timstd<span class="w"> </span>fd_annual.nc<span class="w"> </span>variability.nc
+cdo<span class="w"> </span>div<span class="w"> </span>slope.nc<span class="w"> </span>variability.nc<span class="w"> </span>t_stat.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="practical-workflow-examples">
+<h2>10.6 Practical Workflow Examples<a class="headerlink" href="#practical-workflow-examples" title="Link to this heading">#</a></h2>
+<section id="complete-etccdi-analysis-workflow">
+<h3>10.6.1 Complete ETCCDI Analysis Workflow<a class="headerlink" href="#complete-etccdi-analysis-workflow" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Compute key ETCCDI indices from daily data</span>
+
+<span class="c1"># Temperature indices</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-ltc,0<span class="w"> </span>tn.nc<span class="w"> </span>fd.nc
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gtc,25<span class="w"> </span>tx.nc<span class="w"> </span>su.nc
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gtc,20<span class="w"> </span>tn.nc<span class="w"> </span>tr.nc
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-ltc,0<span class="w"> </span>tx.nc<span class="w"> </span>id.nc
+cdo<span class="w"> </span>monmax<span class="w"> </span>tx.nc<span class="w"> </span>txx.nc
+cdo<span class="w"> </span>monmin<span class="w"> </span>tn.nc<span class="w"> </span>tnn.nc
+
+<span class="c1"># Precipitation indices</span>
+cdo<span class="w"> </span>yearmax<span class="w"> </span>pr.nc<span class="w"> </span>rx1day.nc
+cdo<span class="w"> </span>yearmax<span class="w"> </span>-runsum,5<span class="w"> </span>pr.nc<span class="w"> </span>rx5day.nc
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gec,10<span class="w"> </span>pr.nc<span class="w"> </span>r10mm.nc
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gec,20<span class="w"> </span>pr.nc<span class="w"> </span>r20mm.nc
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gec,1<span class="w"> </span>pr.nc<span class="w"> </span>prcptot.nc
+cdo<span class="w"> </span>div<span class="w"> </span>-monsum<span class="w"> </span>-gec,1<span class="w"> </span>pr.nc<span class="w"> </span>-monsum<span class="w"> </span>-gec,1<span class="w"> </span>pr.nc<span class="w"> </span>sdii.nc
+
+<span class="c1"># Consecutive indices</span>
+cdo<span class="w"> </span>yearmax<span class="w"> </span>-runsum,365<span class="w"> </span>-ltc,1<span class="w"> </span>pr.nc<span class="w"> </span>cdd.nc
+cdo<span class="w"> </span>yearmax<span class="w"> </span>-runsum,365<span class="w"> </span>-gec,1<span class="w"> </span>pr.nc<span class="w"> </span>cwd.nc
+</pre></div>
+</div>
+</section>
+<section id="regional-extreme-analysis">
+<h3>10.6.2 Regional Extreme Analysis<a class="headerlink" href="#regional-extreme-analysis" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Subset to region, then compute index</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-ltc,0<span class="w"> </span>-sellonlatbox,-10,40,30,70<span class="w"> </span>tn.nc<span class="w"> </span>europe_fd.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>europe_fd.nc
+</pre></div>
+</div>
+</section>
+<section id="comparing-indices-across-datasets">
+<h3>10.6.3 Comparing Indices Across Datasets<a class="headerlink" href="#comparing-indices-across-datasets" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sub<span class="w"> </span>observed_fd.nc<span class="w"> </span>modeled_fd.nc<span class="w"> </span>fd_bias.nc
+cdo<span class="w"> </span>fldmean<span class="w"> </span>-abs<span class="w"> </span>fd_bias.nc<span class="w"> </span>mean_abs_bias.nc
+cdo<span class="w"> </span>output<span class="w"> </span>mean_abs_bias.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="hands-on-exercises">
+<h2>10.7 Hands-On Exercises<a class="headerlink" href="#hands-on-exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-10-1-frost-days-analysis">
+<h3>Exercise 10.1: Frost Days Analysis<a class="headerlink" href="#exercise-10-1-frost-days-analysis" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-climate_indices-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 98 </span></p>
+<section id="exercise-content">
+<ol class="arabic simple">
+<li><p>From 30 years of daily minimum temperature data, compute annual frost days (TN &lt; 0°C)</p></li>
+<li><p>Compute the linear trend in frost days</p></li>
+<li><p>Determine at which grid points the trend is statistically significant (p &lt; 0.05)</p></li>
+</ol>
+</section>
+</div>
+<div class="solution admonition" id="book/climate_indices-solution-7">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-climate_indices-4"> Exercise 98</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearsum<span class="w"> </span>-ltc,0<span class="w"> </span>daily_tmin.nc<span class="w"> </span>frost_days.nc
+cdo<span class="w"> </span>trend<span class="w"> </span>frost_days.nc<span class="w"> </span>intercept.nc<span class="w"> </span>slope.nc
+cdo<span class="w"> </span>timstd<span class="w"> </span>frost_days.nc<span class="w"> </span>interannual_std.nc
+<span class="c1"># Simple t-test: |slope| / std &gt; 2 ~ p &lt; 0.05 (approximate)</span>
+cdo<span class="w"> </span>gtc,2<span class="w"> </span>-div<span class="w"> </span>-abs<span class="w"> </span>slope.nc<span class="w"> </span>interannual_std.nc<span class="w"> </span>significant.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-fldsum<span class="w"> </span>significant.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-10-2-growing-season-length">
+<h3>Exercise 10.2: Growing Season Length<a class="headerlink" href="#exercise-10-2-growing-season-length" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-climate_indices-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 99 </span></p>
+<section id="exercise-content">
+<p>Compute the annual growing season length using the simplified approach (count of days with TG &gt; 5°C). Compare the GSL for 1970-1989 vs 2000-2019. Has the growing season lengthened?</p>
+</section>
+</div>
+<div class="solution admonition" id="book/climate_indices-solution-9">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-climate_indices-5"> Exercise 99</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>selyear,1970/1989<span class="w"> </span>daily_tmean.nc<span class="w"> </span>early_period.nc
+cdo<span class="w"> </span>selyear,2000/2019<span class="w"> </span>daily_tmean.nc<span class="w"> </span>late_period.nc
+
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gtc,5<span class="w"> </span>early_period.nc<span class="w"> </span>gsl_early.nc
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-gtc,5<span class="w"> </span>late_period.nc<span class="w"> </span>gsl_late.nc
+
+cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>gsl_early.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>gsl_late.nc
+
+cdo<span class="w"> </span>sub<span class="w"> </span>-fldmean<span class="w"> </span>gsl_late.nc<span class="w"> </span>-fldmean<span class="w"> </span>gsl_early.nc<span class="w"> </span>diff.nc
+cdo<span class="w"> </span>output<span class="w"> </span>diff.nc
+</pre></div>
+</div>
+<p>A positive difference indicates the growing season has lengthened in the later period.</p>
+</section>
+</div>
+</section>
+<section id="exercise-10-3-consecutive-dry-days">
+<h3>Exercise 10.3: Consecutive Dry Days<a class="headerlink" href="#exercise-10-3-consecutive-dry-days" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-climate_indices-6">
+
+<p class="admonition-title"><span class="caption-number">Exercise 100 </span></p>
+<section id="exercise-content">
+<p>Using 30 years of daily precipitation data:</p>
+<ol class="arabic simple">
+<li><p>Compute CDD (max consecutive dry days, PR &lt; 1mm) for each year</p></li>
+<li><p>Identify the year with the longest CDD in the record</p></li>
+<li><p>Map the spatial pattern of the mean CDD</p></li>
+</ol>
+</section>
+</div>
+<div class="solution admonition" id="book/climate_indices-solution-11">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-climate_indices-6"> Exercise 100</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearmax<span class="w"> </span>-runsum,365<span class="w"> </span>-ltc,1<span class="w"> </span>daily_precip.nc<span class="w"> </span>cdd_annual.nc
+
+<span class="c1"># Find year with maximum</span>
+cdo<span class="w"> </span>timmax<span class="w"> </span>cdd_annual.nc<span class="w"> </span>max_cdd.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>max_cdd.nc
+
+<span class="c1"># Mean CDD</span>
+cdo<span class="w"> </span>timmean<span class="w"> </span>cdd_annual.nc<span class="w"> </span>mean_cdd.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-10-4-heatwave-index-wsdi">
+<h3>Exercise 10.4: Heatwave Index (WSDI)<a class="headerlink" href="#exercise-10-4-heatwave-index-wsdi" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-climate_indices-7">
+
+<p class="admonition-title"><span class="caption-number">Exercise 101 </span></p>
+<section id="exercise-content">
+<p>Compute the Warm Spell Duration Index (WSDI) — the annual count of days that are part of warm spells lasting at least 6 consecutive days with TX &gt; 90th percentile.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/climate_indices-solution-13">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-climate_indices-7"> Exercise 101</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 90th percentile threshold</span>
+cdo<span class="w"> </span>ydaypctl,90<span class="w"> </span>daily_tmax.nc<span class="w"> </span>-ydaymin<span class="w"> </span>daily_tmax.nc<span class="w"> </span>-ydaymax<span class="w"> </span>daily_tmax.nc<span class="w"> </span>tx90.nc
+
+<span class="c1"># Exceedances</span>
+cdo<span class="w"> </span>ge<span class="w"> </span>daily_tmax.nc<span class="w"> </span>tx90.nc<span class="w"> </span>exceed.nc
+
+<span class="c1"># Spells of 6+ days</span>
+cdo<span class="w"> </span>runsum,6<span class="w"> </span>exceed.nc<span class="w"> </span>spells.nc
+cdo<span class="w"> </span>gec,1<span class="w"> </span>spells.nc<span class="w"> </span>warm_spell_days.nc
+
+<span class="c1"># Annual count</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>warm_spell_days.nc<span class="w"> </span>wsdi_annual.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-10-5-precipitation-intensity-index">
+<h3>Exercise 10.5: Precipitation Intensity Index<a class="headerlink" href="#exercise-10-5-precipitation-intensity-index" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-climate_indices-8">
+
+<p class="admonition-title"><span class="caption-number">Exercise 102 </span></p>
+<section id="exercise-content">
+<p>Compute SDII (Simple Daily Intensity Index) for each month: the total precipitation on wet days divided by the number of wet days. Analyze the seasonal cycle of precipitation intensity.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/climate_indices-solution-15">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-climate_indices-8"> Exercise 102</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Total precipitation on wet days</span>
+cdo<span class="w"> </span>monsum<span class="w"> </span>-gec,1<span class="w"> </span>daily_precip.nc<span class="w"> </span>wet_total.nc
+
+<span class="c1"># Count of wet days</span>
+cdo<span class="w"> </span>monsum<span class="w"> </span>-gec,1<span class="w"> </span>daily_precip.nc<span class="w"> </span>wet_count.nc
+
+<span class="c1"># SDII</span>
+cdo<span class="w"> </span>div<span class="w"> </span>wet_total.nc<span class="w"> </span>wet_count.nc<span class="w"> </span>sdii_monthly.nc
+
+<span class="c1"># Climatology</span>
+cdo<span class="w"> </span>ymonmean<span class="w"> </span>sdii_monthly.nc<span class="w"> </span>sdii_clim.nc
+cdo<span class="w"> </span>output<span class="w"> </span>sdii_clim.nc
+</pre></div>
+</div>
+<p>SDII is typically highest in summer for many regions (convective precipitation) and lowest in winter (stratiform precipitation).</p>
+</section>
+</div>
+</section>
+</section>
+<section id="quiz">
+<h2>10.8 Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<div class="exercise admonition" id="q-climate_indices-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 103 </span> (Question 1)</p>
+<section id="exercise-content">
+<p>What defines a “frost day” in climate indices?</p>
+<p>a) Maximum temperature below 0°C
+b) Minimum temperature below 0°C
+c) Mean temperature below 0°C
+d) All temperatures below 0°C for 24 consecutive hours</p>
+</section>
+</div>
+<div class="solution admonition" id="book/climate_indices-solution-17">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-climate_indices-1"> Exercise 103 (Question 1)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. A frost day (FD) is defined as a day when the daily minimum temperature (TN) is below 0°C. Ice days (ID) use maximum temperature below 0°C.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-climate_indices-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 104 </span> (Question 2)</p>
+<section id="exercise-content">
+<p>What does CDD measure in the ETCCDI precipitation indices?</p>
+<p>a) Cooling Degree Days
+b) Consecutive Dry Days
+c) Cumulative Drought Duration
+d) Climate Dryness Diagnostic</p>
+</section>
+</div>
+<div class="solution admonition" id="book/climate_indices-solution-19">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-climate_indices-2"> Exercise 104 (Question 2)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. CDD is the Consecutive Dry Days index — the maximum number of consecutive days with precipitation less than 1mm. It is a key drought indicator.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-climate_indices-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 105 </span> (Question 3)</p>
+<section id="exercise-content">
+<p>To compute WSDI (Warm Spell Duration Index), which sequence of CDO operators is required?</p>
+<p>a) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">yearsum</span> <span class="pre">-gtc,0</span> <span class="pre">daily_tmax.nc</span></code>
+b) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">yearsum</span> <span class="pre">-runsum,6</span> <span class="pre">-ge</span> <span class="pre">-ydaypctl,90</span> <span class="pre">daily_tmax.nc</span></code>
+c) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">yearmax</span> <span class="pre">-runsum,5</span> <span class="pre">daily_precip.nc</span></code>
+d) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">seasmean</span> <span class="pre">daily_tmax.nc</span></code></p>
+</section>
+</div>
+<div class="solution admonition" id="book/climate_indices-solution-21">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-climate_indices-3"> Exercise 105 (Question 3)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. WSDI requires: (1) computing the 90th percentile threshold, (2) identifying exceedances, (3) finding consecutive runs of 6+ days with <code class="docutils literal notranslate"><span class="pre">runsum,6</span></code>, and (4) summing per year. The full pipeline is: <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">yearsum</span> <span class="pre">-gec,1</span> <span class="pre">-runsum,6</span> <span class="pre">-ge</span> <span class="pre">daily_tmax.nc</span> <span class="pre">-ydaypctl,90</span> <span class="pre">daily_tmax.nc</span></code>.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-climate_indices-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 106 </span> (Question 4)</p>
+<section id="exercise-content">
+<p>What is the SDII (Simple Daily Intensity Index)?</p>
+<p>a) The maximum precipitation in one day
+b) The standard deviation of daily precipitation intensity
+c) The mean precipitation amount on wet days (PR &gt;= 1mm)
+d) The number of days with precipitation exceeding 10mm</p>
+</section>
+</div>
+<div class="solution admonition" id="book/climate_indices-solution-23">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-climate_indices-4"> Exercise 106 (Question 4)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>c</strong>. SDII is total precipitation on wet days divided by the number of wet days. It measures the average intensity of precipitation events.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-climate_indices-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 107 </span> (Question 5)</p>
+<section id="exercise-content">
+<p>Which of the following is NOT a standard ETCCDI extreme index?</p>
+<p>a) GSL — Growing Season Length
+b) R95p — Very wet days precipitation total
+c) MEI — Multivariate ENSO Index
+d) TXx — Monthly maximum daily maximum temperature</p>
+</section>
+</div>
+<div class="solution admonition" id="book/climate_indices-solution-25">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-climate_indices-5"> Exercise 107 (Question 5)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>c</strong>. The Multivariate ENSO Index (MEI) is a climate variability index, not an ETCCDI extreme index. GSL, R95p, and TXx are all standard ETCCDI indices.</p>
+</section>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this module, you learned to compute a comprehensive set of climate extreme indices using CDO:</p>
+<ul class="simple">
+<li><p><strong>Temperature indices</strong>: Frost days (FD), ice days (ID), tropical nights (TR), summer days (SU), growing season length (GSL), heatwave indices, cold spell indices</p></li>
+<li><p><strong>Precipitation indices</strong>: CDD, CWD, Rx1day, Rx5day, SDII, R10mm, R20mm, PRCPTOT, R95p, R99p</p></li>
+<li><p><strong>ETCCDI indices</strong>: 27 core climate change detection indices covering temperature and precipitation extremes</p></li>
+<li><p><strong>Computation approaches</strong>: Direct CDO operators, <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">expr</span></code> for complex expressions, hybrid bash+CDO workflows</p></li>
+<li><p><strong>Aggregation</strong>: Annual and seasonal summaries of extreme event frequencies</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Climate indices distill complex climate data into actionable information. A single index value like FD or CDD can summarize an entire year of daily data. When publishing results, always state the reference period and thresholds used. The ETCCDI indices are widely accepted and facilitate cross-study comparisons.</p>
+</div>
+<p>Proceed to Module 11 to learn about advanced workflows and automation for climate data processing.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="statistics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Module 9: Statistical Operators</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="workflows.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Module 11: Advanced Workflows and Automation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-indices">10.1 Temperature Indices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-anomalies">10.1.1 Temperature Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frost-days-fd">10.1.2 Frost Days (FD)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-days-id">10.1.3 Ice Days (ID)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tropical-nights-tr">10.1.4 Tropical Nights (TR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summer-days-su">10.1.5 Summer Days (SU)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#growing-season-length-gsl">10.1.6 Growing Season Length (GSL)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heatwave-duration-index-hwdi">10.1.7 Heatwave Duration Index (HWDI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cold-spell-duration-index-csdi">10.1.8 Cold Spell Duration Index (CSDI)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precipitation-indices">10.2 Precipitation Indices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rainfall-anomalies">10.2.1 Rainfall Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consecutive-dry-days-cdd">10.2.2 Consecutive Dry Days (CDD)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consecutive-wet-days-cwd">10.2.3 Consecutive Wet Days (CWD)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#very-heavy-precipitation-days">10.2.4 Very Heavy Precipitation Days</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-1-day-precipitation-rx1day">10.2.5 Maximum 1-Day Precipitation (Rx1day)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-5-day-precipitation-rx5day">10.2.6 Maximum 5-Day Precipitation (Rx5day)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-daily-intensity-index-sdii">10.2.7 Simple Daily Intensity Index (SDII)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precipitation-fraction-above-thresholds">10.2.8 Precipitation Fraction Above Thresholds</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#etccdi-climate-change-detection-indices">10.3 ETCCDI Climate Change Detection Indices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-based-etccdi-indices">10.3.1 Temperature-Based ETCCDI Indices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-percentile-indices">10.3.2 Temperature Percentile Indices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precipitation-based-etccdi-indices">10.3.3 Precipitation-Based ETCCDI Indices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prcptot-and-r95p">10.3.4 PRCPTOT and R95p</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wet-day-percentile-threshold-r95p-approach">10.3.5 Wet Day Percentile Threshold (R95p approach)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-approaches">10.4 Computation Approaches</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-cdo-operators-directly">10.4.1 Using CDO Operators Directly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-cdo-expr-for-complex-expressions">10.4.2 Using <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">expr</span></code> for Complex Expressions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-expressions">10.4.3 Compound Expressions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chaining-for-complex-indices-complete-wsdi-example">10.4.4 Chaining for Complex Indices: Complete WSDI Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripting-for-complex-logic">10.4.5 Scripting for Complex Logic</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-and-annual-aggregation">10.5 Seasonal and Annual Aggregation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#annual-aggregation">10.5.1 Annual Aggregation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-aggregation">10.5.2 Seasonal Aggregation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-decadal-trends">10.5.3 Multi-Decadal Trends</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflow-examples">10.6 Practical Workflow Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-etccdi-analysis-workflow">10.6.1 Complete ETCCDI Analysis Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regional-extreme-analysis">10.6.2 Regional Extreme Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-indices-across-datasets">10.6.3 Comparing Indices Across Datasets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">10.7 Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-1-frost-days-analysis">Exercise 10.1: Frost Days Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-2-growing-season-length">Exercise 10.2: Growing Season Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-3-consecutive-dry-days">Exercise 10.3: Consecutive Dry Days</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-4-heatwave-index-wsdi">Exercise 10.4: Heatwave Index (WSDI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-5-precipitation-intensity-index">Exercise 10.5: Precipitation Intensity Index</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">10.8 Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

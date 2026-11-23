@@ -1,0 +1,1661 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Module 7: Temporal Operators &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/temporal';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 8: Spatial Operators" href="spatial.html" />
+    <link rel="prev" title="Module 6: Working with GRIB Data" href="grib.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./book/temporal.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fbook/temporal.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/temporal.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 7: Temporal Operators</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-time-dimensions-in-climate-data">7.1 Understanding Time Dimensions in Climate Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-time-information">7.1.1 Inspecting Time Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-coordinate-systems">7.1.2 Time Coordinate Systems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-statistics">7.2 Temporal Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-means">7.2.1 Daily Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monthly-means">7.2.2 Monthly Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-means">7.2.3 Seasonal Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#annual-means">7.2.4 Annual Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-aggregation-operators-table">7.2.5 Time Aggregation Operators Table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-windowed-operations">7.3 Running/Windowed Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-means">7.3.1 Running Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-running-operators">7.3.2 Other Running Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-window-edges">7.3.3 Handling Window Edges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-window-example-with-precipitation">7.3.4 Running Window Example with Precipitation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#climatology">7.4 Climatology</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-climatology">7.4.1 Daily Climatology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monthly-climatology">7.4.2 Monthly Climatology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-climatology">7.4.3 Seasonal Climatology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-climatology-operators">7.4.4 Additional Climatology Operators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anomalies">7.5 Anomalies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-anomalies-with-cdo-sub">7.5.1 Computing Anomalies with <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">sub</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-anomalies">7.5.2 Daily Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monthly-anomalies">7.5.3 Monthly Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-anomalies">7.5.4 Seasonal Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardized-anomalies">7.5.5 Standardized Anomalies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-time-steps">7.6 Selecting Time Steps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-by-date">7.6.1 Selecting by Date</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-by-time">7.6.2 Selecting by Time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-by-timestep-index">7.6.3 Selecting by Timestep Index</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-by-hour-month-season">7.6.4 Selecting by Hour, Month, Season</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-time-ranges-in-pipes">7.6.5 Working with Time Ranges in Pipes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-operations">7.7 Time Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-time">7.7.1 Setting Time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shifting-time-axis">7.7.2 Shifting Time Axis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-time-steps">7.7.3 Deleting Time Steps</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflow-examples">7.8 Practical Workflow Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-hourly-to-seasonal-means">7.8.1 From Hourly to Seasonal Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-year-monthly-climatology-and-anomalies">7.8.2 Multi-Year Monthly Climatology and Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identifying-extreme-months">7.8.3 Identifying Extreme Months</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-cycle-removal">7.8.4 Seasonal Cycle Removal</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">7.9 Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-1-monthly-means-from-daily-data">Exercise 7.1: Monthly Means from Daily Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-2-anomaly-calculation">Exercise 7.2: Anomaly Calculation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-3-running-means">Exercise 7.3: Running Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-4-seasonal-extraction-and-statistics">Exercise 7.4: Seasonal Extraction and Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-5-custom-aggregation-pipeline">Exercise 7.5: Custom Aggregation Pipeline</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">7.10 Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-7-temporal-operators">
+<h1>Module 7: Temporal Operators<a class="headerlink" href="#module-7-temporal-operators" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After completing this module, you will be able to:</p>
+<ul class="simple">
+<li><p>Understand how CDO handles time dimensions in NetCDF and GRIB files</p></li>
+<li><p>Compute daily, monthly, seasonal, and annual means from high-frequency data</p></li>
+<li><p>Apply running/windowed operations for time series smoothing</p></li>
+<li><p>Calculate climatologies and anomalies</p></li>
+<li><p>Select specific time steps, dates, and seasons from datasets</p></li>
+<li><p>Manipulate time axes with set and shift operations</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<p>Before starting this module, you should have completed Modules 1-6 or be familiar with basic CDO commands, file operations, and NetCDF data structure.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All examples in this module assume you have CDO installed and a sample NetCDF file named <code class="docutils literal notranslate"><span class="pre">temperature.nc</span></code> with at least one year of daily data. You can use the file created in previous modules or download a sample from the course data repository.</p>
+</div>
+<figure class="align-default" id="fig-global-timeseries">
+<img alt="../_images/fig_global_timeseries.png" src="../_images/fig_global_timeseries.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Global mean monthly temperature derived with CDO-style area weighting from the real NCEP/DOE Reanalysis-2 sample (<code class="docutils literal notranslate"><span class="pre">datasets/tas_sample.nc</span></code>).</span><a class="headerlink" href="#fig-global-timeseries" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="understanding-time-dimensions-in-climate-data">
+<h2>7.1 Understanding Time Dimensions in Climate Data<a class="headerlink" href="#understanding-time-dimensions-in-climate-data" title="Link to this heading">#</a></h2>
+<p>Climate data files typically contain a time dimension that records when each observation or model output was produced. CDO recognizes several time units including:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">days</span> <span class="pre">since</span> <span class="pre">...</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hours</span> <span class="pre">since</span> <span class="pre">...</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">minutes</span> <span class="pre">since</span> <span class="pre">...</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seconds</span> <span class="pre">since</span> <span class="pre">...</span></code></p></li>
+</ul>
+<section id="inspecting-time-information">
+<h3>7.1.1 Inspecting Time Information<a class="headerlink" href="#inspecting-time-information" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">showtime</span></code> to display all time steps:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>showtime<span class="w"> </span>temperature.nc
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">ntime</span></code> to count the number of time steps:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ntime<span class="w"> </span>temperature.nc
+cdo<span class="w"> </span>nyear<span class="w"> </span>temperature.nc
+cdo<span class="w"> </span>nmon<span class="w"> </span>temperature.nc
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Always inspect your time axis first. Many temporal operators fail silently if the time dimension is missing or has unexpected units.</p>
+</div>
+</section>
+<section id="time-coordinate-systems">
+<h3>7.1.2 Time Coordinate Systems<a class="headerlink" href="#time-coordinate-systems" title="Link to this heading">#</a></h3>
+<p>CDO can work with several calendar types found in climate data:</p>
+<ul class="simple">
+<li><p><strong>standard</strong> (proleptic Gregorian)</p></li>
+<li><p><strong>360_day</strong> (all months have 30 days)</p></li>
+<li><p><strong>365_day</strong> (no leap years)</p></li>
+<li><p><strong>noleap</strong> (same as 365_day)</p></li>
+</ul>
+<p>Use <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">showcalendar</span></code> to check:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>showcalendar<span class="w"> </span>temperature.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Some operators behave differently with 360_day calendars. Always verify your calendar type when computing monthly or seasonal means.</p>
+</div>
+</section>
+</section>
+<section id="temporal-statistics">
+<h2>7.2 Temporal Statistics<a class="headerlink" href="#temporal-statistics" title="Link to this heading">#</a></h2>
+<p>Temporal operators aggregate data along the time dimension by grouping time steps into bins.</p>
+<section id="daily-means">
+<h3>7.2.1 Daily Means<a class="headerlink" href="#daily-means" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>daymean<span class="w"> </span>temperature.nc<span class="w"> </span>daymean.nc
+cdo<span class="w"> </span>dayavg<span class="w"> </span>temperature.nc<span class="w"> </span>dayavg.nc
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">daymean</span></code> and <code class="docutils literal notranslate"><span class="pre">dayavg</span></code> operators are functionally identical — both compute the mean of all time steps that fall within each day.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">daymean</span></code> requires that your input data has sub-daily timesteps (e.g., hourly or 6-hourly). If your data is already daily, the operator passes through the values unchanged.</p>
+</div>
+</section>
+<section id="monthly-means">
+<h3>7.2.2 Monthly Means<a class="headerlink" href="#monthly-means" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>monmean<span class="w"> </span>temperature.nc<span class="w"> </span>monmean.nc
+cdo<span class="w"> </span>monavg<span class="w"> </span>temperature.nc<span class="w"> </span>monavg.nc
+</pre></div>
+</div>
+<p>Example: Computing monthly means from hourly data:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>monmean<span class="w"> </span>hourly_temperature.nc<span class="w"> </span>monthly_means.nc
+</pre></div>
+</div>
+<div class="exercise admonition" id="ex-temporal-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 55 </span></p>
+<section id="exercise-content">
+<p>Compute monthly minimum and maximum temperatures from daily data using <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">monmin</span></code> and <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">monmax</span></code>.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/temporal-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-temporal-1"> Exercise 55</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>monmin<span class="w"> </span>daily_temperature.nc<span class="w"> </span>monthly_min.nc
+cdo<span class="w"> </span>monmax<span class="w"> </span>daily_temperature.nc<span class="w"> </span>monthly_max.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="seasonal-means">
+<h3>7.2.3 Seasonal Means<a class="headerlink" href="#seasonal-means" title="Link to this heading">#</a></h3>
+<p>Seasons in CDO are defined as standard 3-month periods:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Season</p></th>
+<th class="head"><p>Months</p></th>
+<th class="head"><p>CDO Code</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DJF</p></td>
+<td><p>Dec, Jan, Feb</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>MAM</p></td>
+<td><p>Mar, Apr, May</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>JJA</p></td>
+<td><p>Jun, Jul, Aug</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>SON</p></td>
+<td><p>Sep, Oct, Nov</p></td>
+<td><p>4</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>seasmean<span class="w"> </span>temperature.nc<span class="w"> </span>seasonal_mean.nc
+cdo<span class="w"> </span>seasavg<span class="w"> </span>temperature.nc<span class="w"> </span>seasonal_avg.nc
+</pre></div>
+</div>
+<p>To select a specific season:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>selseas,1<span class="w"> </span>temperature.nc<span class="w"> </span>djf.nc<span class="w">   </span><span class="c1"># DJF only</span>
+cdo<span class="w"> </span>selseas,2<span class="w"> </span>temperature.nc<span class="w"> </span>mam.nc<span class="w">   </span><span class="c1"># MAM only</span>
+cdo<span class="w"> </span>selseas,3<span class="w"> </span>temperature.nc<span class="w"> </span>jja.nc<span class="w">   </span><span class="c1"># JJA only</span>
+cdo<span class="w"> </span>selseas,4<span class="w"> </span>temperature.nc<span class="w"> </span>son.nc<span class="w">   </span><span class="c1"># SON only</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When computing seasonal means from monthly data, CDO correctly averages the three months. From daily or sub-daily data, all timesteps within the season are averaged together.</p>
+</div>
+</section>
+<section id="annual-means">
+<h3>7.2.4 Annual Means<a class="headerlink" href="#annual-means" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearmean<span class="w"> </span>temperature.nc<span class="w"> </span>annual_mean.nc
+cdo<span class="w"> </span>yearavg<span class="w"> </span>temperature.nc<span class="w"> </span>annual_avg.nc
+</pre></div>
+</div>
+<p>Annual means from daily data:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearmean<span class="w"> </span>daily_temperature.nc<span class="w"> </span>annual_temperature.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">yearmean</span></code> groups by calendar year. For DJF seasons that span year boundaries (e.g., December 2024 with January-February 2025), use seasonal operators instead.</p>
+</div>
+</section>
+<section id="time-aggregation-operators-table">
+<h3>7.2.5 Time Aggregation Operators Table<a class="headerlink" href="#time-aggregation-operators-table" title="Link to this heading">#</a></h3>
+<p>The following table summarizes the available time aggregation operators in CDO:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Applies To</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">daymean</span></code></p></td>
+<td><p>Daily mean</p></td>
+<td><p>Sub-daily data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dayavg</span></code></p></td>
+<td><p>Daily average (alias for mean)</p></td>
+<td><p>Sub-daily data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">daymin</span></code></p></td>
+<td><p>Daily minimum</p></td>
+<td><p>Sub-daily data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">daymax</span></code></p></td>
+<td><p>Daily maximum</p></td>
+<td><p>Sub-daily data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">daysum</span></code></p></td>
+<td><p>Daily sum</p></td>
+<td><p>Sub-daily data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">daystd</span></code></p></td>
+<td><p>Daily standard deviation</p></td>
+<td><p>Sub-daily data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dayvar</span></code></p></td>
+<td><p>Daily variance</p></td>
+<td><p>Sub-daily data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">monmean</span></code></p></td>
+<td><p>Monthly mean</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">monavg</span></code></p></td>
+<td><p>Monthly average</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">monmin</span></code></p></td>
+<td><p>Monthly minimum</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">monmax</span></code></p></td>
+<td><p>Monthly maximum</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">monsum</span></code></p></td>
+<td><p>Monthly sum</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">monstd</span></code></p></td>
+<td><p>Monthly standard deviation</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">monvar</span></code></p></td>
+<td><p>Monthly variance</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">seasmean</span></code></p></td>
+<td><p>Seasonal mean</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">seasavg</span></code></p></td>
+<td><p>Seasonal average</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">seasmin</span></code></p></td>
+<td><p>Seasonal minimum</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">seasmax</span></code></p></td>
+<td><p>Seasonal maximum</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">seassum</span></code></p></td>
+<td><p>Seasonal sum</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">seasstd</span></code></p></td>
+<td><p>Seasonal standard deviation</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">seasvar</span></code></p></td>
+<td><p>Seasonal variance</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">yearmean</span></code></p></td>
+<td><p>Annual mean</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">yearavg</span></code></p></td>
+<td><p>Annual average</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">yearmin</span></code></p></td>
+<td><p>Annual minimum</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">yearmax</span></code></p></td>
+<td><p>Annual maximum</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">yearsum</span></code></p></td>
+<td><p>Annual sum</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">yearstd</span></code></p></td>
+<td><p>Annual standard deviation</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">yearvar</span></code></p></td>
+<td><p>Annual variance</p></td>
+<td><p>Any frequency</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The *avg operators are aliases for the *mean operators. Both produce identical output.</p>
+</div>
+</section>
+</section>
+<section id="running-windowed-operations">
+<h2>7.3 Running/Windowed Operations<a class="headerlink" href="#running-windowed-operations" title="Link to this heading">#</a></h2>
+<p>Running (moving) window operators compute statistics over a sliding window along the time axis.</p>
+<section id="running-means">
+<h3>7.3.1 Running Means<a class="headerlink" href="#running-means" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>runmean,5<span class="w"> </span>temperature.nc<span class="w"> </span>runmean_5day.nc
+</pre></div>
+</div>
+<p>This computes a 5-day running mean. The window size is specified as the second argument (number of timesteps).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>runavg,30<span class="w"> </span>temperature.nc<span class="w"> </span>runmean_30day.nc
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Running means are ideal for smoothing noisy data (e.g., daily rainfall or temperature) to reveal underlying trends.</p>
+</div>
+</section>
+<section id="other-running-operators">
+<h3>7.3.2 Other Running Operators<a class="headerlink" href="#other-running-operators" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>runsum,7<span class="w"> </span>precipitation.nc<span class="w"> </span>weekly_cumulative.nc<span class="w">   </span><span class="c1"># 7-day running sum</span>
+cdo<span class="w"> </span>runmin,5<span class="w"> </span>temperature.nc<span class="w"> </span>runmin_5day.nc<span class="w">            </span><span class="c1"># 5-day running minimum</span>
+cdo<span class="w"> </span>runmax,5<span class="w"> </span>temperature.nc<span class="w"> </span>runmax_5day.nc<span class="w">            </span><span class="c1"># 5-day running maximum</span>
+cdo<span class="w"> </span>runstd,30<span class="w"> </span>temperature.nc<span class="w"> </span>runstd_30day.nc<span class="w">          </span><span class="c1"># 30-day running std</span>
+cdo<span class="w"> </span>runvar,30<span class="w"> </span>temperature.nc<span class="w"> </span>runvar_30day.nc<span class="w">          </span><span class="c1"># 30-day running variance</span>
+</pre></div>
+</div>
+</section>
+<section id="handling-window-edges">
+<h3>7.3.3 Handling Window Edges<a class="headerlink" href="#handling-window-edges" title="Link to this heading">#</a></h3>
+<p>By default, CDO uses partial windows at the beginning of the time series. The result at timestep <code class="docutils literal notranslate"><span class="pre">t</span></code> is computed from timesteps <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">-</span> <span class="pre">(N-1)/2</span></code> to <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">+</span> <span class="pre">(N-1)/2</span></code>. For the first and last timesteps, fewer data points are available.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The first and last <code class="docutils literal notranslate"><span class="pre">(N-1)/2</span></code> timesteps in the output are based on fewer input values. Consider discarding edge values or using a longer dataset when applying running operators.</p>
+</div>
+</section>
+<section id="running-window-example-with-precipitation">
+<h3>7.3.4 Running Window Example with Precipitation<a class="headerlink" href="#running-window-example-with-precipitation" title="Link to this heading">#</a></h3>
+<p>Compute 3-month running total precipitation to identify dry/wet periods:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>runsum,90<span class="w"> </span>daily_precip.nc<span class="w"> </span>running_90day_total.nc
+cdo<span class="w"> </span>runmean,90<span class="w"> </span>daily_precip.nc<span class="w"> </span>running_90day_mean.nc
+</pre></div>
+</div>
+<div class="exercise admonition" id="ex-temporal-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 56 </span></p>
+<section id="exercise-content">
+<p>Compute a 31-day running mean of daily maximum temperature to smooth out synoptic variability. Compare the smoothed series with the original.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/temporal-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-temporal-2"> Exercise 56</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>runmean,31<span class="w"> </span>daily_tmax.nc<span class="w"> </span>tmax_smoothed.nc
+cdo<span class="w"> </span>sub<span class="w"> </span>daily_tmax.nc<span class="w"> </span>tmax_smoothed.nc<span class="w"> </span>tmax_highfreq.nc
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">sub</span></code> command extracts the high-frequency variability by subtracting the smoothed field from the original.</p>
+</section>
+</div>
+</section>
+</section>
+<section id="climatology">
+<h2>7.4 Climatology<a class="headerlink" href="#climatology" title="Link to this heading">#</a></h2>
+<p>Climatology operators compute the long-term average for each day, month, or season across all years in the dataset.</p>
+<section id="daily-climatology">
+<h3>7.4.1 Daily Climatology<a class="headerlink" href="#daily-climatology" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ydaymean<span class="w"> </span>temperature.nc<span class="w"> </span>daily_climatology.nc
+</pre></div>
+</div>
+<p>This computes the average value for each calendar day across all years. If you have 30 years of data, 30 January 1st values are averaged to produce one value.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">ydaymean</span></code> requires data that spans multiple years. For leap years, February 29 is handled separately.</p>
+</div>
+</section>
+<section id="monthly-climatology">
+<h3>7.4.2 Monthly Climatology<a class="headerlink" href="#monthly-climatology" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ymonmean<span class="w"> </span>temperature.nc<span class="w"> </span>monthly_climatology.nc
+</pre></div>
+</div>
+<p>This produces 12 values (one per month) averaged over all years.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ymonstd<span class="w"> </span>temperature.nc<span class="w"> </span>monthly_climatology_std.nc<span class="w">   </span><span class="c1"># interannual variability</span>
+cdo<span class="w"> </span>ymonmax<span class="w"> </span>temperature.nc<span class="w"> </span>monthly_climatology_max.nc
+cdo<span class="w"> </span>ymonmin<span class="w"> </span>temperature.nc<span class="w"> </span>monthly_climatology_min.nc
+</pre></div>
+</div>
+</section>
+<section id="seasonal-climatology">
+<h3>7.4.3 Seasonal Climatology<a class="headerlink" href="#seasonal-climatology" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yseasmean<span class="w"> </span>temperature.nc<span class="w"> </span>seasonal_climatology.nc
+</pre></div>
+</div>
+<p>This produces 4 values (one per season) averaged over all years.</p>
+</section>
+<section id="additional-climatology-operators">
+<h3>7.4.4 Additional Climatology Operators<a class="headerlink" href="#additional-climatology-operators" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ydaymean</span></code></p></td>
+<td><p>Daily mean climatology</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ydayavg</span></code></p></td>
+<td><p>Daily average climatology</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ydaymin</span></code></p></td>
+<td><p>Daily minimum climatology</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ydaymax</span></code></p></td>
+<td><p>Daily maximum climatology</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ydaystd</span></code></p></td>
+<td><p>Daily standard deviation climatology</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ydayvar</span></code></p></td>
+<td><p>Daily variance climatology</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ymonmean</span></code></p></td>
+<td><p>Monthly mean climatology</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ymonavg</span></code></p></td>
+<td><p>Monthly average climatology</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ymonmin</span></code></p></td>
+<td><p>Monthly minimum climatology</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ymonmax</span></code></p></td>
+<td><p>Monthly maximum climatology</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ymonstd</span></code></p></td>
+<td><p>Monthly standard deviation climatology</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ymonvar</span></code></p></td>
+<td><p>Monthly variance climatology</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">yseasmean</span></code></p></td>
+<td><p>Seasonal mean climatology</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">yseasavg</span></code></p></td>
+<td><p>Seasonal average climatology</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">yseasmin</span></code></p></td>
+<td><p>Seasonal minimum climatology</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">yseasmax</span></code></p></td>
+<td><p>Seasonal maximum climatology</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">yseasstd</span></code></p></td>
+<td><p>Seasonal standard deviation climatology</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">yseasvar</span></code></p></td>
+<td><p>Seasonal variance climatology</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">ydaystd</span></code> or <code class="docutils literal notranslate"><span class="pre">ymonstd</span></code> together with the mean to understand interannual variability. A high standard deviation indicates years with large deviations from the climatological average.</p>
+</div>
+</section>
+</section>
+<section id="anomalies">
+<h2>7.5 Anomalies<a class="headerlink" href="#anomalies" title="Link to this heading">#</a></h2>
+<p>Anomalies measure how a given time period deviates from the long-term climatology.</p>
+<section id="computing-anomalies-with-cdo-sub">
+<h3>7.5.1 Computing Anomalies with <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">sub</span></code><a class="headerlink" href="#computing-anomalies-with-cdo-sub" title="Link to this heading">#</a></h3>
+<p>The simplest approach is to subtract a climatology from the original data:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sub<span class="w"> </span>temperature.nc<span class="w"> </span>daily_climatology.nc<span class="w"> </span>temperature_anomaly.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The climatology must have the same time frequency as the original data for <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">sub</span></code> to work correctly. Use <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">yearmean</span></code> for annual data, <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">monmean</span></code> for monthly data, etc. Alternatively, use the yday* family of operators.</p>
+</div>
+</section>
+<section id="daily-anomalies">
+<h3>7.5.2 Daily Anomalies<a class="headerlink" href="#daily-anomalies" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ydaysub<span class="w"> </span>temperature.nc<span class="w"> </span>daily_anomaly.nc
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ydaysub</span></code> operator automatically computes the daily climatology and subtracts it from each day in a single step.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ydaydiv<span class="w"> </span>temperature.nc<span class="w"> </span>daily_anomaly_fraction.nc<span class="w">   </span><span class="c1"># fractional anomaly</span>
+</pre></div>
+</div>
+</section>
+<section id="monthly-anomalies">
+<h3>7.5.3 Monthly Anomalies<a class="headerlink" href="#monthly-anomalies" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ymonsub<span class="w"> </span>temperature.nc<span class="w"> </span>monthly_anomaly.nc
+</pre></div>
+</div>
+<div class="exercise admonition" id="ex-temporal-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 57 </span></p>
+<section id="exercise-content">
+<p>Compute monthly temperature anomalies for a multi-year dataset and identify the warmest and coldest months relative to climatology.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/temporal-solution-5">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-temporal-3"> Exercise 57</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ymonsub<span class="w"> </span>monthly_temperature.nc<span class="w"> </span>monthly_anomaly.nc
+cdo<span class="w"> </span>fldmean<span class="w"> </span>monthly_anomaly.nc<span class="w"> </span>global_monthly_anomaly.nc
+cdo<span class="w"> </span>output<span class="w"> </span>global_monthly_anomaly.nc
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">fldmean</span></code> to compute the global average anomaly and <code class="docutils literal notranslate"><span class="pre">output</span></code> to display the values. The highest positive value indicates the warmest month relative to climatology.</p>
+</section>
+</div>
+</section>
+<section id="seasonal-anomalies">
+<h3>7.5.4 Seasonal Anomalies<a class="headerlink" href="#seasonal-anomalies" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yseassub<span class="w"> </span>temperature.nc<span class="w"> </span>seasonal_anomaly.nc
+</pre></div>
+</div>
+</section>
+<section id="standardized-anomalies">
+<h3>7.5.5 Standardized Anomalies<a class="headerlink" href="#standardized-anomalies" title="Link to this heading">#</a></h3>
+<p>Divide by the climatological standard deviation to get standardized anomalies (Z-scores):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ydaysub<span class="w"> </span>temperature.nc<span class="w"> </span>temp_anom.nc
+cdo<span class="w"> </span>ydaystd<span class="w"> </span>temperature.nc<span class="w"> </span>temp_clim_std.nc
+cdo<span class="w"> </span>div<span class="w"> </span>temp_anom.nc<span class="w"> </span>temp_clim_std.nc<span class="w"> </span>standardized_anomaly.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="selecting-time-steps">
+<h2>7.6 Selecting Time Steps<a class="headerlink" href="#selecting-time-steps" title="Link to this heading">#</a></h2>
+<p>CDO provides several operators for extracting specific time periods from a dataset.</p>
+<section id="selecting-by-date">
+<h3>7.6.1 Selecting by Date<a class="headerlink" href="#selecting-by-date" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>seldate,2020-06-01,2020-08-31<span class="w"> </span>temperature.nc<span class="w"> </span>jja_2020.nc
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">seldate</span></code> operator selects all timesteps within the specified date range (inclusive).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>seldate,2020-01-01<span class="w"> </span>temperature.nc<span class="w"> </span>after_2020.nc<span class="w">   </span><span class="c1"># from date onward</span>
+</pre></div>
+</div>
+</section>
+<section id="selecting-by-time">
+<h3>7.6.2 Selecting by Time<a class="headerlink" href="#selecting-by-time" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>seltime,00:00:00,12:00:00<span class="w"> </span>temperature.nc<span class="w"> </span>morning.nc
+</pre></div>
+</div>
+</section>
+<section id="selecting-by-timestep-index">
+<h3>7.6.3 Selecting by Timestep Index<a class="headerlink" href="#selecting-by-timestep-index" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>seltimestep,1<span class="w"> </span>temperature.nc<span class="w"> </span>first_timestep.nc<span class="w">       </span><span class="c1"># first timestep</span>
+cdo<span class="w"> </span>seltimestep,1/365<span class="w"> </span>temperature.nc<span class="w"> </span>year1.nc<span class="w">            </span><span class="c1"># first 365 timesteps</span>
+cdo<span class="w"> </span>seltimestep,-1<span class="w"> </span>temperature.nc<span class="w"> </span>last_timestep.nc<span class="w">       </span><span class="c1"># last timestep</span>
+cdo<span class="w"> </span>seltimestep,10/20<span class="w"> </span>temperature.nc<span class="w"> </span>steps_10_20.nc<span class="w">      </span><span class="c1"># timesteps 10 to 20</span>
+</pre></div>
+</div>
+</section>
+<section id="selecting-by-hour-month-season">
+<h3>7.6.4 Selecting by Hour, Month, Season<a class="headerlink" href="#selecting-by-hour-month-season" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>selhour,12<span class="w"> </span>temperature.nc<span class="w"> </span>noon_values.nc<span class="w">               </span><span class="c1"># only 12:00 UTC</span>
+cdo<span class="w"> </span>selmonth,1<span class="w"> </span>temperature.nc<span class="w"> </span>january.nc<span class="w">                   </span><span class="c1"># January only</span>
+cdo<span class="w"> </span>selmonth,6/8<span class="w"> </span>temperature.nc<span class="w"> </span>jja.nc<span class="w">                     </span><span class="c1"># June to August</span>
+cdo<span class="w"> </span>selseas,3<span class="w"> </span>temperature.nc<span class="w"> </span>jja.nc<span class="w">                        </span><span class="c1"># JJA season</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">selhour</span></code> is useful for extracting specific synoptic hours from sub-daily data (e.g., only 12 UTC for daily maximum diagnostics).</p>
+</div>
+</section>
+<section id="working-with-time-ranges-in-pipes">
+<h3>7.6.5 Working with Time Ranges in Pipes<a class="headerlink" href="#working-with-time-ranges-in-pipes" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>selyear,2020/2024<span class="w"> </span>temperature.nc<span class="w"> </span>-selyear,1990/1994<span class="w"> </span>temperature.nc<span class="w"> </span>decades.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="time-operations">
+<h2>7.7 Time Operations<a class="headerlink" href="#time-operations" title="Link to this heading">#</a></h2>
+<p>These operators modify the time axis itself rather than the data values.</p>
+<section id="setting-time">
+<h3>7.7.1 Setting Time<a class="headerlink" href="#setting-time" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>settime,12:00:00<span class="w"> </span>temperature.nc<span class="w"> </span>time_set.nc<span class="w">          </span><span class="c1"># set all to 12:00</span>
+cdo<span class="w"> </span>setdate,2020-01-01<span class="w"> </span>temperature.nc<span class="w"> </span>date_set.nc<span class="w">         </span><span class="c1"># set all to Jan 1</span>
+cdo<span class="w"> </span>setday,15<span class="w"> </span>temperature.nc<span class="w"> </span>midmonth.nc<span class="w">                  </span><span class="c1"># set all to day 15</span>
+cdo<span class="w"> </span>setmon,1<span class="w"> </span>temperature.nc<span class="w"> </span>all_jan.nc<span class="w">                    </span><span class="c1"># set all to January</span>
+cdo<span class="w"> </span>setyear,2020<span class="w"> </span>temperature.nc<span class="w"> </span>year_set.nc<span class="w">               </span><span class="c1"># set all to 2020</span>
+</pre></div>
+</div>
+</section>
+<section id="shifting-time-axis">
+<h3>7.7.2 Shifting Time Axis<a class="headerlink" href="#shifting-time-axis" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>shifttime,1day<span class="w"> </span>temperature.nc<span class="w"> </span>shifted.nc<span class="w">              </span><span class="c1"># shift forward 1 day</span>
+cdo<span class="w"> </span>shifttime,-6hour<span class="w"> </span>temperature.nc<span class="w"> </span>shifted_back.nc<span class="w">       </span><span class="c1"># shift back 6 hours</span>
+cdo<span class="w"> </span>shifttime,1mon<span class="w"> </span>temperature.nc<span class="w"> </span>shifted_month.nc<span class="w">        </span><span class="c1"># shift forward 1 month</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code class="docutils literal notranslate"><span class="pre">shifttime</span></code> is useful for aligning time axes from different sources, such as shifting 6-hourly data to align with observation times.</p>
+</div>
+</section>
+<section id="deleting-time-steps">
+<h3>7.7.3 Deleting Time Steps<a class="headerlink" href="#deleting-time-steps" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>deletetimestep,1<span class="w"> </span>temperature.nc<span class="w"> </span>no_first.nc<span class="w">           </span><span class="c1"># remove first timestep</span>
+cdo<span class="w"> </span>deletetimestep,365<span class="w"> </span>temperature.nc<span class="w"> </span>no_leap.nc<span class="w">          </span><span class="c1"># remove Feb 29</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Deleting timesteps changes the time indexing. Subsequent operations that depend on time indexing may behave differently after deletion.</p>
+</div>
+</section>
+</section>
+<section id="practical-workflow-examples">
+<h2>7.8 Practical Workflow Examples<a class="headerlink" href="#practical-workflow-examples" title="Link to this heading">#</a></h2>
+<section id="from-hourly-to-seasonal-means">
+<h3>7.8.1 From Hourly to Seasonal Means<a class="headerlink" href="#from-hourly-to-seasonal-means" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>seasmean<span class="w"> </span>-monmean<span class="w"> </span>-daymean<span class="w"> </span>hourly_temperature.nc<span class="w"> </span>seasonal_means.nc
+</pre></div>
+</div>
+<p>This pipeline computes daily means, then monthly means, then seasonal means — all without intermediate files.</p>
+</section>
+<section id="multi-year-monthly-climatology-and-anomalies">
+<h3>7.8.2 Multi-Year Monthly Climatology and Anomalies<a class="headerlink" href="#multi-year-monthly-climatology-and-anomalies" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ymonmean<span class="w"> </span>monthly_temperature.nc<span class="w"> </span>clim.nc
+cdo<span class="w"> </span>ymonsub<span class="w"> </span>monthly_temperature.nc<span class="w"> </span>clim.nc<span class="w"> </span>anom.nc
+</pre></div>
+</div>
+</section>
+<section id="identifying-extreme-months">
+<h3>7.8.3 Identifying Extreme Months<a class="headerlink" href="#identifying-extreme-months" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ymonsub<span class="w"> </span>monthly_temperature.nc<span class="w"> </span>monthly_clim.nc<span class="w"> </span>anom.nc
+cdo<span class="w"> </span>timmax<span class="w"> </span>anom.nc<span class="w"> </span>max_anom.nc
+cdo<span class="w"> </span>timmin<span class="w"> </span>anom.nc<span class="w"> </span>min_anom.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>max_anom.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>min_anom.nc
+</pre></div>
+</div>
+</section>
+<section id="seasonal-cycle-removal">
+<h3>7.8.4 Seasonal Cycle Removal<a class="headerlink" href="#seasonal-cycle-removal" title="Link to this heading">#</a></h3>
+<p>Remove the seasonal cycle from daily data to study interannual variability:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ydaysub<span class="w"> </span>daily_temperature.nc<span class="w"> </span>deseasonalized.nc
+cdo<span class="w"> </span>runmean,365<span class="w"> </span>deseasonalized.nc<span class="w"> </span>smoothed_annual.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="hands-on-exercises">
+<h2>7.9 Hands-On Exercises<a class="headerlink" href="#hands-on-exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-7-1-monthly-means-from-daily-data">
+<h3>Exercise 7.1: Monthly Means from Daily Data<a class="headerlink" href="#exercise-7-1-monthly-means-from-daily-data" title="Link to this heading">#</a></h3>
+<p>Compute monthly mean, minimum, and maximum temperatures from daily data.</p>
+<div class="exercise admonition" id="ex-temporal-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 58 </span></p>
+<section id="exercise-content">
+<p>Use the file <code class="docutils literal notranslate"><span class="pre">daily_temperature.nc</span></code> (or create one with 3+ years of daily data) to compute:</p>
+<ol class="arabic simple">
+<li><p>Monthly mean temperatures</p></li>
+<li><p>The warmest month in each year</p></li>
+<li><p>The coldest month in each year</p></li>
+</ol>
+</section>
+</div>
+<div class="solution admonition" id="book/temporal-solution-7">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-temporal-4"> Exercise 58</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>monmean<span class="w"> </span>daily_temperature.nc<span class="w"> </span>mon_mean.nc
+cdo<span class="w"> </span>monmax<span class="w"> </span>daily_temperature.nc<span class="w"> </span>mon_max.nc
+cdo<span class="w"> </span>monmin<span class="w"> </span>daily_temperature.nc<span class="w"> </span>mon_min.nc
+
+<span class="c1"># Find warmest month per year</span>
+cdo<span class="w"> </span>yearmax<span class="w"> </span>mon_mean.nc<span class="w"> </span>yearly_warmest.nc
+
+<span class="c1"># Find coldest month per year</span>
+cdo<span class="w"> </span>yearmin<span class="w"> </span>mon_mean.nc<span class="w"> </span>yearly_coldest.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-7-2-anomaly-calculation">
+<h3>Exercise 7.2: Anomaly Calculation<a class="headerlink" href="#exercise-7-2-anomaly-calculation" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-temporal-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 59 </span></p>
+<section id="exercise-content">
+<p>Using the monthly means from Exercise 7.1:</p>
+<ol class="arabic simple">
+<li><p>Compute the monthly climatology (1981-2010 normals)</p></li>
+<li><p>Calculate monthly anomalies for each year</p></li>
+<li><p>Identify the year with the largest positive anomaly</p></li>
+</ol>
+</section>
+</div>
+<div class="solution admonition" id="book/temporal-solution-9">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-temporal-5"> Exercise 59</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Since we already have monthly means</span>
+cdo<span class="w"> </span>ymonmean<span class="w"> </span>mon_mean.nc<span class="w"> </span>monthly_clim.nc
+cdo<span class="w"> </span>ymonsub<span class="w"> </span>mon_mean.nc<span class="w"> </span>monthly_clim.nc<span class="w"> </span>monthly_anom.nc
+
+<span class="c1"># Spatially average and find maximum</span>
+cdo<span class="w"> </span>fldmean<span class="w"> </span>monthly_anom.nc<span class="w"> </span>global_anom.nc
+cdo<span class="w"> </span>timmax<span class="w"> </span>global_anom.nc<span class="w"> </span>max_anomaly.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-intable,max_anomaly.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-7-3-running-means">
+<h3>Exercise 7.3: Running Means<a class="headerlink" href="#exercise-7-3-running-means" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-temporal-6">
+
+<p class="admonition-title"><span class="caption-number">Exercise 60 </span></p>
+<section id="exercise-content">
+<p>Apply a 5-year running mean to annual temperature data and compare the smoothed series with the original annual values. Discuss the differences.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/temporal-solution-11">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-temporal-6"> Exercise 60</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>yearmean<span class="w"> </span>daily_temperature.nc<span class="w"> </span>annual_means.nc
+cdo<span class="w"> </span>runmean,5<span class="w"> </span>annual_means.nc<span class="w"> </span>smoothed_annual.nc
+
+<span class="c1"># Difference (high-frequency component)</span>
+cdo<span class="w"> </span>sub<span class="w"> </span>annual_means.nc<span class="w"> </span>smoothed_annual.nc<span class="w"> </span>highfreq.nc
+
+<span class="c1"># Visualize (requires Python/matplotlib or NCO)</span>
+cdo<span class="w"> </span>output<span class="w"> </span>annual_means.nc<span class="w"> </span>&gt;<span class="w"> </span>annual_vals.txt
+cdo<span class="w"> </span>output<span class="w"> </span>smoothed_annual.nc<span class="w"> </span>&gt;<span class="w"> </span>smoothed_vals.txt
+</pre></div>
+</div>
+<p>The running mean removes interannual variability, revealing the underlying decadal trend.</p>
+</section>
+</div>
+</section>
+<section id="exercise-7-4-seasonal-extraction-and-statistics">
+<h3>Exercise 7.4: Seasonal Extraction and Statistics<a class="headerlink" href="#exercise-7-4-seasonal-extraction-and-statistics" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-temporal-7">
+
+<p class="admonition-title"><span class="caption-number">Exercise 61 </span></p>
+<section id="exercise-content">
+<p>Extract all JJA (June-July-August) seasons from a multi-year dataset and compute:</p>
+<ol class="arabic simple">
+<li><p>The climatological mean JJA temperature</p></li>
+<li><p>The warmest JJA on record</p></li>
+<li><p>The trend in JJA temperatures over the period</p></li>
+</ol>
+</section>
+</div>
+<div class="solution admonition" id="book/temporal-solution-13">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-temporal-7"> Exercise 61</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract all JJA</span>
+cdo<span class="w"> </span>selseas,3<span class="w"> </span>daily_temperature.nc<span class="w"> </span>all_jja.nc
+
+<span class="c1"># Climatological JJA mean</span>
+cdo<span class="w"> </span>yseasmean<span class="w"> </span>all_jja.nc<span class="w"> </span>jja_clim.nc
+
+<span class="c1"># Warmest JJA</span>
+cdo<span class="w"> </span>yearmax<span class="w"> </span>-yseasmean<span class="w"> </span>all_jja.nc<span class="w"> </span>warmest_jja.nc
+
+<span class="c1"># Linear trend (using CDO trend)</span>
+cdo<span class="w"> </span>trend<span class="w"> </span>all_jja.nc<span class="w"> </span>jja_intercept.nc<span class="w"> </span>jja_trend.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>jja_trend.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-7-5-custom-aggregation-pipeline">
+<h3>Exercise 7.5: Custom Aggregation Pipeline<a class="headerlink" href="#exercise-7-5-custom-aggregation-pipeline" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-temporal-8">
+
+<p class="admonition-title"><span class="caption-number">Exercise 62 </span></p>
+<section id="exercise-content">
+<p>Design a pipeline that:</p>
+<ol class="arabic simple">
+<li><p>Takes hourly temperature data as input</p></li>
+<li><p>Computes daily maximum temperatures</p></li>
+<li><p>Computes monthly mean of daily maxima</p></li>
+<li><p>Computes the climatology of monthly mean daily maxima</p></li>
+<li><p>Outputs the anomaly for a specific year</p></li>
+</ol>
+</section>
+</div>
+<div class="solution admonition" id="book/temporal-solution-15">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-temporal-8"> Exercise 62</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ymonsub<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-monmean<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-daymax<span class="w"> </span>hourly_temp.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>monthly_dailymax_clim.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>anom_monthly_dailymax.nc
+
+<span class="c1"># To extract a specific year</span>
+cdo<span class="w"> </span>selyear,2020<span class="w"> </span>anom_monthly_dailymax.nc<span class="w"> </span>anom_2020.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+</section>
+<section id="quiz">
+<h2>7.10 Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<p>Test your understanding of temporal operators.</p>
+<div class="exercise admonition" id="q-temporal-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 63 </span> (Question 1)</p>
+<section id="exercise-content">
+<p>What is the output of <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">daymean</span></code> when applied to data that already has daily resolution?</p>
+<p>a) An error because data is already daily
+b) The same values as the input (pass-through)
+c) Monthly means computed from daily values
+d) Climatological daily means</p>
+</section>
+</div>
+<div class="solution admonition" id="book/temporal-solution-17">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-temporal-1"> Exercise 63 (Question 1)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. <code class="docutils literal notranslate"><span class="pre">daymean</span></code> groups sub-daily timesteps by day and averages them. If the input is already daily, each day contains exactly one value, so the output is identical to the input.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-temporal-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 64 </span> (Question 2)</p>
+<section id="exercise-content">
+<p>Which operator computes the long-term average temperature for each calendar month?</p>
+<p>a) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">monmean</span></code>
+b) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">ymonmean</span></code>
+c) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">monthclim</span></code>
+d) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">monthavg</span></code></p>
+</section>
+</div>
+<div class="solution admonition" id="book/temporal-solution-19">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-temporal-2"> Exercise 64 (Question 2)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">ymonmean</span></code> computes the monthly climatology — the average value for each calendar month (Jan-Dec) across all years. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">monmean</span></code> computes the mean for each individual month in the dataset.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-temporal-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 65 </span> (Question 3)</p>
+<section id="exercise-content">
+<p>How would you compute a 5-year running mean of annual precipitation data?</p>
+<p>a) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">runmean,1825</span> <span class="pre">annual_precip.nc</span></code>
+b) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">runmean,5</span> <span class="pre">annual_precip.nc</span></code>
+c) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">runmean,5y</span> <span class="pre">annual_precip.nc</span></code>
+d) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">runavg,60</span> <span class="pre">annual_precip.nc</span></code></p>
+</section>
+</div>
+<div class="solution admonition" id="book/temporal-solution-21">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-temporal-3"> Exercise 65 (Question 3)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. The window size is specified as the number of timesteps. Since the data is already annual (1 timestep per year), a window of 5 timesteps = 5 years.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-temporal-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 66 </span> (Question 4)</p>
+<section id="exercise-content">
+<p>What does <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">selseas,2</span></code> extract from a dataset?</p>
+<p>a) December-January-February
+b) March-April-May
+c) June-July-August
+d) September-October-November</p>
+</section>
+</div>
+<div class="solution admonition" id="book/temporal-solution-23">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-temporal-4"> Exercise 66 (Question 4)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. Season codes in CDO are: 1=DJF, 2=MAM, 3=JJA, 4=SON. <code class="docutils literal notranslate"><span class="pre">selseas,2</span></code> extracts the March-April-May season (MAM).</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-temporal-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 67 </span> (Question 5)</p>
+<section id="exercise-content">
+<p>Which of the following correctly computes daily anomalies relative to the daily climatology?</p>
+<p>a) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">sub</span> <span class="pre">temperature.nc</span> <span class="pre">-ymonmean</span> <span class="pre">temperature.nc</span></code>
+b) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">ydaysub</span> <span class="pre">temperature.nc</span> <span class="pre">anomaly.nc</span></code>
+c) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">dayanom</span> <span class="pre">temperature.nc</span> <span class="pre">anomaly.nc</span></code>
+d) <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">runmean,1</span> <span class="pre">temperature.nc</span></code></p>
+</section>
+</div>
+<div class="solution admonition" id="book/temporal-solution-25">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-temporal-5"> Exercise 67 (Question 5)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">ydaysub</span></code> directly computes the daily anomaly by subtracting the daily climatology from each day. Option <strong>a</strong> would subtract a monthly climatology, not daily. There is no <code class="docutils literal notranslate"><span class="pre">dayanom</span></code> operator in CDO.</p>
+</section>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this module, you learned how to work with temporal dimensions in climate data using CDO:</p>
+<ul class="simple">
+<li><p><strong>Temporal statistics</strong>: <code class="docutils literal notranslate"><span class="pre">daymean</span></code>, <code class="docutils literal notranslate"><span class="pre">monmean</span></code>, <code class="docutils literal notranslate"><span class="pre">seasmean</span></code>, <code class="docutils literal notranslate"><span class="pre">yearmean</span></code> and their min/max/sum/variance variants aggregate data along the time axis</p></li>
+<li><p><strong>Running operations</strong>: <code class="docutils literal notranslate"><span class="pre">runmean</span></code>, <code class="docutils literal notranslate"><span class="pre">runsum</span></code>, <code class="docutils literal notranslate"><span class="pre">runmin</span></code>, <code class="docutils literal notranslate"><span class="pre">runmax</span></code>, <code class="docutils literal notranslate"><span class="pre">runstd</span></code>, <code class="docutils literal notranslate"><span class="pre">runvar</span></code> apply sliding window statistics for smoothing</p></li>
+<li><p><strong>Climatology</strong>: <code class="docutils literal notranslate"><span class="pre">ydaymean</span></code>, <code class="docutils literal notranslate"><span class="pre">ymonmean</span></code>, <code class="docutils literal notranslate"><span class="pre">yseasmean</span></code> compute long-term averages for each period</p></li>
+<li><p><strong>Anomalies</strong>: <code class="docutils literal notranslate"><span class="pre">ydaysub</span></code>, <code class="docutils literal notranslate"><span class="pre">ymonsub</span></code>, <code class="docutils literal notranslate"><span class="pre">yseassub</span></code> compute deviations from climatological norms</p></li>
+<li><p><strong>Selection</strong>: <code class="docutils literal notranslate"><span class="pre">seldate</span></code>, <code class="docutils literal notranslate"><span class="pre">seltime</span></code>, <code class="docutils literal notranslate"><span class="pre">seltimestep</span></code>, <code class="docutils literal notranslate"><span class="pre">selmonth</span></code>, <code class="docutils literal notranslate"><span class="pre">selhour</span></code>, <code class="docutils literal notranslate"><span class="pre">selseas</span></code> extract specific time periods</p></li>
+<li><p><strong>Time manipulation</strong>: <code class="docutils literal notranslate"><span class="pre">settime</span></code>, <code class="docutils literal notranslate"><span class="pre">setdate</span></code>, <code class="docutils literal notranslate"><span class="pre">shifttime</span></code> modify the time axis metadata</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The real power of CDO temporal operators emerges when you chain them in pipelines. A single command can go from raw hourly data to published seasonal anomaly maps without a single intermediate file.</p>
+</div>
+<p>Proceed to Module 8 to learn about spatial operators, remapping, and grid operations.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="grib.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Module 6: Working with GRIB Data</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="spatial.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Module 8: Spatial Operators</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-time-dimensions-in-climate-data">7.1 Understanding Time Dimensions in Climate Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-time-information">7.1.1 Inspecting Time Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-coordinate-systems">7.1.2 Time Coordinate Systems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-statistics">7.2 Temporal Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-means">7.2.1 Daily Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monthly-means">7.2.2 Monthly Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-means">7.2.3 Seasonal Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#annual-means">7.2.4 Annual Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-aggregation-operators-table">7.2.5 Time Aggregation Operators Table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-windowed-operations">7.3 Running/Windowed Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-means">7.3.1 Running Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-running-operators">7.3.2 Other Running Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-window-edges">7.3.3 Handling Window Edges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-window-example-with-precipitation">7.3.4 Running Window Example with Precipitation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#climatology">7.4 Climatology</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-climatology">7.4.1 Daily Climatology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monthly-climatology">7.4.2 Monthly Climatology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-climatology">7.4.3 Seasonal Climatology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-climatology-operators">7.4.4 Additional Climatology Operators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anomalies">7.5 Anomalies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-anomalies-with-cdo-sub">7.5.1 Computing Anomalies with <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">sub</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-anomalies">7.5.2 Daily Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monthly-anomalies">7.5.3 Monthly Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-anomalies">7.5.4 Seasonal Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardized-anomalies">7.5.5 Standardized Anomalies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-time-steps">7.6 Selecting Time Steps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-by-date">7.6.1 Selecting by Date</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-by-time">7.6.2 Selecting by Time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-by-timestep-index">7.6.3 Selecting by Timestep Index</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-by-hour-month-season">7.6.4 Selecting by Hour, Month, Season</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-time-ranges-in-pipes">7.6.5 Working with Time Ranges in Pipes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-operations">7.7 Time Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-time">7.7.1 Setting Time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shifting-time-axis">7.7.2 Shifting Time Axis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-time-steps">7.7.3 Deleting Time Steps</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflow-examples">7.8 Practical Workflow Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-hourly-to-seasonal-means">7.8.1 From Hourly to Seasonal Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-year-monthly-climatology-and-anomalies">7.8.2 Multi-Year Monthly Climatology and Anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identifying-extreme-months">7.8.3 Identifying Extreme Months</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-cycle-removal">7.8.4 Seasonal Cycle Removal</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">7.9 Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-1-monthly-means-from-daily-data">Exercise 7.1: Monthly Means from Daily Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-2-anomaly-calculation">Exercise 7.2: Anomaly Calculation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-3-running-means">Exercise 7.3: Running Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-4-seasonal-extraction-and-statistics">Exercise 7.4: Seasonal Extraction and Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-5-custom-aggregation-pipeline">Exercise 7.5: Custom Aggregation Pipeline</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">7.10 Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

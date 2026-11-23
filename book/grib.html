@@ -1,0 +1,1806 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Module 6: Working with GRIB Data &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/grib';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 7: Temporal Operators" href="temporal.html" />
+    <link rel="prev" title="Module 5: Working with NetCDF Data" href="netcdf.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./book/grib.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fbook/grib.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/grib.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 6: Working with GRIB Data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-format-fundamentals">GRIB Format Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grib1-vs-grib2">GRIB1 vs GRIB2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grib2-section-structure">GRIB2 Section Structure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wmo-grib-standards">WMO GRIB Standards</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-grib-tables">Key GRIB Tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-grib-center-ids">Common GRIB Center IDs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecmwf-products-and-era5-in-grib">ECMWF Products and ERA5 in GRIB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#era5-grib-structure">ERA5 GRIB Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-era5-grib-metadata">Viewing ERA5 GRIB Metadata</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gfs-model-output-in-grib">GFS Model Output in GRIB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gfs-grib-characteristics">GFS GRIB Characteristics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-gfs-parameters">Common GFS Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-gfs-data">Exploring GFS Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#icon-model-data">ICON Model Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#icon-grib-features">ICON GRIB Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-icon-data">Working with ICON Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-grib-files">Exploring GRIB Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-sinfo-for-grib">cdo sinfo for GRIB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-gribmap-grib-parameter-mapping">cdo gribmap - GRIB Parameter Mapping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-grib-exploration-commands">Additional GRIB Exploration Commands</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-parameter-ids-and-level-types">GRIB Parameter IDs and Level Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-parameter-identification">Understanding Parameter Identification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-grib-parameter-codes">Common GRIB Parameter Codes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-types">Level Types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-grib-to-netcdf">Converting GRIB to NetCDF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-conversion">Basic Conversion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-conversion-issues">Managing Conversion Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-conversion">Batch Conversion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-file-manipulation">GRIB File Manipulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-by-parameter">Filtering by Parameter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-by-level">Filtering by Level</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-by-time">Filtering by Time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-subsetting">Spatial Subsetting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-metadata-handling">GRIB Metadata Handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-grib-metadata">Viewing GRIB Metadata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-grib-metadata">Modifying GRIB Metadata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-metadata-workflow">Complete Metadata Workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-ensemble-forecasts">Working with Ensemble Forecasts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-identification">Ensemble Identification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-processing-with-wildcards">Ensemble Processing with Wildcards</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-grib-processing-workflows">Practical GRIB Processing Workflows</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecmwf-forecast-processing">ECMWF Forecast Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gfs-operational-workflow">GFS Operational Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-to-netcdf-with-metadata-preservation">GRIB to NetCDF with Metadata Preservation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-filters-and-advanced-selection">GRIB Filters and Advanced Selection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-selection-criteria">Complex Selection Criteria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-grib-edition-detection">Handling GRIB Edition Detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-grib-issues">Troubleshooting GRIB Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-problems">Common Problems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-explore-a-grib-file">Exercise 1: Explore a GRIB File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-convert-grib-to-netcdf">Exercise 2: Convert GRIB to NetCDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-filter-grib-by-parameter-and-level">Exercise 3: Filter GRIB by Parameter and Level</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-batch-grib-processing-script">Exercise 4: Batch GRIB Processing Script</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-multi-format-workflow">Exercise 5: Multi-Format Workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-6-working-with-grib-data">
+<h1>Module 6: Working with GRIB Data<a class="headerlink" href="#module-6-working-with-grib-data" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this module, you will be able to:</p>
+<ul class="simple">
+<li><p>Understand GRIB format structure (GRIB1 vs GRIB2)</p></li>
+<li><p>Navigate WMO GRIB standards and conventions</p></li>
+<li><p>Explore and extract metadata from GRIB files</p></li>
+<li><p>Identify GRIB parameter IDs, level types, and centers</p></li>
+<li><p>Convert GRIB to NetCDF and other formats</p></li>
+<li><p>Filter GRIB files by parameter, level, and time</p></li>
+<li><p>Manipulate GRIB metadata</p></li>
+<li><p>Work with ECMWF, GFS, and ICON model data in GRIB format</p></li>
+<li><p>Process ensemble forecasts in GRIB format</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="grib-format-fundamentals">
+<h2>GRIB Format Fundamentals<a class="headerlink" href="#grib-format-fundamentals" title="Link to this heading">#</a></h2>
+<p>GRIB (GRIdded Binary) is the World Meteorological Organization (WMO) standard format for meteorological data. It is widely used by operational weather centers worldwide.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>GRIB is designed for efficient storage and exchange of meteorological data. Unlike NetCDF, GRIB files are not self-documenting in the same way - understanding requires knowledge of GRIB tables and codes.</p>
+</div>
+<section id="grib1-vs-grib2">
+<h3>GRIB1 vs GRIB2<a class="headerlink" href="#grib1-vs-grib2" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>GRIB1 (Edition 1)</p></th>
+<th class="head"><p>GRIB2 (Edition 2)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Introduced</strong></p></td>
+<td><p>1985</p></td>
+<td><p>2003</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Section Structure</strong></p></td>
+<td><p>PDS, GDS, BMS, BDS</p></td>
+<td><p>7 sections (0-6)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Parameter Identification</strong></p></td>
+<td><p>Center + Parameter Number</p></td>
+<td><p>Discipline + Category + Number</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Compression</strong></p></td>
+<td><p>Simple Packing</p></td>
+<td><p>Complex Packing, JPEG2000, PNG</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Grid Types</strong></p></td>
+<td><p>Limited</p></td>
+<td><p>Extensive (including unstructured)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Ensemble Support</strong></p></td>
+<td><p>Basic</p></td>
+<td><p>Comprehensive</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Satellite Data</strong></p></td>
+<td><p>Limited</p></td>
+<td><p>Full support</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Product Templates</strong></p></td>
+<td><p>1</p></td>
+<td><p>15+</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="grib2-section-structure">
+<h3>GRIB2 Section Structure<a class="headerlink" href="#grib2-section-structure" title="Link to this heading">#</a></h3>
+<p>Each GRIB2 file contains multiple messages, each with 7 sections:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GRIB2</span> <span class="n">Message</span>
+<span class="o">+--</span> <span class="n">Section</span> <span class="mi">0</span><span class="p">:</span> <span class="n">Indicator</span> <span class="n">Section</span> <span class="p">(</span><span class="n">file</span> <span class="n">identification</span><span class="p">)</span>
+<span class="o">+--</span> <span class="n">Section</span> <span class="mi">1</span><span class="p">:</span> <span class="n">Identification</span> <span class="n">Section</span> <span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">process</span><span class="p">)</span>
+<span class="o">+--</span> <span class="n">Section</span> <span class="mi">2</span><span class="p">:</span> <span class="n">Local</span> <span class="n">Use</span> <span class="n">Section</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+<span class="o">+--</span> <span class="n">Section</span> <span class="mi">3</span><span class="p">:</span> <span class="n">Grid</span> <span class="n">Definition</span> <span class="n">Section</span> <span class="p">(</span><span class="n">grid</span> <span class="n">description</span><span class="p">)</span>
+<span class="o">+--</span> <span class="n">Section</span> <span class="mi">4</span><span class="p">:</span> <span class="n">Product</span> <span class="n">Definition</span> <span class="n">Section</span> <span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+<span class="o">+--</span> <span class="n">Section</span> <span class="mi">5</span><span class="p">:</span> <span class="n">Data</span> <span class="n">Representation</span> <span class="n">Section</span> <span class="p">(</span><span class="n">packing</span> <span class="n">method</span><span class="p">)</span>
+<span class="o">+--</span> <span class="n">Section</span> <span class="mi">6</span><span class="p">:</span> <span class="n">Bit</span><span class="o">-</span><span class="n">Map</span> <span class="n">Section</span> <span class="p">(</span><span class="n">missing</span> <span class="n">data</span><span class="p">)</span>
+<span class="o">+--</span> <span class="n">Section</span> <span class="mi">7</span><span class="p">:</span> <span class="n">Data</span> <span class="n">Section</span> <span class="p">(</span><span class="n">actual</span> <span class="n">values</span><span class="p">)</span>
+
+<span class="n">Section</span> <span class="mi">8</span><span class="p">:</span> <span class="n">End</span> <span class="n">Section</span> <span class="p">(</span><span class="s2">&quot;7777&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="wmo-grib-standards">
+<h2>WMO GRIB Standards<a class="headerlink" href="#wmo-grib-standards" title="Link to this heading">#</a></h2>
+<p>The WMO maintains international standards for GRIB encoding:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>GRIB files are only meaningful with their associated parameter tables. Common table sources include ECMWF, NCEP, DWD, and JMA.</p>
+</div>
+<section id="key-grib-tables">
+<h3>Key GRIB Tables<a class="headerlink" href="#key-grib-tables" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Table</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Table 0</strong></p></td>
+<td><p>Discipline</p></td>
+<td><p>0=Meteorological, 1=Hydrological, 2=Land, 3=Space</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Table 1</strong></p></td>
+<td><p>Category (within discipline)</p></td>
+<td><p>Temperature, Moisture, Momentum, etc.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Table 4.2</strong></p></td>
+<td><p>Parameter Number</p></td>
+<td><p>Specific parameter within category</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Table 4.5</strong></p></td>
+<td><p>Type of Level</p></td>
+<td><p>100=isobaric, 103=height above sea, etc.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Table 3.1</strong></p></td>
+<td><p>Grid Definition</p></td>
+<td><p>0=lat/lon, 10=mercator, 30=Lambert, 40=Gaussian</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Table 0.0</strong></p></td>
+<td><p>Center ID</p></td>
+<td><p>7=NCEP, 78=ECMWF, 80=DWD, 34=JMA</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="common-grib-center-ids">
+<h3>Common GRIB Center IDs<a class="headerlink" href="#common-grib-center-ids" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Center ID</p></th>
+<th class="head"><p>Center Name</p></th>
+<th class="head"><p>Source</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>7</strong></p></td>
+<td><p>NCEP (US National Weather Service)</p></td>
+<td><p>GFS, HRRR</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>34</strong></p></td>
+<td><p>Japan Meteorological Agency</p></td>
+<td><p>JMA, JRA-55</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>58</strong></p></td>
+<td><p>Met Office (UK)</p></td>
+<td><p>UKV, MOGREPS</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>78</strong></p></td>
+<td><p>ECMWF</p></td>
+<td><p>ERA5, IFS HRES, ENS</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>80</strong></p></td>
+<td><p>DWD (German Weather Service)</p></td>
+<td><p>ICON, ICON-EPS</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>85</strong></p></td>
+<td><p>Meteo-France</p></td>
+<td><p>ARPEGE, AROME</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>98</strong></p></td>
+<td><p>ECCC (Environment Canada)</p></td>
+<td><p>GDPS, RDPS</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="ecmwf-products-and-era5-in-grib">
+<h2>ECMWF Products and ERA5 in GRIB<a class="headerlink" href="#ecmwf-products-and-era5-in-grib" title="Link to this heading">#</a></h2>
+<p>ECMWF distributes ERA5 reanalysis and IFS operational data primarily in GRIB format.</p>
+<section id="era5-grib-structure">
+<h3>ERA5 GRIB Structure<a class="headerlink" href="#era5-grib-structure" title="Link to this heading">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ERA5 in GRIB format contains 240+ parameters at multiple pressure levels and surface fields.</p>
+</div>
+<p>Common ERA5 parameters and their GRIB codes:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>GRIB Code</p></th>
+<th class="head"><p>Type of Level</p></th>
+<th class="head"><p>Short Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2m Temperature</p></td>
+<td><p>167</p></td>
+<td><p>Surface</p></td>
+<td><p>2t</p></td>
+</tr>
+<tr class="row-odd"><td><p>Total Precipitation</p></td>
+<td><p>228</p></td>
+<td><p>Surface</p></td>
+<td><p>tp</p></td>
+</tr>
+<tr class="row-even"><td><p>Mean Sea Level Pressure</p></td>
+<td><p>151</p></td>
+<td><p>Surface</p></td>
+<td><p>msl</p></td>
+</tr>
+<tr class="row-odd"><td><p>10m U Wind</p></td>
+<td><p>165</p></td>
+<td><p>Surface</p></td>
+<td><p>10u</p></td>
+</tr>
+<tr class="row-even"><td><p>10m V Wind</p></td>
+<td><p>166</p></td>
+<td><p>Surface</p></td>
+<td><p>10v</p></td>
+</tr>
+<tr class="row-odd"><td><p>Geopotential</p></td>
+<td><p>129</p></td>
+<td><p>Isobaric</p></td>
+<td><p>z</p></td>
+</tr>
+<tr class="row-even"><td><p>Temperature</p></td>
+<td><p>130</p></td>
+<td><p>Isobaric</p></td>
+<td><p>t</p></td>
+</tr>
+<tr class="row-odd"><td><p>Specific Humidity</p></td>
+<td><p>133</p></td>
+<td><p>Isobaric</p></td>
+<td><p>q</p></td>
+</tr>
+<tr class="row-even"><td><p>U Wind</p></td>
+<td><p>131</p></td>
+<td><p>Isobaric</p></td>
+<td><p>u</p></td>
+</tr>
+<tr class="row-odd"><td><p>V Wind</p></td>
+<td><p>132</p></td>
+<td><p>Isobaric</p></td>
+<td><p>v</p></td>
+</tr>
+<tr class="row-even"><td><p>Vertical Velocity</p></td>
+<td><p>135</p></td>
+<td><p>Isobaric</p></td>
+<td><p>w</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="viewing-era5-grib-metadata">
+<h3>Viewing ERA5 GRIB Metadata<a class="headerlink" href="#viewing-era5-grib-metadata" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sinfo<span class="w"> </span>era5_2020.grib
+cdo<span class="w"> </span>-P<span class="w"> </span>showparam<span class="w"> </span>era5_2020.grib
+cdo<span class="w"> </span>-P<span class="w"> </span>showlevel<span class="w"> </span>era5_2020.grib
+cdo<span class="w"> </span>showdate<span class="w"> </span>era5_2020.grib
+</pre></div>
+</div>
+</section>
+</section>
+<section id="gfs-model-output-in-grib">
+<h2>GFS Model Output in GRIB<a class="headerlink" href="#gfs-model-output-in-grib" title="Link to this heading">#</a></h2>
+<p>The Global Forecast System (GFS) from NCEP is one of the most widely used forecast datasets.</p>
+<section id="gfs-grib-characteristics">
+<h3>GFS GRIB Characteristics<a class="headerlink" href="#gfs-grib-characteristics" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>GRIB2 format (since 2015)</p></li>
+<li><p>0.25 degree global grid (~13 km)</p></li>
+<li><p>16-day forecast horizon</p></li>
+<li><p>4 forecast cycles per day (00, 06, 12, 18 UTC)</p></li>
+<li><p>Hourly output for first 120 hours</p></li>
+<li><p>127 vertical levels (up to ~80 km)</p></li>
+</ul>
+</section>
+<section id="common-gfs-parameters">
+<h3>Common GFS Parameters<a class="headerlink" href="#common-gfs-parameters" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># NCEP GRIB parameter codes</span>
+<span class="c1"># TMP   = Temperature (K)</span>
+<span class="c1"># UGRD  = U-component of wind (m/s)</span>
+<span class="c1"># VGRD  = V-component of wind (m/s)</span>
+<span class="c1"># PRMSL = Pressure reduced to MSL (Pa)</span>
+<span class="c1"># APCP  = Total precipitation (kg/m^2)</span>
+<span class="c1"># RH    = Relative humidity (%)</span>
+<span class="c1"># HGT   = Geopotential height (gpm)</span>
+<span class="c1"># PWAT  = Precipitable water (kg/m^2)</span>
+</pre></div>
+</div>
+</section>
+<section id="exploring-gfs-data">
+<h3>Exploring GFS Data<a class="headerlink" href="#exploring-gfs-data" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sinfo<span class="w"> </span>gfs_20240101_00.grib2
+cdo<span class="w"> </span>-P<span class="w"> </span>showparam<span class="w"> </span>gfs_20240101_00.grib2
+cdo<span class="w"> </span>-P<span class="w"> </span>showlevel<span class="w"> </span>gfs_20240101_00.grib2
+cdo<span class="w"> </span>seltimestep,1/24<span class="w"> </span>gfs.grib2<span class="w"> </span>first_24h.grib2
+</pre></div>
+</div>
+</section>
+</section>
+<section id="icon-model-data">
+<h2>ICON Model Data<a class="headerlink" href="#icon-model-data" title="Link to this heading">#</a></h2>
+<p>The ICON (Icosahedral Non-hydrostatic) model from DWD uses an unstructured icosahedral grid.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>ICON uses an unstructured grid, which is not a standard latitude-longitude grid. CDO has special support for ICON grids.</p>
+</div>
+<section id="icon-grib-features">
+<h3>ICON GRIB Features<a class="headerlink" href="#icon-grib-features" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Unstructured (triangular) grid</p></li>
+<li><p>Global 13 km, nested domains at 6.5 km</p></li>
+<li><p>90 vertical levels</p></li>
+<li><p>7-day forecast</p></li>
+<li><p>GRIB2 encoding</p></li>
+</ul>
+</section>
+<section id="working-with-icon-data">
+<h3>Working with ICON Data<a class="headerlink" href="#working-with-icon-data" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sinfo<span class="w"> </span>icon_output.grib2
+cdo<span class="w"> </span>remapbil,r0.5x0.5<span class="w"> </span>icon_output.grib2<span class="w"> </span>regular.nc
+cdo<span class="w"> </span>remapcon,r0.25x0.25<span class="w"> </span>icon_output.grib2<span class="w"> </span>regular_con.nc
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For ICON data, use conservative remapping for flux variables and bilinear for state variables.</p>
+</div>
+</section>
+</section>
+<section id="exploring-grib-files">
+<h2>Exploring GRIB Files<a class="headerlink" href="#exploring-grib-files" title="Link to this heading">#</a></h2>
+<section id="cdo-sinfo-for-grib">
+<h3>cdo sinfo for GRIB<a class="headerlink" href="#cdo-sinfo-for-grib" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sinfo<span class="w"> </span>data.grib
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">File</span> <span class="nb">format</span><span class="p">:</span> <span class="n">GRIB2</span>
+    <span class="o">-</span><span class="mi">1</span> <span class="p">:</span> <span class="n">Institut</span> <span class="n">Source</span>   <span class="n">T</span> <span class="n">Steptype</span> <span class="n">Levels</span> <span class="n">Num</span>    <span class="n">Points</span> <span class="n">Num</span> <span class="n">Dtype</span> <span class="p">:</span> <span class="n">Parameter</span> <span class="n">name</span>
+     <span class="mi">1</span> <span class="p">:</span> <span class="n">ECMWF</span>    <span class="n">unknown</span>  <span class="n">v</span> <span class="n">instant</span>      <span class="mi">1</span>   <span class="mi">1</span>     <span class="mi">10692</span>   <span class="mi">1</span>  <span class="n">F32</span> <span class="p">:</span> <span class="n">t2m</span>
+     <span class="mi">2</span> <span class="p">:</span> <span class="n">ECMWF</span>    <span class="n">unknown</span>  <span class="n">v</span> <span class="n">instant</span>      <span class="mi">1</span>   <span class="mi">1</span>     <span class="mi">10692</span>   <span class="mi">1</span>  <span class="n">F32</span> <span class="p">:</span> <span class="n">tp</span>
+   <span class="n">Horizontal</span> <span class="n">grid</span>  <span class="p">:</span> <span class="n">regular</span> <span class="n">lonlat</span>
+</pre></div>
+</div>
+</section>
+<section id="cdo-gribmap-grib-parameter-mapping">
+<h3>cdo gribmap - GRIB Parameter Mapping<a class="headerlink" href="#cdo-gribmap-grib-parameter-mapping" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>gribmap<span class="w"> </span>data.grib
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The cdo gribmap command is essential for understanding which parameters are in a GRIB file and how they map to CDO internal naming.</p>
+</div>
+</section>
+<section id="additional-grib-exploration-commands">
+<h3>Additional GRIB Exploration Commands<a class="headerlink" href="#additional-grib-exploration-commands" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>showparam<span class="w"> </span>data.grib
+cdo<span class="w"> </span>showlevel<span class="w"> </span>data.grib
+cdo<span class="w"> </span>showcode<span class="w"> </span>data.grib
+cdo<span class="w"> </span>showcode<span class="w"> </span>-ct<span class="w"> </span>data.grib
+cdo<span class="w"> </span>showdate<span class="w"> </span>data.grib
+cdo<span class="w"> </span>showtime<span class="w"> </span>data.grib
+cdo<span class="w"> </span>output<span class="w"> </span>-griddes<span class="w"> </span>data.grib
+cdo<span class="w"> </span>-s<span class="w"> </span>ntime<span class="w"> </span>data.grib
+</pre></div>
+</div>
+</section>
+</section>
+<section id="grib-parameter-ids-and-level-types">
+<h2>GRIB Parameter IDs and Level Types<a class="headerlink" href="#grib-parameter-ids-and-level-types" title="Link to this heading">#</a></h2>
+<section id="understanding-parameter-identification">
+<h3>Understanding Parameter Identification<a class="headerlink" href="#understanding-parameter-identification" title="Link to this heading">#</a></h3>
+<p>GRIB uses a hierarchical parameter identification system:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># GRIB2 parameter identification:</span>
+<span class="c1"># Discipline (Table 0) + Category (Table 1) + Parameter Number (Table 4.2)</span>
+
+<span class="c1"># Example: Temperature at 500 hPa</span>
+<span class="c1"># Discipline: 0 (Meteorological)</span>
+<span class="c1"># Category: 0 (Temperature)</span>
+<span class="c1"># Parameter: 0 (Temperature)</span>
+<span class="c1"># Type of Level: 100 (Isobaric surface)</span>
+<span class="c1"># Level Value: 50000 (Pa)</span>
+
+<span class="c1"># In CDO, select by GRIB parameter code</span>
+cdo<span class="w"> </span>selcode,130<span class="w"> </span>data.grib<span class="w"> </span>t500.grib
+cdo<span class="w"> </span>sellevel,50000<span class="w"> </span>data.grib<span class="w"> </span>t500.grib
+cdo<span class="w"> </span><span class="k">select</span>,code<span class="o">=</span><span class="m">130</span>,level<span class="o">=</span><span class="m">50000</span><span class="w"> </span>data.grib<span class="w"> </span>t500_500hPa.grib
+</pre></div>
+</div>
+</section>
+<section id="common-grib-parameter-codes">
+<h3>Common GRIB Parameter Codes<a class="headerlink" href="#common-grib-parameter-codes" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># ECMWF codes (for ERA5, IFS)</span>
+<span class="c1"># Surface parameters</span>
+cdo<span class="w"> </span>selcode,167<span class="w"> </span>data.grib<span class="w">   </span><span class="c1"># 2m temperature</span>
+cdo<span class="w"> </span>selcode,228<span class="w"> </span>data.grib<span class="w">   </span><span class="c1"># Total precipitation</span>
+cdo<span class="w"> </span>selcode,151<span class="w"> </span>data.grib<span class="w">   </span><span class="c1"># Mean sea level pressure</span>
+cdo<span class="w"> </span>selcode,165<span class="w"> </span>data.grib<span class="w">   </span><span class="c1"># 10m U wind</span>
+cdo<span class="w"> </span>selcode,166<span class="w"> </span>data.grib<span class="w">   </span><span class="c1"># 10m V wind</span>
+cdo<span class="w"> </span>selcode,134<span class="w"> </span>data.grib<span class="w">   </span><span class="c1"># Surface pressure</span>
+
+<span class="c1"># Pressure level parameters</span>
+cdo<span class="w"> </span>selcode,130<span class="w"> </span>data.grib<span class="w">   </span><span class="c1"># Temperature</span>
+cdo<span class="w"> </span>selcode,129<span class="w"> </span>data.grib<span class="w">   </span><span class="c1"># Geopotential</span>
+cdo<span class="w"> </span>selcode,131<span class="w"> </span>data.grib<span class="w">   </span><span class="c1"># U wind</span>
+cdo<span class="w"> </span>selcode,132<span class="w"> </span>data.grib<span class="w">   </span><span class="c1"># V wind</span>
+cdo<span class="w"> </span>selcode,133<span class="w"> </span>data.grib<span class="w">   </span><span class="c1"># Specific humidity</span>
+cdo<span class="w"> </span>selcode,135<span class="w"> </span>data.grib<span class="w">   </span><span class="c1"># Vertical velocity</span>
+cdo<span class="w"> </span>selcode,157<span class="w"> </span>data.grib<span class="w">   </span><span class="c1"># Relative humidity</span>
+</pre></div>
+</div>
+</section>
+<section id="level-types">
+<h3>Level Types<a class="headerlink" href="#level-types" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># sfc  - Surface (single level)</span>
+<span class="c1"># pl   - Isobaric pressure levels (hPa)</span>
+<span class="c1"># ml   - Model levels</span>
+<span class="c1"># pt   - Potential temperature levels</span>
+<span class="c1"># hl   - Height levels above ground</span>
+<span class="c1"># pv   - Potential vorticity levels</span>
+
+cdo<span class="w"> </span><span class="k">select</span>,levtype<span class="o">=</span>pl<span class="w"> </span>data.grib<span class="w">  </span><span class="c1"># Pressure level data only</span>
+cdo<span class="w"> </span><span class="k">select</span>,levtype<span class="o">=</span>sfc<span class="w"> </span>data.grib<span class="w"> </span><span class="c1"># Surface data only</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="converting-grib-to-netcdf">
+<h2>Converting GRIB to NetCDF<a class="headerlink" href="#converting-grib-to-netcdf" title="Link to this heading">#</a></h2>
+<section id="basic-conversion">
+<h3>Basic Conversion<a class="headerlink" href="#basic-conversion" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>output.nc
+cdo<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>output.nc
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-selname,t2m<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>output.nc
+</pre></div>
+</div>
+</section>
+<section id="managing-conversion-issues">
+<h3>Managing Conversion Issues<a class="headerlink" href="#managing-conversion-issues" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-t<span class="w"> </span>ecmean<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>output.nc
+cdo<span class="w"> </span>-t<span class="w"> </span>ecmwf<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>output.nc
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-select,name<span class="o">=</span>t2m,msl<span class="w"> </span>-t<span class="w"> </span>ecmwf<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>output.nc
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-remapbil,r360x180<span class="w"> </span>-selname,t2m<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>output.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When converting GRIB to NetCDF, parameter names may not map correctly without the correct parameter table. Use the -t option to specify the table.</p>
+</div>
+</section>
+<section id="batch-conversion">
+<h3>Batch Conversion<a class="headerlink" href="#batch-conversion" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nv">INPUT_DIR</span><span class="o">=</span><span class="s2">&quot;./grib_files&quot;</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;./netcdf_files&quot;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+
+<span class="k">for</span><span class="w"> </span>gribfile<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT_DIR</span><span class="s2">&quot;</span>/*.grib<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">fname</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$gribfile</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">fname</span><span class="p">%.grib</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Converting: </span><span class="nv">$fname</span><span class="s2">&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-t<span class="w"> </span>ecmwf<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>copy<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$gribfile</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Batch conversion complete&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="grib-file-manipulation">
+<h2>GRIB File Manipulation<a class="headerlink" href="#grib-file-manipulation" title="Link to this heading">#</a></h2>
+<section id="filtering-by-parameter">
+<h3>Filtering by Parameter<a class="headerlink" href="#filtering-by-parameter" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>selname,t2m<span class="w"> </span>input.grib<span class="w"> </span>output.grib
+cdo<span class="w"> </span>selcode,167<span class="w"> </span>input.grib<span class="w"> </span>output.grib
+cdo<span class="w"> </span>selname,t2m,tp,msl<span class="w"> </span>input.grib<span class="w"> </span>output.grib
+cdo<span class="w"> </span>delete,name<span class="o">=</span>t2m<span class="w"> </span>input.grib<span class="w"> </span>without_t2m.grib
+</pre></div>
+</div>
+</section>
+<section id="filtering-by-level">
+<h3>Filtering by Level<a class="headerlink" href="#filtering-by-level" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sellevel,50000<span class="w"> </span>input.grib<span class="w"> </span>500hPa.grib
+cdo<span class="w"> </span>sellevel,85000,70000,50000,20000<span class="w"> </span>input.grib<span class="w"> </span>multi_level.grib
+cdo<span class="w"> </span>sellevel,1000/100000<span class="w"> </span>input.grib<span class="w"> </span>all_pressure.grib
+cdo<span class="w"> </span><span class="k">select</span>,levtype<span class="o">=</span>sfc<span class="w"> </span>input.grib<span class="w"> </span>surface.grib
+</pre></div>
+</div>
+</section>
+<section id="filtering-by-time">
+<h3>Filtering by Time<a class="headerlink" href="#filtering-by-time" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>seltimestep,1<span class="w"> </span>input.grib<span class="w"> </span>first.grib
+cdo<span class="w"> </span>seltimestep,1/24<span class="w"> </span>input.grib<span class="w"> </span>first_24h.grib
+cdo<span class="w"> </span>seldate,2020-06-01,2020-06-30<span class="w"> </span>input.grib<span class="w"> </span>june_2020.grib
+cdo<span class="w"> </span>selseas,JJA<span class="w"> </span>input.grib<span class="w"> </span>summer.grib
+</pre></div>
+</div>
+</section>
+<section id="spatial-subsetting">
+<h3>Spatial Subsetting<a class="headerlink" href="#spatial-subsetting" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sellonlatbox,-10,30,35,70<span class="w"> </span>input.grib<span class="w"> </span>europe.grib
+cdo<span class="w"> </span>sellonlatbox,0,360,-90,90<span class="w"> </span>input.grib<span class="w"> </span>global.grib
+cdo<span class="w"> </span>sellonlatbox,0,360,-30,30<span class="w"> </span>input.grib<span class="w"> </span>tropics.grib
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use sellonlatbox for geographic subsetting. The order is: lon_min, lon_max, lat_min, lat_max.</p>
+</div>
+</section>
+</section>
+<section id="grib-metadata-handling">
+<h2>GRIB Metadata Handling<a class="headerlink" href="#grib-metadata-handling" title="Link to this heading">#</a></h2>
+<section id="viewing-grib-metadata">
+<h3>Viewing GRIB Metadata<a class="headerlink" href="#viewing-grib-metadata" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grib_ls<span class="w"> </span>input.grib
+grib_dump<span class="w"> </span>input.grib<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-50
+cdo<span class="w"> </span>sinfo<span class="w"> </span>input.grib
+cdo<span class="w"> </span>-P<span class="w"> </span>showparam<span class="w"> </span>input.grib
+cdo<span class="w"> </span>-P<span class="w"> </span>showlevel<span class="w"> </span>input.grib
+cdo<span class="w"> </span>griddes<span class="w"> </span>input.grib
+cdo<span class="w"> </span>showattribute,centre<span class="w"> </span>input.grib
+</pre></div>
+</div>
+</section>
+<section id="modifying-grib-metadata">
+<h3>Modifying GRIB Metadata<a class="headerlink" href="#modifying-grib-metadata" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>setattribute,centre<span class="o">=</span><span class="s2">&quot;ECMWF&quot;</span><span class="w"> </span>input.grib<span class="w"> </span>output.grib
+cdo<span class="w"> </span>setdate,2020-01-01<span class="w"> </span>input.grib<span class="w"> </span>output.grib
+cdo<span class="w"> </span>settime,00:00:00<span class="w"> </span>input.grib<span class="w"> </span>output.grib
+cdo<span class="w"> </span>chname,t2m,Temperature<span class="w"> </span>input.grib<span class="w"> </span>output.grib
+cdo<span class="w"> </span>chunit,t2m,K<span class="w"> </span>input.grib<span class="w"> </span>output.grib
+</pre></div>
+</div>
+</section>
+<section id="complete-metadata-workflow">
+<h3>Complete Metadata Workflow<a class="headerlink" href="#complete-metadata-workflow" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nv">INPUT</span><span class="o">=</span><span class="s2">&quot;ecmwf_forecast.grib&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== GRIB File Analysis ===&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;File: </span><span class="nv">$INPUT</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;1. Basic Info:&quot;</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;2. Available Parameters:&quot;</span>
+cdo<span class="w"> </span>-P<span class="w"> </span>showparam<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;3. Levels:&quot;</span>
+cdo<span class="w"> </span>-P<span class="w"> </span>showlevel<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;4. Grid Description:&quot;</span>
+cdo<span class="w"> </span>griddes<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;5. Time Range:&quot;</span>
+<span class="nv">start</span><span class="o">=</span><span class="k">$(</span>cdo<span class="w"> </span>showdate<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span>
+<span class="nv">end</span><span class="o">=</span><span class="k">$(</span>cdo<span class="w"> </span>showdate<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $NF}&#39;</span><span class="k">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Start: </span><span class="nv">$start</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;End:   </span><span class="nv">$end</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Analysis Complete ===&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="working-with-ensemble-forecasts">
+<h2>Working with Ensemble Forecasts<a class="headerlink" href="#working-with-ensemble-forecasts" title="Link to this heading">#</a></h2>
+<p>GRIB2 has comprehensive support for ensemble forecast data.</p>
+<section id="ensemble-identification">
+<h3>Ensemble Identification<a class="headerlink" href="#ensemble-identification" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>-P<span class="w"> </span>showmember<span class="w"> </span>input_ensemble.grib
+cdo<span class="w"> </span>selmember,1<span class="w"> </span>input_ensemble.grib<span class="w"> </span>member1.grib
+cdo<span class="w"> </span>selmember,1/10<span class="w"> </span>input_ensemble.grib<span class="w"> </span>first_10.grib
+cdo<span class="w"> </span>ensmean<span class="w"> </span>member1.grib<span class="w"> </span>member2.grib<span class="w"> </span>member3.grib<span class="w"> </span>ens_mean.grib
+cdo<span class="w"> </span>ensstd<span class="w"> </span>member1.grib<span class="w"> </span>member2.grib<span class="w"> </span>member3.grib<span class="w"> </span>ens_spread.grib
+cdo<span class="w"> </span>ensmin<span class="w"> </span>member*.grib<span class="w"> </span>ens_min.grib
+cdo<span class="w"> </span>ensmax<span class="w"> </span>member*.grib<span class="w"> </span>ens_max.grib
+</pre></div>
+</div>
+</section>
+<section id="ensemble-processing-with-wildcards">
+<h3>Ensemble Processing with Wildcards<a class="headerlink" href="#ensemble-processing-with-wildcards" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>ensmean<span class="w"> </span>mem_*.grib<span class="w"> </span>ensemble_mean.grib
+cdo<span class="w"> </span>selmember,0<span class="w"> </span>eps.grib<span class="w"> </span>control.grib
+cdo<span class="w"> </span>expr,<span class="s1">&#39;prob = (t2m &gt; 303.15) ? 1 : 0&#39;</span><span class="w"> </span>-ensmean<span class="w"> </span>member*.grib<span class="w"> </span>prob_exceed.grib
+</pre></div>
+</div>
+</section>
+</section>
+<section id="practical-grib-processing-workflows">
+<h2>Practical GRIB Processing Workflows<a class="headerlink" href="#practical-grib-processing-workflows" title="Link to this heading">#</a></h2>
+<section id="ecmwf-forecast-processing">
+<h3>ECMWF Forecast Processing<a class="headerlink" href="#ecmwf-forecast-processing" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">set</span><span class="w"> </span>-e
+
+<span class="nv">FCST_DIR</span><span class="o">=</span><span class="s2">&quot;./forecast&quot;</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;./processed&quot;</span>
+<span class="nv">DATE</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing ECMWF forecast for </span><span class="nv">$DATE</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Extracting surface parameters...&quot;</span>
+cdo<span class="w"> </span>selname,t2m,msl,tp<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$FCST_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2">_ens.grib&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2">_surface.grib&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Extracting 500 hPa height...&quot;</span>
+cdo<span class="w"> </span>sellevel,50000<span class="w"> </span>-selname,z<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$FCST_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2">_ens.grib&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2">_z500.grib&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Computing ensemble mean...&quot;</span>
+cdo<span class="w"> </span>ensmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2">_surface.grib&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2">_z500.grib&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2">_ens_mean.grib&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Converting to NetCDF...&quot;</span>
+cdo<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>copy<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2">_ens_mean.grib&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2">_ens_mean.nc&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing complete&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="gfs-operational-workflow">
+<h3>GFS Operational Workflow<a class="headerlink" href="#gfs-operational-workflow" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;./gfs_processed&quot;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Selecting parameters and region...&quot;</span>
+cdo<span class="w"> </span>sellonlatbox,-130,-60,25,50<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-selname,TMP,PRMSL,UGRD,VGRD<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gfs_20240101_00z.grib2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/gfs_conus.grib2&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Converting temperature to Celsius...&quot;</span>
+cdo<span class="w"> </span>expr,<span class="s1">&#39;TMP_C = TMP - 273.15&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/gfs_conus.grib2&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/gfs_conus_celsius.grib2&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Saving as compressed NetCDF...&quot;</span>
+cdo<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>copy<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/gfs_conus_celsius.grib2&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/gfs_conus.nc&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Data processed successfully&quot;</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/gfs_conus.nc&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="grib-to-netcdf-with-metadata-preservation">
+<h3>GRIB to NetCDF with Metadata Preservation<a class="headerlink" href="#grib-to-netcdf-with-metadata-preservation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nv">INPUT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="nv">OUTPUT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">INPUT</span><span class="p">%.grib</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Converting </span><span class="nv">$INPUT</span><span class="s2"> to </span><span class="nv">$OUTPUT</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Input parameters:&quot;</span>
+cdo<span class="w"> </span>-P<span class="w"> </span>showparam<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Converting with ECMWF tables...&quot;</span>
+cdo<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-t<span class="w"> </span>ecmwf<span class="w"> </span>copy<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Verifying output...&quot;</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-30
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Conversion complete: </span><span class="nv">$OUTPUT</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="grib-filters-and-advanced-selection">
+<h2>GRIB Filters and Advanced Selection<a class="headerlink" href="#grib-filters-and-advanced-selection" title="Link to this heading">#</a></h2>
+<section id="complex-selection-criteria">
+<h3>Complex Selection Criteria<a class="headerlink" href="#complex-selection-criteria" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span><span class="k">select</span>,code<span class="o">=</span><span class="m">130</span>,level<span class="o">=</span><span class="m">50000</span><span class="w"> </span>data.grib<span class="w"> </span>t_500hPa.grib
+cdo<span class="w"> </span><span class="k">select</span>,name<span class="o">=</span>t2m,levtype<span class="o">=</span>sfc<span class="w"> </span>data.grib<span class="w"> </span>surface_t2m.grib
+cdo<span class="w"> </span>delete,name<span class="o">=</span>tp,levtype<span class="o">=</span>sfc<span class="w"> </span>data.grib<span class="w"> </span>no_precip.grib
+cdo<span class="w"> </span><span class="k">select</span>,member<span class="o">=</span><span class="m">1</span>,code<span class="o">=</span><span class="m">130</span><span class="w"> </span>data.grib<span class="w"> </span>member1_t.grib
+</pre></div>
+</div>
+</section>
+<section id="handling-grib-edition-detection">
+<h3>Handling GRIB Edition Detection<a class="headerlink" href="#handling-grib-edition-detection" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>-f<span class="w"> </span>grb2<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>output.grib2
+cdo<span class="w"> </span>-f<span class="w"> </span>grb<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>output.grib1
+cdo<span class="w"> </span>sinfo<span class="w"> </span>input.grib<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;File format&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="troubleshooting-grib-issues">
+<h2>Troubleshooting GRIB Issues<a class="headerlink" href="#troubleshooting-grib-issues" title="Link to this heading">#</a></h2>
+<section id="common-problems">
+<h3>Common Problems<a class="headerlink" href="#common-problems" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Problem: &quot;Unknown parameter name&quot;</span>
+<span class="c1"># Solution: Use parameter code instead of name</span>
+cdo<span class="w"> </span>selcode,167<span class="w"> </span>input.grib<span class="w"> </span>output.grib
+
+<span class="c1"># Problem: &quot;Different grid types in file&quot;</span>
+<span class="c1"># Solution: Split and process separately</span>
+cdo<span class="w"> </span><span class="k">select</span>,levtype<span class="o">=</span>sfc<span class="w"> </span>input.grib<span class="w"> </span>surface.grib
+cdo<span class="w"> </span><span class="k">select</span>,levtype<span class="o">=</span>pl<span class="w"> </span>input.grib<span class="w"> </span>pressure.grib
+
+<span class="c1"># Problem: &quot;GRIB API error in field&quot;</span>
+<span class="c1"># Solution: Check file integrity</span>
+grib_ls<span class="w"> </span>input.grib<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>ERROR
+</pre></div>
+</div>
+</section>
+</section>
+<section id="hands-on-exercises">
+<h2>Hands-On Exercises<a class="headerlink" href="#hands-on-exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-1-explore-a-grib-file">
+<h3>Exercise 1: Explore a GRIB File<a class="headerlink" href="#exercise-1-explore-a-grib-file" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-grib-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 45 </span></p>
+<section id="exercise-content">
+<p>If you have a GRIB file available, explore it with CDO:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sinfo<span class="w"> </span>data.grib
+cdo<span class="w"> </span>-P<span class="w"> </span>showparam<span class="w"> </span>data.grib
+cdo<span class="w"> </span>-P<span class="w"> </span>showlevel<span class="w"> </span>data.grib
+cdo<span class="w"> </span>griddes<span class="w"> </span>data.grib
+cdo<span class="w"> </span>showdate<span class="w"> </span>data.grib
+cdo<span class="w"> </span>ntime<span class="w"> </span>data.grib
+</pre></div>
+</div>
+<p>If you do not have a GRIB file, create a test file and explore:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>-f<span class="w"> </span>grb2<span class="w"> </span>-random,50,10,10<span class="w"> </span>test.grib
+cdo<span class="w"> </span>griddes<span class="w"> </span>test.grib
+cdo<span class="w"> </span>-P<span class="w"> </span>showparam<span class="w"> </span>test.grib
+</pre></div>
+</div>
+<p>Answer these questions:</p>
+<ol class="arabic simple">
+<li><p>What is the GRIB edition?</p></li>
+<li><p>How many parameters are in the file?</p></li>
+<li><p>What level types are present?</p></li>
+<li><p>What is the grid type and size?</p></li>
+</ol>
+</section>
+</div>
+</section>
+<section id="exercise-2-convert-grib-to-netcdf">
+<h3>Exercise 2: Convert GRIB to NetCDF<a class="headerlink" href="#exercise-2-convert-grib-to-netcdf" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-grib-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 46 </span></p>
+<section id="exercise-content">
+<p>Convert a GRIB file to NetCDF with different options:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic conversion</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>basic.nc
+
+<span class="c1"># With compression</span>
+cdo<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>compressed.nc
+
+<span class="c1"># Select specific parameter</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-selname,t2m<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>t2m_only.nc
+
+<span class="c1"># Compare file sizes</span>
+ls<span class="w"> </span>-lh<span class="w"> </span>input.grib<span class="w"> </span>basic.nc<span class="w"> </span>compressed.nc<span class="w"> </span>t2m_only.nc
+
+<span class="c1"># Verify content</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>basic.nc
+cdo<span class="w"> </span>sinfo<span class="w"> </span>compressed.nc
+
+<span class="c1"># Compare data integrity</span>
+cdo<span class="w"> </span>diff<span class="w"> </span>basic.nc<span class="w"> </span>compressed.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-3-filter-grib-by-parameter-and-level">
+<h3>Exercise 3: Filter GRIB by Parameter and Level<a class="headerlink" href="#exercise-3-filter-grib-by-parameter-and-level" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-grib-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 47 </span></p>
+<section id="exercise-content">
+<p>Practice filtering GRIB data:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create multi-level test GRIB</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>grb2<span class="w"> </span>-random,50,10,10<span class="w"> </span>multi.grib
+cdo<span class="w"> </span>settaxis,2020-01-01,00:00:00,1day<span class="w"> </span>multi.grib<span class="w"> </span>dated.grib
+
+<span class="c1"># Extract surface parameters</span>
+cdo<span class="w"> </span><span class="k">select</span>,levtype<span class="o">=</span>sfc<span class="w"> </span>dated.grib<span class="w"> </span>surface.grib
+cdo<span class="w"> </span>sinfo<span class="w"> </span>surface.grib
+
+<span class="c1"># Extract pressure level data only</span>
+cdo<span class="w"> </span><span class="k">select</span>,levtype<span class="o">=</span>pl<span class="w"> </span>dated.grib<span class="w"> </span>pressure.grib
+cdo<span class="w"> </span>sinfo<span class="w"> </span>pressure.grib
+
+<span class="c1"># Select all data except first variable</span>
+cdo<span class="w"> </span>delete,name<span class="o">=</span>var1<span class="w"> </span>dated.grib<span class="w"> </span>no_var1.grib
+cdo<span class="w"> </span>sinfo<span class="w"> </span>no_var1.grib
+
+<span class="c1"># Clean up</span>
+rm<span class="w"> </span>multi.grib<span class="w"> </span>dated.grib<span class="w"> </span>surface.grib<span class="w"> </span>pressure.grib<span class="w"> </span>no_var1.grib
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-4-batch-grib-processing-script">
+<h3>Exercise 4: Batch GRIB Processing Script<a class="headerlink" href="#exercise-4-batch-grib-processing-script" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-grib-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 48 </span></p>
+<section id="exercise-content">
+<p>Write a batch processing script for multiple GRIB files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># batch_process_grib.sh</span>
+
+<span class="nv">INPUT_DIR</span><span class="o">=</span><span class="s2">&quot;./grib_input&quot;</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;./processed_output&quot;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Batch processing GRIB files...&quot;</span>
+
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT_DIR</span><span class="s2">&quot;</span>/*.grib*<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">continue</span>
+<span class="w">    </span><span class="nv">bname</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">bname</span><span class="p">%.*</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing: </span><span class="nv">$bname</span><span class="s2">&quot;</span>
+
+<span class="w">    </span><span class="c1"># Convert to compressed NetCDF</span>
+<span class="w">    </span>cdo<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>copy<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+
+<span class="w">    </span><span class="c1"># Extract metadata summary</span>
+<span class="w">    </span>cdo<span class="w"> </span>sinfo<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">_info.txt&quot;</span>
+<span class="k">done</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Batch processing complete.&quot;</span>
+ls<span class="w"> </span>-lh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/&quot;</span>
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-5-multi-format-workflow">
+<h3>Exercise 5: Multi-Format Workflow<a class="headerlink" href="#exercise-5-multi-format-workflow" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-grib-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 49 </span></p>
+<section id="exercise-content">
+<p>Build a workflow that processes GRIB and NetCDF data together:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># multi-format workflow</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Multi-Format Processing ===&quot;</span>
+
+<span class="c1"># Step 1: Create test files</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Creating test data...&quot;</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>grb2<span class="w"> </span>-random,100,10,10<span class="w"> </span>model_output.grib2
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-random,100,10,10<span class="w"> </span>observations.nc
+
+<span class="c1"># Step 2: Convert model to NetCDF</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Converting model data...&quot;</span>
+cdo<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>copy<span class="w"> </span>model_output.grib2<span class="w"> </span>model.nc
+
+<span class="c1"># Step 3: Select same variable from both</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Selecting common variable...&quot;</span>
+cdo<span class="w"> </span>selname,var1<span class="w"> </span>model.nc<span class="w"> </span>model_var1.nc
+cdo<span class="w"> </span>selname,var1<span class="w"> </span>observations.nc<span class="w"> </span>obs_var1.nc
+
+<span class="c1"># Step 4: Compute bias</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Computing model bias...&quot;</span>
+cdo<span class="w"> </span>sub<span class="w"> </span>model_var1.nc<span class="w"> </span>obs_var1.nc<span class="w"> </span>bias.nc
+cdo<span class="w"> </span>info<span class="w"> </span>bias.nc
+
+<span class="c1"># Step 5: Generate statistics</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Statistics:&quot;</span>
+<span class="nv">model_mean</span><span class="o">=</span><span class="k">$(</span>cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>-timmean<span class="w"> </span>model_var1.nc<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span>
+<span class="nv">obs_mean</span><span class="o">=</span><span class="k">$(</span>cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>-timmean<span class="w"> </span>obs_var1.nc<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span>
+<span class="nv">bias_mean</span><span class="o">=</span><span class="k">$(</span>cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>-timmean<span class="w"> </span>bias.nc<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Model mean: </span><span class="nv">$model_mean</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Obs mean:   </span><span class="nv">$obs_mean</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Bias mean:  </span><span class="nv">$bias_mean</span><span class="s2">&quot;</span>
+
+<span class="c1"># Clean up</span>
+rm<span class="w"> </span>-f<span class="w"> </span>model_output.grib2<span class="w"> </span>model.nc<span class="w"> </span>model_var1.nc<span class="w"> </span>obs_var1.nc<span class="w"> </span>bias.nc<span class="w"> </span>observations.nc
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Workflow Complete ===&quot;</span>
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+</section>
+<section id="quiz">
+<h2>Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Quiz</p>
+<p>Test your knowledge of GRIB data handling with CDO.</p>
+</div>
+<div class="exercise admonition" id="q-grib-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 50 </span> (Question 1: What is the difference between GRIB1 and GRIB2?)</p>
+<section id="exercise-content">
+<p>A. GRIB2 is older than GRIB1
+B. GRIB2 uses a different file extension
+C. GRIB2 has more sections, better compression, and comprehensive ensemble support
+D. There is no difference</p>
+</section>
+</div>
+<div class="solution admonition" id="book/grib-solution-6">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-grib-1"> Exercise 50 (Question 1: What is the difference between GRIB1 and GRIB2?)</a></p>
+<section id="solution-content">
+<p>C. GRIB2 has 7 sections, supports JPEG2000/PNG compression, and has comprehensive ensemble support.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-grib-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 51 </span> (Question 2: Which CDO command shows the GRIB parameter mapping?)</p>
+<section id="exercise-content">
+<p>A. cdo sinfo
+B. cdo gribmap
+C. cdo param
+D. cdo showcode</p>
+</section>
+</div>
+<div class="solution admonition" id="book/grib-solution-8">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-grib-2"> Exercise 51 (Question 2: Which CDO command shows the GRIB parameter mapping?)</a></p>
+<section id="solution-content">
+<p>B. cdo gribmap</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-grib-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 52 </span> (Question 3: What does ‘cdo -f nc copy input.grib <a class="reference external" href="http://output.nc">output.nc</a>’ do?)</p>
+<section id="exercise-content">
+<p>A. Copies the GRIB file to a new location
+B. Converts GRIB to NetCDF format
+C. Merges two files
+D. Renames the file</p>
+</section>
+</div>
+<div class="solution admonition" id="book/grib-solution-10">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-grib-3"> Exercise 52 (Question 3: What does 'cdo -f nc copy input.grib <a class="reference external" href="http://output.nc">output.nc</a>' do?)</a></p>
+<section id="solution-content">
+<p>B. Converts GRIB to NetCDF format</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-grib-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 53 </span> (Question 4: Which option selects a specific GRIB parameter by its code number?)</p>
+<section id="exercise-content">
+<p>A. cdo selname,167
+B. cdo selcode,167
+C. cdo select,param=167
+D. cdo sellparam,167</p>
+</section>
+</div>
+<div class="solution admonition" id="book/grib-solution-12">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-grib-4"> Exercise 53 (Question 4: Which option selects a specific GRIB parameter by its code number?)</a></p>
+<section id="solution-content">
+<p>B. cdo selcode,167</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-grib-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 54 </span> (Question 5: What is the ECMWF center ID in GRIB tables?)</p>
+<section id="exercise-content">
+<p>A. 7
+B. 34
+C. 78
+D. 80</p>
+</section>
+</div>
+<div class="solution admonition" id="book/grib-solution-14">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-grib-5"> Exercise 54 (Question 5: What is the ECMWF center ID in GRIB tables?)</a></p>
+<section id="solution-content">
+<p>C. 78</p>
+</section>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this module, we covered:</p>
+<ul class="simple">
+<li><p><strong>GRIB format</strong>: GRIB1 vs GRIB2, section structure (0-7), WMO standards</p></li>
+<li><p><strong>Key GRIB tables</strong>: Discipline, Category, Parameter Number, Level Type, Center ID</p></li>
+<li><p><strong>Center identification</strong>: ECMWF (78), NCEP (7), DWD (80), JMA (34)</p></li>
+<li><p><strong>Data sources</strong>: ERA5, GFS, ICON, ensemble forecasts</p></li>
+<li><p><strong>Exploration commands</strong>: sinfo, gribmap, showparam, showlevel, showcode</p></li>
+<li><p><strong>Parameter selection</strong>: selcode, selname, sellevel, select with conditions</p></li>
+<li><p><strong>Format conversion</strong>: -f nc copy for GRIB to NetCDF, -t ecmwf for table handling</p></li>
+<li><p><strong>Spatial/temporal filtering</strong>: sellonlatbox, seldate, seltimestep</p></li>
+<li><p><strong>Ensemble processing</strong>: selmember, ensmean, ensstd</p></li>
+<li><p><strong>Metadata management</strong>: setattribute, grib_ls, grib_dump</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Key Points</p>
+<ul class="simple">
+<li><p>GRIB2 is the modern standard with better compression and ensemble support</p></li>
+<li><p>Always specify the parameter table (-t option) when converting to NetCDF</p></li>
+<li><p>Use code numbers (selcode) when parameter names are not recognized</p></li>
+<li><p>CDO treats GRIB and NetCDF similarly for most operations</p></li>
+<li><p>Ensemble forecasts require GRIB2 format for full support</p></li>
+</ul>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>WMO GRIB2 Specification: <a class="reference external" href="https://www.wmo.int/pages/prog/www/WMOCodes/ManualonGRIB2.pdf">https://www.wmo.int/pages/prog/www/WMOCodes/ManualonGRIB2.pdf</a></p></li>
+<li><p>ECMWF GRIB Documentation: <a class="reference external" href="https://confluence.ecmwf.int/display/UDOC/GRIB">https://confluence.ecmwf.int/display/UDOC/GRIB</a></p></li>
+<li><p>eccodes (grib_ls, grib_dump): <a class="github reference external" href="https://github.com/ecmwf/eccodes">ecmwf/eccodes</a></p></li>
+<li><p>ICON Model Data: <a class="reference external" href="https://www.dwd.de/EN/ourservices/icon_global/icon_global.html">https://www.dwd.de/EN/ourservices/icon_global/icon_global.html</a></p></li>
+<li><p>GFS Data Access: <a class="reference external" href="https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/global-forcast-system-gfs">https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/global-forcast-system-gfs</a></p></li>
+<li><p>CDO GRIB Guide: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo/wiki/Grib">https://code.mpimet.mpg.de/projects/cdo/wiki/Grib</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="netcdf.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Module 5: Working with NetCDF Data</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="temporal.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Module 7: Temporal Operators</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-format-fundamentals">GRIB Format Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grib1-vs-grib2">GRIB1 vs GRIB2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grib2-section-structure">GRIB2 Section Structure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wmo-grib-standards">WMO GRIB Standards</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-grib-tables">Key GRIB Tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-grib-center-ids">Common GRIB Center IDs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecmwf-products-and-era5-in-grib">ECMWF Products and ERA5 in GRIB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#era5-grib-structure">ERA5 GRIB Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-era5-grib-metadata">Viewing ERA5 GRIB Metadata</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gfs-model-output-in-grib">GFS Model Output in GRIB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gfs-grib-characteristics">GFS GRIB Characteristics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-gfs-parameters">Common GFS Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-gfs-data">Exploring GFS Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#icon-model-data">ICON Model Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#icon-grib-features">ICON GRIB Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-icon-data">Working with ICON Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-grib-files">Exploring GRIB Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-sinfo-for-grib">cdo sinfo for GRIB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-gribmap-grib-parameter-mapping">cdo gribmap - GRIB Parameter Mapping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-grib-exploration-commands">Additional GRIB Exploration Commands</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-parameter-ids-and-level-types">GRIB Parameter IDs and Level Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-parameter-identification">Understanding Parameter Identification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-grib-parameter-codes">Common GRIB Parameter Codes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-types">Level Types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-grib-to-netcdf">Converting GRIB to NetCDF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-conversion">Basic Conversion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-conversion-issues">Managing Conversion Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-conversion">Batch Conversion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-file-manipulation">GRIB File Manipulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-by-parameter">Filtering by Parameter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-by-level">Filtering by Level</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-by-time">Filtering by Time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-subsetting">Spatial Subsetting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-metadata-handling">GRIB Metadata Handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-grib-metadata">Viewing GRIB Metadata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-grib-metadata">Modifying GRIB Metadata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-metadata-workflow">Complete Metadata Workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-ensemble-forecasts">Working with Ensemble Forecasts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-identification">Ensemble Identification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-processing-with-wildcards">Ensemble Processing with Wildcards</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-grib-processing-workflows">Practical GRIB Processing Workflows</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecmwf-forecast-processing">ECMWF Forecast Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gfs-operational-workflow">GFS Operational Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-to-netcdf-with-metadata-preservation">GRIB to NetCDF with Metadata Preservation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-filters-and-advanced-selection">GRIB Filters and Advanced Selection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-selection-criteria">Complex Selection Criteria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-grib-edition-detection">Handling GRIB Edition Detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-grib-issues">Troubleshooting GRIB Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-problems">Common Problems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-explore-a-grib-file">Exercise 1: Explore a GRIB File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-convert-grib-to-netcdf">Exercise 2: Convert GRIB to NetCDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-filter-grib-by-parameter-and-level">Exercise 3: Filter GRIB by Parameter and Level</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-batch-grib-processing-script">Exercise 4: Batch GRIB Processing Script</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-multi-format-workflow">Exercise 5: Multi-Format Workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

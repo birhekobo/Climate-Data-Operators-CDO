@@ -1,0 +1,1334 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Module 1: Introduction to Climate Data Operators &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/introduction';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 2: Installation and Setup" href="installation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./book/introduction.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fbook/introduction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/introduction.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 1: Introduction to Climate Data Operators</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-cdo">What is CDO?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-cdo-is-important">Why CDO is Important</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-architecture">CDO Architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-operator-concept">The Operator Concept</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-flow">Data Flow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#climate-data-formats-overview">Climate Data Formats Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-network-common-data-form">NetCDF (Network Common Data Form)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-gridded-binary">GRIB (GRIdded Binary)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hdf5-hierarchical-data-format">HDF5 (Hierarchical Data Format)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geotiff">GeoTIFF</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#climate-models">Climate Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cmip5-and-cmip6">CMIP5 and CMIP6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regional-climate-models-rcms">Regional Climate Models (RCMs)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reanalysis-data">Reanalysis Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#era5">ERA5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#era-interim">ERA-Interim</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merra-2">MERRA-2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jra-55">JRA-55</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weather-datasets">Weather Datasets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gfs-global-forecast-system">GFS (Global Forecast System)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#icon">ICON</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hrrr-high-resolution-rapid-refresh">HRRR (High-Resolution Rapid Refresh)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#earth-observation-datasets">Earth Observation Datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-structure-overview">Course Structure Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-install-cdo">Exercise 1: Install CDO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-verify-installation-and-explore-help">Exercise 2: Verify Installation and Explore Help</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-explore-available-operators">Exercise 3: Explore Available Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-check-format-support">Exercise 4: Check Format Support</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-1-introduction-to-climate-data-operators">
+<h1>Module 1: Introduction to Climate Data Operators<a class="headerlink" href="#module-1-introduction-to-climate-data-operators" title="Link to this heading">#</a></h1>
+<p><img alt="Climate Data Operators training banner built from real reanalysis and satellite-derived climate data." src="../_images/hero.png" /></p>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this module, you will be able to:</p>
+<ul class="simple">
+<li><p>Explain what CDO is and why it is essential for climate data processing</p></li>
+<li><p>Describe CDO’s architecture and the operator concept</p></li>
+<li><p>Identify common climate data formats (NetCDF, GRIB, HDF5, GeoTIFF)</p></li>
+<li><p>Distinguish between different climate data sources (CMIP, reanalysis, weather, satellite)</p></li>
+<li><p>Navigate the course structure and understand what each module covers</p></li>
+<li><p>Install CDO and explore available operators</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="what-is-cdo">
+<h2>What is CDO?<a class="headerlink" href="#what-is-cdo" title="Link to this heading">#</a></h2>
+<p>Climate Data Operators (CDO) is a powerful command-line tool designed specifically for processing and analyzing climate and weather data. Developed and maintained by the Max Planck Institute for Meteorology, CDO provides a comprehensive collection of operators that work with climate data files in various formats.</p>
+<figure class="align-default" id="fig-global-temperature">
+<img alt="../_images/fig_global_temperature.png" src="../_images/fig_global_temperature.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Real near-surface air temperature from the NCEP/DOE Reanalysis-2 sample distributed with this course. Every chapter and notebook uses this and other real observational and reanalysis datasets.</span><a class="headerlink" href="#fig-global-temperature" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CDO is free and open-source software. It handles the complexities of climate data formats so that researchers can focus on science rather than data wrangling.</p>
+</div>
+<p>CDO operates on the principle of <strong>operators</strong> - individual commands that perform specific operations on climate data. These operators can be chained together to create complex processing pipelines.</p>
+</section>
+<section id="why-cdo-is-important">
+<h2>Why CDO is Important<a class="headerlink" href="#why-cdo-is-important" title="Link to this heading">#</a></h2>
+<p>Climate data processing presents several unique challenges that CDO addresses:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Efficiency</strong>: CDO is optimized for large-scale climate datasets, often processing terabytes of data efficiently without requiring a high-memory environment.</p>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Benefit</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Efficiency</strong></p></td>
+<td><p>Written in C, CDO processes data much faster than equivalent Python or R scripts</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Standardized Operations</strong></p></td>
+<td><p>Hundreds of predefined operators for common climate data tasks</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Large Dataset Handling</strong></p></td>
+<td><p>Memory-efficient processing that can handle files much larger than available RAM</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Format Agnostic</strong></p></td>
+<td><p>Works seamlessly across NetCDF, GRIB, HDF5, and other formats</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Reproducibility</strong></p></td>
+<td><p>Command-line operations are inherently reproducible and scriptable</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Parallel Processing</strong></p></td>
+<td><p>Support for multi-threaded and distributed computing</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="cdo-architecture">
+<h2>CDO Architecture<a class="headerlink" href="#cdo-architecture" title="Link to this heading">#</a></h2>
+<p>CDO’s architecture is based on a <strong>stream-oriented data flow model</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Input File(s) → [CDO Operator(s)] → Output File
+</pre></div>
+</div>
+<section id="the-operator-concept">
+<h3>The Operator Concept<a class="headerlink" href="#the-operator-concept" title="Link to this heading">#</a></h3>
+<p>Each CDO command follows this syntax:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span><span class="o">[</span>global_options<span class="o">]</span><span class="w"> </span>operator<span class="w"> </span><span class="o">[</span>operator_options<span class="o">]</span><span class="w"> </span>input_file<span class="w"> </span>output_file
+</pre></div>
+</div>
+<p>Operators are organized into categories:</p>
+<ul class="simple">
+<li><p><strong>File operations</strong>: copy, merge, split, select</p></li>
+<li><p><strong>Statistical operators</strong>: mean, sum, max, min, std</p></li>
+<li><p><strong>Temporal operators</strong>: timmean, timsum, timmax</p></li>
+<li><p><strong>Spatial operators</strong>: fldmean, fldsum, fldmax</p></li>
+<li><p><strong>Arithmetic operators</strong>: add, sub, mul, div</p></li>
+<li><p><strong>Grid operators</strong>: remap, grid interpolation</p></li>
+<li><p><strong>Conditional operators</strong>: select, ifthen, mask</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Think of CDO operators as a toolbox. Each operator does one thing well, and you can combine them like building blocks.</p>
+</div>
+</section>
+<section id="data-flow">
+<h3>Data Flow<a class="headerlink" href="#data-flow" title="Link to this heading">#</a></h3>
+<p>CDO processes data as a <strong>stream</strong>:</p>
+<ol class="arabic simple">
+<li><p>Read input file(s) in chunks</p></li>
+<li><p>Apply the operator to each chunk</p></li>
+<li><p>Write the processed result to output</p></li>
+</ol>
+<p>This streaming architecture means CDO never needs to load an entire dataset into memory at once.</p>
+</section>
+</section>
+<section id="climate-data-formats-overview">
+<h2>Climate Data Formats Overview<a class="headerlink" href="#climate-data-formats-overview" title="Link to this heading">#</a></h2>
+<p>Climate data comes in several formats, each with its own strengths:</p>
+<section id="netcdf-network-common-data-form">
+<h3>NetCDF (Network Common Data Form)<a class="headerlink" href="#netcdf-network-common-data-form" title="Link to this heading">#</a></h3>
+<p>NetCDF (.nc) is the most widely used format in climate research.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>NetCDF is self-describing - the file contains metadata about its contents, including variable names, units, dimensions, and coordinate information.</p>
+</div>
+<p><strong>Key characteristics:</strong></p>
+<ul class="simple">
+<li><p>Self-describing with embedded metadata</p></li>
+<li><p>Follows CF (Climate and Forecast) conventions</p></li>
+<li><p>Supports compression and chunking</p></li>
+<li><p>Ideal for multidimensional array data</p></li>
+</ul>
+</section>
+<section id="grib-gridded-binary">
+<h3>GRIB (GRIdded Binary)<a class="headerlink" href="#grib-gridded-binary" title="Link to this heading">#</a></h3>
+<p>GRIB (usually .grib or .grb) is the standard format from the World Meteorological Organization (WMO).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>GRIB1</p></th>
+<th class="head"><p>GRIB2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Introduced</strong></p></td>
+<td><p>1985</p></td>
+<td><p>2003</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Template-based</strong></p></td>
+<td><p>Limited</p></td>
+<td><p>Extensive</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Compression</strong></p></td>
+<td><p>Simple packing</p></td>
+<td><p>Complex packing, JPEG, PNG</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Support</strong></p></td>
+<td><p>Legacy</p></td>
+<td><p>Modern</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Sections</strong></p></td>
+<td><p>3</p></td>
+<td><p>7</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="hdf5-hierarchical-data-format">
+<h3>HDF5 (Hierarchical Data Format)<a class="headerlink" href="#hdf5-hierarchical-data-format" title="Link to this heading">#</a></h3>
+<p>HDF5 is a versatile format used in many scientific domains:</p>
+<ul class="simple">
+<li><p>Supports large, complex data</p></li>
+<li><p>Excellent compression capabilities</p></li>
+<li><p>Used by NASA for Earth observation data</p></li>
+<li><p>Can store multiple datasets in one file</p></li>
+</ul>
+</section>
+<section id="geotiff">
+<h3>GeoTIFF<a class="headerlink" href="#geotiff" title="Link to this heading">#</a></h3>
+<p>GeoTIFF embeds georeferencing information into standard TIFF images:</p>
+<ul class="simple">
+<li><p>Common for remote sensing and satellite data</p></li>
+<li><p>Supports multiple bands</p></li>
+<li><p>Widely supported in GIS software</p></li>
+</ul>
+</section>
+</section>
+<section id="climate-models">
+<h2>Climate Models<a class="headerlink" href="#climate-models" title="Link to this heading">#</a></h2>
+<p>Climate models simulate the Earth’s climate system and produce vast amounts of data.</p>
+<section id="cmip5-and-cmip6">
+<h3>CMIP5 and CMIP6<a class="headerlink" href="#cmip5-and-cmip6" title="Link to this heading">#</a></h3>
+<p>The Coupled Model Intercomparison Project (CMIP) coordinates climate model experiments worldwide.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>CMIP data is foundational for IPCC assessment reports.</p>
+</div>
+<p><strong>CMIP5</strong> (2013):</p>
+<ul class="simple">
+<li><p>50+ modeling groups</p></li>
+<li><p>~60 models</p></li>
+<li><p>RCP (Representative Concentration Pathway) scenarios</p></li>
+<li><p>Used in IPCC AR5</p></li>
+</ul>
+<p><strong>CMIP6</strong> (2019+):</p>
+<ul class="simple">
+<li><p>100+ modeling groups</p></li>
+<li><p>~100 models</p></li>
+<li><p>SSP (Shared Socioeconomic Pathway) scenarios</p></li>
+<li><p>Used in IPCC AR6</p></li>
+<li><p>Higher resolution than CMIP5</p></li>
+</ul>
+</section>
+<section id="regional-climate-models-rcms">
+<h3>Regional Climate Models (RCMs)<a class="headerlink" href="#regional-climate-models-rcms" title="Link to this heading">#</a></h3>
+<p>Regional models provide higher resolution over specific areas:</p>
+<ul class="simple">
+<li><p><strong>CORDEX</strong> - Coordinated Regional Climate Downscaling Experiment</p></li>
+<li><p><strong>RegCM</strong> - Regional Climate Model</p></li>
+<li><p><strong>WRF</strong> - Weather Research and Forecasting model</p></li>
+<li><p><strong>RACMO</strong> - Regional Atmospheric Climate Model</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>RCMs typically run at 12-50 km resolution, compared to 100-300 km for global models.</p>
+</div>
+</section>
+</section>
+<section id="reanalysis-data">
+<h2>Reanalysis Data<a class="headerlink" href="#reanalysis-data" title="Link to this heading">#</a></h2>
+<p>Reanalysis combines observations with model data to create consistent, long-term climate records.</p>
+<section id="era5">
+<h3>ERA5<a class="headerlink" href="#era5" title="Link to this heading">#</a></h3>
+<p>The European Centre for Medium-Range Weather Forecasts (ECMWF) latest reanalysis:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Coverage</strong></p></td>
+<td><p>1940-present</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Resolution</strong></p></td>
+<td><p>0.25° (~31 km)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Hourly</strong></p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Levels</strong></p></td>
+<td><p>137 hybrid sigma-pressure</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Variables</strong></p></td>
+<td><p>240+</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Size</strong></p></td>
+<td><p>~2 PB total</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="era-interim">
+<h3>ERA-Interim<a class="headerlink" href="#era-interim" title="Link to this heading">#</a></h3>
+<p>ERA-Interim is ECMWF’s earlier reanalysis (1979-2019):</p>
+<ul class="simple">
+<li><p>0.75° resolution (~79 km)</p></li>
+<li><p>6-hourly output</p></li>
+<li><p>60 vertical levels</p></li>
+<li><p>Being superseded by ERA5</p></li>
+</ul>
+</section>
+<section id="merra-2">
+<h3>MERRA-2<a class="headerlink" href="#merra-2" title="Link to this heading">#</a></h3>
+<p>NASA’s Modern-Era Retrospective analysis for Research and Applications, Version 2:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Coverage</strong></p></td>
+<td><p>1980-present</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Resolution</strong></p></td>
+<td><p>0.5° x 0.625°</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Hourly</strong></p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Focus</strong></p></td>
+<td><p>Atmospheric, hydrologic cycle</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="jra-55">
+<h3>JRA-55<a class="headerlink" href="#jra-55" title="Link to this heading">#</a></h3>
+<p>Japanese 55-year Reanalysis by JMA:</p>
+<ul class="simple">
+<li><p>1958-present</p></li>
+<li><p>0.5625° resolution</p></li>
+<li><p>3-hourly output</p></li>
+<li><p>60 levels</p></li>
+</ul>
+</section>
+</section>
+<section id="weather-datasets">
+<h2>Weather Datasets<a class="headerlink" href="#weather-datasets" title="Link to this heading">#</a></h2>
+<section id="gfs-global-forecast-system">
+<h3>GFS (Global Forecast System)<a class="headerlink" href="#gfs-global-forecast-system" title="Link to this heading">#</a></h3>
+<p>The US National Weather Service’s global model:</p>
+<ul class="simple">
+<li><p>0.25° resolution</p></li>
+<li><p>16-day forecast</p></li>
+<li><p>4 runs per day (00, 06, 12, 18 UTC)</p></li>
+<li><p>Free and open access</p></li>
+</ul>
+</section>
+<section id="icon">
+<h3>ICON<a class="headerlink" href="#icon" title="Link to this heading">#</a></h3>
+<p>The ICOsahedral Non-hydrostatic model from DWD (Germany):</p>
+<ul class="simple">
+<li><p>Uses an icosahedral grid (no poles)</p></li>
+<li><p>Global and regional versions</p></li>
+<li><p>13 km global resolution</p></li>
+<li><p>7-day forecasts</p></li>
+</ul>
+</section>
+<section id="hrrr-high-resolution-rapid-refresh">
+<h3>HRRR (High-Resolution Rapid Refresh)<a class="headerlink" href="#hrrr-high-resolution-rapid-refresh" title="Link to this heading">#</a></h3>
+<p>NOAA’s convection-allowing model:</p>
+<ul class="simple">
+<li><p>3 km resolution</p></li>
+<li><p>Hourly updates</p></li>
+<li><p>18-hour forecast</p></li>
+<li><p>US domain only</p></li>
+</ul>
+</section>
+</section>
+<section id="earth-observation-datasets">
+<h2>Earth Observation Datasets<a class="headerlink" href="#earth-observation-datasets" title="Link to this heading">#</a></h2>
+<p>Satellite data provides crucial observations of the Earth system:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CDO can process satellite-derived datasets that follow CF conventions, particularly in NetCDF format.</p>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Dataset</p></th>
+<th class="head"><p>Source</p></th>
+<th class="head"><p>Key Variables</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>MODIS</strong></p></td>
+<td><p>NASA Terra/Aqua</p></td>
+<td><p>Land surface, SST, aerosols</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>VIIRS</strong></p></td>
+<td><p>NOAA Suomi-NPP</p></td>
+<td><p>Vegetation, fires, SST</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Sentinel</strong></p></td>
+<td><p>ESA Copernicus</p></td>
+<td><p>SAR, optical imagery</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Landsat</strong></p></td>
+<td><p>NASA/USGS</p></td>
+<td><p>Land surface, vegetation</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>TRMM/GPM</strong></p></td>
+<td><p>NASA/JAXA</p></td>
+<td><p>Precipitation</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>SMAP</strong></p></td>
+<td><p>NASA</p></td>
+<td><p>Soil moisture</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="course-structure-overview">
+<h2>Course Structure Overview<a class="headerlink" href="#course-structure-overview" title="Link to this heading">#</a></h2>
+<p>This course is organized into six modules:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>Title</p></th>
+<th class="head"><p>Focus</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><strong>Introduction</strong></p></td>
+<td><p>CDO concepts, data formats, climate data sources</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><strong>Installation and Setup</strong></p></td>
+<td><p>Installing CDO on various platforms</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><strong>Linux Basics</strong></p></td>
+<td><p>Command-line skills for climate data processing</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p><strong>CDO Operators</strong></p></td>
+<td><p>File operations and dataset exploration</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p><strong>Working with NetCDF</strong></p></td>
+<td><p>NetCDF format, metadata, compression</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p><strong>Working with GRIB</strong></p></td>
+<td><p>GRIB format, conversion, manipulation</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="hands-on-exercises">
+<h2>Hands-On Exercises<a class="headerlink" href="#hands-on-exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-1-install-cdo">
+<h3>Exercise 1: Install CDO<a class="headerlink" href="#exercise-1-install-cdo" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-introduction-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1 </span></p>
+<section id="exercise-content">
+<p>Install CDO on your system using one of the following methods:</p>
+<ol class="arabic">
+<li><p><strong>Linux (Ubuntu/Debian):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>cdo
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</div>
+<ol class="arabic" start="2">
+<li><p><strong>macOS:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>cdo
+</pre></div>
+</div>
+</li>
+<li><p><strong>Windows (WSL):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install WSL first, then use Ubuntu commands</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>cdo
+</pre></div>
+</div>
+</li>
+<li><p><strong>Conda (any platform):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>cdo
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="exercise-2-verify-installation-and-explore-help">
+<h3>Exercise 2: Verify Installation and Explore Help<a class="headerlink" href="#exercise-2-verify-installation-and-explore-help" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-introduction-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 2 </span></p>
+<section id="exercise-content">
+<p>Once CDO is installed, run the following commands and note the output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>--version
+cdo<span class="w"> </span>--help<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-50
+</pre></div>
+</div>
+<p>Answer these questions:</p>
+<ol class="arabic simple">
+<li><p>What version of CDO is installed?</p></li>
+<li><p>How many operators are listed in the help output?</p></li>
+<li><p>What is the generic CDO command syntax shown in the help?</p></li>
+</ol>
+</section>
+</div>
+</section>
+<section id="exercise-3-explore-available-operators">
+<h3>Exercise 3: Explore Available Operators<a class="headerlink" href="#exercise-3-explore-available-operators" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-introduction-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 3 </span></p>
+<section id="exercise-content">
+<p>Explore CDO’s operator categories:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Count total operators</span>
+cdo<span class="w"> </span>--help<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;^ &quot;</span>
+
+<span class="c1"># List file operation operators</span>
+cdo<span class="w"> </span>--help<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;file&quot;</span>
+
+<span class="c1"># Look for temporal operators</span>
+cdo<span class="w"> </span>--help<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;tim&quot;</span>
+
+<span class="c1"># Find statistical operators</span>
+cdo<span class="w"> </span>--help<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;mean|std|min|max&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+</pre></div>
+</div>
+<p>Create a list of 10 operators that seem useful for your research.</p>
+</section>
+</div>
+</section>
+<section id="exercise-4-check-format-support">
+<h3>Exercise 4: Check Format Support<a class="headerlink" href="#exercise-4-check-format-support" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-introduction-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 4 </span></p>
+<section id="exercise-content">
+<p>Check which file formats your CDO installation supports:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>--help<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;format&quot;</span>
+cdo<span class="w"> </span>--help<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;netcdf\|grib\|hdf\|tiff&quot;</span>
+</pre></div>
+</div>
+<p>What formats are available? Which format is recommended for general use?</p>
+</section>
+</div>
+</section>
+</section>
+<section id="quiz">
+<h2>Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Quiz</p>
+<p>Test your understanding of Module 1 concepts.</p>
+</div>
+<div class="exercise admonition" id="q-introduction-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 5 </span> (Question 1: What does CDO stand for?)</p>
+<section id="exercise-content">
+<p>A. Climate Data Operators<br />
+B. Climate Database Organizer<br />
+C. Comprehensive Data Output<br />
+D. Coordinated Data Operations</p>
+</section>
+</div>
+<div class="solution admonition" id="book/introduction-solution-5">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-introduction-1"> Exercise 5 (Question 1: What does CDO stand for?)</a></p>
+<section id="solution-content">
+<p>A. Climate Data Operators</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-introduction-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 6 </span> (Question 2: Which climate data format is self-describing and most widely used in climate research?)</p>
+<section id="exercise-content">
+<p>A. GRIB2<br />
+B. HDF5<br />
+C. NetCDF<br />
+D. GeoTIFF</p>
+</section>
+</div>
+<div class="solution admonition" id="book/introduction-solution-7">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-introduction-2"> Exercise 6 (Question 2: Which climate data format is self-describing and most widely used in climate research?)</a></p>
+<section id="solution-content">
+<p>C. NetCDF</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-introduction-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 7 </span> (Question 3: Which ECMWF reanalysis product has the highest spatial resolution?)</p>
+<section id="exercise-content">
+<p>A. ERA-Interim<br />
+B. ERA5<br />
+C. ERA-20C<br />
+D. ERA-40</p>
+</section>
+</div>
+<div class="solution admonition" id="book/introduction-solution-9">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-introduction-3"> Exercise 7 (Question 3: Which ECMWF reanalysis product has the highest spatial resolution?)</a></p>
+<section id="solution-content">
+<p>B. ERA5 (0.25° resolution)</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-introduction-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 8 </span> (Question 4: CDO processes data using which architecture model?)</p>
+<section id="exercise-content">
+<p>A. Batch processing<br />
+B. Stream-oriented data flow<br />
+C. Database query<br />
+D. Client-server</p>
+</section>
+</div>
+<div class="solution admonition" id="book/introduction-solution-11">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-introduction-4"> Exercise 8 (Question 4: CDO processes data using which architecture model?)</a></p>
+<section id="solution-content">
+<p>B. Stream-oriented data flow</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-introduction-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 9 </span> (Question 5: Which CMIP iteration is used for the latest IPCC assessment report (AR6)?)</p>
+<section id="exercise-content">
+<p>A. CMIP3<br />
+B. CMIP5<br />
+C. CMIP6<br />
+D. CMIP2</p>
+</section>
+</div>
+<div class="solution admonition" id="book/introduction-solution-13">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-introduction-5"> Exercise 9 (Question 5: Which CMIP iteration is used for the latest IPCC assessment report (AR6)?)</a></p>
+<section id="solution-content">
+<p>C. CMIP6</p>
+</section>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this module, we covered:</p>
+<ul class="simple">
+<li><p><strong>CDO</strong> is a command-line tool for efficient climate data processing using operators</p></li>
+<li><p><strong>Operator architecture</strong>: <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">operator</span> <span class="pre">input</span> <span class="pre">output</span></code> with streaming data flow</p></li>
+<li><p><strong>Four main formats</strong>: NetCDF (self-describing, CF-compliant), GRIB (WMO standard), HDF5 (versatile), GeoTIFF (remote sensing)</p></li>
+<li><p><strong>Climate models</strong>: CMIP5/CMIP6 global models and regional models (CORDEX, WRF)</p></li>
+<li><p><strong>Reanalysis data</strong>: ERA5 (0.25°), ERA-Interim, MERRA-2, JRA-55</p></li>
+<li><p><strong>Weather datasets</strong>: GFS (NWS), ICON (DWD), HRRR (NOAA)</p></li>
+<li><p><strong>Earth observation</strong>: MODIS, VIIRS, Sentinel, Landsat</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Key Points</p>
+<ul class="simple">
+<li><p>CDO is the industry standard for command-line climate data processing</p></li>
+<li><p>Understanding data formats helps you choose the right tools for your data</p></li>
+<li><p>CDO’s streaming architecture handles large datasets efficiently</p></li>
+<li><p>The operator concept makes complex pipelines easy to build and reproduce</p></li>
+</ul>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>CDO Homepage: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo">https://code.mpimet.mpg.de/projects/cdo</a></p></li>
+<li><p>NetCDF Documentation: <a class="reference external" href="https://docs.unidata.ucar.edu/nug/current/">https://docs.unidata.ucar.edu/nug/current/</a></p></li>
+<li><p>GRIB Format: <a class="reference external" href="https://www.wmo.int/pages/prog/www/WMOCodes/ManualonGRIB2.pdf">https://www.wmo.int/pages/prog/www/WMOCodes/ManualonGRIB2.pdf</a></p></li>
+<li><p>CMIP6: <a class="reference external" href="https://pcmdi.llnl.gov/CMIP6/">https://pcmdi.llnl.gov/CMIP6/</a></p></li>
+<li><p>ERA5: <a class="reference external" href="https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5">https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5</a></p></li>
+<li><p>MERRA-2: <a class="reference external" href="https://gmao.gsfc.nasa.gov/reanalysis/MERRA-2/">https://gmao.gsfc.nasa.gov/reanalysis/MERRA-2/</a></p></li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="installation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Module 2: Installation and Setup</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-cdo">What is CDO?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-cdo-is-important">Why CDO is Important</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-architecture">CDO Architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-operator-concept">The Operator Concept</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-flow">Data Flow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#climate-data-formats-overview">Climate Data Formats Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-network-common-data-form">NetCDF (Network Common Data Form)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grib-gridded-binary">GRIB (GRIdded Binary)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hdf5-hierarchical-data-format">HDF5 (Hierarchical Data Format)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geotiff">GeoTIFF</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#climate-models">Climate Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cmip5-and-cmip6">CMIP5 and CMIP6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regional-climate-models-rcms">Regional Climate Models (RCMs)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reanalysis-data">Reanalysis Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#era5">ERA5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#era-interim">ERA-Interim</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merra-2">MERRA-2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jra-55">JRA-55</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weather-datasets">Weather Datasets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gfs-global-forecast-system">GFS (Global Forecast System)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#icon">ICON</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hrrr-high-resolution-rapid-refresh">HRRR (High-Resolution Rapid Refresh)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#earth-observation-datasets">Earth Observation Datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-structure-overview">Course Structure Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-install-cdo">Exercise 1: Install CDO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-verify-installation-and-explore-help">Exercise 2: Verify Installation and Explore Help</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-explore-available-operators">Exercise 3: Explore Available Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-check-format-support">Exercise 4: Check Format Support</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

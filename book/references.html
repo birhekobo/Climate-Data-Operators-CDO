@@ -1,0 +1,1720 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>References and Further Resources &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/references';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exercise 1: CDO Basics" href="../exercises/exercise_01_intro.html" />
+    <link rel="prev" title="Module 12: Capstone Projects" href="projects.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./book/references.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fbook/references.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/references.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>References and Further Resources</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-official-cdo-documentation">A. Official CDO Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-1-primary-cdo-resources">A.1 Primary CDO Resources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-2-cdo-operator-categories">A.2 CDO Operator Categories</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-netcdf-documentation-and-cf-conventions">B. NetCDF Documentation and CF Conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-1-netcdf-resources">B.1 NetCDF Resources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-2-cf-conventions">B.2 CF Conventions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3-key-cf-concepts">B.3 Key CF Concepts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-grib-documentation-and-wmo-standards">C. GRIB Documentation and WMO Standards</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-1-grib-resources">C.1 GRIB Resources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-2-working-with-grib-in-cdo">C.2 Working with GRIB in CDO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-3-key-grib-concepts">C.3 Key GRIB Concepts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-climate-data-sources">D. Climate Data Sources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-1-reanalysis-datasets">D.1 Reanalysis Datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-2-gridded-observation-datasets">D.2 Gridded Observation Datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-3-cmip6-and-climate-projections">D.3 CMIP6 and Climate Projections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-4-regional-climate-data">D.4 Regional Climate Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e-books-and-papers-on-climate-data-analysis">E. Books and Papers on Climate Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-1-essential-reading">E.1 Essential Reading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-2-cdo-specific-publications">E.2 CDO-Specific Publications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-3-climate-extremes-references">E.3 Climate Extremes References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f-software-tools-for-climate-data">F. Software Tools for Climate Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-cdo-alternatives-and-complements">F.1 CDO Alternatives and Complements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-2-installation-commands">F.2 Installation Commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-3-python-environment-setup">F.3 Python Environment Setup</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#g-glossary-of-terms">G. Glossary of Terms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h-frequently-asked-questions-faq">H. Frequently Asked Questions (FAQ)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h-1-general-cdo-questions">H.1 General CDO Questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h-2-data-specific-questions">H.2 Data-Specific Questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h-3-error-troubleshooting">H.3 Error Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i-best-practices-checklist">I. Best Practices Checklist</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-1-data-management">I.1 Data Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-2-workflow-practices">I.2 Workflow Practices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-3-quality-assurance">I.3 Quality Assurance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-4-reproducibility">I.4 Reproducibility</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#j-references-cited-throughout-the-course">J. References Cited Throughout the Course</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-1-3-introduction-and-file-operations">Module 1-3: Introduction and File Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-4-data-selection">Module 4: Data Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-5-arithmetic-operations">Module 5: Arithmetic Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-6-comparison-and-conditional-operators">Module 6: Comparison and Conditional Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-7-temporal-operators">Module 7: Temporal Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-8-spatial-operators">Module 8: Spatial Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-9-statistical-operators">Module 9: Statistical Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-10-climate-indices-and-extremes">Module 10: Climate Indices and Extremes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-11-advanced-workflows-and-automation">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-12-capstone-projects">Module 12: Capstone Projects</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-online-resources-and-communities">K. Online Resources and Communities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-1-forums-and-q-a">K.1 Forums and Q&amp;A</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-2-tutorials-and-courses">K.2 Tutorials and Courses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-3-blogs-and-articles">K.3 Blogs and Articles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-4-conferences-and-workshops">K.4 Conferences and Workshops</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-5-data-portals">K.5 Data Portals</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-troubleshooting-guide">L. Troubleshooting Guide</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-1-installation-problems">L.1 Installation Problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-2-runtime-errors">L.2 Runtime Errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-3-data-issues">L.3 Data Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-4-performance-troubleshooting">L.4 Performance Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m-key-cdo-commands-quick-reference">M. Key CDO Commands Quick Reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-version-information">N. Version Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-contributing-and-feedback">O. Contributing and Feedback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-references">Summary of References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="references-and-further-resources">
+<h1>References and Further Resources<a class="headerlink" href="#references-and-further-resources" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After reviewing this reference module, you will be able to:</p>
+<ul class="simple">
+<li><p>Locate official CDO documentation and operator references</p></li>
+<li><p>Identify appropriate climate data sources for your research</p></li>
+<li><p>Understand NetCDF and GRIB data conventions</p></li>
+<li><p>Access key software tools for climate data analysis</p></li>
+<li><p>Troubleshoot common CDO issues</p></li>
+<li><p>Follow best practices for climate data processing</p></li>
+</ul>
+</section>
+<section id="a-official-cdo-documentation">
+<h2>A. Official CDO Documentation<a class="headerlink" href="#a-official-cdo-documentation" title="Link to this heading">#</a></h2>
+<section id="a-1-primary-cdo-resources">
+<h3>A.1 Primary CDO Resources<a class="headerlink" href="#a-1-primary-cdo-resources" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Resource</p></th>
+<th class="head"><p>URL / Location</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDO Homepage</p></td>
+<td><p><a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo">https://code.mpimet.mpg.de/projects/cdo</a></p></td>
+<td><p>Project page, downloads, documentation</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDO User Guide</p></td>
+<td><p><a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo/embedded/index.html">https://code.mpimet.mpg.de/projects/cdo/embedded/index.html</a></p></td>
+<td><p>Complete reference manual</p></td>
+</tr>
+<tr class="row-even"><td><p>CDO Git Repository</p></td>
+<td><p><a class="github reference external" href="https://github.com/MPI-MagDE/cdo">MPI-MagDE/cdo</a></p></td>
+<td><p>Source code and issue tracker</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDO Mailing List</p></td>
+<td><p><a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo/lists">https://code.mpimet.mpg.de/projects/cdo/lists</a></p></td>
+<td><p>User support and announcements</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="a-2-cdo-operator-categories">
+<h3>A.2 CDO Operator Categories<a class="headerlink" href="#a-2-cdo-operator-categories" title="Link to this heading">#</a></h3>
+<p>The complete CDO operator reference is organized into these categories:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example Operators</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>File Operations</p></td>
+<td><p>File manipulation, metadata</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">copy</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">show</span></code>, <code class="docutils literal notranslate"><span class="pre">nmlist</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Selection</p></td>
+<td><p>Selecting data subsets</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">selname</span></code>, <code class="docutils literal notranslate"><span class="pre">seldate</span></code>, <code class="docutils literal notranslate"><span class="pre">sellonlatbox</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Comparison</p></td>
+<td><p>Binary and relational</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">eq</span></code>, <code class="docutils literal notranslate"><span class="pre">ne</span></code>, <code class="docutils literal notranslate"><span class="pre">gt</span></code>, <code class="docutils literal notranslate"><span class="pre">lt</span></code>, <code class="docutils literal notranslate"><span class="pre">ge</span></code>, <code class="docutils literal notranslate"><span class="pre">le</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Arithmetic</p></td>
+<td><p>Mathematical operations</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">sub</span></code>, <code class="docutils literal notranslate"><span class="pre">mul</span></code>, <code class="docutils literal notranslate"><span class="pre">div</span></code>, <code class="docutils literal notranslate"><span class="pre">sqrt</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Statistics</p></td>
+<td><p>Statistical operators</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">std</span></code>, <code class="docutils literal notranslate"><span class="pre">timpctl</span></code>, <code class="docutils literal notranslate"><span class="pre">histcount</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Temporal</p></td>
+<td><p>Time dimension operations</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">daymean</span></code>, <code class="docutils literal notranslate"><span class="pre">monmean</span></code>, <code class="docutils literal notranslate"><span class="pre">ymonsub</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Spatial</p></td>
+<td><p>Grid and space operations</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">remapbil</span></code>, <code class="docutils literal notranslate"><span class="pre">griddes</span></code>, <code class="docutils literal notranslate"><span class="pre">fldmean</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Ensemble</p></td>
+<td><p>Multi-file statistics</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ensmean</span></code>, <code class="docutils literal notranslate"><span class="pre">ensstd</span></code>, <code class="docutils literal notranslate"><span class="pre">enspctl</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Vertical</p></td>
+<td><p>Level operations</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vertmean</span></code>, <code class="docutils literal notranslate"><span class="pre">vertint</span></code>, <code class="docutils literal notranslate"><span class="pre">mlev</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Climate Indices</p></td>
+<td><p>Dedicated index operators</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">eca_fd</span></code>, <code class="docutils literal notranslate"><span class="pre">eca_cdd</span></code>, <code class="docutils literal notranslate"><span class="pre">eca_r10mm</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="b-netcdf-documentation-and-cf-conventions">
+<h2>B. NetCDF Documentation and CF Conventions<a class="headerlink" href="#b-netcdf-documentation-and-cf-conventions" title="Link to this heading">#</a></h2>
+<section id="b-1-netcdf-resources">
+<h3>B.1 NetCDF Resources<a class="headerlink" href="#b-1-netcdf-resources" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>NetCDF Official Site</strong>: <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/">https://www.unidata.ucar.edu/software/netcdf/</a></p></li>
+<li><p><strong>NetCDF User Guide</strong>: <a class="reference external" href="https://docs.unidata.ucar.edu/netcdf-c/current/">https://docs.unidata.ucar.edu/netcdf-c/current/</a></p></li>
+<li><p><strong>NetCDF Operators (NCO)</strong>: <a class="reference external" href="http://nco.sourceforge.net/">http://nco.sourceforge.net/</a></p></li>
+<li><p><strong>NCO User Guide</strong>: <a class="reference external" href="https://nco.readthedocs.io/en/latest/">https://nco.readthedocs.io/en/latest/</a></p></li>
+</ul>
+</section>
+<section id="b-2-cf-conventions">
+<h3>B.2 CF Conventions<a class="headerlink" href="#b-2-cf-conventions" title="Link to this heading">#</a></h3>
+<p>The Climate and Forecast (CF) conventions are the standard for climate and forecast data stored in NetCDF format.</p>
+<ul class="simple">
+<li><p><strong>CF Conventions Homepage</strong>: <a class="reference external" href="https://cfconventions.org/">https://cfconventions.org/</a></p></li>
+<li><p><strong>CF Metadata Conventions (PDF)</strong>: <a class="reference external" href="https://cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html">https://cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html</a></p></li>
+<li><p><strong>Standard Variable Names</strong>: <a class="reference external" href="https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html">https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html</a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Always verify that your NetCDF files follow CF conventions. CDO and most climate analysis tools rely on CF-compliant metadata for correct operation.</p>
+</div>
+</section>
+<section id="b-3-key-cf-concepts">
+<h3>B.3 Key CF Concepts<a class="headerlink" href="#b-3-key-cf-concepts" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Coordinate variables</strong>: Latitude (<code class="docutils literal notranslate"><span class="pre">lat</span></code>), longitude (<code class="docutils literal notranslate"><span class="pre">lon</span></code>), time (<code class="docutils literal notranslate"><span class="pre">time</span></code>), vertical (<code class="docutils literal notranslate"><span class="pre">lev</span></code>/<code class="docutils literal notranslate"><span class="pre">plev</span></code>)</p></li>
+<li><p><strong>Standard names</strong>: Standardized variable names like <code class="docutils literal notranslate"><span class="pre">air_temperature</span></code>, <code class="docutils literal notranslate"><span class="pre">precipitation_amount</span></code></p></li>
+<li><p><strong>Units</strong>: CF-compliant units (K for temperature, kg m-2 s-1 for precipitation rate, etc.)</p></li>
+<li><p><strong>Bounds</strong>: Cell boundaries for grid cells and time intervals</p></li>
+<li><p><strong>Cell methods</strong>: Description of how data was processed (e.g., <code class="docutils literal notranslate"><span class="pre">time:</span> <span class="pre">mean</span></code>)</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check CF compliance of a file</span>
+cdo<span class="w"> </span>nmlist<span class="w"> </span>temperature.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>findstr<span class="w"> </span><span class="s2">&quot;standard_name&quot;</span>
+cdo<span class="w"> </span>nmlist<span class="w"> </span>temperature.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>findstr<span class="w"> </span><span class="s2">&quot;units&quot;</span>
+cdo<span class="w"> </span>nmlist<span class="w"> </span>temperature.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>findstr<span class="w"> </span><span class="s2">&quot;cell_methods&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="c-grib-documentation-and-wmo-standards">
+<h2>C. GRIB Documentation and WMO Standards<a class="headerlink" href="#c-grib-documentation-and-wmo-standards" title="Link to this heading">#</a></h2>
+<section id="c-1-grib-resources">
+<h3>C.1 GRIB Resources<a class="headerlink" href="#c-1-grib-resources" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>GRIB Specification (WMO)</strong>: <a class="github reference external" href="https://github.com/wmo-im/GRIB2">wmo-im/GRIB2</a></p></li>
+<li><p><strong>ECMWF GRIB Guide</strong>: <a class="reference external" href="https://confluence.ecmwf.int/display/UDOC/GRIB+data+files">https://confluence.ecmwf.int/display/UDOC/GRIB+data+files</a></p></li>
+<li><p><strong>cfgrib (Python GRIB reader)</strong>: <a class="github reference external" href="https://github.com/ecmwf/cfgrib">ecmwf/cfgrib</a></p></li>
+</ul>
+</section>
+<section id="c-2-working-with-grib-in-cdo">
+<h3>C.2 Working with GRIB in CDO<a class="headerlink" href="#c-2-working-with-grib-in-cdo" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get GRIB information</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>grib_file.grib
+
+<span class="c1"># Convert GRIB to NetCDF</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>copy<span class="w"> </span>grib_file.grib<span class="w"> </span>netcdf_file.nc
+
+<span class="c1"># Select GRIB parameters by shortName</span>
+cdo<span class="w"> </span>selname,t<span class="w"> </span>grib_file.grib<span class="w"> </span>temperature.grib
+
+<span class="c1"># Select by GRIB level</span>
+cdo<span class="w"> </span>sellev,500<span class="w"> </span>pressure_level.grib
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>GRIB files can contain multiple parameters, levels, and time steps in a single file. Always use <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">sinfo</span></code> to understand the file structure before processing.</p>
+</div>
+</section>
+<section id="c-3-key-grib-concepts">
+<h3>C.3 Key GRIB Concepts<a class="headerlink" href="#c-3-key-grib-concepts" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>GRIB Edition</strong>: GRIB1 (older, limited), GRIB2 (current standard)</p></li>
+<li><p><strong>Parameter</strong>: Variable identified by parameter number (e.g., 130 = temperature in GRIB1)</p></li>
+<li><p><strong>Level type</strong>: Pressure level, surface, height above ground, etc.</p></li>
+<li><p><strong>Data representation</strong>: Grid type (regular lat-lon, Gaussian, reduced Gaussian)</p></li>
+<li><p><strong>Bits per value</strong>: Precision of packed data (more bits = higher precision)</p></li>
+</ul>
+</section>
+</section>
+<section id="d-climate-data-sources">
+<h2>D. Climate Data Sources<a class="headerlink" href="#d-climate-data-sources" title="Link to this heading">#</a></h2>
+<section id="d-1-reanalysis-datasets">
+<h3>D.1 Reanalysis Datasets<a class="headerlink" href="#d-1-reanalysis-datasets" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Dataset</p></th>
+<th class="head"><p>Provider</p></th>
+<th class="head"><p>Resolution</p></th>
+<th class="head"><p>Period</p></th>
+<th class="head"><p>Access</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ERA5</p></td>
+<td><p>ECMWF</p></td>
+<td><p>0.25 degree</p></td>
+<td><p>1940-present</p></td>
+<td><p><a class="reference external" href="https://cds.climate.copernicus.eu">https://cds.climate.copernicus.eu</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>ERA-Interim</p></td>
+<td><p>ECMWF</p></td>
+<td><p>0.75 degree</p></td>
+<td><p>1979-2019</p></td>
+<td><p><a class="reference external" href="https://apps.ecmwf.int/datasets">https://apps.ecmwf.int/datasets</a></p></td>
+</tr>
+<tr class="row-even"><td><p>MERRA-2</p></td>
+<td><p>NASA GMAO</p></td>
+<td><p>0.5 x 0.625 degree</p></td>
+<td><p>1980-present</p></td>
+<td><p><a class="reference external" href="https://disc.gsfc.nasa.gov">https://disc.gsfc.nasa.gov</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>JRA-55</p></td>
+<td><p>JMA</p></td>
+<td><p>0.5625 degree</p></td>
+<td><p>1958-present</p></td>
+<td><p><a class="reference external" href="https://jra.kishou.go.jp">https://jra.kishou.go.jp</a></p></td>
+</tr>
+<tr class="row-even"><td><p>NCEP/NCAR Reanalysis</p></td>
+<td><p>NOAA</p></td>
+<td><p>2.5 degree</p></td>
+<td><p>1948-present</p></td>
+<td><p><a class="reference external" href="https://psl.noaa.gov/data/reanalysis">https://psl.noaa.gov/data/reanalysis</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>CFSR</p></td>
+<td><p>NOAA</p></td>
+<td><p>0.5 degree</p></td>
+<td><p>1979-present</p></td>
+<td><p><a class="reference external" href="https://cfs.ncep.noaa.gov">https://cfs.ncep.noaa.gov</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>ERA5 is generally preferred for most applications due to its high resolution, long record, and comprehensive validation. It has largely replaced ERA-Interim.</p>
+</div>
+</section>
+<section id="d-2-gridded-observation-datasets">
+<h3>D.2 Gridded Observation Datasets<a class="headerlink" href="#d-2-gridded-observation-datasets" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Dataset</p></th>
+<th class="head"><p>Variable</p></th>
+<th class="head"><p>Resolution</p></th>
+<th class="head"><p>Period</p></th>
+<th class="head"><p>Access</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CRU TS</p></td>
+<td><p>Temperature, precipitation</p></td>
+<td><p>0.5 degree</p></td>
+<td><p>1901-present</p></td>
+<td><p><a class="reference external" href="https://crudata.uea.ac.uk/cru/data/hrg">https://crudata.uea.ac.uk/cru/data/hrg</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GPCC</p></td>
+<td><p>Precipitation</p></td>
+<td><p>1.0/0.5/0.25 degree</p></td>
+<td><p>1891-present</p></td>
+<td><p><a class="reference external" href="https://www.dwd.de/gpcc">https://www.dwd.de/gpcc</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GPCP</p></td>
+<td><p>Precipitation</p></td>
+<td><p>2.5/1.0 degree</p></td>
+<td><p>1979-present</p></td>
+<td><p><a class="reference external" href="https://psl.noaa.gov/data/gridded/gpcp">https://psl.noaa.gov/data/gridded/gpcp</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>CHIRPS</p></td>
+<td><p>Precipitation</p></td>
+<td><p>0.05 degree</p></td>
+<td><p>1981-present</p></td>
+<td><p><a class="reference external" href="https://www.chc.ucsb.edu/data/chirps">https://www.chc.ucsb.edu/data/chirps</a></p></td>
+</tr>
+<tr class="row-even"><td><p>CMAP</p></td>
+<td><p>Precipitation</p></td>
+<td><p>2.5 degree</p></td>
+<td><p>1979-present</p></td>
+<td><p><a class="reference external" href="https://psl.noaa.gov/data/gridded">https://psl.noaa.gov/data/gridded</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GISTEMP</p></td>
+<td><p>Temperature</p></td>
+<td><p>2 x 2 degree</p></td>
+<td><p>1880-present</p></td>
+<td><p><a class="reference external" href="https://data.giss.nasa.gov/gistemp">https://data.giss.nasa.gov/gistemp</a></p></td>
+</tr>
+<tr class="row-even"><td><p>HadCRUT5</p></td>
+<td><p>Temperature</p></td>
+<td><p>5 degree</p></td>
+<td><p>1850-present</p></td>
+<td><p><a class="reference external" href="https://www.metoffice.gov.uk/hadobs">https://www.metoffice.gov.uk/hadobs</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="d-3-cmip6-and-climate-projections">
+<h3>D.3 CMIP6 and Climate Projections<a class="headerlink" href="#d-3-cmip6-and-climate-projections" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>CMIP6 Data Archive (ESGF)</strong>: <a class="reference external" href="https://esgf-node.llnl.gov/projects/esgf-llnl/">https://esgf-node.llnl.gov/projects/esgf-llnl/</a></p></li>
+<li><p><strong>CDS CMIP6 Access</strong>: <a class="reference external" href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/projections-cmip6">https://cds.climate.copernicus.eu/cdsapp#!/dataset/projections-cmip6</a></p></li>
+<li><p><strong>CMIP6 Model Documentation</strong>: <a class="reference external" href="https://wcrp-cmip.github.io/CMIP6_CVs/">https://wcrp-cmip.github.io/CMIP6_CVs/</a></p></li>
+<li><p><strong>CMIP6 ScenarioMIP</strong>: <a class="reference external" href="https://esgf-node.llnl.gov/search/cmip6">https://esgf-node.llnl.gov/search/cmip6</a></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># ESGF search and download tools</span>
+<span class="c1"># Option 1: CDS API (Python)</span>
+<span class="c1"># Option 2: esgf-pyclient (Python)</span>
+<span class="c1"># Option 3: synda (command line)</span>
+</pre></div>
+</div>
+</section>
+<section id="d-4-regional-climate-data">
+<h3>D.4 Regional Climate Data<a class="headerlink" href="#d-4-regional-climate-data" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Region</p></th>
+<th class="head"><p>Dataset</p></th>
+<th class="head"><p>Provider</p></th>
+<th class="head"><p>Access</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Europe</p></td>
+<td><p>E-OBS</p></td>
+<td><p>KNMI</p></td>
+<td><p><a class="reference external" href="https://www.ecad.eu">https://www.ecad.eu</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Africa</p></td>
+<td><p>ARC2</p></td>
+<td><p>NOAA</p></td>
+<td><p><a class="reference external" href="https://psl.noaa.gov/data/gridded/data.arc2.html">https://psl.noaa.gov/data/gridded/data.arc2.html</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Africa</p></td>
+<td><p>ENACTS</p></td>
+<td><p>IRI</p></td>
+<td><p><a class="reference external" href="https://iri.columbia.edu/resources/enacts">https://iri.columbia.edu/resources/enacts</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Asia</p></td>
+<td><p>APHRODITE</p></td>
+<td><p>Chuo University</p></td>
+<td><p><a class="reference external" href="http://www.chikyu.ac.jp/precip">http://www.chikyu.ac.jp/precip</a></p></td>
+</tr>
+<tr class="row-even"><td><p>South America</p></td>
+<td><p>PISCO</p></td>
+<td><p>SENAMHI Peru</p></td>
+<td><p><a class="reference external" href="https://pisco.iri.columbia.edu">https://pisco.iri.columbia.edu</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Global</p></td>
+<td><p>WorldClim</p></td>
+<td><p>UC Berkeley</p></td>
+<td><p><a class="reference external" href="https://www.worldclim.org">https://www.worldclim.org</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="e-books-and-papers-on-climate-data-analysis">
+<h2>E. Books and Papers on Climate Data Analysis<a class="headerlink" href="#e-books-and-papers-on-climate-data-analysis" title="Link to this heading">#</a></h2>
+<section id="e-1-essential-reading">
+<h3>E.1 Essential Reading<a class="headerlink" href="#e-1-essential-reading" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Wilks, D.S. (2019)</strong>: “Statistical Methods in the Atmospheric Sciences” (4th ed.), Academic Press. <em>The definitive reference for climate statistics.</em></p></li>
+<li><p><strong>von Storch, H. &amp; Zwiers, F.W. (1999)</strong>: “Statistical Analysis in Climate Research”, Cambridge University Press. <em>Comprehensive statistical methods for climate data.</em></p></li>
+<li><p><strong>Hartmann, D.L. (2016)</strong>: “Global Physical Climatology” (2nd ed.), Elsevier. <em>Fundamental climate science background.</em></p></li>
+</ul>
+</section>
+<section id="e-2-cdo-specific-publications">
+<h3>E.2 CDO-Specific Publications<a class="headerlink" href="#e-2-cdo-specific-publications" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Schulzweida, U. (2023)</strong>: “CDO User Guide”, <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo/embedded/index.html">https://code.mpimet.mpg.de/projects/cdo/embedded/index.html</a></p></li>
+<li><p><strong>Schulzweida, U. (2019)</strong>: “CDO - Climate Data Operators”, <a class="reference external" href="https://doi.org/10.5281/zenodo.3539275">https://doi.org/10.5281/zenodo.3539275</a></p></li>
+</ul>
+</section>
+<section id="e-3-climate-extremes-references">
+<h3>E.3 Climate Extremes References<a class="headerlink" href="#e-3-climate-extremes-references" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>ETCCDI Indices</strong>: <a class="reference external" href="https://www.wcrp-climate.org/etccdi">https://www.wcrp-climate.org/etccdi</a></p></li>
+<li><p><strong>IPCC AR6 WG1 (2021)</strong>: “Climate Change 2021: The Physical Science Basis”, Cambridge University Press.</p></li>
+<li><p><strong>Sillmann, J. et al. (2013)</strong>: “Climate extremes indices in the CMIP5 multimodel ensemble”, JGR Atmospheres, 118, 1718-1732.</p></li>
+<li><p><strong>Zhang, X. et al. (2011)</strong>: “Indices for monitoring changes in extremes based on daily temperature and precipitation data”, WIREs Climate Change, 2, 851-870.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ETCCDI indices (described in Module 10) are the internationally accepted standard for climate extreme analysis. Always cite the relevant ETCCDI documentation when using these indices.</p>
+</div>
+</section>
+</section>
+<section id="f-software-tools-for-climate-data">
+<h2>F. Software Tools for Climate Data<a class="headerlink" href="#f-software-tools-for-climate-data" title="Link to this heading">#</a></h2>
+<section id="f-1-cdo-alternatives-and-complements">
+<h3>F.1 CDO Alternatives and Complements<a class="headerlink" href="#f-1-cdo-alternatives-and-complements" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tool</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Language</p></th>
+<th class="head"><p>Best For</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>NCO</strong></p></td>
+<td><p>NetCDF Operators</p></td>
+<td><p>C, CLI</p></td>
+<td><p>NetCDF file manipulation, metadata editing</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>NCL</strong></p></td>
+<td><p>NCAR Command Language</p></td>
+<td><p>NCL Script</p></td>
+<td><p>Plotting, analysis (legacy)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Ferret</strong></p></td>
+<td><p>Ocean/atmosphere analysis</p></td>
+<td><p>Ferret Script</p></td>
+<td><p>Subsetting, regridding, visualization</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Panoply</strong></p></td>
+<td><p>NetCDF viewer</p></td>
+<td><p>Java GUI</p></td>
+<td><p>Quick data inspection, basic plots</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Climate Data Store Toolbox</strong></p></td>
+<td><p>CDS tools</p></td>
+<td><p>Python</p></td>
+<td><p>ERA5 data access and analysis</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>xarray</strong></p></td>
+<td><p>Labeled arrays</p></td>
+<td><p>Python</p></td>
+<td><p>Flexible analysis, integration with Python ecosystem</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Iris</strong></p></td>
+<td><p>CF-compliant analysis</p></td>
+<td><p>Python</p></td>
+<td><p>CF-focused climate analysis</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>cf-python</strong></p></td>
+<td><p>CF data model</p></td>
+<td><p>Python</p></td>
+<td><p>CF conventions implementation</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>cfgrib</strong></p></td>
+<td><p>GRIB to Python</p></td>
+<td><p>Python</p></td>
+<td><p>Reading GRIB files in Python</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>ecCodes</strong></p></td>
+<td><p>GRIB/BUFR toolkit</p></td>
+<td><p>C/Python</p></td>
+<td><p>Encoding/decoding GRIB and BUFR</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="f-2-installation-commands">
+<h3>F.2 Installation Commands<a class="headerlink" href="#f-2-installation-commands" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conda environment (recommended for Python tools)</span>
+conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>climate<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
+conda<span class="w"> </span>activate<span class="w"> </span>climate
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>cdo<span class="w"> </span>nco<span class="w"> </span>xarray<span class="w"> </span>netcdf4<span class="w"> </span>matplotlib<span class="w"> </span>cartopy
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>plotly<span class="w"> </span>pandas<span class="w"> </span>numpy<span class="w"> </span>jupyter
+
+<span class="c1"># CDO standalone (Windows via conda)</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>cdo
+
+<span class="c1"># CDO on Ubuntu/Debian</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>cdo
+
+<span class="c1"># CDO on macOS</span>
+brew<span class="w"> </span>install<span class="w"> </span>cdo
+</pre></div>
+</div>
+</section>
+<section id="f-3-python-environment-setup">
+<h3>F.3 Python Environment Setup<a class="headerlink" href="#f-3-python-environment-setup" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># requirements.txt for climate analysis</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">cdo</span>
+<span class="sd">xarray&gt;=2023.0</span>
+<span class="sd">netCDF4</span>
+<span class="sd">matplotlib&gt;=3.5</span>
+<span class="sd">cartopy&gt;=0.20</span>
+<span class="sd">numpy</span>
+<span class="sd">pandas</span>
+<span class="sd">plotly</span>
+<span class="sd">jupyter</span>
+<span class="sd">scipy</span>
+<span class="sd">cfgrib</span>
+<span class="sd">cdsapi</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="g-glossary-of-terms">
+<h2>G. Glossary of Terms<a class="headerlink" href="#g-glossary-of-terms" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Anomaly</strong></p></td>
+<td><p>Deviation of a value from its climatological mean</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>CF Conventions</strong></p></td>
+<td><p>Climate and Forecast metadata conventions for NetCDF</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Climatology</strong></p></td>
+<td><p>Long-term average of a climate variable (usually 30 years)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>CMIP</strong></p></td>
+<td><p>Coupled Model Intercomparison Project</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Ensemble</strong></p></td>
+<td><p>Collection of model runs with different initial conditions or physics</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>ESGF</strong></p></td>
+<td><p>Earth System Grid Federation - CMIP data distribution</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>ETCCDI</strong></p></td>
+<td><p>Expert Team on Climate Change Detection and Indices</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>GRIB</strong></p></td>
+<td><p>GRIdded Binary - WMO standard format for meteorological data</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>NetCDF</strong></p></td>
+<td><p>Network Common Data Form - self-describing scientific data format</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Reanalysis</strong></p></td>
+<td><p>Gridded dataset combining observations with model forecasts via data assimilation</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Regridding</strong></p></td>
+<td><p>Interpolating data from one grid to another</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Remapping</strong></p></td>
+<td><p>Same as regridding (CDO terminology)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>SPI</strong></p></td>
+<td><p>Standardized Precipitation Index</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Trend</strong></p></td>
+<td><p>Long-term change in a variable, usually computed by linear regression</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Unstructured Grid</strong></p></td>
+<td><p>Grid without regular spatial structure (e.g., triangular mesh)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="h-frequently-asked-questions-faq">
+<h2>H. Frequently Asked Questions (FAQ)<a class="headerlink" href="#h-frequently-asked-questions-faq" title="Link to this heading">#</a></h2>
+<section id="h-1-general-cdo-questions">
+<h3>H.1 General CDO Questions<a class="headerlink" href="#h-1-general-cdo-questions" title="Link to this heading">#</a></h3>
+<p><strong>Q: CDO says “Error: Unsupported grid type” - what does this mean?</strong>
+A: Your file may use a grid type that CDO does not support for the requested operation. Try <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">griddes</span></code> to see the grid type. For reduced Gaussian or unstructured grids, remap to a regular grid first.</p>
+<p><strong>Q: How do I process very large files without running out of memory?</strong>
+A: Use the <code class="docutils literal notranslate"><span class="pre">-L</span></code> flag for large-file mode, process data in chunks by year or variable, and use piped operations to avoid intermediate files.</p>
+<p><strong>Q: What is the difference between <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">timmean</span></code>?</strong>
+A: <code class="docutils literal notranslate"><span class="pre">mean</span></code> averages over ALL dimensions. <code class="docutils literal notranslate"><span class="pre">timmean</span></code> averages only over the time dimension, preserving spatial structure.</p>
+<p><strong>Q: How do I select a specific variable from a multi-variable file?</strong>
+A: Use <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">selname,varname</span> <span class="pre">input.nc</span> <span class="pre">output.nc</span></code> or <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">selvar,varname</span> <span class="pre">input.nc</span> <span class="pre">output.nc</span></code>.</p>
+<p><strong>Q: CDO is slow on my Windows machine. What can I do?</strong>
+A: Use the <code class="docutils literal notranslate"><span class="pre">-P</span> <span class="pre">N</span></code> flag for parallel processing. Install via conda-forge (better optimization). Use pipes. Consider Windows Subsystem for Linux (WSL).</p>
+</section>
+<section id="h-2-data-specific-questions">
+<h3>H.2 Data-Specific Questions<a class="headerlink" href="#h-2-data-specific-questions" title="Link to this heading">#</a></h3>
+<p><strong>Q: My NetCDF file has longitude values from 0 to 360. How do I convert to -180 to 180?</strong>
+A: Use <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">sellonlatbox,-180,180,-90,90</span> <span class="pre">input.nc</span> <span class="pre">output.nc</span></code> or <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">remapbil,r360x180</span> <span class="pre">input.nc</span> <span class="pre">output.nc</span></code>.</p>
+<p><strong>Q: How do I handle missing values in CDO?</strong>
+A: CDO automatically recognizes missing values from the NetCDF <code class="docutils literal notranslate"><span class="pre">_FillValue</span></code> or missing_value attribute. You can set missing values with <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">setmissval,new_value</span></code>.</p>
+<p><strong>Q: What do I do if my time axis is in “days since …” but I need dates?</strong>
+A: CDO automatically interprets time units. Use <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">showdate</span></code> to see calendar dates, <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">showtime</span></code> for times.</p>
+<p><strong>Q: My GRIB file won’t load in CDO. What’s wrong?</strong>
+A: Check if ecCodes is installed (CDO needs it for GRIB2). Try <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">-v</span></code> to verify GRIB support. Convert to NetCDF first.</p>
+</section>
+<section id="h-3-error-troubleshooting">
+<h3>H.3 Error Troubleshooting<a class="headerlink" href="#h-3-error-troubleshooting" title="Link to this heading">#</a></h3>
+<p><strong>Q: “Segmentation fault” when running CDO - what now?</strong>
+A: This usually indicates a memory issue. Try: reduce parallel threads, add <code class="docutils literal notranslate"><span class="pre">-L</span></code> flag, process smaller chunks, update CDO to latest version.</p>
+<p><strong>Q: “Error: Too many open files”</strong>
+A: Increase your system’s open file limit. On Linux: <code class="docutils literal notranslate"><span class="pre">ulimit</span> <span class="pre">-n</span> <span class="pre">4096</span></code>. In pipes, ensure each operator completes before the next starts.</p>
+<p><strong>Q: “Error: cdo remapbil: Input file contains grid cell corners? Use remapycon instead?”</strong>
+A: This happens when the input has curvilinear coordinates. Try <code class="docutils literal notranslate"><span class="pre">remapycon</span></code> (conservative remapping for curvilinear grids) or preprocess with <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">setgridtype,regular</span></code>.</p>
+</section>
+</section>
+<section id="i-best-practices-checklist">
+<h2>I. Best Practices Checklist<a class="headerlink" href="#i-best-practices-checklist" title="Link to this heading">#</a></h2>
+<section id="i-1-data-management">
+<h3>I.1 Data Management<a class="headerlink" href="#i-1-data-management" title="Link to this heading">#</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Use descriptive filenames (e.g., <code class="docutils literal notranslate"><span class="pre">era5_t2m_1980_2020_monthly.nc</span></code>)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Keep raw data separate from processed data</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Document processing steps in scripts (not manual commands)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Use version control (git) for analysis scripts</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Maintain a data inventory (what, where, when, how)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Compress large files with <code class="docutils literal notranslate"><span class="pre">-z</span> <span class="pre">zip_5</span></code></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Verify data integrity after download (checksums)</p></li>
+</ul>
+</section>
+<section id="i-2-workflow-practices">
+<h3>I.2 Workflow Practices<a class="headerlink" href="#i-2-workflow-practices" title="Link to this heading">#</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Always use <code class="docutils literal notranslate"><span class="pre">-O</span></code> flag in scripts (overwrite without prompting)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Use <code class="docutils literal notranslate"><span class="pre">-P</span> <span class="pre">N</span></code> for CPU-intensive operations</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Pre-compute remapping weights when processing multiple files</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Chain operations with pipes to avoid intermediate files</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Log all processing steps with timestamps</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Use error handling (<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-euo</span> <span class="pre">pipefail</span></code> in bash)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Test pipelines on small subsets before full data runs</p></li>
+</ul>
+</section>
+<section id="i-3-quality-assurance">
+<h3>I.3 Quality Assurance<a class="headerlink" href="#i-3-quality-assurance" title="Link to this heading">#</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Inspect data with <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">info</span></code> before processing</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Check for missing values and outliers</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Verify time axis with <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">showdate</span></code></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Check grid description with <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">griddes</span></code></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Validate results against known values or benchmarks</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Document assumptions and thresholds used</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Cross-check with independent datasets</p></li>
+</ul>
+</section>
+<section id="i-4-reproducibility">
+<h3>I.4 Reproducibility<a class="headerlink" href="#i-4-reproducibility" title="Link to this heading">#</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Save all processing commands in version-controlled scripts</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Record software versions (CDO, Python libraries)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Document data sources with DOIs or access dates</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Use random seeds where applicable</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Package results with scripts and data citations</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Create README files explaining the workflow</p></li>
+</ul>
+</section>
+</section>
+<section id="j-references-cited-throughout-the-course">
+<h2>J. References Cited Throughout the Course<a class="headerlink" href="#j-references-cited-throughout-the-course" title="Link to this heading">#</a></h2>
+<section id="module-1-3-introduction-and-file-operations">
+<h3>Module 1-3: Introduction and File Operations<a class="headerlink" href="#module-1-3-introduction-and-file-operations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>CDO Project Page: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo">https://code.mpimet.mpg.de/projects/cdo</a></p></li>
+<li><p>NetCDF Format: <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/">https://www.unidata.ucar.edu/software/netcdf/</a></p></li>
+<li><p>CF Conventions: <a class="reference external" href="https://cfconventions.org/">https://cfconventions.org/</a></p></li>
+</ul>
+</section>
+<section id="module-4-data-selection">
+<h3>Module 4: Data Selection<a class="headerlink" href="#module-4-data-selection" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>CDO Selection Operators: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo/embedded/index.html#x1-480004.2">https://code.mpimet.mpg.de/projects/cdo/embedded/index.html#x1-480004.2</a></p></li>
+<li><p>GRIB Parameter Database: <a class="reference external" href="https://apps.ecmwf.int/codes/grib/param-db/">https://apps.ecmwf.int/codes/grib/param-db/</a></p></li>
+</ul>
+</section>
+<section id="module-5-arithmetic-operations">
+<h3>Module 5: Arithmetic Operations<a class="headerlink" href="#module-5-arithmetic-operations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>CDO Expression Syntax: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo/embedded/index.html#x1-700005.2">https://code.mpimet.mpg.de/projects/cdo/embedded/index.html#x1-700005.2</a></p></li>
+</ul>
+</section>
+<section id="module-6-comparison-and-conditional-operators">
+<h3>Module 6: Comparison and Conditional Operators<a class="headerlink" href="#module-6-comparison-and-conditional-operators" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>CDO Comparison Operators: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo/embedded/index.html#x1-610005.2">https://code.mpimet.mpg.de/projects/cdo/embedded/index.html#x1-610005.2</a></p></li>
+</ul>
+</section>
+<section id="module-7-temporal-operators">
+<h3>Module 7: Temporal Operators<a class="headerlink" href="#module-7-temporal-operators" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Schulzweida, U. (2023). Temporal Statistics. CDO User Guide.</p></li>
+<li><p>Trenberth, K.E. (1983). What are the Seasons? BAMS, 64, 1276-1282.</p></li>
+</ul>
+</section>
+<section id="module-8-spatial-operators">
+<h3>Module 8: Spatial Operators<a class="headerlink" href="#module-8-spatial-operators" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Jones, P.W. (1999). First- and Second-Order Conservative Remapping Schemes. MWR, 127, 2204-2210.</p></li>
+<li><p>CDO Remapping Documentation: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo/embedded/index.html#x1-870006.2">https://code.mpimet.mpg.de/projects/cdo/embedded/index.html#x1-870006.2</a></p></li>
+</ul>
+</section>
+<section id="module-9-statistical-operators">
+<h3>Module 9: Statistical Operators<a class="headerlink" href="#module-9-statistical-operators" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Wilks, D.S. (2019). Statistical Methods in the Atmospheric Sciences (4th ed.). Academic Press.</p></li>
+<li><p>CDO Statistics Documentation: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo/embedded/index.html#x1-580005.2">https://code.mpimet.mpg.de/projects/cdo/embedded/index.html#x1-580005.2</a></p></li>
+</ul>
+</section>
+<section id="module-10-climate-indices-and-extremes">
+<h3>Module 10: Climate Indices and Extremes<a class="headerlink" href="#module-10-climate-indices-and-extremes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>ETCCDI Indices: <a class="reference external" href="https://www.wcrp-climate.org/etccdi">https://www.wcrp-climate.org/etccdi</a></p></li>
+<li><p>Zhang, X. et al. (2011). Indices for monitoring changes in extremes. WIREs Climate Change, 2, 851-870.</p></li>
+<li><p>Sillmann, J. et al. (2013). Climate extremes indices in CMIP5. JGR Atmospheres, 118, 1718-1732.</p></li>
+<li><p>McKee, T.B. et al. (1993). The relationship of drought frequency and duration to time scales. AMS Conference.</p></li>
+</ul>
+</section>
+<section id="module-11-advanced-workflows-and-automation">
+<h3>Module 11: Advanced Workflows and Automation<a class="headerlink" href="#module-11-advanced-workflows-and-automation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>xarray Documentation: <a class="reference external" href="https://docs.xarray.dev/">https://docs.xarray.dev/</a></p></li>
+<li><p>Cartopy Documentation: <a class="reference external" href="https://scitools.org.uk/cartopy/">https://scitools.org.uk/cartopy/</a></p></li>
+<li><p>Plotly Documentation: <a class="reference external" href="https://plotly.com/python/">https://plotly.com/python/</a></p></li>
+<li><p>CDS API: <a class="reference external" href="https://cds.climate.copernicus.eu/api-how-to">https://cds.climate.copernicus.eu/api-how-to</a></p></li>
+</ul>
+</section>
+<section id="module-12-capstone-projects">
+<h3>Module 12: Capstone Projects<a class="headerlink" href="#module-12-capstone-projects" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>GPCC Precipitation Data: <a class="reference external" href="https://www.dwd.de/gpcc">https://www.dwd.de/gpcc</a></p></li>
+<li><p>CHIRPS Precipitation Data: <a class="reference external" href="https://www.chc.ucsb.edu/data/chirps">https://www.chc.ucsb.edu/data/chirps</a></p></li>
+<li><p>CRU TS Temperature Data: <a class="reference external" href="https://crudata.uea.ac.uk/cru/data/hrg">https://crudata.uea.ac.uk/cru/data/hrg</a></p></li>
+<li><p>ERA5 Reanalysis: <a class="reference external" href="https://cds.climate.copernicus.eu">https://cds.climate.copernicus.eu</a></p></li>
+<li><p>CMIP6 Data: <a class="reference external" href="https://esgf-node.llnl.gov/projects/esgf-llnl/">https://esgf-node.llnl.gov/projects/esgf-llnl/</a></p></li>
+</ul>
+</section>
+</section>
+<section id="k-online-resources-and-communities">
+<h2>K. Online Resources and Communities<a class="headerlink" href="#k-online-resources-and-communities" title="Link to this heading">#</a></h2>
+<section id="k-1-forums-and-q-a">
+<h3>K.1 Forums and Q&amp;A<a class="headerlink" href="#k-1-forums-and-q-a" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>CDO Mailing List</strong>: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo/lists">https://code.mpimet.mpg.de/projects/cdo/lists</a> - Official user support</p></li>
+<li><p><strong>Stack Overflow (cdo tag)</strong>: <a class="reference external" href="https://stackoverflow.com/questions/tagged/cdo">https://stackoverflow.com/questions/tagged/cdo</a> - Community Q&amp;A</p></li>
+<li><p><strong>ResearchGate CDO Topics</strong>: <a class="reference external" href="https://www.researchgate.net/topics">https://www.researchgate.net/topics</a> - Climate data analysis discussions</p></li>
+<li><p><strong>GitHub Discussions</strong>: <a class="github reference external" href="https://github.com/MPI-MagDE/cdo/discussions">MPI-MagDE/cdo#discussions</a> - Community discussions</p></li>
+</ul>
+</section>
+<section id="k-2-tutorials-and-courses">
+<h3>K.2 Tutorials and Courses<a class="headerlink" href="#k-2-tutorials-and-courses" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>CDO Examples Gallery</strong>: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo/wiki/Examples">https://code.mpimet.mpg.de/projects/cdo/wiki/Examples</a> - Official examples</p></li>
+<li><p><strong>NCAR CDO Tutorial</strong>: <a class="reference external" href="https://www.cgd.ucar.edu/cert/cdo_tutorial.pdf">https://www.cgd.ucar.edu/cert/cdo_tutorial.pdf</a> - Comprehensive tutorial</p></li>
+<li><p><strong>ECMWF CDO Training</strong>: <a class="reference external" href="https://confluence.ecmwf.int/display/CUSF">https://confluence.ecmwf.int/display/CUSF</a> - ECMWF ODB/CDO resources</p></li>
+<li><p><strong>YouTube Tutorials</strong>: Search “CDO climate data operators” for video walkthroughs</p></li>
+</ul>
+</section>
+<section id="k-3-blogs-and-articles">
+<h3>K.3 Blogs and Articles<a class="headerlink" href="#k-3-blogs-and-articles" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Climate Data Guide (NCAR)</strong>: <a class="reference external" href="https://climatedataguide.ucar.edu">https://climatedataguide.ucar.edu</a> - Dataset reviews and guidance</p></li>
+<li><p><strong>RealClimate</strong>: <a class="reference external" href="https://www.realclimate.org">https://www.realclimate.org</a> - Climate science commentary</p></li>
+<li><p><strong>Carbon Brief</strong>: <a class="reference external" href="https://www.carbonbrief.org">https://www.carbonbrief.org</a> - Climate science explained</p></li>
+<li><p><strong>Climate Lab Book</strong>: <a class="reference external" href="https://www.climate-lab-book.ac.uk">https://www.climate-lab-book.ac.uk</a> - Visualization and analysis examples</p></li>
+</ul>
+</section>
+<section id="k-4-conferences-and-workshops">
+<h3>K.4 Conferences and Workshops<a class="headerlink" href="#k-4-conferences-and-workshops" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>EGU General Assembly</strong>: <a class="reference external" href="https://www.egu.eu">https://www.egu.eu</a> - Annual European geosciences conference</p></li>
+<li><p><strong>AGU Fall Meeting</strong>: <a class="reference external" href="https://www.agu.org/annual-meeting">https://www.agu.org/annual-meeting</a> - Major US geosciences meeting</p></li>
+<li><p><strong>NCAR CDO Workshops</strong>: Periodic training sessions organized by NCAR</p></li>
+<li><p><strong>ECMWF Annual Seminar</strong>: <a class="reference external" href="https://www.ecmwf.int">https://www.ecmwf.int</a> - Annual meteorological seminars</p></li>
+</ul>
+</section>
+<section id="k-5-data-portals">
+<h3>K.5 Data Portals<a class="headerlink" href="#k-5-data-portals" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Copernicus Climate Data Store</strong>: <a class="reference external" href="https://cds.climate.copernicus.eu">https://cds.climate.copernicus.eu</a></p></li>
+<li><p><strong>NASA Earthdata</strong>: <a class="reference external" href="https://earthdata.nasa.gov">https://earthdata.nasa.gov</a></p></li>
+<li><p><strong>NOAA PSL Data</strong>: <a class="reference external" href="https://psl.noaa.gov/data">https://psl.noaa.gov/data</a></p></li>
+<li><p><strong>IRI Data Library</strong>: <a class="reference external" href="https://iridl.ldeo.columbia.edu">https://iridl.ldeo.columbia.edu</a></p></li>
+<li><p><strong>World Bank Climate Data</strong>: <a class="reference external" href="https://climateknowledgeportal.worldbank.org">https://climateknowledgeportal.worldbank.org</a></p></li>
+</ul>
+</section>
+</section>
+<section id="l-troubleshooting-guide">
+<h2>L. Troubleshooting Guide<a class="headerlink" href="#l-troubleshooting-guide" title="Link to this heading">#</a></h2>
+<section id="l-1-installation-problems">
+<h3>L.1 Installation Problems<a class="headerlink" href="#l-1-installation-problems" title="Link to this heading">#</a></h3>
+<p><strong>Problem: CDO not found after installation</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if installed</span>
+cdo<span class="w"> </span>--version
+<span class="c1"># If not found, add to PATH</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/path/to/cdo/bin:<span class="nv">$PATH</span><span class="w">   </span><span class="c1"># Linux/macOS</span>
+<span class="c1"># On Windows, ensure conda environment is activated</span>
+conda<span class="w"> </span>activate<span class="w"> </span>climate
+</pre></div>
+</div>
+<p><strong>Problem: GRIB support missing</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check GRIB support</span>
+cdo<span class="w"> </span>-v<span class="w"> </span><span class="p">|</span><span class="w"> </span>findstr<span class="w"> </span>grib
+<span class="c1"># Install ecCodes alongside CDO</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>cdo<span class="w"> </span>eccodes
+</pre></div>
+</div>
+<p><strong>Problem: Compilation errors (building from source)</strong>
+Check dependencies: zlib, hdf5, netcdf-c, eccodes, proj, udunits.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>libhdf5-dev<span class="w"> </span>libnetcdf-dev<span class="w"> </span>libeccodes-dev<span class="w">   </span><span class="c1"># Ubuntu</span>
+brew<span class="w"> </span>install<span class="w"> </span>hdf5<span class="w"> </span>netcdf<span class="w"> </span>eccodes<span class="w">                                  </span><span class="c1"># macOS</span>
+</pre></div>
+</div>
+</section>
+<section id="l-2-runtime-errors">
+<h3>L.2 Runtime Errors<a class="headerlink" href="#l-2-runtime-errors" title="Link to this heading">#</a></h3>
+<p><strong>Problem: “Segmentation fault (core dumped)”</strong></p>
+<ul class="simple">
+<li><p>Cause: Usually memory exhaustion or incompatible file format</p></li>
+<li><p>Solution: Use <code class="docutils literal notranslate"><span class="pre">-L</span></code> flag, reduce threads with <code class="docutils literal notranslate"><span class="pre">-P</span> <span class="pre">2</span></code>, process smaller chunks</p></li>
+</ul>
+<p><strong>Problem: “Unsupported grid type”</strong></p>
+<ul class="simple">
+<li><p>Cause: Reduced Gaussian, curvilinear, or unstructured grid</p></li>
+<li><p>Solution: Convert to regular grid first with <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">remapbil,r360x180</span></code></p></li>
+</ul>
+<p><strong>Problem: “Time axis not monotonic”</strong></p>
+<ul class="simple">
+<li><p>Cause: File contains unsorted or duplicate time steps</p></li>
+<li><p>Solution: Use <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">sorttimestamp</span></code> or <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">mergetime</span></code> to fix</p></li>
+</ul>
+<p><strong>Problem: “Operator not found”</strong></p>
+<ul class="simple">
+<li><p>Cause: Typo or operator not available in your CDO version</p></li>
+<li><p>Solution: Check spelling, update CDO, or use alternative operator</p></li>
+</ul>
+<p><strong>Problem: “Too many open files”</strong></p>
+<ul class="simple">
+<li><p>Cause: System file descriptor limit reached</p></li>
+<li><p>Solution: Increase limit: <code class="docutils literal notranslate"><span class="pre">ulimit</span> <span class="pre">-n</span> <span class="pre">10000</span></code> (Linux/macOS)</p></li>
+</ul>
+</section>
+<section id="l-3-data-issues">
+<h3>L.3 Data Issues<a class="headerlink" href="#l-3-data-issues" title="Link to this heading">#</a></h3>
+<p><strong>Problem: Missing values not recognized</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set missing value explicitly</span>
+cdo<span class="w"> </span>setmissval,-999<span class="w"> </span>data.nc<span class="w"> </span>fixed.nc
+</pre></div>
+</div>
+<p><strong>Problem: Longitude range 0-360 vs -180 to 180 mismatch</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert 0-360 to -180 to 180</span>
+cdo<span class="w"> </span>sellonlatbox,-180,180,-90,90<span class="w"> </span>data_360.nc<span class="w"> </span>data_180.nc
+</pre></div>
+</div>
+<p><strong>Problem: Inconsistent time units between files</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># CDO may fail when merging files with different time units</span>
+<span class="c1"># Use setreftime to standardize</span>
+cdo<span class="w"> </span>setreftime,1900-01-01,00:00:00,days<span class="w"> </span>file1.nc<span class="w"> </span>file1_fixed.nc
+</pre></div>
+</div>
+<p><strong>Problem: Variables renamed or missing expected names</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find available variables</span>
+cdo<span class="w"> </span>showname<span class="w"> </span>data.nc
+<span class="c1"># Rename if needed</span>
+cdo<span class="w"> </span>chname,old_var,new_var<span class="w"> </span>data.nc<span class="w"> </span>renamed.nc
+</pre></div>
+</div>
+</section>
+<section id="l-4-performance-troubleshooting">
+<h3>L.4 Performance Troubleshooting<a class="headerlink" href="#l-4-performance-troubleshooting" title="Link to this heading">#</a></h3>
+<p><strong>Issue: CDO is very slow</strong></p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">-P</span> <span class="pre">N</span></code> with appropriate N (number of cores)</p></li>
+<li><p>Avoid intermediate files – use pipes</p></li>
+<li><p>Check disk speed (SSD recommended for large files)</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">-f</span> <span class="pre">nc4</span> <span class="pre">-z</span> <span class="pre">zip_1</span></code> for faster compression</p></li>
+<li><p>Precompute remapping weights</p></li>
+</ul>
+<p><strong>Issue: Out of memory</strong></p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">-L</span></code> flag for large-file mode</p></li>
+<li><p>Process in temporal chunks (e.g., year by year)</p></li>
+<li><p>Select only needed variables with <code class="docutils literal notranslate"><span class="pre">selname</span></code></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">-f</span> <span class="pre">nc4</span></code> which is more memory-efficient than classic NetCDF</p></li>
+</ul>
+</section>
+</section>
+<section id="m-key-cdo-commands-quick-reference">
+<h2>M. Key CDO Commands Quick Reference<a class="headerlink" href="#m-key-cdo-commands-quick-reference" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># File Information</span>
+cdo<span class="w"> </span>infov<span class="w"> </span>file.nc<span class="w">              </span><span class="c1"># Variable info with statistics</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>file.grib<span class="w">             </span><span class="c1"># GRIB file structure</span>
+cdo<span class="w"> </span>griddes<span class="w"> </span>file.nc<span class="w">             </span><span class="c1"># Grid description</span>
+cdo<span class="w"> </span>showdate<span class="w"> </span>file.nc<span class="w">            </span><span class="c1"># Time steps as dates</span>
+cdo<span class="w"> </span>showyear<span class="w"> </span>file.nc<span class="w">            </span><span class="c1"># Years present</span>
+cdo<span class="w"> </span>nmlist<span class="w"> </span>file.nc<span class="w">              </span><span class="c1"># NetCDF metadata dump</span>
+
+<span class="c1"># Selection</span>
+cdo<span class="w"> </span>selname,tas<span class="w"> </span>file.nc<span class="w"> </span>out.nc<span class="w">  </span><span class="c1"># Select variable</span>
+cdo<span class="w"> </span>seldate,2000-01-01<span class="w"> </span>file.nc<span class="w">  </span><span class="c1"># Select by date</span>
+cdo<span class="w"> </span>sellonlatbox,lon1,lon2,lat1,lat2<span class="w"> </span>file.nc<span class="w">  </span><span class="c1"># Spatial crop</span>
+cdo<span class="w"> </span>seltimestep,1/10<span class="w"> </span>file.nc<span class="w">    </span><span class="c1"># Select timesteps 1-10</span>
+
+<span class="c1"># Temporal</span>
+cdo<span class="w"> </span>daymean<span class="w"> </span>file.nc<span class="w"> </span>out.nc<span class="w">      </span><span class="c1"># Daily mean</span>
+cdo<span class="w"> </span>monmean<span class="w"> </span>file.nc<span class="w"> </span>out.nc<span class="w">      </span><span class="c1"># Monthly mean</span>
+cdo<span class="w"> </span>yearmean<span class="w"> </span>file.nc<span class="w"> </span>out.nc<span class="w">     </span><span class="c1"># Annual mean</span>
+cdo<span class="w"> </span>ymonmean<span class="w"> </span>file.nc<span class="w"> </span>out.nc<span class="w">     </span><span class="c1"># Monthly climatology</span>
+cdo<span class="w"> </span>ymonsub<span class="w"> </span>file.nc<span class="w"> </span>out.nc<span class="w">      </span><span class="c1"># Monthly anomaly</span>
+
+<span class="c1"># Spatial</span>
+cdo<span class="w"> </span>fldmean<span class="w"> </span>file.nc<span class="w"> </span>out.nc<span class="w">      </span><span class="c1"># Spatial mean</span>
+cdo<span class="w"> </span>remapbil,target.nc<span class="w"> </span>src.nc<span class="w"> </span>out.nc<span class="w">  </span><span class="c1"># Bilinear remap</span>
+cdo<span class="w"> </span>genbil,target.nc<span class="w"> </span>src.nc<span class="w"> </span>w.nc<span class="w">     </span><span class="c1"># Generate weights</span>
+
+<span class="c1"># Statistics</span>
+cdo<span class="w"> </span>timmean<span class="w"> </span>file.nc<span class="w"> </span>out.nc<span class="w">      </span><span class="c1"># Temporal mean</span>
+cdo<span class="w"> </span>timpctl,90<span class="w"> </span>file.nc<span class="w"> </span>min.nc<span class="w"> </span>max.nc<span class="w"> </span>out.nc<span class="w">  </span><span class="c1"># 90th percentile</span>
+cdo<span class="w"> </span>ensmean<span class="w"> </span>f1.nc<span class="w"> </span>f2.nc<span class="w"> </span>f3.nc<span class="w"> </span>out.nc<span class="w">  </span><span class="c1"># Ensemble mean</span>
+
+<span class="c1"># Indices</span>
+cdo<span class="w"> </span>yearsum<span class="w"> </span>-ltc,0<span class="w"> </span>tn.nc<span class="w"> </span>fd.nc<span class="w">  </span><span class="c1"># Frost days</span>
+cdo<span class="w"> </span>yearmax<span class="w"> </span>-runsum,5<span class="w"> </span>pr.nc<span class="w"> </span>rx5day.nc<span class="w">  </span><span class="c1"># Max 5-day precip</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Save this quick reference as a cheat sheet. The most commonly used CDO operators are: <code class="docutils literal notranslate"><span class="pre">selname</span></code>, <code class="docutils literal notranslate"><span class="pre">sellonlatbox</span></code>, <code class="docutils literal notranslate"><span class="pre">seldate</span></code>, <code class="docutils literal notranslate"><span class="pre">fldmean</span></code>, <code class="docutils literal notranslate"><span class="pre">timmean</span></code>, <code class="docutils literal notranslate"><span class="pre">monmean</span></code>, <code class="docutils literal notranslate"><span class="pre">yearmean</span></code>, <code class="docutils literal notranslate"><span class="pre">ymonsub</span></code>, <code class="docutils literal notranslate"><span class="pre">remapbil</span></code>, <code class="docutils literal notranslate"><span class="pre">ensmean</span></code>, and <code class="docutils literal notranslate"><span class="pre">output</span></code>.</p>
+</div>
+</section>
+<section id="n-version-information">
+<h2>N. Version Information<a class="headerlink" href="#n-version-information" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check your CDO version</span>
+cdo<span class="w"> </span>--version
+
+<span class="c1"># Check installed components (NetCDF, GRIB, etc.)</span>
+cdo<span class="w"> </span>-v
+
+<span class="c1"># Check Python library versions</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import xarray; print(xarray.__version__)&quot;</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import cartopy; print(cartopy.__version__)&quot;</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import matplotlib; print(matplotlib.__version__)&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This course was written for CDO version 2.x. Most commands are also compatible with CDO 1.9.x, but some newer operators may not be available. Check the CDO changelog for version-specific features.</p>
+</div>
+</section>
+<section id="o-contributing-and-feedback">
+<h2>O. Contributing and Feedback<a class="headerlink" href="#o-contributing-and-feedback" title="Link to this heading">#</a></h2>
+<p>This training course is maintained by the course authors. Contributions, corrections, and suggestions are welcome.</p>
+<ul class="simple">
+<li><p><strong>Course Repository</strong>: [Course URL / GitHub link]</p></li>
+<li><p><strong>Issue Tracker</strong>: [Link to issue tracker]</p></li>
+<li><p><strong>License</strong>: CC BY 4.0 International</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The examples in this course use sample data paths and filenames. Adapt these paths to your local data organization. All commands have been tested but results may vary depending on CDO version, operating system, and data characteristics.</p>
+</div>
+</section>
+<section id="summary-of-references">
+<h2>Summary of References<a class="headerlink" href="#summary-of-references" title="Link to this heading">#</a></h2>
+<p>This reference module provides:</p>
+<ul class="simple">
+<li><p>Complete documentation and links for CDO, NetCDF, GRIB, and CF conventions</p></li>
+<li><p>Comprehensive list of climate data sources (reanalysis, observations, projections)</p></li>
+<li><p>FAQ section addressing common CDO errors and solutions</p></li>
+<li><p>Best practices checklist for data management and reproducibility</p></li>
+<li><p>Glossary of key climate data terminology</p></li>
+<li><p>Quick reference of most frequently used CDO commands</p></li>
+<li><p>All references cited throughout the 12-module course</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Bookmark this reference module for quick access during your climate data analysis work. The best practices checklist (Section I) is particularly useful when setting up new analysis projects.</p>
+</div>
+<p>This concludes the Climate Data Operators (CDO) Training Course. Thank you for your dedication to learning climate data analysis.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="projects.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Module 12: Capstone Projects</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../exercises/exercise_01_intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercise 1: CDO Basics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-official-cdo-documentation">A. Official CDO Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-1-primary-cdo-resources">A.1 Primary CDO Resources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-2-cdo-operator-categories">A.2 CDO Operator Categories</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-netcdf-documentation-and-cf-conventions">B. NetCDF Documentation and CF Conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-1-netcdf-resources">B.1 NetCDF Resources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-2-cf-conventions">B.2 CF Conventions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3-key-cf-concepts">B.3 Key CF Concepts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-grib-documentation-and-wmo-standards">C. GRIB Documentation and WMO Standards</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-1-grib-resources">C.1 GRIB Resources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-2-working-with-grib-in-cdo">C.2 Working with GRIB in CDO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-3-key-grib-concepts">C.3 Key GRIB Concepts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-climate-data-sources">D. Climate Data Sources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-1-reanalysis-datasets">D.1 Reanalysis Datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-2-gridded-observation-datasets">D.2 Gridded Observation Datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-3-cmip6-and-climate-projections">D.3 CMIP6 and Climate Projections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-4-regional-climate-data">D.4 Regional Climate Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e-books-and-papers-on-climate-data-analysis">E. Books and Papers on Climate Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-1-essential-reading">E.1 Essential Reading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-2-cdo-specific-publications">E.2 CDO-Specific Publications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-3-climate-extremes-references">E.3 Climate Extremes References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f-software-tools-for-climate-data">F. Software Tools for Climate Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-cdo-alternatives-and-complements">F.1 CDO Alternatives and Complements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-2-installation-commands">F.2 Installation Commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-3-python-environment-setup">F.3 Python Environment Setup</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#g-glossary-of-terms">G. Glossary of Terms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h-frequently-asked-questions-faq">H. Frequently Asked Questions (FAQ)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h-1-general-cdo-questions">H.1 General CDO Questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h-2-data-specific-questions">H.2 Data-Specific Questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h-3-error-troubleshooting">H.3 Error Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i-best-practices-checklist">I. Best Practices Checklist</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-1-data-management">I.1 Data Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-2-workflow-practices">I.2 Workflow Practices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-3-quality-assurance">I.3 Quality Assurance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-4-reproducibility">I.4 Reproducibility</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#j-references-cited-throughout-the-course">J. References Cited Throughout the Course</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-1-3-introduction-and-file-operations">Module 1-3: Introduction and File Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-4-data-selection">Module 4: Data Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-5-arithmetic-operations">Module 5: Arithmetic Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-6-comparison-and-conditional-operators">Module 6: Comparison and Conditional Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-7-temporal-operators">Module 7: Temporal Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-8-spatial-operators">Module 8: Spatial Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-9-statistical-operators">Module 9: Statistical Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-10-climate-indices-and-extremes">Module 10: Climate Indices and Extremes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-11-advanced-workflows-and-automation">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-12-capstone-projects">Module 12: Capstone Projects</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-online-resources-and-communities">K. Online Resources and Communities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-1-forums-and-q-a">K.1 Forums and Q&amp;A</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-2-tutorials-and-courses">K.2 Tutorials and Courses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-3-blogs-and-articles">K.3 Blogs and Articles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-4-conferences-and-workshops">K.4 Conferences and Workshops</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-5-data-portals">K.5 Data Portals</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-troubleshooting-guide">L. Troubleshooting Guide</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-1-installation-problems">L.1 Installation Problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-2-runtime-errors">L.2 Runtime Errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-3-data-issues">L.3 Data Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-4-performance-troubleshooting">L.4 Performance Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#m-key-cdo-commands-quick-reference">M. Key CDO Commands Quick Reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-version-information">N. Version Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-contributing-and-feedback">O. Contributing and Feedback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-references">Summary of References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

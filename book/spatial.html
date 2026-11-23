@@ -1,0 +1,1540 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Module 8: Spatial Operators &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/spatial';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 9: Statistical Operators" href="statistics.html" />
+    <link rel="prev" title="Module 7: Temporal Operators" href="temporal.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./book/spatial.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fbook/spatial.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/spatial.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 8: Spatial Operators</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-domain-operations">8.1 Spatial Domain Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-by-latitude-longitude-box">8.1.1 Selecting by Latitude/Longitude Box</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regions-of-interest">8.1.2 Regions of Interest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-by-grid-index-box">8.1.3 Selecting by Grid Index Box</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-specific-grid">8.1.4 Selecting Specific Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subsampling">8.1.5 Subsampling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remapping-and-regridding">8.2 Remapping and Regridding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bilinear-interpolation">8.2.1 Bilinear Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bicubic-interpolation">8.2.2 Bicubic Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conservative-interpolation">8.2.3 Conservative Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-weighted-interpolation">8.2.4 Distance-Weighted Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nearest-neighbor">8.2.5 Nearest Neighbor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remapping-methods-comparison-table">8.2.6 Remapping Methods Comparison Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-interpolation-weights">8.2.7 Generating Interpolation Weights</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-grid-specification">8.2.8 Target Grid Specification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-operations">8.3 Grid Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-grids">8.3.1 Describing Grids</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-grids">8.3.2 Setting Grids</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-cell-areas">8.3.3 Grid Cell Areas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-editing">8.3.4 Grid Editing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-statistics">8.4 Spatial Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#field-mean-spatial-average">8.4.1 Field Mean (Spatial Average)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-field-statistics">8.4.2 Other Field Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tropical-mean-example">8.4.3 Tropical Mean Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zonal-statistics">8.4.4 Zonal Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#meridional-statistics">8.4.5 Meridional Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-types-and-conversion">8.5 Grid Types and Conversion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-lat-lon-grid">8.5.1 Regular Lat-Lon Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-grid">8.5.2 Gaussian Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduced-gaussian-grid">8.5.3 Reduced Gaussian Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curvilinear-grid">8.5.4 Curvilinear Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unstructured-grid">8.5.5 Unstructured Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-grid-types">8.5.6 Converting Grid Types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#area-operations">8.6 Area Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#area-weighted-average">8.6.1 Area-Weighted Average</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-area-operators">8.6.2 Other Area Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-area-weighting">8.6.3 Manual Area Weighting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflow-examples">8.7 Practical Workflow Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regional-climate-extraction">8.7.1 Regional Climate Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-regridding">8.7.2 Multi-Model Regridding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-mean-time-series">8.7.3 Global Mean Time Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regional-masks">8.7.4 Regional Masks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">8.8 Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8-1-crop-and-analyze-a-region">Exercise 8.1: Crop and Analyze a Region</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8-2-regridding-between-resolutions">Exercise 8.2: Regridding Between Resolutions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8-3-regional-average-computation">Exercise 8.3: Regional Average Computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8-4-multi-model-remapping">Exercise 8.4: Multi-Model Remapping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8-5-global-mean-temperature">Exercise 8.5: Global Mean Temperature</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">8.9 Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-8-spatial-operators">
+<h1>Module 8: Spatial Operators<a class="headerlink" href="#module-8-spatial-operators" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After completing this module, you will be able to:</p>
+<ul class="simple">
+<li><p>Extract spatial subsets using coordinate boxes and grid indices</p></li>
+<li><p>Remap data between different grid types and resolutions</p></li>
+<li><p>Describe, set, and manipulate grids</p></li>
+<li><p>Compute spatial statistics (field means, maxima, etc.)</p></li>
+<li><p>Work with different grid types (regular, Gaussian, reduced, curvilinear, unstructured)</p></li>
+<li><p>Perform area-weighted statistics</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<p>This module assumes you have completed Modules 1-7 or are familiar with basic CDO commands and have a working NetCDF file with spatial dimensions (latitude/longitude).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will need a global or regional dataset with latitude and longitude coordinates for the examples in this module. A global temperature or precipitation field works well. Sample files are available from the course data repository.</p>
+</div>
+<figure class="align-default" id="fig-ethiopia-precipitation">
+<img alt="../_images/fig_ethiopia_precipitation.png" src="../_images/fig_ethiopia_precipitation.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Real CHIRPS precipitation climatology for Ethiopia, used by the spatial and climate-index examples in this course.</span><a class="headerlink" href="#fig-ethiopia-precipitation" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-ethiopia-season-map-spatial">
+<img alt="../_images/fig_ethiopia_season_map.png" src="../_images/fig_ethiopia_season_map.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Seasonal precipitation climatology over Ethiopia derived from the same real CHIRPS dataset: Belgi, Kiremt, Bega, and annual total. Regional subsetting and remapping of these fields is demonstrated in the examples below.</span><a class="headerlink" href="#fig-ethiopia-season-map-spatial" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="spatial-domain-operations">
+<h2>8.1 Spatial Domain Operations<a class="headerlink" href="#spatial-domain-operations" title="Link to this heading">#</a></h2>
+<p>Spatial domain operators subset data by geographical region or grid index.</p>
+<section id="selecting-by-latitude-longitude-box">
+<h3>8.1.1 Selecting by Latitude/Longitude Box<a class="headerlink" href="#selecting-by-latitude-longitude-box" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">sellonlatbox</span></code> operator extracts a rectangular region:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sellonlatbox,-10,40,30,70<span class="w"> </span>europe.nc<span class="w"> </span>global.nc
+</pre></div>
+</div>
+<p>The syntax is <code class="docutils literal notranslate"><span class="pre">sellonlatbox,x1,x2,y1,y2</span></code> where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x1</span></code> = western longitude boundary</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x2</span></code> = eastern longitude boundary</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y1</span></code> = southern latitude boundary</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y2</span></code> = northern latitude boundary</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For global data spanning 0-360°E, use longitudes in the 0-360 convention. For -180 to 180°E, use negative values for western longitudes.</p>
+</div>
+</section>
+<section id="regions-of-interest">
+<h3>8.1.2 Regions of Interest<a class="headerlink" href="#regions-of-interest" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tropical band</span>
+cdo<span class="w"> </span>sellonlatbox,-180,180,-30,30<span class="w"> </span>tropics.nc<span class="w"> </span>global.nc
+
+<span class="c1"># Europe</span>
+cdo<span class="w"> </span>sellonlatbox,-10,40,30,70<span class="w"> </span>europe.nc<span class="w"> </span>global.nc
+
+<span class="c1"># Africa</span>
+cdo<span class="w"> </span>sellonlatbox,-20,55,-35,38<span class="w"> </span>africa.nc<span class="w"> </span>global.nc
+
+<span class="c1"># South America</span>
+cdo<span class="w"> </span>sellonlatbox,-85,-30,-60,15<span class="w"> </span>south_america.nc<span class="w"> </span>global.nc
+
+<span class="c1"># Southeast Asia</span>
+cdo<span class="w"> </span>sellonlatbox,90,150,-15,30<span class="w"> </span>se_asia.nc<span class="w"> </span>global.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">sellonlatbox</span></code> preserves the original grid structure but reduces the grid dimensions. It does <strong>not</strong> remap or interpolate — it simply crops.</p>
+</div>
+</section>
+<section id="selecting-by-grid-index-box">
+<h3>8.1.3 Selecting by Grid Index Box<a class="headerlink" href="#selecting-by-grid-index-box" title="Link to this heading">#</a></h3>
+<p>When you know the grid indices rather than coordinates:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>selindexbox,10,50,20,60<span class="w"> </span>indonesia_subset.nc<span class="w"> </span>global.nc
+</pre></div>
+</div>
+<p>The syntax is <code class="docutils literal notranslate"><span class="pre">selindexbox,ilon1,ilon2,ilat1,ilat2</span></code> — all 1-indexed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">selindexbox</span></code> is faster than <code class="docutils literal notranslate"><span class="pre">sellonlatbox</span></code> because it avoids coordinate lookups. It is useful in automated scripts where grid indices are known in advance.</p>
+</div>
+</section>
+<section id="selecting-specific-grid">
+<h3>8.1.4 Selecting Specific Grid<a class="headerlink" href="#selecting-specific-grid" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>selgrid,1<span class="w"> </span>multi_grid_file.nc<span class="w"> </span>grid1.nc
+cdo<span class="w"> </span>selgrid,2<span class="w"> </span>multi_grid_file.nc<span class="w"> </span>grid2.nc
+</pre></div>
+</div>
+<p>This is useful for data stored on multiple grids (e.g., output from models with different parameterizations on different grids).</p>
+</section>
+<section id="subsampling">
+<h3>8.1.5 Subsampling<a class="headerlink" href="#subsampling" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>samplegrid,2<span class="w"> </span>global.nc<span class="w"> </span>every_other.nc<span class="w">   </span><span class="c1"># keep every 2nd grid cell</span>
+cdo<span class="w"> </span>samplegrid,4<span class="w"> </span>global.nc<span class="w"> </span>coarse.nc<span class="w">         </span><span class="c1"># keep every 4th grid cell</span>
+</pre></div>
+</div>
+<div class="exercise admonition" id="ex-spatial-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 68 </span></p>
+<section id="exercise-content">
+<p>Extract the Horn of Africa region (32-52°E, 5°S-15°N) from a global precipitation dataset.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/spatial-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-spatial-1"> Exercise 68</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sellonlatbox,32,52,-5,15<span class="w"> </span>horn_of_africa.nc<span class="w"> </span>global_precip.nc
+cdo<span class="w"> </span>info<span class="w"> </span>horn_of_africa.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+</section>
+<section id="remapping-and-regridding">
+<h2>8.2 Remapping and Regridding<a class="headerlink" href="#remapping-and-regridding" title="Link to this heading">#</a></h2>
+<p>Remapping (regridding) transfers data from one grid to another. This is essential when comparing or combining datasets on different grids.</p>
+<section id="bilinear-interpolation">
+<h3>8.2.1 Bilinear Interpolation<a class="headerlink" href="#bilinear-interpolation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>remapbil,target_grid.nc<span class="w"> </span>source.nc<span class="w"> </span>remapped.nc
+cdo<span class="w"> </span>remapbil,r144x72<span class="w"> </span>source.nc<span class="w"> </span>remapped.nc<span class="w">    </span><span class="c1"># to regular 144x72 grid</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Bilinear interpolation is fast and works well for smooth fields like temperature. It is less suitable for precipitation where values can change abruptly.</p>
+</div>
+</section>
+<section id="bicubic-interpolation">
+<h3>8.2.2 Bicubic Interpolation<a class="headerlink" href="#bicubic-interpolation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>remapbic,target_grid.nc<span class="w"> </span>source.nc<span class="w"> </span>bicubic.nc
+</pre></div>
+</div>
+<p>Bicubic interpolation uses 16 surrounding grid points and produces smoother results than bilinear, but can overshoot in regions with sharp gradients.</p>
+</section>
+<section id="conservative-interpolation">
+<h3>8.2.3 Conservative Interpolation<a class="headerlink" href="#conservative-interpolation" title="Link to this heading">#</a></h3>
+<p>First-order conservative:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>remapcon,target_grid.nc<span class="w"> </span>source.nc<span class="w"> </span>conservative.nc
+</pre></div>
+</div>
+<p>Second-order conservative:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>remapcon2,target_grid.nc<span class="w"> </span>source.nc<span class="w"> </span>conservative2.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Conservative remapping preserves area integrals (e.g., total precipitation, energy fluxes). It is the preferred method for precipitation and flux variables. It requires that the source and target grid cell areas can be computed.</p>
+</div>
+</section>
+<section id="distance-weighted-interpolation">
+<h3>8.2.4 Distance-Weighted Interpolation<a class="headerlink" href="#distance-weighted-interpolation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>remapdis,target_grid.nc<span class="w"> </span>source.nc<span class="w"> </span>distance_weighted.nc
+</pre></div>
+</div>
+</section>
+<section id="nearest-neighbor">
+<h3>8.2.5 Nearest Neighbor<a class="headerlink" href="#nearest-neighbor" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>remapnn,target_grid.nc<span class="w"> </span>source.nc<span class="w"> </span>nearest.nc
+</pre></div>
+</div>
+<p>Nearest neighbor preserves original values and is ideal for categorical data (e.g., land-sea masks, vegetation types).</p>
+</section>
+<section id="remapping-methods-comparison-table">
+<h3>8.2.6 Remapping Methods Comparison Table<a class="headerlink" href="#remapping-methods-comparison-table" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Operator</p></th>
+<th class="head"><p>Best For</p></th>
+<th class="head text-center"><p>Conservation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bilinear</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">remapbil</span></code></p></td>
+<td><p>Smooth fields (T, Z, pressure)</p></td>
+<td class="text-center"><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bicubic</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">remapbic</span></code></p></td>
+<td><p>Very smooth fields</p></td>
+<td class="text-center"><p>No</p></td>
+</tr>
+<tr class="row-even"><td><p>Conservative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">remapcon</span></code></p></td>
+<td><p>Fluxes, precipitation</p></td>
+<td class="text-center"><p>Yes (1st order)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Conservative2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">remapcon2</span></code></p></td>
+<td><p>Fluxes (higher accuracy)</p></td>
+<td class="text-center"><p>Yes (2nd order)</p></td>
+</tr>
+<tr class="row-even"><td><p>Distance</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">remapdis</span></code></p></td>
+<td><p>General purpose</p></td>
+<td class="text-center"><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nearest</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">remapnn</span></code></p></td>
+<td><p>Categorical, binary fields</p></td>
+<td class="text-center"><p>No</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="generating-interpolation-weights">
+<h3>8.2.7 Generating Interpolation Weights<a class="headerlink" href="#generating-interpolation-weights" title="Link to this heading">#</a></h3>
+<p>For repeated remapping operations, precompute weights to save time:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>genbil,target_grid.nc<span class="w"> </span>source.nc<span class="w"> </span>weights_bil.nc
+cdo<span class="w"> </span>gencon,target_grid.nc<span class="w"> </span>source.nc<span class="w"> </span>weights_con.nc
+cdo<span class="w"> </span>genbic,target_grid.nc<span class="w"> </span>source.nc<span class="w"> </span>weights_bic.nc
+cdo<span class="w"> </span>gendis,target_grid.nc<span class="w"> </span>source.nc<span class="w"> </span>weights_dis.nc
+cdo<span class="w"> </span>gennn,target_grid.nc<span class="w"> </span>source.nc<span class="w"> </span>weights_nn.nc
+</pre></div>
+</div>
+<p>Apply precomputed weights:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>remap,target_grid.nc,weights_bil.nc<span class="w"> </span>source.nc<span class="w"> </span>remapped.nc
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When remapping many files to the same target grid (e.g., multiple CMIP6 models), generate weights once and reuse them for all files. This can reduce processing time by 50-80%.</p>
+</div>
+</section>
+<section id="target-grid-specification">
+<h3>8.2.8 Target Grid Specification<a class="headerlink" href="#target-grid-specification" title="Link to this heading">#</a></h3>
+<p>Target grids can be specified in several ways:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># From an existing file</span>
+cdo<span class="w"> </span>remapbil,reference_grid.nc<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Regular grid using resolution string</span>
+cdo<span class="w"> </span>remapbil,r360x180<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w">       </span><span class="c1"># 1° x 1°</span>
+cdo<span class="w"> </span>remapbil,r720x360<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w">       </span><span class="c1"># 0.5° x 0.5°</span>
+cdo<span class="w"> </span>remapbil,r1440x720<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w">      </span><span class="c1"># 0.25° x 0.25°</span>
+
+<span class="c1"># Using grid description file</span>
+cdo<span class="w"> </span>remapbil,mytargetgrid<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">rNXxNY</span></code> format defines a regular lon-lat grid with NX longitude points and NY latitude points.</p>
+<div class="exercise admonition" id="ex-spatial-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 69 </span></p>
+<section id="exercise-content">
+<p>Remap a global 0.25° dataset to a 1° x 1° regular grid using conservative remapping. Compare the file sizes and total precipitation sums.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/spatial-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-spatial-2"> Exercise 69</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>remapcon,r360x180<span class="w"> </span>highres.nc<span class="w"> </span>lowres.nc
+cdo<span class="w"> </span>info<span class="w"> </span>highres.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>find<span class="w"> </span><span class="s2">&quot;precip&quot;</span>
+cdo<span class="w"> </span>info<span class="w"> </span>lowres.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>find<span class="w"> </span><span class="s2">&quot;precip&quot;</span>
+cdo<span class="w"> </span>fldsum<span class="w"> </span>-timsum<span class="w"> </span>highres.nc<span class="w"> </span>total_high.nc
+cdo<span class="w"> </span>fldsum<span class="w"> </span>-timsum<span class="w"> </span>lowres.nc<span class="w"> </span>total_low.nc
+</pre></div>
+</div>
+<p>Conservative remapping should approximately preserve the total precipitation.</p>
+</section>
+</div>
+</section>
+</section>
+<section id="grid-operations">
+<h2>8.3 Grid Operations<a class="headerlink" href="#grid-operations" title="Link to this heading">#</a></h2>
+<p>These operators describe, set, and manipulate grids.</p>
+<section id="describing-grids">
+<h3>8.3.1 Describing Grids<a class="headerlink" href="#describing-grids" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>griddes<span class="w"> </span>temperature.nc
+</pre></div>
+</div>
+<p>This outputs a complete grid description including the number of grid points, grid type, and coordinate bounds.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>gridtype<span class="w"> </span>temperature.nc<span class="w">      </span><span class="c1"># grid type (regular, curvilinear, etc.)</span>
+cdo<span class="w"> </span>nlon<span class="w"> </span>temperature.nc<span class="w">           </span><span class="c1"># number of longitudes</span>
+cdo<span class="w"> </span>nlat<span class="w"> </span>temperature.nc<span class="w">           </span><span class="c1"># number of latitudes</span>
+cdo<span class="w"> </span>nlevel<span class="w"> </span>temperature.nc<span class="w">         </span><span class="c1"># number of vertical levels</span>
+cdo<span class="w"> </span>npoints<span class="w"> </span>temperature.nc<span class="w">        </span><span class="c1"># total number of grid points</span>
+cdo<span class="w"> </span>gridarea<span class="w"> </span>temperature.nc<span class="w">       </span><span class="c1"># compute grid cell areas</span>
+</pre></div>
+</div>
+</section>
+<section id="setting-grids">
+<h3>8.3.2 Setting Grids<a class="headerlink" href="#setting-grids" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>setgrid,newgridfile.nc<span class="w"> </span>data.nc<span class="w"> </span>data_with_grid.nc
+cdo<span class="w"> </span>setgridtype,curvilinear<span class="w"> </span>data.nc<span class="w"> </span>curvilinear.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Setting a grid with incorrect parameters can silently corrupt spatial coordinates. Always verify with <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">griddes</span></code> after setting.</p>
+</div>
+</section>
+<section id="grid-cell-areas">
+<h3>8.3.3 Grid Cell Areas<a class="headerlink" href="#grid-cell-areas" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>gridarea<span class="w"> </span>temperature.nc<span class="w"> </span>cell_areas.nc
+cdo<span class="w"> </span>fldsum<span class="w"> </span>cell_areas.nc<span class="w"> </span>total_area.nc
+cdo<span class="w"> </span>output<span class="w"> </span>-fldsum<span class="w"> </span>cell_areas.nc
+</pre></div>
+</div>
+<p>Grid cell areas vary significantly with latitude. Cells near the equator are much larger than cells near the poles on regular lat-lon grids.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Grid cell areas are essential for correct flux calculations. Always use <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">gridarea</span></code> rather than assuming constant cell size.</p>
+</div>
+</section>
+<section id="grid-editing">
+<h3>8.3.4 Grid Editing<a class="headerlink" href="#grid-editing" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>setx,lonitude.nc<span class="w"> </span>temperature.nc<span class="w">   </span><span class="c1"># set new longitude values</span>
+cdo<span class="w"> </span>sety,latitude.nc<span class="w"> </span>temperature.nc<span class="w">   </span><span class="c1"># set new latitude values</span>
+cdo<span class="w"> </span>setgridtype,regular<span class="w"> </span>temperature.nc<span class="w"> </span>regular.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="spatial-statistics">
+<h2>8.4 Spatial Statistics<a class="headerlink" href="#spatial-statistics" title="Link to this heading">#</a></h2>
+<p>Spatial statistics reduce the spatial dimensions (lat/lon) to produce a single value per time step.</p>
+<section id="field-mean-spatial-average">
+<h3>8.4.1 Field Mean (Spatial Average)<a class="headerlink" href="#field-mean-spatial-average" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>fldmean<span class="w"> </span>temperature.nc<span class="w"> </span>global_mean.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">fldmean</span></code> computes a simple arithmetic mean over all grid cells. For proper area-weighted averaging, use <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">fldmean</span></code> with area weights or use <code class="docutils literal notranslate"><span class="pre">areaavg</span></code>.</p>
+</div>
+<p>Comparison of spatial mean types:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>fldmean<span class="w"> </span>temperature.nc<span class="w"> </span>simple_mean.nc<span class="w">              </span><span class="c1"># arithmetic mean</span>
+cdo<span class="w"> </span>areaavg<span class="w"> </span>temperature.nc<span class="w"> </span>area_weighted_mean.nc<span class="w">       </span><span class="c1"># area-weighted mean</span>
+cdo<span class="w"> </span>fldmean<span class="w"> </span>-gridarea<span class="w"> </span>temperature.nc<span class="w"> </span>weighted.nc<span class="w">       </span><span class="c1"># manual weighting</span>
+</pre></div>
+</div>
+</section>
+<section id="other-field-statistics">
+<h3>8.4.2 Other Field Statistics<a class="headerlink" href="#other-field-statistics" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>fldmax<span class="w"> </span>temperature.nc<span class="w"> </span>max_per_timestep.nc<span class="w">          </span><span class="c1"># maximum at each time</span>
+cdo<span class="w"> </span>fldmin<span class="w"> </span>temperature.nc<span class="w"> </span>min_per_timestep.nc<span class="w">          </span><span class="c1"># minimum at each time</span>
+cdo<span class="w"> </span>fldstd<span class="w"> </span>temperature.nc<span class="w"> </span>std_per_timestep.nc<span class="w">          </span><span class="c1"># spatial standard deviation</span>
+cdo<span class="w"> </span>fldvar<span class="w"> </span>temperature.nc<span class="w"> </span>var_per_timestep.nc<span class="w">          </span><span class="c1"># spatial variance</span>
+cdo<span class="w"> </span>fldsum<span class="w"> </span>temperature.nc<span class="w"> </span>sum_per_timestep.nc<span class="w">          </span><span class="c1"># sum over all cells</span>
+cdo<span class="w"> </span>fldrange<span class="w"> </span>temperature.nc<span class="w"> </span>range_per_timestep.nc<span class="w">      </span><span class="c1"># max-min</span>
+cdo<span class="w"> </span>fldmedian<span class="w"> </span>temperature.nc<span class="w"> </span>median_per_timestep.nc<span class="w">    </span><span class="c1"># median</span>
+</pre></div>
+</div>
+</section>
+<section id="tropical-mean-example">
+<h3>8.4.3 Tropical Mean Example<a class="headerlink" href="#tropical-mean-example" title="Link to this heading">#</a></h3>
+<p>Combine spatial subsetting with field statistics:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>fldmean<span class="w"> </span>-sellonlatbox,-180,180,-30,30<span class="w"> </span>temperature.nc<span class="w"> </span>tropical_mean.nc
+cdo<span class="w"> </span>output<span class="w"> </span>tropical_mean.nc
+</pre></div>
+</div>
+</section>
+<section id="zonal-statistics">
+<h3>8.4.4 Zonal Statistics<a class="headerlink" href="#zonal-statistics" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>zonmean<span class="w"> </span>temperature.nc<span class="w"> </span>zonal_mean.nc<span class="w">               </span><span class="c1"># mean along each latitude band</span>
+cdo<span class="w"> </span>zonmax<span class="w"> </span>temperature.nc<span class="w"> </span>zonal_max.nc
+cdo<span class="w"> </span>zonmin<span class="w"> </span>temperature.nc<span class="w"> </span>zonal_min.nc
+cdo<span class="w"> </span>zonstd<span class="w"> </span>temperature.nc<span class="w"> </span>zonal_std.nc
+cdo<span class="w"> </span>zonsum<span class="w"> </span>temperature.nc<span class="w"> </span>zonal_sum.nc
+</pre></div>
+</div>
+<p>Zonal means are useful for examining the latitudinal structure of climate fields.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">zonmean</span></code> averages across all longitudes at each latitude, producing a 1D (lat, time) field from a 2D (lon, lat, time) field.</p>
+</div>
+</section>
+<section id="meridional-statistics">
+<h3>8.4.5 Meridional Statistics<a class="headerlink" href="#meridional-statistics" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>mermean<span class="w"> </span>temperature.nc<span class="w"> </span>meridional_mean.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="grid-types-and-conversion">
+<h2>8.5 Grid Types and Conversion<a class="headerlink" href="#grid-types-and-conversion" title="Link to this heading">#</a></h2>
+<p>Climate data comes in many grid types. CDO can handle all major formats.</p>
+<section id="regular-lat-lon-grid">
+<h3>8.5.1 Regular Lat-Lon Grid<a class="headerlink" href="#regular-lat-lon-grid" title="Link to this heading">#</a></h3>
+<p>The simplest grid — equally spaced latitude/longitude grid cells.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>griddes<span class="w"> </span>regular_grid.nc
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gridtype</span>  <span class="o">=</span> <span class="n">lonlat</span>
+<span class="n">xsize</span>     <span class="o">=</span> <span class="mi">144</span>
+<span class="n">ysize</span>     <span class="o">=</span> <span class="mi">72</span>
+<span class="n">xfirst</span>    <span class="o">=</span> <span class="mi">0</span>
+<span class="n">xinc</span>      <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">yfirst</span>    <span class="o">=</span> <span class="o">-</span><span class="mf">88.75</span>
+<span class="n">yinc</span>      <span class="o">=</span> <span class="mf">2.5</span>
+</pre></div>
+</div>
+</section>
+<section id="gaussian-grid">
+<h3>8.5.2 Gaussian Grid<a class="headerlink" href="#gaussian-grid" title="Link to this heading">#</a></h3>
+<p>Used by many atmospheric models (ECMWF, NCEP). Latitude spacing is non-uniform with higher resolution near the equator.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>griddes<span class="w"> </span>gaussian_grid.nc
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gridtype</span>  <span class="o">=</span> <span class="n">gaussian</span>
+<span class="n">xsize</span>     <span class="o">=</span> <span class="mi">256</span>
+<span class="n">ysize</span>     <span class="o">=</span> <span class="mi">128</span>
+<span class="n">yfirst</span>    <span class="o">=</span> <span class="o">-</span><span class="mf">88.927</span><span class="o">...</span>
+<span class="n">yinc</span>      <span class="o">=</span> <span class="n">variable</span> <span class="p">(</span><span class="n">Gaussian</span> <span class="n">latitudes</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="reduced-gaussian-grid">
+<h3>8.5.3 Reduced Gaussian Grid<a class="headerlink" href="#reduced-gaussian-grid" title="Link to this heading">#</a></h3>
+<p>A Gaussian grid with fewer longitude points near the poles. This is more computationally efficient.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>griddes<span class="w"> </span>reduced_gaussian.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Reduced Gaussian grids require special handling. Not all operators support them. Consider remapping to a regular grid first.</p>
+</div>
+</section>
+<section id="curvilinear-grid">
+<h3>8.5.4 Curvilinear Grid<a class="headerlink" href="#curvilinear-grid" title="Link to this heading">#</a></h3>
+<p>Grid cells are not aligned with lines of constant latitude/longitude. Common in regional climate models.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>griddes<span class="w"> </span>curvilinear.nc
+</pre></div>
+</div>
+</section>
+<section id="unstructured-grid">
+<h3>8.5.5 Unstructured Grid<a class="headerlink" href="#unstructured-grid" title="Link to this heading">#</a></h3>
+<p>Grid cells have no regular structure. Common in ocean models (MPAS, FESOM) and some newer atmospheric models.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>griddes<span class="w"> </span>unstructured.nc
+</pre></div>
+</div>
+</section>
+<section id="converting-grid-types">
+<h3>8.5.6 Converting Grid Types<a class="headerlink" href="#converting-grid-types" title="Link to this heading">#</a></h3>
+<p>Convert reduced Gaussian to regular grid:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>remapbil,r360x180<span class="w"> </span>reduced_gaussian.nc<span class="w"> </span>regular.nc
+</pre></div>
+</div>
+<p>Convert curvilinear to regular:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>remapbil,regular_target.nc<span class="w"> </span>curvilinear.nc<span class="w"> </span>regular.nc
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For conversions involving unstructured grids, you may need to provide additional grid information. Use <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">griddes</span></code> on your source file to understand its structure before attempting remapping.</p>
+</div>
+</section>
+</section>
+<section id="area-operations">
+<h2>8.6 Area Operations<a class="headerlink" href="#area-operations" title="Link to this heading">#</a></h2>
+<p>Area-weighted statistics account for varying grid cell sizes.</p>
+<section id="area-weighted-average">
+<h3>8.6.1 Area-Weighted Average<a class="headerlink" href="#area-weighted-average" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>areaavg<span class="w"> </span>temperature.nc<span class="w"> </span>area_avg.nc
+</pre></div>
+</div>
+<p>This is the same as computing grid cell areas and using them as weights in a weighted average.</p>
+</section>
+<section id="other-area-operators">
+<h3>8.6.2 Other Area Operators<a class="headerlink" href="#other-area-operators" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>areamax<span class="w"> </span>temperature.nc<span class="w"> </span>area_max.nc
+cdo<span class="w"> </span>areamin<span class="w"> </span>temperature.nc<span class="w"> </span>area_min.nc
+cdo<span class="w"> </span>areastd<span class="w"> </span>temperature.nc<span class="w"> </span>area_std.nc
+cdo<span class="w"> </span>areasum<span class="w"> </span>temperature.nc<span class="w"> </span>area_sum.nc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">area*</span></code> operators internally compute grid cell areas. They are generally preferred over <code class="docutils literal notranslate"><span class="pre">fld*</span></code> operators for climate applications where grid cell size varies.</p>
+</div>
+</section>
+<section id="manual-area-weighting">
+<h3>8.6.3 Manual Area Weighting<a class="headerlink" href="#manual-area-weighting" title="Link to this heading">#</a></h3>
+<p>For full control:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>gridarea<span class="w"> </span>temperature.nc<span class="w"> </span>areas.nc
+cdo<span class="w"> </span>fldmean<span class="w"> </span>-mul<span class="w"> </span>temperature.nc<span class="w"> </span>areas.nc<span class="w"> </span>weighted_mean.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="practical-workflow-examples">
+<h2>8.7 Practical Workflow Examples<a class="headerlink" href="#practical-workflow-examples" title="Link to this heading">#</a></h2>
+<section id="regional-climate-extraction">
+<h3>8.7.1 Regional Climate Extraction<a class="headerlink" href="#regional-climate-extraction" title="Link to this heading">#</a></h3>
+<p>Extract and analyze a region from global data:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sellonlatbox,32,52,-5,15<span class="w"> </span>precip.nc<span class="w"> </span>horn_africa.nc
+cdo<span class="w"> </span>yearmon<span class="w"> </span>-fldmean<span class="w"> </span>horn_africa.nc<span class="w"> </span>annual_precip_horn.nc
+cdo<span class="w"> </span>output<span class="w"> </span>annual_precip_horn.nc
+</pre></div>
+</div>
+</section>
+<section id="multi-model-regridding">
+<h3>8.7.2 Multi-Model Regridding<a class="headerlink" href="#multi-model-regridding" title="Link to this heading">#</a></h3>
+<p>Regrid multiple models to a common 1° x 1° grid:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate weights once</span>
+cdo<span class="w"> </span>genbil,r360x180<span class="w"> </span>model1.nc<span class="w"> </span>weights.nc
+
+<span class="c1"># Apply to all models</span>
+<span class="k">for</span><span class="w"> </span>model<span class="w"> </span><span class="k">in</span><span class="w"> </span>model1.nc<span class="w"> </span>model2.nc<span class="w"> </span>model3.nc<span class="w"> </span>model4.nc<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span>cdo<span class="w"> </span>remap,r360x180,weights.nc<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$model</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;regridded_</span><span class="nv">$model</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="global-mean-time-series">
+<h3>8.7.3 Global Mean Time Series<a class="headerlink" href="#global-mean-time-series" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>-sellonlatbox,-180,180,-60,60<span class="w"> </span>temperature.nc
+</pre></div>
+</div>
+</section>
+<section id="regional-masks">
+<h3>8.7.4 Regional Masks<a class="headerlink" href="#regional-masks" title="Link to this heading">#</a></h3>
+<p>Create a mask for a region and apply it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create mask (1 for region, 0 elsewhere)</span>
+cdo<span class="w"> </span>setctomiss,0<span class="w"> </span>-sellonlatbox,32,52,-5,15<span class="w"> </span>global.nc<span class="w"> </span>mask.nc
+cdo<span class="w"> </span>setmissval,1<span class="w"> </span>-eqc,1<span class="w"> </span>mask.nc
+<span class="c1"># Apply mask to data</span>
+cdo<span class="w"> </span>mul<span class="w"> </span>region_mask.nc<span class="w"> </span>original_data.nc<span class="w"> </span>masked_data.nc
+</pre></div>
+</div>
+<div class="exercise admonition" id="ex-spatial-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70 </span></p>
+<section id="exercise-content">
+<p>Create a mask for the Nile Basin region and compute area-weighted average precipitation over the basin.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/spatial-solution-5">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-spatial-3"> Exercise 70</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Approximate Nile Basin bounding box (extension assumed from course data)</span>
+cdo<span class="w"> </span>sellonlatbox,28,42,-5,25<span class="w"> </span>precip.nc<span class="w"> </span>nile_basin.nc
+cdo<span class="w"> </span>areaavg<span class="w"> </span>nile_basin.nc<span class="w"> </span>nile_avg_precip.nc
+cdo<span class="w"> </span>output<span class="w"> </span>nile_avg_precip.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+</section>
+<section id="hands-on-exercises">
+<h2>8.8 Hands-On Exercises<a class="headerlink" href="#hands-on-exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-8-1-crop-and-analyze-a-region">
+<h3>Exercise 8.1: Crop and Analyze a Region<a class="headerlink" href="#exercise-8-1-crop-and-analyze-a-region" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-spatial-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 71 </span></p>
+<section id="exercise-content">
+<p>From a global temperature dataset:</p>
+<ol class="arabic simple">
+<li><p>Extract the Mediterranean region (10°W-40°E, 30°N-50°N)</p></li>
+<li><p>Compute the area-weighted mean temperature</p></li>
+<li><p>Compute the spatial standard deviation</p></li>
+<li><p>Identify the warmest and coldest grid points in the region</p></li>
+</ol>
+</section>
+</div>
+<div class="solution admonition" id="book/spatial-solution-7">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-spatial-4"> Exercise 71</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>sellonlatbox,-10,40,30,50<span class="w"> </span>global_temp.nc<span class="w"> </span>mediterranean.nc
+cdo<span class="w"> </span>areaavg<span class="w"> </span>mediterranean.nc<span class="w"> </span>mediterranean_mean.nc
+cdo<span class="w"> </span>areastd<span class="w"> </span>mediterranean.nc<span class="w"> </span>mediterranean_std.nc
+cdo<span class="w"> </span>fldmax<span class="w"> </span>mediterranean.nc<span class="w"> </span>warmest.nc
+cdo<span class="w"> </span>fldmin<span class="w"> </span>mediterranean.nc<span class="w"> </span>coldest.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-8-2-regridding-between-resolutions">
+<h3>Exercise 8.2: Regridding Between Resolutions<a class="headerlink" href="#exercise-8-2-regridding-between-resolutions" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-spatial-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 72 </span></p>
+<section id="exercise-content">
+<ol class="arabic simple">
+<li><p>Remap a 0.25° dataset to 1° using bilinear interpolation</p></li>
+<li><p>Remap the same dataset to 1° using conservative interpolation</p></li>
+<li><p>Compare the two results — how do they differ near coastlines?</p></li>
+</ol>
+</section>
+</div>
+<div class="solution admonition" id="book/spatial-solution-9">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-spatial-5"> Exercise 72</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>remapbil,r360x180<span class="w"> </span>highres.nc<span class="w"> </span>bilinear_1deg.nc
+cdo<span class="w"> </span>remapcon,r360x180<span class="w"> </span>highres.nc<span class="w"> </span>conservative_1deg.nc
+cdo<span class="w"> </span>sub<span class="w"> </span>bilinear_1deg.nc<span class="w"> </span>conservative_1deg.nc<span class="w"> </span>difference.nc
+cdo<span class="w"> </span>fldmean<span class="w"> </span>-abs<span class="w"> </span>difference.nc<span class="w"> </span>mean_abs_diff.nc
+</pre></div>
+</div>
+<p>Conservative remapping better preserves gradients near coastlines, while bilinear may smooth them. The absolute difference field highlights regions of largest discrepancy.</p>
+</section>
+</div>
+</section>
+<section id="exercise-8-3-regional-average-computation">
+<h3>Exercise 8.3: Regional Average Computation<a class="headerlink" href="#exercise-8-3-regional-average-computation" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-spatial-6">
+
+<p class="admonition-title"><span class="caption-number">Exercise 73 </span></p>
+<section id="exercise-content">
+<p>Compute the area-weighted average precipitation for:</p>
+<ol class="arabic simple">
+<li><p>The Amazon basin (approximate: 80°W-50°W, 20°S-5°N)</p></li>
+<li><p>The Congo basin (10°E-30°E, 10°S-5°N)</p></li>
+<li><p>Southeast Asia (90°E-150°E, 15°S-15°N)
+Compare the seasonal cycles.</p></li>
+</ol>
+</section>
+</div>
+<div class="solution admonition" id="book/spatial-solution-11">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-spatial-6"> Exercise 73</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>areaavg<span class="w"> </span>-sellonlatbox,-80,-50,-20,5<span class="w"> </span>global_precip.nc<span class="w"> </span>amazon.nc
+cdo<span class="w"> </span>areaavg<span class="w"> </span>-sellonlatbox,10,30,-10,5<span class="w"> </span>global_precip.nc<span class="w"> </span>congo.nc
+cdo<span class="w"> </span>areaavg<span class="w"> </span>-sellonlatbox,90,150,-15,15<span class="w"> </span>global_precip.nc<span class="w"> </span>seasia.nc
+
+<span class="c1"># Compute monthly climatology for each</span>
+cdo<span class="w"> </span>ymonmean<span class="w"> </span>amazon.nc<span class="w"> </span>amazon_clim.nc
+cdo<span class="w"> </span>ymonmean<span class="w"> </span>congo.nc<span class="w"> </span>congo_clim.nc
+cdo<span class="w"> </span>ymonmean<span class="w"> </span>seasia.nc<span class="w"> </span>seasia_clim.nc
+
+<span class="c1"># Output for comparison</span>
+cdo<span class="w"> </span>output<span class="w"> </span>amazon_clim.nc
+cdo<span class="w"> </span>output<span class="w"> </span>congo_clim.nc
+cdo<span class="w"> </span>output<span class="w"> </span>seasia_clim.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-8-4-multi-model-remapping">
+<h3>Exercise 8.4: Multi-Model Remapping<a class="headerlink" href="#exercise-8-4-multi-model-remapping" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-spatial-7">
+
+<p class="admonition-title"><span class="caption-number">Exercise 74 </span></p>
+<section id="exercise-content">
+<p>Given three CMIP6 model files on different grids, remap all three to a common 2° x 2° grid and compute the ensemble mean.</p>
+</section>
+</div>
+<div class="solution admonition" id="book/spatial-solution-13">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-spatial-7"> Exercise 74</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">TARGET</span><span class="o">=</span><span class="s2">&quot;r180x90&quot;</span>
+cdo<span class="w"> </span>remapbil,<span class="nv">$TARGET</span><span class="w"> </span>model_A.nc<span class="w"> </span>model_A_r.nc
+cdo<span class="w"> </span>remapbil,<span class="nv">$TARGET</span><span class="w"> </span>model_B.nc<span class="w"> </span>model_B_r.nc
+cdo<span class="w"> </span>remapbil,<span class="nv">$TARGET</span><span class="w"> </span>model_C.nc<span class="w"> </span>model_C_r.nc
+cdo<span class="w"> </span>ensmean<span class="w"> </span>model_A_r.nc<span class="w"> </span>model_B_r.nc<span class="w"> </span>model_C_r.nc<span class="w"> </span>ensemble_mean.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-8-5-global-mean-temperature">
+<h3>Exercise 8.5: Global Mean Temperature<a class="headerlink" href="#exercise-8-5-global-mean-temperature" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-spatial-8">
+
+<p class="admonition-title"><span class="caption-number">Exercise 75 </span></p>
+<section id="exercise-content">
+<p>Compute the global mean surface temperature (GMST) from ERA5 data for 1981-2010. Compare the area-weighted mean with the simple arithmetic mean. How large is the difference?</p>
+</section>
+</div>
+<div class="solution admonition" id="book/spatial-solution-15">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-spatial-8"> Exercise 75</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simple mean</span>
+cdo<span class="w"> </span>fldmean<span class="w"> </span>-timmean<span class="w"> </span>era5_t2m.nc<span class="w"> </span>simple_gmst.nc
+cdo<span class="w"> </span>output<span class="w"> </span>simple_gmst.nc
+
+<span class="c1"># Area-weighted mean</span>
+cdo<span class="w"> </span>areaavg<span class="w"> </span>-timmean<span class="w"> </span>era5_t2m.nc<span class="w"> </span>weighted_gmst.nc
+cdo<span class="w"> </span>output<span class="w"> </span>weighted_gmst.nc
+
+<span class="c1"># Difference</span>
+cdo<span class="w"> </span>sub<span class="w"> </span>simple_gmst.nc<span class="w"> </span>weighted_gmst.nc<span class="w"> </span>diff.nc
+cdo<span class="w"> </span>output<span class="w"> </span>diff.nc
+</pre></div>
+</div>
+<p>The difference is typically 1-3 K because polar regions (with small grid cells) have different temperatures than equatorial regions (with large grid cells). The area-weighted mean is more physically correct.</p>
+</section>
+</div>
+</section>
+</section>
+<section id="quiz">
+<h2>8.9 Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<div class="exercise admonition" id="q-spatial-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 76 </span> (Question 1)</p>
+<section id="exercise-content">
+<p>What does <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">sellonlatbox,-10,40,30,70</span> <span class="pre">global.nc</span></code> do?</p>
+<p>a) Selects longitudes 30-70 and latitudes -10 to 40
+b) Selects longitudes -10 to 40 and latitudes 30 to 70
+c) Cuts the file to have exactly 10 longitude and 40 latitude points
+d) Remaps the data to a 10x40 degree grid</p>
+</section>
+</div>
+<div class="solution admonition" id="book/spatial-solution-17">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-spatial-1"> Exercise 76 (Question 1)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. The syntax is <code class="docutils literal notranslate"><span class="pre">sellonlatbox,x1,x2,y1,y2</span></code> representing western, eastern, southern, and northern boundaries. So -10°W to 40°E and 30°N to 70°N (Europe region).</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-spatial-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 77 </span> (Question 2)</p>
+<section id="exercise-content">
+<p>Which remapping method should be used for precipitation data when conservation of total mass is required?</p>
+<p>a) <code class="docutils literal notranslate"><span class="pre">remapbil</span></code> — bilinear interpolation
+b) <code class="docutils literal notranslate"><span class="pre">remapbic</span></code> — bicubic interpolation
+c) <code class="docutils literal notranslate"><span class="pre">remapcon</span></code> — conservative interpolation
+d) <code class="docutils literal notranslate"><span class="pre">remapnn</span></code> — nearest neighbor</p>
+</section>
+</div>
+<div class="solution admonition" id="book/spatial-solution-19">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-spatial-2"> Exercise 77 (Question 2)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>c</strong>. Conservative interpolation (<code class="docutils literal notranslate"><span class="pre">remapcon</span></code>) preserves area integrals, ensuring that the total precipitation amount is conserved when moving between grids. Bilinear and bicubic methods do not conserve mass.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-spatial-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 78 </span> (Question 3)</p>
+<section id="exercise-content">
+<p>What is the primary difference between <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">fldmean</span></code> and <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">areaavg</span></code>?</p>
+<p>a) <code class="docutils literal notranslate"><span class="pre">fldmean</span></code> works on fields, <code class="docutils literal notranslate"><span class="pre">areaavg</span></code> works on areas
+b) <code class="docutils literal notranslate"><span class="pre">areaavg</span></code> computes an area-weighted mean, <code class="docutils literal notranslate"><span class="pre">fldmean</span></code> computes a simple arithmetic mean
+c) <code class="docutils literal notranslate"><span class="pre">fldmean</span></code> computes means faster
+d) There is no difference — they are aliases</p>
+</section>
+</div>
+<div class="solution admonition" id="book/spatial-solution-21">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-spatial-3"> Exercise 78 (Question 3)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">areaavg</span></code> weights each grid cell by its area (which varies with latitude on regular grids), while <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">fldmean</span></code> treats all grid cells equally. For proper climate analysis, <code class="docutils literal notranslate"><span class="pre">areaavg</span></code> is preferred.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-spatial-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 79 </span> (Question 4)</p>
+<section id="exercise-content">
+<p>What is a reduced Gaussian grid?</p>
+<p>a) A grid with the same number of points at all latitudes
+b) A Gaussian grid with fewer longitude points near the poles
+c) A regular grid at reduced (lower) resolution
+d) A grid that has been compressed using lossy compression</p>
+</section>
+</div>
+<div class="solution admonition" id="book/spatial-solution-23">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-spatial-4"> Exercise 79 (Question 4)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. In a reduced Gaussian grid, the number of longitude points decreases toward the poles, where meridians converge. This reduces computational cost without significant loss of accuracy.</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-spatial-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 80 </span> (Question 5)</p>
+<section id="exercise-content">
+<p>Why would you generate remapping weights with <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">genbil</span></code> before using <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">remapbil</span></code>?</p>
+<p>a) Weights are required — <code class="docutils literal notranslate"><span class="pre">remapbil</span></code> will not work without them
+b) To save time when remapping many files to the same target grid
+c) To improve the accuracy of the interpolation
+d) Weights are only needed for conservative remapping</p>
+</section>
+</div>
+<div class="solution admonition" id="book/spatial-solution-25">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-spatial-5"> Exercise 80 (Question 5)</a></p>
+<section id="solution-content">
+<p>The correct answer is <strong>b</strong>. Precomputing weights with <code class="docutils literal notranslate"><span class="pre">genbil</span></code> (or <code class="docutils literal notranslate"><span class="pre">gencon</span></code>, etc.) saves the weight calculation step for each remapping operation. When remapping 50 model outputs to the same grid, generating weights once and applying them 50 times can reduce total processing time by more than half.</p>
+</section>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this module, you learned:</p>
+<ul class="simple">
+<li><p><strong>Spatial subsetting</strong>: <code class="docutils literal notranslate"><span class="pre">sellonlatbox</span></code>, <code class="docutils literal notranslate"><span class="pre">selindexbox</span></code>, <code class="docutils literal notranslate"><span class="pre">selgrid</span></code> extract regions by coordinates or indices</p></li>
+<li><p><strong>Remapping</strong>: <code class="docutils literal notranslate"><span class="pre">remapbil</span></code>, <code class="docutils literal notranslate"><span class="pre">remapbic</span></code>, <code class="docutils literal notranslate"><span class="pre">remapcon</span></code>, <code class="docutils literal notranslate"><span class="pre">remapcon2</span></code>, <code class="docutils literal notranslate"><span class="pre">remapdis</span></code>, <code class="docutils literal notranslate"><span class="pre">remapnn</span></code> transfer data between grids with different characteristics</p></li>
+<li><p><strong>Weight generation</strong>: <code class="docutils literal notranslate"><span class="pre">genbil</span></code>, <code class="docutils literal notranslate"><span class="pre">gencon</span></code> precompute remapping weights for efficient batch processing</p></li>
+<li><p><strong>Grid operations</strong>: <code class="docutils literal notranslate"><span class="pre">griddes</span></code>, <code class="docutils literal notranslate"><span class="pre">gridarea</span></code>, <code class="docutils literal notranslate"><span class="pre">setgrid</span></code>, <code class="docutils literal notranslate"><span class="pre">setgridtype</span></code> manage grid metadata</p></li>
+<li><p><strong>Spatial statistics</strong>: <code class="docutils literal notranslate"><span class="pre">fldmean</span></code>, <code class="docutils literal notranslate"><span class="pre">fldmax</span></code>, <code class="docutils literal notranslate"><span class="pre">fldmin</span></code>, <code class="docutils literal notranslate"><span class="pre">fldstd</span></code>, <code class="docutils literal notranslate"><span class="pre">fldvar</span></code>, <code class="docutils literal notranslate"><span class="pre">fldsum</span></code> reduce spatial dimensions</p></li>
+<li><p><strong>Area-weighted statistics</strong>: <code class="docutils literal notranslate"><span class="pre">areaavg</span></code>, <code class="docutils literal notranslate"><span class="pre">areamax</span></code>, <code class="docutils literal notranslate"><span class="pre">areamin</span></code>, <code class="docutils literal notranslate"><span class="pre">areastd</span></code>, <code class="docutils literal notranslate"><span class="pre">areasum</span></code> account for varying grid cell sizes</p></li>
+<li><p><strong>Grid types</strong>: Regular lat-lon, Gaussian, reduced Gaussian, curvilinear, and unstructured grids</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remapping is one of the most common yet computationally expensive CDO operations. Always precompute weights when processing multiple files, and choose the remapping method that is appropriate for your variable type (conservative for fluxes, bilinear for smooth fields, nearest neighbor for categories).</p>
+</div>
+<p>Proceed to Module 9 to learn about statistical operators for climate data analysis.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="temporal.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Module 7: Temporal Operators</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="statistics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Module 9: Statistical Operators</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-domain-operations">8.1 Spatial Domain Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-by-latitude-longitude-box">8.1.1 Selecting by Latitude/Longitude Box</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regions-of-interest">8.1.2 Regions of Interest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-by-grid-index-box">8.1.3 Selecting by Grid Index Box</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-specific-grid">8.1.4 Selecting Specific Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subsampling">8.1.5 Subsampling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remapping-and-regridding">8.2 Remapping and Regridding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bilinear-interpolation">8.2.1 Bilinear Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bicubic-interpolation">8.2.2 Bicubic Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conservative-interpolation">8.2.3 Conservative Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-weighted-interpolation">8.2.4 Distance-Weighted Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nearest-neighbor">8.2.5 Nearest Neighbor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remapping-methods-comparison-table">8.2.6 Remapping Methods Comparison Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-interpolation-weights">8.2.7 Generating Interpolation Weights</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-grid-specification">8.2.8 Target Grid Specification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-operations">8.3 Grid Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-grids">8.3.1 Describing Grids</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-grids">8.3.2 Setting Grids</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-cell-areas">8.3.3 Grid Cell Areas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-editing">8.3.4 Grid Editing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-statistics">8.4 Spatial Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#field-mean-spatial-average">8.4.1 Field Mean (Spatial Average)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-field-statistics">8.4.2 Other Field Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tropical-mean-example">8.4.3 Tropical Mean Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zonal-statistics">8.4.4 Zonal Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#meridional-statistics">8.4.5 Meridional Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-types-and-conversion">8.5 Grid Types and Conversion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-lat-lon-grid">8.5.1 Regular Lat-Lon Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-grid">8.5.2 Gaussian Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduced-gaussian-grid">8.5.3 Reduced Gaussian Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curvilinear-grid">8.5.4 Curvilinear Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unstructured-grid">8.5.5 Unstructured Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-grid-types">8.5.6 Converting Grid Types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#area-operations">8.6 Area Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#area-weighted-average">8.6.1 Area-Weighted Average</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-area-operators">8.6.2 Other Area Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-area-weighting">8.6.3 Manual Area Weighting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflow-examples">8.7 Practical Workflow Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regional-climate-extraction">8.7.1 Regional Climate Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-regridding">8.7.2 Multi-Model Regridding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-mean-time-series">8.7.3 Global Mean Time Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regional-masks">8.7.4 Regional Masks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">8.8 Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8-1-crop-and-analyze-a-region">Exercise 8.1: Crop and Analyze a Region</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8-2-regridding-between-resolutions">Exercise 8.2: Regridding Between Resolutions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8-3-regional-average-computation">Exercise 8.3: Regional Average Computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8-4-multi-model-remapping">Exercise 8.4: Multi-Model Remapping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8-5-global-mean-temperature">Exercise 8.5: Global Mean Temperature</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">8.9 Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

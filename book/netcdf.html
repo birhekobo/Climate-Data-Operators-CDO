@@ -1,0 +1,1812 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Module 5: Working with NetCDF Data &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/netcdf';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 6: Working with GRIB Data" href="grib.html" />
+    <link rel="prev" title="Module 4: CDO Operators and File Operations" href="operators.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./book/netcdf.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fbook/netcdf.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/netcdf.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 5: Working with NetCDF Data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-format-fundamentals">NetCDF Format Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-file-structure">NetCDF File Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-versions">NetCDF Versions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-components">NetCDF Components</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensions">Dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes">Attributes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cf-climate-and-forecast-conventions">CF (Climate and Forecast) Conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-cf-requirements">Key CF Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-cf-compliance">Checking CF Compliance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-standards">Metadata Standards</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#essential-metadata-elements">Essential Metadata Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-metadata">Viewing Metadata</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-compression">NetCDF Compression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-compression-levels">CDO Compression Levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-comparison">Performance Comparison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarking-compression">Benchmarking Compression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deflate-level-options">Deflate Level Options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values-handling">Missing Values Handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detecting-missing-values">Detecting Missing Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-missing-values">Setting Missing Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-value-workflow-example">Missing Value Workflow Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-chunking-and-performance">NetCDF Chunking and Performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-chunks">Understanding Chunks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chunking-strategies">Chunking Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-benchmarking">Performance Benchmarking</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-to-from-netcdf">Converting to/from NetCDF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-to-netcdf">Converting to NetCDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-from-netcdf">Converting from NetCDF</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-ncdump-and-ncgen-from-nco">Using ncdump and ncgen from NCO</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ncdump-netcdf-dump">ncdump - NetCDF Dump</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ncgen-netcdf-generation">ncgen - NetCDF Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-cdl-file">Creating a CDL File</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-nco-integration">CDO + NCO Integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-cdo-vs-nco">When to Use CDO vs NCO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-nco-commands">Common NCO Commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-integration-example">Practical Integration Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-netcdf-operations">Advanced NetCDF Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-aggregated-data">Working with Aggregated Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attribute-management">Attribute Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#date-time-manipulation">Date/Time Manipulation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-examine-netcdf-structure">Exercise 1: Examine NetCDF Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-compression-comparison">Exercise 2: Compression Comparison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-missing-values">Exercise 3: Missing Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-attribute-manipulation">Exercise 4: Attribute Manipulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-cdo-nco-workflow">Exercise 5: CDO + NCO Workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-5-working-with-netcdf-data">
+<h1>Module 5: Working with NetCDF Data<a class="headerlink" href="#module-5-working-with-netcdf-data" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this module, you will be able to:</p>
+<ul class="simple">
+<li><p>Understand NetCDF file structure and components</p></li>
+<li><p>Interpret CF (Climate and Forecast) conventions</p></li>
+<li><p>Navigate NetCDF dimensions, variables, and attributes</p></li>
+<li><p>Apply compression to reduce file sizes</p></li>
+<li><p>Handle missing values and fill values</p></li>
+<li><p>Configure chunking for optimal performance</p></li>
+<li><p>Convert data between NetCDF and other formats</p></li>
+<li><p>Integrate CDO with NCO tools for advanced NetCDF operations</p></li>
+<li><p>Examine and modify metadata appropriately</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="netcdf-format-fundamentals">
+<h2>NetCDF Format Fundamentals<a class="headerlink" href="#netcdf-format-fundamentals" title="Link to this heading">#</a></h2>
+<p>NetCDF (Network Common Data Form) is a set of software libraries and self-describing, machine-independent data formats that support the creation, access, and sharing of array-oriented scientific data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>NetCDF is the most widely used format in climate science, supported by CMIP, CORDEX, ERA5, and virtually all climate model output.</p>
+</div>
+<section id="netcdf-file-structure">
+<h3>NetCDF File Structure<a class="headerlink" href="#netcdf-file-structure" title="Link to this heading">#</a></h3>
+<p>A NetCDF file contains three main components organized hierarchically:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>NetCDF File (.nc)
+├── Dimensions    (e.g., time, lat, lon, level)
+├── Variables     (e.g., temperature, pressure)
+│   ├── Data values (multidimensional arrays)
+│   └── Attributes (metadata describing the variable)
+└── Global Attributes (metadata describing the entire dataset)
+</pre></div>
+</div>
+</section>
+<section id="netcdf-versions">
+<h3>NetCDF Versions<a class="headerlink" href="#netcdf-versions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Extension</p></th>
+<th class="head"><p>Key Features</p></th>
+<th class="head"><p>Max File Size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>NetCDF Classic</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.nc</span></code></p></td>
+<td><p>Original format</p></td>
+<td><p>2 GB</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>NetCDF-4 (HDF5)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.nc</span></code></p></td>
+<td><p>HDF5 backend, compression, chunking</p></td>
+<td><p>Unlimited</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>NetCDF-4 Classic</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.nc</span></code></p></td>
+<td><p>HDF5 backend, classic data model</p></td>
+<td><p>Unlimited</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>NetCDF-64bit</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.nc</span></code></p></td>
+<td><p>64-bit offsets</p></td>
+<td><p>&gt; 2 GB</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>NetCDF-4 (NC4) is recommended for modern climate data processing. It supports compression and files larger than 2 GB.</p>
+</div>
+</section>
+</section>
+<section id="netcdf-components">
+<h2>NetCDF Components<a class="headerlink" href="#netcdf-components" title="Link to this heading">#</a></h2>
+<section id="dimensions">
+<h3>Dimensions<a class="headerlink" href="#dimensions" title="Link to this heading">#</a></h3>
+<p>Dimensions define the axes of the data arrays:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show dimensions</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;^[[:space:]]*(dimension|grid)&quot;</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;^dimensions:&quot;</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;^[[:space:]]*[a-z]&quot;</span>
+
+<span class="c1"># Typical dimensions in climate data:</span>
+<span class="c1"># time       - unlimited dimension</span>
+<span class="c1"># lat        - latitude (e.g., 1 to 180)</span>
+<span class="c1"># lon        - longitude (e.g., 1 to 360)</span>
+<span class="c1"># level      - vertical level (e.g., 1 to 37)</span>
+<span class="c1"># nv         - vertex dimension for bounds</span>
+</pre></div>
+</div>
+</section>
+<section id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Link to this heading">#</a></h3>
+<p>Variables contain the actual data, with associated metadata:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># List all variables and their properties</span>
+cdo<span class="w"> </span>vardes<span class="w"> </span>data.nc
+ncdump<span class="w"> </span>-h<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;^[[:space:]]*float\|^[[:space:]]*double\|^[[:space:]]*int&quot;</span>
+
+<span class="c1"># Example variable definition (from ncdump):</span>
+<span class="c1">#   float t2m(time, lat, lon) ;</span>
+<span class="c1">#     t2m:long_name = &quot;2m temperature&quot; ;</span>
+<span class="c1">#     t2m:units = &quot;K&quot; ;</span>
+<span class="c1">#     t2m:standard_name = &quot;air_temperature&quot; ;</span>
+</pre></div>
+</div>
+</section>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">#</a></h3>
+<p>Attributes provide metadata about variables or the dataset:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show all variable attributes</span>
+cdo<span class="w"> </span>vardes<span class="w"> </span>data.nc
+
+<span class="c1"># Show global attributes</span>
+cdo<span class="w"> </span>gattr<span class="w"> </span>data.nc
+
+<span class="c1"># Show specific attribute</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="s2">&quot;:title&quot;</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;:units&quot;</span>
+
+<span class="c1"># Common CF attributes:</span>
+<span class="c1"># long_name    - Human-readable description</span>
+<span class="c1"># units        - Physical units (K, m/s, Pa, etc.)</span>
+<span class="c1"># standard_name - CF standard name</span>
+<span class="c1"># cell_methods - How data was aggregated</span>
+<span class="c1"># coordinates  - Auxiliary coordinate variables</span>
+<span class="c1"># missing_value - Value representing missing data</span>
+<span class="c1"># _FillValue   - Fill value for missing data</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="cf-climate-and-forecast-conventions">
+<h2>CF (Climate and Forecast) Conventions<a class="headerlink" href="#cf-climate-and-forecast-conventions" title="Link to this heading">#</a></h2>
+<p>The CF conventions standardize climate data metadata to ensure interoperability:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CF conventions are essential for data sharing and archival. Most climate data portals (CMIP, CORDEX, ESGF) require CF compliance.</p>
+</div>
+<section id="key-cf-requirements">
+<h3>Key CF Requirements<a class="headerlink" href="#key-cf-requirements" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Element</p></th>
+<th class="head"><p>Requirement</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Units</strong></p></td>
+<td><p>UDUNITS-compliant</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">K</span></code>, <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">s-1</span></code>, <code class="docutils literal notranslate"><span class="pre">kg</span> <span class="pre">m-2</span> <span class="pre">s-1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Standard Names</strong></p></td>
+<td><p>From CF standard name table</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">air_temperature</span></code>, <code class="docutils literal notranslate"><span class="pre">eastward_wind</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Coordinates</strong></p></td>
+<td><p>Lat, lon, time, vertical</p></td>
+<td><p>Proper axis attributes</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Cell Bounds</strong></p></td>
+<td><p>For grid cell boundaries</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lat_bnds</span></code>, <code class="docutils literal notranslate"><span class="pre">lon_bnds</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Cell Methods</strong></p></td>
+<td><p>How statistics were computed</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">time:</span> <span class="pre">mean</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="checking-cf-compliance">
+<h3>Checking CF Compliance<a class="headerlink" href="#checking-cf-compliance" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if a file follows CF conventions</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;cf_role\|standard_name\|cell_methods&quot;</span>
+
+<span class="c1"># Look for standard names</span>
+cdo<span class="w"> </span>vardes<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;standard_name&quot;</span>
+
+<span class="c1"># Check coordinate variables</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;double|float.*lat|float.*lon&quot;</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Always ensure your output files contain proper units, standard names, and coordinate information to maintain CF compliance.</p>
+</div>
+</section>
+</section>
+<section id="metadata-standards">
+<h2>Metadata Standards<a class="headerlink" href="#metadata-standards" title="Link to this heading">#</a></h2>
+<section id="essential-metadata-elements">
+<h3>Essential Metadata Elements<a class="headerlink" href="#essential-metadata-elements" title="Link to this heading">#</a></h3>
+<p>Well-documented datasets include:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set essential global attributes</span>
+cdo<span class="w"> </span>setattribute,title<span class="o">=</span><span class="s2">&quot;ERA5 Monthly Mean Temperature&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,source<span class="o">=</span><span class="s2">&quot;ERA5 Reanalysis&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,institution<span class="o">=</span><span class="s2">&quot;ECMWF&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,references<span class="o">=</span><span class="s2">&quot;Hersbach et al. (2020)&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,history<span class="o">=</span><span class="s2">&quot;Created by CDO training course&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,Conventions<span class="o">=</span><span class="s2">&quot;CF-1.8&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Set variable attributes</span>
+cdo<span class="w"> </span>setattribute,t2m@long_name<span class="o">=</span><span class="s2">&quot;Near-Surface Air Temperature&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,t2m@standard_name<span class="o">=</span><span class="s2">&quot;air_temperature&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,t2m@units<span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,t2m@cell_methods<span class="o">=</span><span class="s2">&quot;time: mean&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>input.nc<span class="w"> </span>output.nc
+</pre></div>
+</div>
+</section>
+<section id="viewing-metadata">
+<h3>Viewing Metadata<a class="headerlink" href="#viewing-metadata" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Full file header (NCO)</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>data.nc
+
+<span class="c1"># Global attributes only</span>
+cdo<span class="w"> </span>gattr<span class="w"> </span>data.nc
+
+<span class="c1"># Variable attributes</span>
+cdo<span class="w"> </span>vardes<span class="w"> </span>data.nc
+
+<span class="c1"># Time coordinate attributes</span>
+cdo<span class="w"> </span>showattribute,time@units<span class="w"> </span>data.nc
+cdo<span class="w"> </span>showattribute,time@calendar<span class="w"> </span>data.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="netcdf-compression">
+<h2>NetCDF Compression<a class="headerlink" href="#netcdf-compression" title="Link to this heading">#</a></h2>
+<p>Compression is critical for managing the large file sizes common in climate research.</p>
+<section id="cdo-compression-levels">
+<h3>CDO Compression Levels<a class="headerlink" href="#cdo-compression-levels" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compression levels 0-9 (0 = no compression, 9 = maximum)</span>
+cdo<span class="w"> </span>-z<span class="w"> </span>zip_0<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w">   </span><span class="c1"># No compression</span>
+cdo<span class="w"> </span>-z<span class="w"> </span>zip_1<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w">   </span><span class="c1"># Fast, minimal compression</span>
+cdo<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w">   </span><span class="c1"># Good balance (recommended)</span>
+cdo<span class="w"> </span>-z<span class="w"> </span>zip_9<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w">   </span><span class="c1"># Maximum compression (slowest)</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Compression is lossless - the original data is perfectly reconstructed. NetCDF-4 format (HDF5-based) is required for compression.</p>
+</div>
+</section>
+<section id="performance-comparison">
+<h3>Performance Comparison<a class="headerlink" href="#performance-comparison" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Level</p></th>
+<th class="head"><p>File Size</p></th>
+<th class="head"><p>Write Time</p></th>
+<th class="head"><p>Read Time</p></th>
+<th class="head"><p>Use Case</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>100%</p></td>
+<td><p>Fast</p></td>
+<td><p>Fast</p></td>
+<td><p>Temporary files</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>~45%</p></td>
+<td><p>Fast</p></td>
+<td><p>Fast</p></td>
+<td><p>Frequent access</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>~30%</p></td>
+<td><p>Moderate</p></td>
+<td><p>Moderate</p></td>
+<td><p><strong>Archival (recommended)</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>~25%</p></td>
+<td><p>Slow</p></td>
+<td><p>Slow</p></td>
+<td><p>Long-term storage</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="benchmarking-compression">
+<h3>Benchmarking Compression<a class="headerlink" href="#benchmarking-compression" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Compare compression levels</span>
+
+<span class="nv">INPUT</span><span class="o">=</span><span class="s2">&quot;large_dataset.nc&quot;</span>
+
+<span class="k">for</span><span class="w"> </span>level<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">9</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Testing compression level </span><span class="nv">$level</span><span class="s2">...&quot;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1"># Time the compression</span>
+<span class="w">    </span><span class="nv">start</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%s<span class="k">)</span>
+<span class="w">    </span>cdo<span class="w"> </span>-z<span class="w"> </span>zip_<span class="si">${</span><span class="nv">level</span><span class="si">}</span><span class="w"> </span>-f<span class="w"> </span>nc4<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;compressed_</span><span class="si">${</span><span class="nv">level</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span><span class="nv">end</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%s<span class="k">)</span>
+<span class="w">    </span><span class="nv">time</span><span class="o">=</span><span class="k">$((</span><span class="nv">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">start</span><span class="k">))</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1"># Check size</span>
+<span class="w">    </span><span class="nv">orig_size</span><span class="o">=</span><span class="k">$(</span>stat<span class="w"> </span>-c%s<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">comp_size</span><span class="o">=</span><span class="k">$(</span>stat<span class="w"> </span>-c%s<span class="w"> </span><span class="s2">&quot;compressed_</span><span class="si">${</span><span class="nv">level</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">ratio</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;scale=2; </span><span class="nv">$comp_size</span><span class="s2"> / </span><span class="nv">$orig_size</span><span class="s2"> * 100&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="k">)</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  Level </span><span class="nv">$level</span><span class="s2">: </span><span class="si">${</span><span class="nv">ratio</span><span class="si">}</span><span class="s2">% of original, took </span><span class="si">${</span><span class="nv">time</span><span class="si">}</span><span class="s2">s&quot;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For most applications, compression level 5 offers the best balance between file size and processing speed.</p>
+</div>
+</section>
+</section>
+<section id="deflate-level-options">
+<h2>Deflate Level Options<a class="headerlink" href="#deflate-level-options" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify deflate (gzip) compression level explicitly</span>
+cdo<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>-f<span class="w"> </span>nc4<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Set chunk size for better compression</span>
+cdo<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>-f<span class="w"> </span>nc4<span class="w"> </span>-setchunk,100,100<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Check compression of existing file</span>
+ncdump<span class="w"> </span>-hs<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;_DeflateLevel\|_ChunkSizes&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="missing-values-handling">
+<h2>Missing Values Handling<a class="headerlink" href="#missing-values-handling" title="Link to this heading">#</a></h2>
+<p>Climate data often contains missing values (e.g., ocean grid points, non-overlapping regions).</p>
+<section id="detecting-missing-values">
+<h3>Detecting Missing Values<a class="headerlink" href="#detecting-missing-values" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if a file has missing values</span>
+cdo<span class="w"> </span>info<span class="w"> </span>input.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;Miss  :     0&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
+
+<span class="c1"># Count missing values</span>
+cdo<span class="w"> </span>info<span class="w"> </span>input.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{if ($5 &gt; 0) print &quot;Variable has&quot;, $5, &quot;missing points&quot;}&#39;</span>
+
+<span class="c1"># Show fraction of missing data per timestep</span>
+cdo<span class="w"> </span>timavg<span class="w"> </span>-setctomiss,0<span class="w"> </span>input.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>cdo<span class="w"> </span>info<span class="w"> </span>-
+
+<span class="c1"># Create a mask of valid data points</span>
+cdo<span class="w"> </span>gtc,0<span class="w"> </span>-setctomiss,-999<span class="w"> </span>input.nc<span class="w"> </span>mask.nc
+</pre></div>
+</div>
+</section>
+<section id="setting-missing-values">
+<h3>Setting Missing Values<a class="headerlink" href="#setting-missing-values" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set specific value as missing</span>
+cdo<span class="w"> </span>setmissval,-999<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Set values equal to or greater than a threshold to missing</span>
+cdo<span class="w"> </span>setctomiss,300<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w">  </span><span class="c1"># Set values &gt;= 300 to missing</span>
+cdo<span class="w"> </span>setrtomiss,250,300<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w">  </span><span class="c1"># Set range to missing</span>
+
+<span class="c1"># Set values less than a threshold to missing</span>
+cdo<span class="w"> </span>setltomiss,250<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+cdo<span class="w"> </span>setgtomiss,320<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Replace missing values with a constant</span>
+cdo<span class="w"> </span>setmisstoc,0<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w">  </span><span class="c1"># Set missing to 0</span>
+
+<span class="c1"># Fill missing values by interpolation</span>
+cdo<span class="w"> </span>intfill<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Fill missing values with nearest neighbor</span>
+cdo<span class="w"> </span>fillmiss<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Different datasets use different missing value conventions (-999, 1e20, NaN). Always check before processing.</p>
+</div>
+</section>
+<section id="missing-value-workflow-example">
+<h3>Missing Value Workflow Example<a class="headerlink" href="#missing-value-workflow-example" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Complete missing value handling workflow</span>
+
+<span class="nv">INPUT</span><span class="o">=</span><span class="s2">&quot;data_with_gaps.nc&quot;</span>
+<span class="nv">OUTPUT</span><span class="o">=</span><span class="s2">&quot;cleaned_data.nc&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Step 1: Identify missing value indicator&quot;</span>
+cdo<span class="w"> </span>info<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-10
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Step 2: Check missing value count&quot;</span>
+cdo<span class="w"> </span>info<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{sum += $5} END {print &quot;Total missing:&quot;, sum}&#39;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Step 3: Apply mask (only ocean points, for example)&quot;</span>
+cdo<span class="w"> </span>ifthen<span class="w"> </span>land_mask.nc<span class="w"> </span>-selname,t2m<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span>masked.nc
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Step 4: Fill remaining missing values&quot;</span>
+cdo<span class="w"> </span>fillmiss<span class="w"> </span>masked.nc<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Step 5: Verify no missing values remain&quot;</span>
+cdo<span class="w"> </span>info<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{if ($5 &gt; 0) print &quot;WARNING: Missing values remain&quot;}&#39;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Cleanup&quot;</span>
+rm<span class="w"> </span>masked.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="netcdf-chunking-and-performance">
+<h2>NetCDF Chunking and Performance<a class="headerlink" href="#netcdf-chunking-and-performance" title="Link to this heading">#</a></h2>
+<p>Chunking divides NetCDF data into rectangular blocks for efficient I/O.</p>
+<section id="understanding-chunks">
+<h3>Understanding Chunks<a class="headerlink" href="#understanding-chunks" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check current chunking</span>
+ncdump<span class="w"> </span>-hs<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;_ChunkSizes&quot;</span>
+
+<span class="c1"># Set chunk sizes</span>
+cdo<span class="w"> </span>setchunk,100,100<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w">  </span><span class="c1"># 2D chunks</span>
+
+<span class="c1"># Automatic chunk selection</span>
+cdo<span class="w"> </span>setchunk,auto<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Performance-related chunking</span>
+<span class="c1"># For time series access: chunk along time</span>
+<span class="c1"># For spatial access: chunk along lat/lon</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Proper chunking can dramatically improve performance. Time-series access benefits from chunking along the time dimension; spatial analysis benefits from chunking in lat/lon.</p>
+</div>
+</section>
+<section id="chunking-strategies">
+<h3>Chunking Strategies<a class="headerlink" href="#chunking-strategies" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Access Pattern</p></th>
+<th class="head"><p>Recommended Chunking</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Time series</strong></p></td>
+<td><p>Small time, large space</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-setchunk,1,100,100</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Spatial slice</strong></p></td>
+<td><p>Large time, small space</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-setchunk,100,10,10</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Single point</strong></p></td>
+<td><p>Small time, small space</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-setchunk,1,1,1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Balanced</strong></p></td>
+<td><p>Moderate all</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-setchunk,10,50,50</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="performance-benchmarking">
+<h3>Performance Benchmarking<a class="headerlink" href="#performance-benchmarking" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Test different chunk sizes</span>
+
+<span class="nv">INPUT</span><span class="o">=</span><span class="s2">&quot;large.nc&quot;</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;./chunk_test&quot;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+
+<span class="k">for</span><span class="w"> </span>chunks<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;1,100,100&quot;</span><span class="w"> </span><span class="s2">&quot;10,50,50&quot;</span><span class="w"> </span><span class="s2">&quot;100,10,10&quot;</span><span class="w"> </span><span class="s2">&quot;auto&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Testing chunks: </span><span class="nv">$chunks</span><span class="s2">&quot;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1"># Time the copy with chunking</span>
+<span class="w">    </span><span class="nb">time</span><span class="w"> </span>cdo<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>-setchunk,<span class="nv">$chunks</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/chunk_</span><span class="si">${</span><span class="nv">chunks</span><span class="p">//,/_</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="converting-to-from-netcdf">
+<h2>Converting to/from NetCDF<a class="headerlink" href="#converting-to-from-netcdf" title="Link to this heading">#</a></h2>
+<section id="converting-to-netcdf">
+<h3>Converting to NetCDF<a class="headerlink" href="#converting-to-netcdf" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># GRIB to NetCDF</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>output.nc
+
+<span class="c1"># GRIB to NetCDF with compression</span>
+cdo<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>output.nc
+
+<span class="c1"># GRIB to NetCDF4</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc4<span class="w"> </span>-z<span class="w"> </span>zip_5<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>output.nc
+
+<span class="c1"># HDF5 to NetCDF</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>copy<span class="w"> </span>input.h5<span class="w"> </span>output.nc
+
+<span class="c1"># Extract specific variable during conversion</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-selname,t2m<span class="w"> </span>copy<span class="w"> </span>input.grib<span class="w"> </span>output.nc
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When converting GRIB to NetCDF, parameter IDs and level types must be properly mapped. Use <code class="docutils literal notranslate"><span class="pre">-selname</span></code> to select specific variables during conversion.</p>
+</div>
+</section>
+<section id="converting-from-netcdf">
+<h3>Converting from NetCDF<a class="headerlink" href="#converting-from-netcdf" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># NetCDF to GRIB</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>grb2<span class="w"> </span>copy<span class="w"> </span>input.nc<span class="w"> </span>output.grib
+
+<span class="c1"># NetCDF to ASCII</span>
+cdo<span class="w"> </span>output<span class="w"> </span>input.nc<span class="w"> </span>&gt;<span class="w"> </span>data.txt
+
+<span class="c1"># NetCDF to CSV-like format</span>
+cdo<span class="w"> </span>outputf,%5.2f,1<span class="w"> </span>input.nc<span class="w"> </span>&gt;<span class="w"> </span>formatted.txt
+
+<span class="c1"># NetCDF to binary</span>
+cdo<span class="w"> </span>-b<span class="w"> </span>F64<span class="w"> </span>copy<span class="w"> </span>input.nc<span class="w"> </span>output_f64.nc<span class="w">  </span><span class="c1"># 64-bit floats</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="using-ncdump-and-ncgen-from-nco">
+<h2>Using ncdump and ncgen from NCO<a class="headerlink" href="#using-ncdump-and-ncgen-from-nco" title="Link to this heading">#</a></h2>
+<p>The NCO toolkit complements CDO with low-level NetCDF operations.</p>
+<section id="ncdump-netcdf-dump">
+<h3>ncdump - NetCDF Dump<a class="headerlink" href="#ncdump-netcdf-dump" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># View file header (metadata only)</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>data.nc
+
+<span class="c1"># View header with data</span>
+ncdump<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-100
+
+<span class="c1"># View specific variable</span>
+ncdump<span class="w"> </span>-v<span class="w"> </span>t2m<span class="w"> </span>data.nc
+
+<span class="c1"># View specific variable header only</span>
+ncdump<span class="w"> </span>-v<span class="w"> </span>t2m<span class="w"> </span>-h<span class="w"> </span>data.nc
+
+<span class="c1"># View attributes only</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;:&quot;</span>
+
+<span class="c1"># View dimensions</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;dimensions:&quot;</span><span class="w"> </span>-A<span class="w"> </span><span class="m">10</span>
+
+<span class="c1"># Optional ncdump flags:</span>
+<span class="c1"># -c             Show coordinate data</span>
+<span class="c1"># -p 1,5         Print string with given length</span>
+<span class="c1"># -f [c|f|e]     Format floating point</span>
+<span class="c1"># -l [length]    Set line length</span>
+</pre></div>
+</div>
+</section>
+<section id="ncgen-netcdf-generation">
+<h3>ncgen - NetCDF Generation<a class="headerlink" href="#ncgen-netcdf-generation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create NetCDF from CDL (text description)</span>
+ncgen<span class="w"> </span>-o<span class="w"> </span>output.nc<span class="w"> </span>file.cdl
+
+<span class="c1"># Generate CDL template</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>data.nc<span class="w"> </span>&gt;<span class="w"> </span>template.cdl
+
+<span class="c1"># Modify template and regenerate</span>
+<span class="c1"># Edit template.cdl with text editor</span>
+ncgen<span class="w"> </span>-o<span class="w"> </span>modified.nc<span class="w"> </span>template.cdl
+
+<span class="c1"># Generate Fortran/Python code from file structure</span>
+ncdump<span class="w"> </span>-c<span class="w"> </span>data.nc<span class="w"> </span>&gt;<span class="w"> </span>code_snippet.txt
+</pre></div>
+</div>
+</section>
+<section id="creating-a-cdl-file">
+<h3>Creating a CDL File<a class="headerlink" href="#creating-a-cdl-file" title="Link to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>netcdf sample {
+dimensions:
+    time = UNLIMITED ; // (10 currently)
+    lat = 5 ;
+    lon = 10 ;
+variables:
+    double time(time) ;
+        time:units = &quot;hours since 2020-01-01 00:00:00&quot; ;
+        time:calendar = &quot;standard&quot; ;
+    double lat(lat) ;
+        lat:units = &quot;degrees_north&quot; ;
+        lat:long_name = &quot;Latitude&quot; ;
+    double lon(lon) ;
+        lon:units = &quot;degrees_east&quot; ;
+        lon:long_name = &quot;Longitude&quot; ;
+    float t2m(time, lat, lon) ;
+        t2m:units = &quot;K&quot; ;
+        t2m:long_name = &quot;2m temperature&quot; ;
+        t2m:standard_name = &quot;air_temperature&quot; ;
+        t2m:missing_value = -999.f ;
+
+data:
+    lat = 0, 1, 2, 3, 4 ;
+    lon = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ;
+}
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate the NetCDF file</span>
+ncgen<span class="w"> </span>-o<span class="w"> </span>sample.nc<span class="w"> </span>sample.cdl
+ncdump<span class="w"> </span>-h<span class="w"> </span>sample.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="cdo-nco-integration">
+<h2>CDO + NCO Integration<a class="headerlink" href="#cdo-nco-integration" title="Link to this heading">#</a></h2>
+<p>CDO and NCO work best together, each excelling at different tasks:</p>
+<section id="when-to-use-cdo-vs-nco">
+<h3>When to Use CDO vs NCO<a class="headerlink" href="#when-to-use-cdo-vs-nco" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Task</p></th>
+<th class="head"><p>Tool</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Climate-specific operations (means, remapping)</p></td>
+<td><p><strong>CDO</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>File structure manipulation</p></td>
+<td><p><strong>NCO</strong> (ncks, ncatted)</p></td>
+</tr>
+<tr class="row-even"><td><p>Attribute editing</p></td>
+<td><p><strong>Both</strong> (CDO: setattribute, NCO: ncatted)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dimension manipulation</p></td>
+<td><p><strong>NCO</strong> (ncks)</p></td>
+</tr>
+<tr class="row-even"><td><p>Variable renaming</p></td>
+<td><p><strong>Both</strong> (CDO: chname, NCO: ncrename)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data subsetting</p></td>
+<td><p><strong>CDO</strong> (selname, seldate)</p></td>
+</tr>
+<tr class="row-even"><td><p>Format conversion</p></td>
+<td><p><strong>CDO</strong> (-f nc, -f grb2)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="common-nco-commands">
+<h3>Common NCO Commands<a class="headerlink" href="#common-nco-commands" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract hyperslab (NCO)</span>
+ncks<span class="w"> </span>-d<span class="w"> </span>lat,10,20<span class="w"> </span>-d<span class="w"> </span>lon,10,30<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Edit attributes (NCO)</span>
+ncatted<span class="w"> </span>-a<span class="w"> </span>units,t2m,o,c,<span class="s2">&quot;K&quot;</span><span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Rename dimension (NCO)</span>
+ncrename<span class="w"> </span>-d<span class="w"> </span>old_dim,new_dim<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Append records (NCO)</span>
+ncrcat<span class="w"> </span>file1.nc<span class="w"> </span>file2.nc<span class="w"> </span>combined.nc
+
+<span class="c1"># Weighted average (NCO)</span>
+ncwa<span class="w"> </span>-a<span class="w"> </span>lat,lon<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+</pre></div>
+</div>
+</section>
+<section id="practical-integration-example">
+<h3>Practical Integration Example<a class="headerlink" href="#practical-integration-example" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># CDO + NCO workflow</span>
+
+<span class="nv">INPUT</span><span class="o">=</span><span class="s2">&quot;model_data.nc&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Step 1: CDO - select variable and compute seasonal mean&quot;</span>
+cdo<span class="w"> </span>timmean<span class="w"> </span>-selseas,JJA<span class="w"> </span>-selname,t2m<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT</span><span class="s2">&quot;</span><span class="w"> </span>season.nc
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Step 2: NCO - add detailed metadata&quot;</span>
+ncatted<span class="w"> </span>-a<span class="w"> </span>long_name,t2m,o,c,<span class="s2">&quot;June-July-August Mean Temperature&quot;</span><span class="w"> </span>season.nc
+ncatted<span class="w"> </span>-a<span class="w"> </span>cell_methods,t2m,o,c,<span class="s2">&quot;time: mean within years time: mean over years&quot;</span><span class="w"> </span>season.nc
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Step 3: CDO - convert to GRIB&quot;</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>grb2<span class="w"> </span>copy<span class="w"> </span>season.nc<span class="w"> </span>season.grib
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Step 4: CDO - check result&quot;</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>season.nc
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use CDO for climate-specific processing and NCO for low-level NetCDF structure manipulation. Combining both gives you complete control.</p>
+</div>
+</section>
+</section>
+<section id="advanced-netcdf-operations">
+<h2>Advanced NetCDF Operations<a class="headerlink" href="#advanced-netcdf-operations" title="Link to this heading">#</a></h2>
+<section id="working-with-aggregated-data">
+<h3>Working with Aggregated Data<a class="headerlink" href="#working-with-aggregated-data" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute ensemble statistics</span>
+cdo<span class="w"> </span>ensmean<span class="w"> </span>model1.nc<span class="w"> </span>model2.nc<span class="w"> </span>model3.nc<span class="w"> </span>ensemble_mean.nc
+cdo<span class="w"> </span>ensstd<span class="w"> </span>model1.nc<span class="w"> </span>model2.nc<span class="w"> </span>model3.nc<span class="w"> </span>ensemble_std.nc
+
+<span class="c1"># Compute multi-year means</span>
+cdo<span class="w"> </span>yearmean<span class="w"> </span>input.nc<span class="w"> </span>annual_means.nc
+cdo<span class="w"> </span>ymonmean<span class="w"> </span>input.nc<span class="w"> </span>monthly_climatology.nc
+cdo<span class="w"> </span>yseasmean<span class="w"> </span>input.nc<span class="w"> </span>seasonal_climatology.nc
+
+<span class="c1"># Detrending</span>
+cdo<span class="w"> </span>detrend<span class="w"> </span>input.nc<span class="w"> </span>detrended.nc
+
+<span class="c1"># Smoothing</span>
+cdo<span class="w"> </span>smooth,9<span class="w"> </span>input.nc<span class="w"> </span>smoothed.nc<span class="w">  </span><span class="c1"># 9-point smoother</span>
+</pre></div>
+</div>
+</section>
+<section id="attribute-management">
+<h3>Attribute Management<a class="headerlink" href="#attribute-management" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy attributes from one file to another</span>
+cdo<span class="w"> </span>copy<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Preserve history with -h flag</span>
+cdo<span class="w"> </span>-h<span class="w"> </span>copy<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Remove all attributes</span>
+cdo<span class="w"> </span>setattribute,,<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Modify time axis</span>
+cdo<span class="w"> </span>settaxis,2020-01-01,00:00:00,1hour<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Set calendar</span>
+cdo<span class="w"> </span>setcalendar,standard<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+</pre></div>
+</div>
+</section>
+<section id="date-time-manipulation">
+<h3>Date/Time Manipulation<a class="headerlink" href="#date-time-manipulation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Shift time axis</span>
+cdo<span class="w"> </span>shifttime,1day<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Select specific dates</span>
+cdo<span class="w"> </span>seldate,2020-06-01,2020-08-31<span class="w"> </span>input.nc<span class="w"> </span>summer.nc
+
+<span class="c1"># Select specific time of day</span>
+cdo<span class="w"> </span>selhour,0,6,12,18<span class="w"> </span>input.nc<span class="w"> </span>diurnal.nc
+
+<span class="c1"># Compute time mean</span>
+cdo<span class="w"> </span>timmean<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+
+<span class="c1"># Compute daily statistics from hourly</span>
+cdo<span class="w"> </span>daymean<span class="w"> </span>input.nc<span class="w"> </span>daily.nc
+cdo<span class="w"> </span>daymin<span class="w"> </span>input.nc<span class="w"> </span>daily_min.nc
+cdo<span class="w"> </span>daymax<span class="w"> </span>input.nc<span class="w"> </span>daily_max.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="hands-on-exercises">
+<h2>Hands-On Exercises<a class="headerlink" href="#hands-on-exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-1-examine-netcdf-structure">
+<h3>Exercise 1: Examine NetCDF Structure<a class="headerlink" href="#exercise-1-examine-netcdf-structure" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-netcdf-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 36 </span></p>
+<section id="exercise-content">
+<p>Create a test dataset and examine its structure:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create test data</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-random,50,10,10<span class="w"> </span>test_structure.nc
+
+<span class="c1"># Examine with CDO</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>test_structure.nc
+cdo<span class="w"> </span>vardes<span class="w"> </span>test_structure.nc
+cdo<span class="w"> </span>griddes<span class="w"> </span>test_structure.nc
+cdo<span class="w"> </span>ntime<span class="w"> </span>test_structure.nc
+cdo<span class="w"> </span>nlevel<span class="w"> </span>test_structure.nc
+
+<span class="c1"># Examine with NCO</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>test_structure.nc
+
+<span class="c1"># Answer:</span>
+<span class="m">1</span>.<span class="w"> </span>How<span class="w"> </span>many<span class="w"> </span>dimensions<span class="w"> </span>does<span class="w"> </span>the<span class="w"> </span>file<span class="w"> </span>have?
+<span class="m">2</span>.<span class="w"> </span>What<span class="w"> </span>are<span class="w"> </span>the<span class="w"> </span>variable<span class="w"> </span>names<span class="w"> </span>and<span class="w"> </span>their<span class="w"> </span>dimensions?
+<span class="m">3</span>.<span class="w"> </span>Is<span class="w"> </span>the<span class="w"> </span><span class="nb">time</span><span class="w"> </span>dimension<span class="w"> </span>unlimited?
+<span class="m">4</span>.<span class="w"> </span>What<span class="w"> </span>attributes<span class="w"> </span>are<span class="w"> </span><span class="nb">set</span><span class="w"> </span>on<span class="w"> </span>each<span class="w"> </span>variable?
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-2-compression-comparison">
+<h3>Exercise 2: Compression Comparison<a class="headerlink" href="#exercise-2-compression-comparison" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-netcdf-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 37 </span></p>
+<section id="exercise-content">
+<p>Compare compression levels on a large (or artificially large) dataset:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a test dataset</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-random,5000,100,100<span class="w"> </span>test_large.nc
+
+<span class="c1"># Compress at different levels</span>
+<span class="k">for</span><span class="w"> </span>level<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">9</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Compression level </span><span class="nv">$level</span><span class="s2"> ===&quot;</span>
+<span class="w">    </span><span class="nb">time</span><span class="w"> </span>cdo<span class="w"> </span>-z<span class="w"> </span>zip_<span class="si">${</span><span class="nv">level</span><span class="si">}</span><span class="w"> </span>-f<span class="w"> </span>nc4<span class="w"> </span>test_large.nc<span class="w"> </span><span class="s2">&quot;compress_</span><span class="si">${</span><span class="nv">level</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span>ls<span class="w"> </span>-lh<span class="w"> </span><span class="s2">&quot;compress_</span><span class="si">${</span><span class="nv">level</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># Create a comparison table</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Level | Size | Ratio&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;------|------|-------&quot;</span>
+<span class="k">for</span><span class="w"> </span>level<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">9</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">orig</span><span class="o">=</span><span class="k">$(</span>stat<span class="w"> </span>-c%s<span class="w"> </span><span class="s2">&quot;test_large.nc&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">comp</span><span class="o">=</span><span class="k">$(</span>stat<span class="w"> </span>-c%s<span class="w"> </span><span class="s2">&quot;compress_</span><span class="si">${</span><span class="nv">level</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">pct</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;scale=1; </span><span class="nv">$comp</span><span class="s2"> * 100 / </span><span class="nv">$orig</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="k">)</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$level</span><span class="s2"> | </span><span class="si">${</span><span class="nv">pct</span><span class="si">}</span><span class="s2">%&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># Verify data integrity</span>
+cdo<span class="w"> </span>diff<span class="w"> </span>test_large.nc<span class="w"> </span>compress_9.nc<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Data preserved perfectly!&quot;</span>
+
+<span class="c1"># Cleanup</span>
+rm<span class="w"> </span>test_large.nc<span class="w"> </span>compress_*.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-3-missing-values">
+<h3>Exercise 3: Missing Values<a class="headerlink" href="#exercise-3-missing-values" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-netcdf-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 38 </span></p>
+<section id="exercise-content">
+<p>Practice working with missing values:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create data with missing values</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-random,20,10,10<span class="w"> </span>test_data.nc
+
+<span class="c1"># Create a mask with 20% missing</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-random,0,10,10<span class="w"> </span>-setrtomiss,0.8,9999.0<span class="w"> </span>test_data.nc<span class="w"> </span>masked.nc
+
+<span class="c1"># Examine missing values</span>
+cdo<span class="w"> </span>info<span class="w"> </span>masked.nc
+
+<span class="c1"># Operations:</span>
+<span class="c1"># 1. Count total missing values</span>
+cdo<span class="w"> </span>info<span class="w"> </span>masked.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{sum += $5} END {print &quot;Total missing:&quot;, sum}&#39;</span>
+
+<span class="c1"># 2. Fill missing values</span>
+cdo<span class="w"> </span>fillmiss<span class="w"> </span>masked.nc<span class="w"> </span>filled.nc
+
+<span class="c1"># 3. Set specific value to missing</span>
+cdo<span class="w"> </span>setmisstoc,-999.0<span class="w"> </span>filled.nc<span class="w"> </span>final.nc
+
+<span class="c1"># 4. Verify no missing remain</span>
+cdo<span class="w"> </span>info<span class="w"> </span>final.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{if ($5 &gt; 0) print &quot;WARNING: Missing values still exist&quot;}&#39;</span>
+
+<span class="c1"># Cleanup</span>
+rm<span class="w"> </span>test_data.nc<span class="w"> </span>masked.nc<span class="w"> </span>filled.nc<span class="w"> </span>final.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-4-attribute-manipulation">
+<h3>Exercise 4: Attribute Manipulation<a class="headerlink" href="#exercise-4-attribute-manipulation" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-netcdf-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 39 </span></p>
+<section id="exercise-content">
+<p>Practice adding and modifying metadata:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create test file</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-random,10,5,5<span class="w"> </span>raw.nc
+
+<span class="c1"># Add comprehensive metadata</span>
+cdo<span class="w"> </span>-setattribute,title<span class="o">=</span><span class="s2">&quot;Training Dataset&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,description<span class="o">=</span><span class="s2">&quot;Created for CDO training course&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,creation_date<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>date<span class="w"> </span>+%Y-%m-%d<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,creator<span class="o">=</span><span class="s2">&quot;CDO Training Participant&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,Conventions<span class="o">=</span><span class="s2">&quot;CF-1.8&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>raw.nc<span class="w"> </span>metadata.nc
+
+<span class="c1"># Add variable-specific attributes</span>
+cdo<span class="w"> </span>-setattribute,var1@long_name<span class="o">=</span><span class="s2">&quot;Temperature&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,var1@units<span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-setattribute,var1@standard_name<span class="o">=</span><span class="s2">&quot;air_temperature&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>metadata.nc<span class="w"> </span>attrs.nc
+
+<span class="c1"># Verify the metadata</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>attrs.nc
+
+<span class="c1"># Extract specific attributes</span>
+cdo<span class="w"> </span>showattribute,title<span class="w"> </span>attrs.nc
+cdo<span class="w"> </span>vardes<span class="w"> </span>attrs.nc
+
+<span class="c1"># Cleanup</span>
+rm<span class="w"> </span>raw.nc<span class="w"> </span>metadata.nc<span class="w"> </span>attrs.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-5-cdo-nco-workflow">
+<h3>Exercise 5: CDO + NCO Workflow<a class="headerlink" href="#exercise-5-cdo-nco-workflow" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-netcdf-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 40 </span></p>
+<section id="exercise-content">
+<p>Write a complete workflow using both CDO and NCO:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Integrated CDO + NCO workflow</span>
+
+<span class="nb">set</span><span class="w"> </span>-e<span class="w">  </span><span class="c1"># Exit on error</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== CDO + NCO Integration Exercise ===&quot;</span>
+
+<span class="c1"># Step 1: Create test data simulating model output</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Creating test data...&quot;</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-random,100,10,10<span class="w"> </span>model_output.nc
+
+<span class="c1"># Step 2: Use CDO for climate operations</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Computing climatology...&quot;</span>
+cdo<span class="w"> </span>timmean<span class="w"> </span>model_output.nc<span class="w"> </span>climatology.nc
+
+<span class="c1"># Step 3: Use NCO for metadata enhancement</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Adding CF-compliant metadata...&quot;</span>
+ncatted<span class="w"> </span>-h<span class="w"> </span>-a<span class="w"> </span>long_name,var1,o,c,<span class="s2">&quot;Surface Temperature&quot;</span><span class="w"> </span>climatology.nc
+ncatted<span class="w"> </span>-h<span class="w"> </span>-a<span class="w"> </span>units,var1,o,c,<span class="s2">&quot;K&quot;</span><span class="w"> </span>climatology.nc
+ncatted<span class="w"> </span>-h<span class="w"> </span>-a<span class="w"> </span>standard_name,var1,o,c,<span class="s2">&quot;surface_temperature&quot;</span><span class="w"> </span>climatology.nc
+ncatted<span class="w"> </span>-h<span class="w"> </span>-a<span class="w"> </span>cell_methods,var1,o,c,<span class="s2">&quot;time: mean&quot;</span><span class="w"> </span>climatology.nc
+ncatted<span class="w"> </span>-h<span class="w"> </span>-a<span class="w"> </span>Conventions,global,o,c,<span class="s2">&quot;CF-1.8&quot;</span><span class="w"> </span>climatology.nc
+
+<span class="c1"># Step 4: Verify with ncdump</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Final metadata:&quot;</span>
+ncdump<span class="w"> </span>-h<span class="w"> </span>climatology.nc
+
+<span class="c1"># Step 5: Comparison between tools</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;CDO rename:&quot;</span>
+<span class="nb">time</span><span class="w"> </span>cdo<span class="w"> </span>chname,var1,t2m<span class="w"> </span>climatology.nc<span class="w"> </span>renamed_cdo.nc
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;NCO rename:&quot;</span>
+<span class="nb">time</span><span class="w"> </span>ncrename<span class="w"> </span>-v<span class="w"> </span>var1,t2m<span class="w"> </span>climatology.nc<span class="w"> </span>renamed_nco.nc
+
+<span class="c1"># Cleanup</span>
+rm<span class="w"> </span>-f<span class="w"> </span>model_output.nc<span class="w"> </span>climatology.nc<span class="w"> </span>renamed_cdo.nc<span class="w"> </span>renamed_nco.nc
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Exercise complete!&quot;</span>
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+</section>
+<section id="quiz">
+<h2>Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Quiz</p>
+<p>Test your knowledge of NetCDF data handling with CDO.</p>
+</div>
+<div class="exercise admonition" id="q-netcdf-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 41 </span> (Question 1: Which NetCDF version supports compression and files larger than 2 GB?)</p>
+<section id="exercise-content">
+<p>A. NetCDF Classic<br />
+B. NetCDF-3<br />
+C. NetCDF-4 (HDF5-based)<br />
+D. NetCDF-64bit</p>
+</section>
+</div>
+<div class="solution admonition" id="book/netcdf-solution-6">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-netcdf-1"> Exercise 41 (Question 1: Which NetCDF version supports compression and files larger than 2 GB?)</a></p>
+<section id="solution-content">
+<p>C. NetCDF-4 (HDF5-based)</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-netcdf-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 42 </span> (Question 2: What CDO flag enables compression?)</p>
+<section id="exercise-content">
+<p>A. <code class="docutils literal notranslate"><span class="pre">-c</span></code><br />
+B. <code class="docutils literal notranslate"><span class="pre">-z</span> <span class="pre">zip_N</span></code><br />
+C. <code class="docutils literal notranslate"><span class="pre">-compress</span></code><br />
+D. <code class="docutils literal notranslate"><span class="pre">-d</span></code></p>
+</section>
+</div>
+<div class="solution admonition" id="book/netcdf-solution-8">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-netcdf-2"> Exercise 42 (Question 2: What CDO flag enables compression?)</a></p>
+<section id="solution-content">
+<p>B. <code class="docutils literal notranslate"><span class="pre">-z</span> <span class="pre">zip_N</span></code> (where N is the compression level 0-9)</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-netcdf-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 43 </span> (Question 3: Which CDO command replaces missing values with interpolated values?)</p>
+<section id="exercise-content">
+<p>A. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">setmisstoc</span></code><br />
+B. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">fillmiss</span></code><br />
+C. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">setmissval</span></code><br />
+D. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">setctomiss</span></code></p>
+</section>
+</div>
+<div class="solution admonition" id="book/netcdf-solution-10">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-netcdf-3"> Exercise 43 (Question 3: Which CDO command replaces missing values with interpolated values?)</a></p>
+<section id="solution-content">
+<p>B. <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">fillmiss</span></code></p>
+</section>
+</div>
+<p>```{exercise} Question 4: What does the NCO command <code class="docutils literal notranslate"><span class="pre">ncdump</span> <span class="pre">-h</span> <span class="pre">data.nc</span></code> do?
+:label: q-netcdf-4</p>
+<p>A. Dumps the entire file contents<br />
+B. Dumps only the header (metadata)<br />
+C. Dumps only variable data<br />
+D. Dumps the file in hexadecimal</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+```{solution} q-netcdf-4
+B. Dumps only the header (metadata)
+</pre></div>
+</div>
+<div class="exercise admonition" id="q-netcdf-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 44 </span> (Question 5: Which of the following is NOT a component of a NetCDF file?)</p>
+<section id="exercise-content">
+<p>A. Dimensions<br />
+B. Variables<br />
+C. Attributes<br />
+D. Templates</p>
+</section>
+</div>
+<div class="solution admonition" id="book/netcdf-solution-12">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-netcdf-5"> Exercise 44 (Question 5: Which of the following is NOT a component of a NetCDF file?)</a></p>
+<section id="solution-content">
+<p>D. Templates</p>
+</section>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this module, we covered:</p>
+<ul class="simple">
+<li><p><strong>NetCDF structure</strong>: dimensions, variables, attributes, global metadata</p></li>
+<li><p><strong>CF conventions</strong>: standard names, units, cell methods for interoperability</p></li>
+<li><p><strong>Compression</strong>: <code class="docutils literal notranslate"><span class="pre">-z</span> <span class="pre">zip_0</span></code> through <code class="docutils literal notranslate"><span class="pre">-z</span> <span class="pre">zip_9</span></code>, with level 5 recommended</p></li>
+<li><p><strong>Missing values</strong>: detection (<code class="docutils literal notranslate"><span class="pre">setmissval</span></code>), filling (<code class="docutils literal notranslate"><span class="pre">fillmiss</span></code>), masking</p></li>
+<li><p><strong>Chunking</strong>: optimizing I/O for different access patterns</p></li>
+<li><p><strong>NCO tools</strong>: <code class="docutils literal notranslate"><span class="pre">ncdump</span></code> (viewing), <code class="docutils literal notranslate"><span class="pre">ncgen</span></code> (creating), <code class="docutils literal notranslate"><span class="pre">ncatted</span></code> (editing)</p></li>
+<li><p><strong>CDO + NCO integration</strong>: complementary tools for complete NetCDF control</p></li>
+<li><p><strong>Format conversion</strong>: GRIB→NetCDF, NetCDF→GRIB, binary, ASCII</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Key Points</p>
+<ul class="simple">
+<li><p>NetCDF is self-describing - use metadata to document your data</p></li>
+<li><p>Always use compression (level 5) for archival and large datasets</p></li>
+<li><p>Handle missing values carefully - different datasets use different conventions</p></li>
+<li><p>CF conventions ensure data interoperability across tools and platforms</p></li>
+<li><p>NCO complements CDO for low-level NetCDF operations</p></li>
+</ul>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>NetCDF Documentation: <a class="reference external" href="https://docs.unidata.ucar.edu/nug/current/">https://docs.unidata.ucar.edu/nug/current/</a></p></li>
+<li><p>CF Conventions: <a class="reference external" href="http://cfconventions.org/">http://cfconventions.org/</a></p></li>
+<li><p>CF Standard Names: <a class="reference external" href="http://cfconventions.org/standard-names.html">http://cfconventions.org/standard-names.html</a></p></li>
+<li><p>NCO Toolkit: <a class="reference external" href="http://nco.sourceforge.net/">http://nco.sourceforge.net/</a></p></li>
+<li><p>NetCDF User Guide: <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/docs/">https://www.unidata.ucar.edu/software/netcdf/docs/</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="operators.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Module 4: CDO Operators and File Operations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="grib.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Module 6: Working with GRIB Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-format-fundamentals">NetCDF Format Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-file-structure">NetCDF File Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-versions">NetCDF Versions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-components">NetCDF Components</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensions">Dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes">Attributes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cf-climate-and-forecast-conventions">CF (Climate and Forecast) Conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-cf-requirements">Key CF Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-cf-compliance">Checking CF Compliance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-standards">Metadata Standards</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#essential-metadata-elements">Essential Metadata Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-metadata">Viewing Metadata</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-compression">NetCDF Compression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-compression-levels">CDO Compression Levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-comparison">Performance Comparison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarking-compression">Benchmarking Compression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deflate-level-options">Deflate Level Options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values-handling">Missing Values Handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detecting-missing-values">Detecting Missing Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-missing-values">Setting Missing Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-value-workflow-example">Missing Value Workflow Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-chunking-and-performance">NetCDF Chunking and Performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-chunks">Understanding Chunks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chunking-strategies">Chunking Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-benchmarking">Performance Benchmarking</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-to-from-netcdf">Converting to/from NetCDF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-to-netcdf">Converting to NetCDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-from-netcdf">Converting from NetCDF</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-ncdump-and-ncgen-from-nco">Using ncdump and ncgen from NCO</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ncdump-netcdf-dump">ncdump - NetCDF Dump</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ncgen-netcdf-generation">ncgen - NetCDF Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-cdl-file">Creating a CDL File</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-nco-integration">CDO + NCO Integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-cdo-vs-nco">When to Use CDO vs NCO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-nco-commands">Common NCO Commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-integration-example">Practical Integration Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-netcdf-operations">Advanced NetCDF Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-aggregated-data">Working with Aggregated Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attribute-management">Attribute Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#date-time-manipulation">Date/Time Manipulation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-examine-netcdf-structure">Exercise 1: Examine NetCDF Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-compression-comparison">Exercise 2: Compression Comparison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-missing-values">Exercise 3: Missing Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-attribute-manipulation">Exercise 4: Attribute Manipulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-cdo-nco-workflow">Exercise 5: CDO + NCO Workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

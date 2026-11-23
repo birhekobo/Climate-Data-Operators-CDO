@@ -1,0 +1,1792 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Module 3: Linux Basics for Climate Data Processing &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/basics';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 4: CDO Operators and File Operations" href="operators.html" />
+    <link rel="prev" title="Module 2: Installation and Setup" href="installation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./book/basics.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fbook/basics.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/basics.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 3: Linux Basics for Climate Data Processing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linux-command-line-fundamentals">Linux Command Line Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shell">The Shell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#command-structure">Command Structure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-management">File Management</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navigation-commands">Navigation Commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-operations">File Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-climate-data-files">Working with Climate Data Files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-scripting-basics">Shell Scripting Basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-first-script">Creating Your First Script</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-scripts-executable">Making Scripts Executable</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-in-bash">Variables in Bash</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-and-using-variables">Defining and Using Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-variables">Special Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-scope-and-export">Variable Scope and Export</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loops">Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops">For Loops</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loops">While Loops</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-batch-processing">Practical Example: Batch Processing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-statements">Conditional Statements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-statements">If-Else Statements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-test-conditions">Common Test Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-operators">Logical Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#case-statements">Case Statements</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipes-and-redirections">Pipes and Redirections</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-streams">Standard Streams</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redirections">Redirections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipes">Pipes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-cdo-pipelines">Practical CDO Pipelines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variables">Environment Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-and-setting">Viewing and Setting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-specific-environment-variables">CDO-Specific Environment Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#path-management">PATH Management</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wildcards-and-globbing">Wildcards and Globbing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-wildcards">Basic Wildcards</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-wildcards-with-cdo">Using Wildcards with CDO</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-processing">Text Processing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grep-pattern-search">grep - Pattern Search</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sed-stream-editor">sed - Stream Editor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#awk-text-processing">awk - Text Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-text-tools">Combining Text Tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-your-first-cdo-pipeline-with-bash">Writing Your First CDO Pipeline with Bash</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-processing-pipeline">Complete Processing Pipeline</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-file-management">Exercise 1: File Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-script-with-variables">Exercise 2: Script with Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-batch-processing-loop">Exercise 3: Batch Processing Loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-pipeline-with-conditionals">Exercise 4: Pipeline with Conditionals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-text-processing-pipeline">Exercise 5: Text Processing Pipeline</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-3-linux-basics-for-climate-data-processing">
+<h1>Module 3: Linux Basics for Climate Data Processing<a class="headerlink" href="#module-3-linux-basics-for-climate-data-processing" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this module, you will be able to:</p>
+<ul class="simple">
+<li><p>Navigate the Linux filesystem using command-line tools</p></li>
+<li><p>Manage files and directories efficiently</p></li>
+<li><p>Write bash scripts with variables, loops, and conditionals</p></li>
+<li><p>Use pipes and redirections to chain commands</p></li>
+<li><p>Set and manage environment variables for CDO</p></li>
+<li><p>Use wildcards and globbing patterns for batch processing</p></li>
+<li><p>Process text with grep, sed, and awk</p></li>
+<li><p>Build complete CDO processing pipelines in bash</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="linux-command-line-fundamentals">
+<h2>Linux Command Line Fundamentals<a class="headerlink" href="#linux-command-line-fundamentals" title="Link to this heading">#</a></h2>
+<p>CDO is a command-line tool, so familiarity with the Linux terminal is essential.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This module assumes you have access to a Linux terminal or WSL on Windows.</p>
+</div>
+<section id="the-shell">
+<h3>The Shell<a class="headerlink" href="#the-shell" title="Link to this heading">#</a></h3>
+<p>The <strong>shell</strong> is a program that interprets commands. The most common shell is <strong>bash</strong> (Bourne Again SHell).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check which shell you are using</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$SHELL</span>
+
+<span class="c1"># Check your shell version</span>
+bash<span class="w"> </span>--version
+</pre></div>
+</div>
+</section>
+<section id="command-structure">
+<h3>Command Structure<a class="headerlink" href="#command-structure" title="Link to this heading">#</a></h3>
+<p>Most Linux commands follow this pattern:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">command</span><span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="o">[</span>arguments<span class="o">]</span>
+</pre></div>
+</div>
+<p>Examples:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>-la<span class="w"> </span>/home/user/
+<span class="c1"># command: ls (list directory)</span>
+<span class="c1"># options: -l (long format), -a (all files)</span>
+<span class="c1"># argument: /home/user/ (directory to list)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="file-management">
+<h2>File Management<a class="headerlink" href="#file-management" title="Link to this heading">#</a></h2>
+<section id="navigation-commands">
+<h3>Navigation Commands<a class="headerlink" href="#navigation-commands" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print working directory</span>
+<span class="nb">pwd</span>
+
+<span class="c1"># List files</span>
+ls<span class="w">                    </span><span class="c1"># basic listing</span>
+ls<span class="w"> </span>-l<span class="w">                 </span><span class="c1"># long format (permissions, size, date)</span>
+ls<span class="w"> </span>-la<span class="w">                </span><span class="c1"># long format including hidden files</span>
+ls<span class="w"> </span>-lh<span class="w">                </span><span class="c1"># human-readable sizes</span>
+ls<span class="w"> </span>-lt<span class="w">                </span><span class="c1"># sorted by modification time</span>
+ls<span class="w"> </span>-lS<span class="w">                </span><span class="c1"># sorted by file size</span>
+ls<span class="w"> </span>-R<span class="w">                 </span><span class="c1"># recursive listing</span>
+
+<span class="c1"># Change directory</span>
+<span class="nb">cd</span><span class="w"> </span>/path/to/dir<span class="w">       </span><span class="c1"># go to absolute path</span>
+<span class="nb">cd</span><span class="w"> </span>..<span class="w">                 </span><span class="c1"># go up one level</span>
+<span class="nb">cd</span><span class="w"> </span>~<span class="w">                  </span><span class="c1"># go to home directory</span>
+<span class="nb">cd</span><span class="w"> </span>-<span class="w">                  </span><span class="c1"># go to previous directory</span>
+
+<span class="c1"># View directory tree</span>
+tree<span class="w"> </span>/path<span class="w">            </span><span class="c1"># show directory tree structure</span>
+tree<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span><span class="w">             </span><span class="c1"># limit to 2 levels deep</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-lh</span></code> for readable file sizes, and <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-lt</span></code> to see the most recently modified files.</p>
+</div>
+</section>
+<section id="file-operations">
+<h3>File Operations<a class="headerlink" href="#file-operations" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create directories</span>
+mkdir<span class="w"> </span>data
+mkdir<span class="w"> </span>-p<span class="w"> </span>data/raw/2024<span class="w">    </span><span class="c1"># create parent directories as needed</span>
+
+<span class="c1"># Create empty files</span>
+touch<span class="w"> </span>file.txt
+
+<span class="c1"># Copy files</span>
+cp<span class="w"> </span>source.nc<span class="w"> </span>dest.nc
+cp<span class="w"> </span>-r<span class="w"> </span>source_dir<span class="w"> </span>dest_dir<span class="w">    </span><span class="c1"># recursive copy for directories</span>
+
+<span class="c1"># Move/Rename files</span>
+mv<span class="w"> </span>oldname.nc<span class="w"> </span>newname.nc
+mv<span class="w"> </span>file.nc<span class="w"> </span>/path/to/target/
+
+<span class="c1"># Remove files (use with caution!)</span>
+rm<span class="w"> </span>file.nc
+rm<span class="w"> </span>-rf<span class="w"> </span>directory_name<span class="w">       </span><span class="c1"># remove directory and contents</span>
+rm<span class="w"> </span>-i<span class="w"> </span>*.nc<span class="w">                  </span><span class="c1"># interactive mode (ask before each)</span>
+
+<span class="c1"># View file contents</span>
+cat<span class="w"> </span>file.txt<span class="w">                </span><span class="c1"># display entire file</span>
+less<span class="w"> </span>file.txt<span class="w">               </span><span class="c1"># view with pagination (q to quit)</span>
+head<span class="w"> </span>-20<span class="w"> </span>file.txt<span class="w">           </span><span class="c1"># first 20 lines</span>
+tail<span class="w"> </span>-10<span class="w"> </span>file.txt<span class="w">           </span><span class="c1"># last 10 lines</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-rf</span></code> command is dangerous. Always double-check the path before executing. There is no trash bin in the terminal.</p>
+</div>
+</section>
+<section id="working-with-climate-data-files">
+<h3>Working with Climate Data Files<a class="headerlink" href="#working-with-climate-data-files" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check file size</span>
+ls<span class="w"> </span>-lh<span class="w"> </span>data.nc
+du<span class="w"> </span>-h<span class="w"> </span>data.nc<span class="w">               </span><span class="c1"># disk usage</span>
+
+<span class="c1"># Check file type</span>
+file<span class="w"> </span>data.nc
+
+<span class="c1"># Count files matching pattern</span>
+ls<span class="w"> </span>*.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+
+<span class="c1"># Find files</span>
+find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.nc&quot;</span><span class="w">         </span><span class="c1"># find all NetCDF files recursively</span>
+find<span class="w"> </span>.<span class="w"> </span>-size<span class="w"> </span>+1G<span class="w">            </span><span class="c1"># files larger than 1 GB</span>
+find<span class="w"> </span>.<span class="w"> </span>-mtime<span class="w"> </span>-7<span class="w">            </span><span class="c1"># files modified in last 7 days</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="shell-scripting-basics">
+<h2>Shell Scripting Basics<a class="headerlink" href="#shell-scripting-basics" title="Link to this heading">#</a></h2>
+<section id="creating-your-first-script">
+<h3>Creating Your First Script<a class="headerlink" href="#creating-your-first-script" title="Link to this heading">#</a></h3>
+<p>A bash script is a text file containing shell commands.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># My first CDO script</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Starting climate data processing...&quot;</span>
+
+<span class="c1"># Create output directory</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>output
+
+<span class="c1"># List input files</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Input files:&quot;</span>
+ls<span class="w"> </span>-lh<span class="w"> </span>*.nc
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Done!&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The first line (<code class="docutils literal notranslate"><span class="pre">#!/bin/bash</span></code>) is called a <strong>shebang</strong>. It tells the system which interpreter to use.</p>
+</div>
+</section>
+<section id="making-scripts-executable">
+<h3>Making Scripts Executable<a class="headerlink" href="#making-scripts-executable" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>myscript.sh
+
+<span class="c1"># Run the script</span>
+./myscript.sh
+<span class="c1"># OR</span>
+bash<span class="w"> </span>myscript.sh
+</pre></div>
+</div>
+</section>
+</section>
+<section id="variables-in-bash">
+<h2>Variables in Bash<a class="headerlink" href="#variables-in-bash" title="Link to this heading">#</a></h2>
+<section id="defining-and-using-variables">
+<h3>Defining and Using Variables<a class="headerlink" href="#defining-and-using-variables" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Variable assignment (no spaces around =)</span>
+<span class="nv">input_file</span><span class="o">=</span><span class="s2">&quot;era5_data.nc&quot;</span>
+<span class="nv">output_file</span><span class="o">=</span><span class="s2">&quot;processed_data.nc&quot;</span>
+
+<span class="c1"># Using variables (prefix with $)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing </span><span class="nv">$input_file</span><span class="s2">&quot;</span>
+cdo<span class="w"> </span>timmean<span class="w"> </span><span class="nv">$input_file</span><span class="w"> </span><span class="nv">$output_file</span>
+
+<span class="c1"># Command substitution (store command output)</span>
+<span class="nv">num_files</span><span class="o">=</span><span class="k">$(</span>ls<span class="w"> </span>*.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Found </span><span class="nv">$num_files</span><span class="s2"> NetCDF files&quot;</span>
+
+<span class="c1"># Current date</span>
+<span class="nv">today</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Today&#39;s date: </span><span class="nv">$today</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="special-variables">
+<h3>Special Variables<a class="headerlink" href="#special-variables" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Script name</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Script name: </span><span class="nv">$0</span><span class="s2">&quot;</span>
+
+<span class="c1"># First argument</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;First argument: </span><span class="nv">$1</span><span class="s2">&quot;</span>
+
+<span class="c1"># Second argument</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Second argument: </span><span class="nv">$2</span><span class="s2">&quot;</span>
+
+<span class="c1"># All arguments</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;All arguments: </span><span class="nv">$@</span><span class="s2">&quot;</span>
+
+<span class="c1"># Number of arguments</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Number of arguments: </span><span class="nv">$#</span><span class="s2">&quot;</span>
+
+<span class="c1"># Exit status of last command</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Exit code: </span><span class="nv">$?</span><span class="s2">&quot;</span>
+
+<span class="c1"># Process ID of current shell</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PID: </span><span class="nv">$$</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="variable-scope-and-export">
+<h3>Variable Scope and Export<a class="headerlink" href="#variable-scope-and-export" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Local variable</span>
+<span class="nv">my_var</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span>
+
+<span class="c1"># Export to subshell (environment variable)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/custom/path:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+
+<span class="c1"># Array variables</span>
+<span class="nv">files</span><span class="o">=(</span>*.nc<span class="o">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;First file: </span><span class="si">${</span><span class="nv">files</span><span class="p">[0]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;All files: </span><span class="si">${</span><span class="nv">files</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Number of files: </span><span class="si">${#</span><span class="nv">files</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="loops">
+<h2>Loops<a class="headerlink" href="#loops" title="Link to this heading">#</a></h2>
+<section id="for-loops">
+<h3>For Loops<a class="headerlink" href="#for-loops" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over a list</span>
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.nc<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing </span><span class="nv">$file</span><span class="s2">&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>timmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">file</span><span class="p">%.nc</span><span class="si">}</span><span class="s2">_mean.nc&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># Loop with a sequence</span>
+<span class="k">for</span><span class="w"> </span>year<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">2000</span><span class="w"> </span><span class="m">2020</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Year: </span><span class="nv">$year</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># C-style for loop</span>
+<span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="nv">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span>i&lt;<span class="m">10</span><span class="p">;</span><span class="w"> </span>i++<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Iteration </span><span class="nv">$i</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="while-loops">
+<h3>While Loops<a class="headerlink" href="#while-loops" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read a file line by line</span>
+<span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing: </span><span class="nv">$line</span><span class="s2">&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>sinfo<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>metadata.txt
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>filelist.txt
+
+<span class="c1"># Counter-based loop</span>
+<span class="nv">counter</span><span class="o">=</span><span class="m">0</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$counter</span><span class="w"> </span>-lt<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Count: </span><span class="nv">$counter</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="o">((</span>counter++<span class="o">))</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="practical-example-batch-processing">
+<h3>Practical Example: Batch Processing<a class="headerlink" href="#practical-example-batch-processing" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-basics-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 19 </span></p>
+<section id="exercise-content">
+<p>Create a script to process multiple years of data:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Batch process climate data by year</span>
+
+<span class="k">for</span><span class="w"> </span>year<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">2010</span><span class="w"> </span><span class="m">2020</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">infile</span><span class="o">=</span><span class="s2">&quot;era5_t2m_</span><span class="si">${</span><span class="nv">year</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span><span class="nv">outfile</span><span class="o">=</span><span class="s2">&quot;era5_t2m_</span><span class="si">${</span><span class="nv">year</span><span class="si">}</span><span class="s2">_annual_mean.nc&quot;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing </span><span class="nv">$year</span><span class="s2">...&quot;</span>
+<span class="w">        </span>cdo<span class="w"> </span>timmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$outfile</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;WARNING: </span><span class="nv">$infile</span><span class="s2"> not found!&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Batch processing complete.&quot;</span>
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+</section>
+<section id="conditional-statements">
+<h2>Conditional Statements<a class="headerlink" href="#conditional-statements" title="Link to this heading">#</a></h2>
+<section id="if-else-statements">
+<h3>If-Else Statements<a class="headerlink" href="#if-else-statements" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if file exists</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filename</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing </span><span class="nv">$filename</span><span class="s2">&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>sinfo<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filename</span><span class="s2">&quot;</span>
+<span class="k">elif</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dirname</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dirname</span><span class="s2"> is a directory&quot;</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;File not found&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+</section>
+<section id="common-test-conditions">
+<h3>Common Test Conditions<a class="headerlink" href="#common-test-conditions" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># File tests</span>
+<span class="o">[</span><span class="w"> </span>-f<span class="w"> </span>file<span class="w"> </span><span class="o">]</span><span class="w">    </span><span class="c1"># file exists and is a regular file</span>
+<span class="o">[</span><span class="w"> </span>-d<span class="w"> </span>dir<span class="w"> </span><span class="o">]</span><span class="w">     </span><span class="c1"># directory exists</span>
+<span class="o">[</span><span class="w"> </span>-e<span class="w"> </span>path<span class="w"> </span><span class="o">]</span><span class="w">    </span><span class="c1"># path exists</span>
+<span class="o">[</span><span class="w"> </span>-s<span class="w"> </span>file<span class="w"> </span><span class="o">]</span><span class="w">    </span><span class="c1"># file exists and is not empty</span>
+<span class="o">[</span><span class="w"> </span>-r<span class="w"> </span>file<span class="w"> </span><span class="o">]</span><span class="w">    </span><span class="c1"># file is readable</span>
+<span class="o">[</span><span class="w"> </span>-w<span class="w"> </span>file<span class="w"> </span><span class="o">]</span><span class="w">    </span><span class="c1"># file is writable</span>
+<span class="o">[</span><span class="w"> </span>-x<span class="w"> </span>file<span class="w"> </span><span class="o">]</span><span class="w">    </span><span class="c1"># file is executable</span>
+
+<span class="c1"># String tests</span>
+<span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$a</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$b</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w">  </span><span class="c1"># strings are equal</span>
+<span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$a</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$b</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="c1"># strings are not equal</span>
+<span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$a</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w">      </span><span class="c1"># string is empty</span>
+<span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$a</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w">      </span><span class="c1"># string is not empty</span>
+
+<span class="c1"># Numeric tests</span>
+<span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$a</span><span class="s2">&quot;</span><span class="w"> </span>-eq<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$b</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="c1"># equal</span>
+<span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$a</span><span class="s2">&quot;</span><span class="w"> </span>-ne<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$b</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="c1"># not equal</span>
+<span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$a</span><span class="s2">&quot;</span><span class="w"> </span>-gt<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$b</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="c1"># greater than</span>
+<span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$a</span><span class="s2">&quot;</span><span class="w"> </span>-lt<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$b</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="c1"># less than</span>
+<span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$a</span><span class="s2">&quot;</span><span class="w"> </span>-ge<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$b</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="c1"># greater than or equal</span>
+<span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$a</span><span class="s2">&quot;</span><span class="w"> </span>-le<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$b</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="c1"># less than or equal</span>
+</pre></div>
+</div>
+</section>
+<section id="logical-operators">
+<h3>Logical Operators<a class="headerlink" href="#logical-operators" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># AND</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Both files exist&quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># OR</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;At least one file exists&quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># Using double brackets (bash-specific)</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$var1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;value&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$var2</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;2020&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Conditions met&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+</section>
+<section id="case-statements">
+<h3>Case Statements<a class="headerlink" href="#case-statements" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$var</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>start<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Starting...&quot;</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>stop<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Stopping...&quot;</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>restart<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Restarting...&quot;</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>*<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Unknown command: </span><span class="nv">$var</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="k">esac</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pipes-and-redirections">
+<h2>Pipes and Redirections<a class="headerlink" href="#pipes-and-redirections" title="Link to this heading">#</a></h2>
+<section id="standard-streams">
+<h3>Standard Streams<a class="headerlink" href="#standard-streams" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Stream</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Number</p></th>
+<th class="head"><p>Default Target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>stdin</p></td>
+<td><p>Standard Input</p></td>
+<td><p>0</p></td>
+<td><p>Keyboard</p></td>
+</tr>
+<tr class="row-odd"><td><p>stdout</p></td>
+<td><p>Standard Output</p></td>
+<td><p>1</p></td>
+<td><p>Terminal</p></td>
+</tr>
+<tr class="row-even"><td><p>stderr</p></td>
+<td><p>Standard Error</p></td>
+<td><p>2</p></td>
+<td><p>Terminal</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="redirections">
+<h3>Redirections<a class="headerlink" href="#redirections" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Redirect output to file (overwrite)</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>input.nc<span class="w"> </span>&gt;<span class="w"> </span>info.txt
+
+<span class="c1"># Redirect output to file (append)</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>input.nc<span class="w"> </span>&gt;&gt;<span class="w"> </span>all_info.txt
+
+<span class="c1"># Redirect errors to file</span>
+cdo<span class="w"> </span>timmean<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>errors.log
+
+<span class="c1"># Redirect both stdout and stderr</span>
+cdo<span class="w"> </span>timmean<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>all_output.log
+
+<span class="c1"># Redirect stderr to stdout</span>
+cdo<span class="w"> </span>timmean<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+
+<span class="c1"># Suppress output (discard)</span>
+cdo<span class="w"> </span>timmean<span class="w"> </span>input.nc<span class="w"> </span>output.nc<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+
+<span class="c1"># Take input from file</span>
+<span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>file<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>cdo<span class="w"> </span>sinfo<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span>
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>filelist.txt
+
+<span class="c1"># Here document</span>
+cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; myscript.sh</span>
+<span class="s">#!/bin/bash</span>
+<span class="s">echo &quot;Generated script&quot;</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+</section>
+<section id="pipes">
+<h3>Pipes<a class="headerlink" href="#pipes" title="Link to this heading">#</a></h3>
+<p>Pipes connect the stdout of one command to the stdin of another.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chain commands</span>
+ls<span class="w"> </span>-lh<span class="w"> </span>*.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Jan &quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+
+<span class="c1"># CDO pipeline without intermediate files</span>
+cdo<span class="w"> </span>timmean<span class="w"> </span>-seldate,2020-01-01,2020-12-31<span class="w"> </span>input.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>cdo<span class="w"> </span>fldmean<span class="w"> </span>-<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>cdo<span class="w"> </span>output<span class="w"> </span>-
+
+<span class="c1"># Check file sizes</span>
+ls<span class="w"> </span>-lh<span class="w"> </span>*.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $5, $9}&#39;</span>
+
+<span class="c1"># Count variables in NetCDF file</span>
+cdo<span class="w"> </span>vardes<span class="w"> </span>input.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Pipes avoid creating intermediate files, saving disk space and I/O time for large datasets.</p>
+</div>
+</section>
+<section id="practical-cdo-pipelines">
+<h3>Practical CDO Pipelines<a class="headerlink" href="#practical-cdo-pipelines" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pipeline: select, average, and output</span>
+cdo<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-fldmean<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-timmean<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-selname,t2m<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>input.nc
+
+<span class="c1"># Using intermediate files (same result, but uses disk)</span>
+cdo<span class="w"> </span>selname,t2m<span class="w"> </span>input.nc<span class="w"> </span>step1.nc
+cdo<span class="w"> </span>timmean<span class="w"> </span>step1.nc<span class="w"> </span>step2.nc
+cdo<span class="w"> </span>fldmean<span class="w"> </span>step2.nc<span class="w"> </span>result.nc
+rm<span class="w"> </span>step1.nc<span class="w"> </span>step2.nc
+
+<span class="c1"># The pipeline version is cleaner and more efficient</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use pipes (<code class="docutils literal notranslate"><span class="pre">|</span></code>) and the <code class="docutils literal notranslate"><span class="pre">-</span></code> placeholder for output to chain CDO operations without temporary files.</p>
+</div>
+</section>
+</section>
+<section id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading">#</a></h2>
+<section id="viewing-and-setting">
+<h3>Viewing and Setting<a class="headerlink" href="#viewing-and-setting" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># View all environment variables</span>
+env
+printenv
+
+<span class="c1"># View specific variable</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$HOME</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$SHELL</span>
+
+<span class="c1"># Set environment variable (session only)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MY_VAR</span><span class="o">=</span><span class="s2">&quot;value&quot;</span>
+
+<span class="c1"># Set for a single command</span>
+<span class="nv">CDO_NTHREADS</span><span class="o">=</span><span class="m">8</span><span class="w"> </span>cdo<span class="w"> </span>timmean<span class="w"> </span>input.nc<span class="w"> </span>output.nc
+</pre></div>
+</div>
+</section>
+<section id="cdo-specific-environment-variables">
+<h3>CDO-Specific Environment Variables<a class="headerlink" href="#cdo-specific-environment-variables" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set threads for parallel processing</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CDO_NTHREADS</span><span class="o">=</span><span class="m">4</span>
+
+<span class="c1"># Set temporary directory</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CDO_TEMPDIR</span><span class="o">=</span>/scratch/tmp
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$CDO_TEMPDIR</span>
+
+<span class="c1"># Verbose mode</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CDO_VERBOSE</span><span class="o">=</span><span class="m">1</span>
+
+<span class="c1"># Memory limit (GB)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CDO_MEMORY</span><span class="o">=</span><span class="m">8</span>
+
+<span class="c1"># Make settings permanent</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export CDO_NTHREADS=4&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export CDO_TEMPDIR=/tmp/cdo&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+</section>
+<section id="path-management">
+<h3>PATH Management<a class="headerlink" href="#path-management" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># View your PATH</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+
+<span class="c1"># Add directory to PATH</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/custom/installation/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+
+<span class="c1"># Add to bashrc for permanence</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export PATH=&quot;$HOME/local/bin:$PATH&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="wildcards-and-globbing">
+<h2>Wildcards and Globbing<a class="headerlink" href="#wildcards-and-globbing" title="Link to this heading">#</a></h2>
+<section id="basic-wildcards">
+<h3>Basic Wildcards<a class="headerlink" href="#basic-wildcards" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>*<span class="w">       </span><span class="c1"># Matches any number of any characters</span>
+?<span class="w">       </span><span class="c1"># Matches exactly one character</span>
+<span class="o">[]</span><span class="w">      </span><span class="c1"># Matches one character from a set</span>
+<span class="o">[</span>!<span class="o">]</span><span class="w">     </span><span class="c1"># Matches one character NOT in a set</span>
+</pre></div>
+</div>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Match all NetCDF files</span>
+*.nc
+
+<span class="c1"># Match files starting with &quot;temp&quot;</span>
+temp*.nc
+
+<span class="c1"># Match single year files</span>
+era5_202?.nc<span class="w">     </span><span class="c1"># matches era5_2020.nc, era5_2021.nc, etc.</span>
+
+<span class="c1"># Match specific months</span>
+data_2024_0<span class="o">{</span><span class="m">1</span>,2,3<span class="o">}</span>.nc<span class="w">     </span><span class="c1"># matches months 01, 02, 03</span>
+data_2024_0<span class="o">[</span><span class="m">1</span>-6<span class="o">]</span>.nc<span class="w">       </span><span class="c1"># matches months 01 through 06</span>
+
+<span class="c1"># Negation</span>
+data_2024_0<span class="o">[</span>!5-9<span class="o">]</span>.nc<span class="w">      </span><span class="c1"># matches months 01-04 only</span>
+
+<span class="c1"># Brace expansion</span>
+<span class="nb">echo</span><span class="w"> </span><span class="o">{</span>jan,feb,mar<span class="o">}</span>_<span class="o">{</span><span class="m">2020</span>,2021<span class="o">}</span>.nc
+<span class="c1"># Output: jan_2020.nc jan_2021.nc feb_2020.nc feb_2021.nc mar_2020.nc mar_2021.nc</span>
+</pre></div>
+</div>
+</section>
+<section id="using-wildcards-with-cdo">
+<h3>Using Wildcards with CDO<a class="headerlink" href="#using-wildcards-with-cdo" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Merge all NetCDF files</span>
+cdo<span class="w"> </span>mergetime<span class="w"> </span>*.nc<span class="w"> </span>merged.nc
+
+<span class="c1"># Process only files matching pattern</span>
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>era5_202<span class="o">[</span><span class="m">0</span>-5<span class="o">]</span>_*.nc<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>cdo<span class="w"> </span>timmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;mean_</span><span class="nv">$file</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># Count files</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing </span><span class="k">$(</span>ls<span class="w"> </span>*.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="s2"> files&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When using wildcards, be careful about the maximum number of arguments. For thousands of files, use loops or <code class="docutils literal notranslate"><span class="pre">find</span></code> instead.</p>
+</div>
+</section>
+</section>
+<section id="text-processing">
+<h2>Text Processing<a class="headerlink" href="#text-processing" title="Link to this heading">#</a></h2>
+<section id="grep-pattern-search">
+<h3>grep - Pattern Search<a class="headerlink" href="#grep-pattern-search" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Search for text in files</span>
+grep<span class="w"> </span><span class="s2">&quot;temperature&quot;</span><span class="w"> </span>metadata.txt
+
+<span class="c1"># Recursive search</span>
+grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;t2m&quot;</span><span class="w"> </span>/data/
+
+<span class="c1"># Case-insensitive search</span>
+grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;temperature&quot;</span><span class="w"> </span>file.txt
+
+<span class="c1"># Show line numbers</span>
+grep<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="w"> </span>log.txt
+
+<span class="c1"># Show context</span>
+grep<span class="w"> </span>-B<span class="w"> </span><span class="m">5</span><span class="w"> </span>-A<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="w"> </span>log.txt<span class="w">   </span><span class="c1"># 5 lines before and after</span>
+
+<span class="c1"># Invert match</span>
+grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;comment&quot;</span><span class="w"> </span>file.txt
+
+<span class="c1"># Count matches</span>
+grep<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;variable&quot;</span><span class="w"> </span>metadata.txt
+
+<span class="c1"># Use with pipes</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;temperature&quot;</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>grep is invaluable for searching through CDO output and log files.</p>
+</div>
+</section>
+<section id="sed-stream-editor">
+<h3>sed - Stream Editor<a class="headerlink" href="#sed-stream-editor" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Replace text</span>
+sed<span class="w"> </span><span class="s1">&#39;s/old/new/g&#39;</span><span class="w"> </span>file.txt
+
+<span class="c1"># Replace in place</span>
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/old/new/g&#39;</span><span class="w"> </span>file.txt
+
+<span class="c1"># Delete lines matching pattern</span>
+sed<span class="w"> </span><span class="s1">&#39;/pattern/d&#39;</span><span class="w"> </span>file.txt
+
+<span class="c1"># Print specific lines</span>
+sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;10,20p&#39;</span><span class="w"> </span>file.txt
+
+<span class="c1"># CDO-specific: clean up output</span>
+cdo<span class="w"> </span>griddes<span class="w"> </span>input.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/  */ /g&#39;</span><span class="w">   </span><span class="c1"># remove extra spaces</span>
+</pre></div>
+</div>
+</section>
+<section id="awk-text-processing">
+<h3>awk - Text Processing<a class="headerlink" href="#awk-text-processing" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print specific columns</span>
+ls<span class="w"> </span>-lh<span class="w"> </span>*.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $5, $9}&#39;</span>
+
+<span class="c1"># Calculate sum of file sizes</span>
+ls<span class="w"> </span>-l<span class="w"> </span>*.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{sum += $5} END {print &quot;Total size:&quot;, sum, &quot;bytes&quot;}&#39;</span>
+
+<span class="c1"># Filter by condition</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;/^[0-9]+:/ {print $2, $4}&#39;</span>
+
+<span class="c1"># Format output</span>
+cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>-timmean<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{printf &quot;%.4f\n&quot;, $1}&#39;</span>
+
+<span class="c1"># Conditional processing</span>
+cdo<span class="w"> </span>output<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{if ($1 &gt; 300) print $0}&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="combining-text-tools">
+<h3>Combining Text Tools<a class="headerlink" href="#combining-text-tools" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find all variable names in a NetCDF file</span>
+cdo<span class="w"> </span>vardes<span class="w"> </span>data.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;^#&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-u
+
+<span class="c1"># List all unique grid types in a directory</span>
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.nc<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>cdo<span class="w"> </span>griddes<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;^gridtype&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span>
+<span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-u
+
+<span class="c1"># Get time range of all files</span>
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.nc<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">: &quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>showdate<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-1
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot; to &quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>showdate<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-1
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="writing-your-first-cdo-pipeline-with-bash">
+<h2>Writing Your First CDO Pipeline with Bash<a class="headerlink" href="#writing-your-first-cdo-pipeline-with-bash" title="Link to this heading">#</a></h2>
+<section id="complete-processing-pipeline">
+<h3>Complete Processing Pipeline<a class="headerlink" href="#complete-processing-pipeline" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Comprehensive CDO pipeline for ERA5 data processing</span>
+<span class="c1"># Usage: ./process_era5.sh &lt;input_dir&gt; &lt;output_dir&gt; &lt;year&gt;</span>
+
+<span class="nb">set</span><span class="w"> </span>-e<span class="w">  </span><span class="c1"># Exit on error</span>
+<span class="nb">set</span><span class="w"> </span>-u<span class="w">  </span><span class="c1"># Exit on undefined variable</span>
+
+<span class="c1"># Configuration</span>
+<span class="nv">SCRIPT_DIR</span><span class="o">=</span><span class="k">$(</span>dirname<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$0</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="nv">INPUT_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="p">./data</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="p">./output</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">YEAR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">3</span><span class="k">:-</span><span class="nv">2020</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># CDO settings</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CDO_NTHREADS</span><span class="o">=</span><span class="k">$(</span>nproc<span class="k">)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CDO_VERBOSE</span><span class="o">=</span><span class="m">0</span>
+
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;===================================&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERA5 Processing Pipeline - </span><span class="nv">$YEAR</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;===================================&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Input:  </span><span class="nv">$INPUT_DIR</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Output: </span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Threads: </span><span class="nv">$CDO_NTHREADS</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;===================================&quot;</span>
+
+<span class="c1"># Step 1: Extract variables</span>
+extract_var<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">var</span><span class="o">=</span><span class="nv">$1</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">infile</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$INPUT_DIR</span><span class="s2">/era5_</span><span class="si">${</span><span class="nv">YEAR</span><span class="si">}</span><span class="s2">_full.nc&quot;</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">outfile</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">var</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">YEAR</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: Input file not found: </span><span class="nv">$infile</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Extracting </span><span class="nv">$var</span><span class="s2">...&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>selname,<span class="s2">&quot;</span><span class="nv">$var</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$outfile</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+<span class="c1"># Step 2: Compute annual mean</span>
+annual_mean<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">var</span><span class="o">=</span><span class="nv">$1</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">infile</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">var</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">YEAR</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">outfile</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">var</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">YEAR</span><span class="si">}</span><span class="s2">_annual.nc&quot;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Computing annual mean for </span><span class="nv">$var</span><span class="s2">...&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>timmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$outfile</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+<span class="c1"># Step 3: Compute spatial mean</span>
+spatial_mean<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">var</span><span class="o">=</span><span class="nv">$1</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">infile</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">var</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">YEAR</span><span class="si">}</span><span class="s2">_annual.nc&quot;</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">outfile</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">var</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">YEAR</span><span class="si">}</span><span class="s2">_global_mean.txt&quot;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Computing global mean for </span><span class="nv">$var</span><span class="s2">...&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$outfile</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+<span class="c1"># Main processing</span>
+<span class="nv">VARIABLES</span><span class="o">=(</span><span class="s2">&quot;t2m&quot;</span><span class="w"> </span><span class="s2">&quot;tp&quot;</span><span class="w"> </span><span class="s2">&quot;msl&quot;</span><span class="w"> </span><span class="s2">&quot;u10&quot;</span><span class="w"> </span><span class="s2">&quot;v10&quot;</span><span class="o">)</span>
+
+<span class="k">for</span><span class="w"> </span>var<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">VARIABLES</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--------------------------------&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing variable: </span><span class="nv">$var</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--------------------------------&quot;</span>
+<span class="w">    </span>
+<span class="w">    </span>extract_var<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$var</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">continue</span>
+<span class="w">    </span>annual_mean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$var</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">continue</span>
+<span class="w">    </span>spatial_mean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$var</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">continue</span>
+<span class="k">done</span>
+
+<span class="c1"># Step 4: Generate summary report</span>
+<span class="nv">SUMMARY</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/summary_</span><span class="si">${</span><span class="nv">YEAR</span><span class="si">}</span><span class="s2">.txt&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Generation summary report...&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERA5 Processing Summary - </span><span class="nv">$YEAR</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SUMMARY</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=================================&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SUMMARY</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SUMMARY</span><span class="s2">&quot;</span>
+
+<span class="k">for</span><span class="w"> </span>var<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">VARIABLES</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">result_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">var</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">YEAR</span><span class="si">}</span><span class="s2">_global_mean.txt&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$result_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nv">value</span><span class="o">=</span><span class="k">$(</span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$result_file</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$var</span><span class="s2"> global mean: </span><span class="nv">$value</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SUMMARY</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--------------------------------&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Pipeline complete!&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Results saved in: </span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Summary: </span><span class="nv">$SUMMARY</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=================================&quot;</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This pipeline script can be adapted for any climate variable or year. Save it as <code class="docutils literal notranslate"><span class="pre">process_era5.sh</span></code> and reuse it.</p>
+</div>
+</section>
+</section>
+<section id="hands-on-exercises">
+<h2>Hands-On Exercises<a class="headerlink" href="#hands-on-exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-1-file-management">
+<h3>Exercise 1: File Management<a class="headerlink" href="#exercise-1-file-management" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-basics-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 20 </span></p>
+<section id="exercise-content">
+<p>Create a directory structure for a climate data project:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/climate_project/<span class="o">{</span>data,scripts,output,figures,logs<span class="o">}</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>~/climate_project/data/<span class="o">{</span>raw,processed<span class="o">}</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>~/climate_project/data/raw/<span class="o">{</span>era5,cmip6,gfs<span class="o">}</span>
+</pre></div>
+</div>
+<p>Then:</p>
+<ol class="arabic simple">
+<li><p>Navigate to each directory using <code class="docutils literal notranslate"><span class="pre">cd</span></code></p></li>
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">readme.txt</span></code> file in <code class="docutils literal notranslate"><span class="pre">climate_project/</span></code> with a description of the project</p></li>
+<li><p>List the full tree structure with <code class="docutils literal notranslate"><span class="pre">tree</span> <span class="pre">~/climate_project</span></code></p></li>
+<li><p>Check disk usage with <code class="docutils literal notranslate"><span class="pre">du</span> <span class="pre">-sh</span> <span class="pre">~/climate_project</span></code></p></li>
+</ol>
+</section>
+</div>
+</section>
+<section id="exercise-2-script-with-variables">
+<h3>Exercise 2: Script with Variables<a class="headerlink" href="#exercise-2-script-with-variables" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-basics-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 21 </span></p>
+<section id="exercise-content">
+<p>Write a bash script called <code class="docutils literal notranslate"><span class="pre">process_variable.sh</span></code> that:</p>
+<ol class="arabic simple">
+<li><p>Takes a variable name as the first argument</p></li>
+<li><p>Takes an input file as the second argument</p></li>
+<li><p>Computes the timestep count, global mean, and standard deviation</p></li>
+<li><p>Prints a formatted report</p></li>
+<li><p>Saves the results to a timestamped output file</p></li>
+</ol>
+<p>Example usage: <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">process_variable.sh</span> <span class="pre">t2m</span> <span class="pre">era5_data.nc</span></code></p>
+</section>
+</div>
+</section>
+<section id="exercise-3-batch-processing-loop">
+<h3>Exercise 3: Batch Processing Loop<a class="headerlink" href="#exercise-3-batch-processing-loop" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-basics-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 22 </span></p>
+<section id="exercise-content">
+<p>Create a script that processes all NetCDF files in a directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Batch processing script</span>
+
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;./processed&quot;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+
+<span class="k">for</span><span class="w"> </span>infile<span class="w"> </span><span class="k">in</span><span class="w"> </span>./data/*.nc<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">filename</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">basename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="p">%.nc</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing: </span><span class="nv">$filename</span><span class="s2">&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>timmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">basename</span><span class="si">}</span><span class="s2">_mean.nc&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>fldmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">basename</span><span class="si">}</span><span class="s2">_mean.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">basename</span><span class="si">}</span><span class="s2">_global.txt&quot;</span>
+<span class="k">done</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;All files processed.&quot;</span>
+</pre></div>
+</div>
+<p>Test it by creating dummy NC files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..5<span class="o">}</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-random,10,5,3<span class="w"> </span><span class="s2">&quot;data/test_</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-4-pipeline-with-conditionals">
+<h3>Exercise 4: Pipeline with Conditionals<a class="headerlink" href="#exercise-4-pipeline-with-conditionals" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-basics-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 23 </span></p>
+<section id="exercise-content">
+<p>Write a script that:</p>
+<ol class="arabic simple">
+<li><p>Checks if an output directory exists; if not, creates it</p></li>
+<li><p>For each NetCDF file in the input directory:</p>
+<ul class="simple">
+<li><p>Checks if it’s larger than 100 MB</p></li>
+<li><p>If yes, compresses it with <code class="docutils literal notranslate"><span class="pre">-z</span> <span class="pre">zip_5</span></code> and saves to output</p></li>
+<li><p>If no, copies it directly</p></li>
+</ul>
+</li>
+<li><p>Generates a log file with processing details</p></li>
+</ol>
+<p>Use conditionals (<code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">test</span></code>) and arithmetic comparisons.</p>
+</section>
+</div>
+</section>
+<section id="exercise-5-text-processing-pipeline">
+<h3>Exercise 5: Text Processing Pipeline<a class="headerlink" href="#exercise-5-text-processing-pipeline" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-basics-6">
+
+<p class="admonition-title"><span class="caption-number">Exercise 24 </span></p>
+<section id="exercise-content">
+<p>Use pipes and text processing tools to create a data inventory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For all NC files in a directory, extract:</span>
+<span class="c1"># - File name</span>
+<span class="c1"># - Number of timesteps</span>
+<span class="c1"># - Number of variables</span>
+<span class="c1"># - Grid description</span>
+
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.nc<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">ntime</span><span class="o">=</span><span class="k">$(</span>cdo<span class="w"> </span>ntime<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;N/A&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">nvar</span><span class="o">=</span><span class="k">$(</span>cdo<span class="w"> </span>vardes<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;^[0-9]&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;N/A&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">grid</span><span class="o">=</span><span class="k">$(</span>cdo<span class="w"> </span>griddes<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;^gridtype&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;N/A&quot;</span><span class="k">)</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2"> | </span><span class="nv">$ntime</span><span class="s2"> timesteps | </span><span class="nv">$nvar</span><span class="s2"> variables | </span><span class="nv">$grid</span><span class="s2"> grid&quot;</span>
+<span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>column<span class="w"> </span>-t<span class="w"> </span>-s<span class="w"> </span><span class="s1">&#39;|&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>inventory.txt
+
+cat<span class="w"> </span>inventory.txt
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+</section>
+<section id="quiz">
+<h2>Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Quiz</p>
+<p>Test your understanding of Linux basics for climate data processing.</p>
+</div>
+<p>```{exercise} Question 1: What does the <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-lh</span></code> command do?
+:label: q-basics-1</p>
+<p>A. Lists files in long format with human-readable sizes<br />
+B. Lists only hidden files<br />
+C. Lists files sorted by name<br />
+D. Lists files recursively</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+```{solution} q-basics-1
+A. Lists files in long format with human-readable sizes
+</pre></div>
+</div>
+<div class="exercise admonition" id="q-basics-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 25 </span> (Question 2: Which symbol is used to connect the stdout of one command to the stdin of another?)</p>
+<section id="exercise-content">
+<p>A. <code class="docutils literal notranslate"><span class="pre">&gt;</span></code><br />
+B. <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code><br />
+C. <code class="docutils literal notranslate"><span class="pre">|</span></code><br />
+D. <code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p>
+</section>
+</div>
+<div class="solution admonition" id="book/basics-solution-7">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-basics-2"> Exercise 25 (Question 2: Which symbol is used to connect the stdout of one command to the stdin of another?)</a></p>
+<section id="solution-content">
+<p>C. <code class="docutils literal notranslate"><span class="pre">|</span></code> (pipe)</p>
+</section>
+</div>
+<p>```{exercise} Question 3: In bash, what does <code class="docutils literal notranslate"><span class="pre">$1</span></code> represent inside a script?
+:label: q-basics-3</p>
+<p>A. The script name<br />
+B. The first command-line argument<br />
+C. The process ID<br />
+D. The exit status of the last command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+```{solution} q-basics-3
+B. The first command-line argument
+</pre></div>
+</div>
+<div class="exercise admonition" id="q-basics-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 26 </span> (Question 4: Which wildcard matches exactly one character?)</p>
+<section id="exercise-content">
+<p>A. <code class="docutils literal notranslate"><span class="pre">*</span></code><br />
+B. <code class="docutils literal notranslate"><span class="pre">?</span></code><br />
+C. <code class="docutils literal notranslate"><span class="pre">[]</span></code><br />
+D. <code class="docutils literal notranslate"><span class="pre">{}</span></code></p>
+</section>
+</div>
+<div class="solution admonition" id="book/basics-solution-9">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-basics-4"> Exercise 26 (Question 4: Which wildcard matches exactly one character?)</a></p>
+<section id="solution-content">
+<p>B. <code class="docutils literal notranslate"><span class="pre">?</span></code></p>
+</section>
+</div>
+<p>```{exercise} Question 5: What is the purpose of the <code class="docutils literal notranslate"><span class="pre">export</span></code> command in bash?
+:label: q-basics-5</p>
+<p>A. To save a file<br />
+B. To make a variable available to child processes<br />
+C. To display environment variables<br />
+D. To remove a variable</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+```{solution} q-basics-5
+B. To make a variable available to child processes
+</pre></div>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this module, we covered:</p>
+<ul class="simple">
+<li><p><strong>File management</strong>: <code class="docutils literal notranslate"><span class="pre">ls</span></code>, <code class="docutils literal notranslate"><span class="pre">cd</span></code>, <code class="docutils literal notranslate"><span class="pre">pwd</span></code>, <code class="docutils literal notranslate"><span class="pre">mkdir</span></code>, <code class="docutils literal notranslate"><span class="pre">cp</span></code>, <code class="docutils literal notranslate"><span class="pre">mv</span></code>, <code class="docutils literal notranslate"><span class="pre">rm</span></code></p></li>
+<li><p><strong>Shell scripting</strong>: shebang, variables, script arguments, exit codes</p></li>
+<li><p><strong>Loops</strong>: <code class="docutils literal notranslate"><span class="pre">for</span></code> loops over lists and sequences, <code class="docutils literal notranslate"><span class="pre">while</span></code> loops</p></li>
+<li><p><strong>Conditionals</strong>: <code class="docutils literal notranslate"><span class="pre">if-elif-else</span></code>, test conditions (<code class="docutils literal notranslate"><span class="pre">-f</span></code>, <code class="docutils literal notranslate"><span class="pre">-d</span></code>, <code class="docutils literal notranslate"><span class="pre">-eq</span></code>, etc.)</p></li>
+<li><p><strong>Pipes and redirections</strong>: <code class="docutils literal notranslate"><span class="pre">|</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">2&gt;&amp;1</span></code></p></li>
+<li><p><strong>Environment variables</strong>: <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, <code class="docutils literal notranslate"><span class="pre">CDO_NTHREADS</span></code>, <code class="docutils literal notranslate"><span class="pre">CDO_TEMPDIR</span></code></p></li>
+<li><p><strong>Wildcards</strong>: <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">?</span></code>, <code class="docutils literal notranslate"><span class="pre">[]</span></code>, <code class="docutils literal notranslate"><span class="pre">{}</span></code> for batch file matching</p></li>
+<li><p><strong>Text processing</strong>: <code class="docutils literal notranslate"><span class="pre">grep</span></code> (pattern search), <code class="docutils literal notranslate"><span class="pre">sed</span></code> (stream editing), <code class="docutils literal notranslate"><span class="pre">awk</span></code> (column processing)</p></li>
+<li><p><strong>CDO pipelines</strong>: Chaining operators without intermediate files</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Key Points</p>
+<ul class="simple">
+<li><p>Master the Linux command line before diving deep into CDO</p></li>
+<li><p>Pipes and redirections are essential for efficient CDO pipelines</p></li>
+<li><p>Loops and conditionals automate repetitive climate data tasks</p></li>
+<li><p>Text processing tools help analyze CDO output metadata</p></li>
+<li><p>Always verify file existence before processing in scripts</p></li>
+</ul>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>GNU Bash Manual: <a class="reference external" href="https://www.gnu.org/software/bash/manual/">https://www.gnu.org/software/bash/manual/</a></p></li>
+<li><p>Linux Command Line Basics: <a class="reference external" href="https://linuxcommand.org/">https://linuxcommand.org/</a></p></li>
+<li><p>Advanced Bash Scripting Guide: <a class="reference external" href="https://tldp.org/LDP/abs/html/">https://tldp.org/LDP/abs/html/</a></p></li>
+<li><p>grep Manual: <a class="reference external" href="https://www.gnu.org/software/grep/manual/">https://www.gnu.org/software/grep/manual/</a></p></li>
+<li><p>sed Manual: <a class="reference external" href="https://www.gnu.org/software/sed/manual/">https://www.gnu.org/software/sed/manual/</a></p></li>
+<li><p>awk Manual: <a class="reference external" href="https://www.gnu.org/software/gawk/manual/">https://www.gnu.org/software/gawk/manual/</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="installation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Module 2: Installation and Setup</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="operators.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Module 4: CDO Operators and File Operations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linux-command-line-fundamentals">Linux Command Line Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shell">The Shell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#command-structure">Command Structure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-management">File Management</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navigation-commands">Navigation Commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-operations">File Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-climate-data-files">Working with Climate Data Files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-scripting-basics">Shell Scripting Basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-first-script">Creating Your First Script</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-scripts-executable">Making Scripts Executable</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-in-bash">Variables in Bash</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-and-using-variables">Defining and Using Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-variables">Special Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-scope-and-export">Variable Scope and Export</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loops">Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops">For Loops</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loops">While Loops</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-batch-processing">Practical Example: Batch Processing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-statements">Conditional Statements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-statements">If-Else Statements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-test-conditions">Common Test Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-operators">Logical Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#case-statements">Case Statements</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipes-and-redirections">Pipes and Redirections</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-streams">Standard Streams</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redirections">Redirections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipes">Pipes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-cdo-pipelines">Practical CDO Pipelines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variables">Environment Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-and-setting">Viewing and Setting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-specific-environment-variables">CDO-Specific Environment Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#path-management">PATH Management</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wildcards-and-globbing">Wildcards and Globbing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-wildcards">Basic Wildcards</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-wildcards-with-cdo">Using Wildcards with CDO</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-processing">Text Processing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grep-pattern-search">grep - Pattern Search</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sed-stream-editor">sed - Stream Editor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#awk-text-processing">awk - Text Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-text-tools">Combining Text Tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-your-first-cdo-pipeline-with-bash">Writing Your First CDO Pipeline with Bash</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-processing-pipeline">Complete Processing Pipeline</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-file-management">Exercise 1: File Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-script-with-variables">Exercise 2: Script with Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-batch-processing-loop">Exercise 3: Batch Processing Loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-pipeline-with-conditionals">Exercise 4: Pipeline with Conditionals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-text-processing-pipeline">Exercise 5: Text Processing Pipeline</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

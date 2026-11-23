@@ -1,0 +1,1480 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Project 3: Drought Index Computation &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'projects/project_03_drought_index';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Project 4: Climate Extremes Detection" href="project_04_climate_extremes.html" />
+    <link rel="prev" title="Project 2: Temperature Trend Mapping" href="project_02_temperature_trend.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../book/introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../book/introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./projects/project_03_drought_index.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fprojects/project_03_drought_index.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/projects/project_03_drought_index.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Project 3: Drought Index Computation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-background">Theoretical Background</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-spi">What is SPI?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-multiple-timescales">Why Multiple Timescales?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">Data Requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-workflow">Step-by-Step Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-a-cdo-based-spi-approximation-z-score-method">Approach A: CDO-Based SPI Approximation (Z-Score Method)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-compute-running-precipitation-sums">Step 1: Compute Running Precipitation Sums</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-compute-climatology-and-standard-deviation">Step 2: Compute Climatology and Standard Deviation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-compute-spi-z-score-approximation">Step 3: Compute SPI (Z-Score Approximation)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-identify-drought-events">Step 4: Identify Drought Events</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-b-percentile-based-spi">Approach B: Percentile-Based SPI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-c-full-gamma-distribution-spi-python">Approach C: Full Gamma Distribution SPI (Python)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-spatial-analysis-of-drought">Step 5: Spatial Analysis of Drought</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-regional-drought-time-series">Step 6: Regional Drought Time Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-visualization">Step 7: Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spi-time-series-comparison-python">SPI Time Series Comparison (Python)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#drought-severity-map-python">Drought Severity Map (Python)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#drought-event-timeline-python">Drought Event Timeline (Python)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-bash-workflow-script">Complete Bash Workflow Script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-outputs">Expected Outputs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-timescale-spi-time-series">1. Multi-Timescale SPI Time Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drought-severity-and-frequency-maps">2. Drought Severity and Frequency Maps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drought-event-timeline">3. Drought Event Timeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drought-event-table">4. Drought Event Table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-guidance">Interpretation Guidance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-look-for">What to Look For</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-questions">Key Questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-the-z-score-method">Limitations of the Z-Score Method</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-criteria">Evaluation Criteria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-activities">Extension Activities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-options">Advanced Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-project-integration">Cross-Project Integration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="project-3-drought-index-computation">
+<h1>Project 3: Drought Index Computation<a class="headerlink" href="#project-3-drought-index-computation" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The Standardized Precipitation Index (SPI) is a widely used drought index that quantifies precipitation deficits at multiple timescales. This project guides you through computing SPI at different accumulation periods (1, 3, 6, and 12 months) using CDO and Python.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Estimated time</strong>: 3-4 hours
+<strong>Prerequisites</strong>: Modules 1-9 (including statistics and temporal operators)</p>
+</div>
+</section>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After completing this project, you will be able to:</p>
+<ul class="simple">
+<li><p>Understand the theoretical basis of the Standardized Precipitation Index</p></li>
+<li><p>Compute running precipitation sums at multiple timescales using CDO</p></li>
+<li><p>Apply gamma distribution fitting for accurate SPI computation</p></li>
+<li><p>Use CDO percentile-based approximation for rapid SPI estimation</p></li>
+<li><p>Identify and characterize drought events based on SPI thresholds</p></li>
+<li><p>Map drought severity and frequency spatially</p></li>
+<li><p>Analyze trends in drought frequency and intensity</p></li>
+</ul>
+</section>
+<section id="theoretical-background">
+<h2>Theoretical Background<a class="headerlink" href="#theoretical-background" title="Link to this heading">#</a></h2>
+<section id="what-is-spi">
+<h3>What is SPI?<a class="headerlink" href="#what-is-spi" title="Link to this heading">#</a></h3>
+<p>The Standardized Precipitation Index (McKee et al., 1993) quantifies precipitation deficits by standardizing accumulated precipitation at a given timescale. SPI values represent the number of standard deviations that observed cumulative precipitation deviates from the long-term median.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>SPI Value</p></th>
+<th class="head"><p>Category</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>&gt; 2.0</p></td>
+<td><p>Extremely wet</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>1.5 to 2.0</p></td>
+<td><p>Very wet</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>1.0 to 1.5</p></td>
+<td><p>Moderately wet</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>-1.0 to 1.0</p></td>
+<td><p>Near normal</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>-1.0 to -1.5</p></td>
+<td><p>Moderately dry</p></td>
+<td><p>Moderate drought</p></td>
+</tr>
+<tr class="row-odd"><td><p>-1.5 to -2.0</p></td>
+<td><p>Severely dry</p></td>
+<td><p>Severe drought</p></td>
+</tr>
+<tr class="row-even"><td><p>&lt; -2.0</p></td>
+<td><p>Extremely dry</p></td>
+<td><p>Extreme drought</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="why-multiple-timescales">
+<h3>Why Multiple Timescales?<a class="headerlink" href="#why-multiple-timescales" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>SPI-1</strong>: Agricultural drought, soil moisture response (weeks to 1 month)</p></li>
+<li><p><strong>SPI-3</strong>: Short-term drought, crop stress (quarterly)</p></li>
+<li><p><strong>SPI-6</strong>: Medium-term drought, streamflow, reservoir levels</p></li>
+<li><p><strong>SPI-12</strong>: Long-term drought, groundwater, hydrological drought</p></li>
+</ul>
+</section>
+</section>
+<section id="data-requirements">
+<h2>Data Requirements<a class="headerlink" href="#data-requirements" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Variable</strong></p></td>
+<td><p>Monthly precipitation (mm/month)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Minimum length</strong></p></td>
+<td><p>30 years (WMO standard)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Recommended length</strong></p></td>
+<td><p>50+ years for robust distribution fitting</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Spatial resolution</strong></p></td>
+<td><p>Any (CHIRPS, GPCC, CRU, or ERA5)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the real CHIRPS monthly precipitation supplied with the course</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>../datasets/chirps_ethiopia.nc
+
+<span class="c1"># Build the 3-, 6- and 12-month running sums needed for SPI</span>
+cdo<span class="w"> </span>runsum,3<span class="w"> </span>../datasets/chirps_ethiopia.nc<span class="w"> </span>chirps_3mon.nc
+cdo<span class="w"> </span>runsum,6<span class="w"> </span>../datasets/chirps_ethiopia.nc<span class="w"> </span>chirps_6mon.nc
+cdo<span class="w"> </span>runsum,12<span class="w"> </span>../datasets/chirps_ethiopia.nc<span class="w"> </span>chirps_12mon.nc
+</pre></div>
+</div>
+</section>
+<section id="step-by-step-workflow">
+<h2>Step-by-Step Workflow<a class="headerlink" href="#step-by-step-workflow" title="Link to this heading">#</a></h2>
+<section id="approach-a-cdo-based-spi-approximation-z-score-method">
+<h3>Approach A: CDO-Based SPI Approximation (Z-Score Method)<a class="headerlink" href="#approach-a-cdo-based-spi-approximation-z-score-method" title="Link to this heading">#</a></h3>
+<p>This method approximates SPI using standardized anomalies (Z-scores) of accumulated precipitation. It is faster but less accurate than gamma-based SPI for extreme values.</p>
+<section id="step-1-compute-running-precipitation-sums">
+<h4>Step 1: Compute Running Precipitation Sums<a class="headerlink" href="#step-1-compute-running-precipitation-sums" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># SPI-1 (1-month accumulation = original data)</span>
+cp<span class="w"> </span>monthly_precip.nc<span class="w"> </span>spi1_data.nc
+
+<span class="c1"># SPI-3 (3-month running sum)</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>runsum,3<span class="w"> </span>monthly_precip.nc<span class="w"> </span>spi3_data.nc
+
+<span class="c1"># SPI-6 (6-month running sum)</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>runsum,6<span class="w"> </span>monthly_precip.nc<span class="w"> </span>spi6_data.nc
+
+<span class="c1"># SPI-12 (12-month running sum)</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>runsum,12<span class="w"> </span>monthly_precip.nc<span class="w"> </span>spi12_data.nc
+
+<span class="c1"># SPI-24 (2-year accumulation for hydrological drought)</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>runsum,24<span class="w"> </span>monthly_precip.nc<span class="w"> </span>spi24_data.nc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">runsum</span></code> operator computes a running sum over N timesteps. The first N-1 timesteps will have incomplete accumulations — consider removing them or using <code class="docutils literal notranslate"><span class="pre">--timestep_date</span> <span class="pre">first</span></code>.</p>
+</div>
+</section>
+<section id="step-2-compute-climatology-and-standard-deviation">
+<h4>Step 2: Compute Climatology and Standard Deviation<a class="headerlink" href="#step-2-compute-climatology-and-standard-deviation" title="Link to this heading">#</a></h4>
+<p>For each timescale, compute the monthly climatology (mean) and standard deviation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For SPI-3</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>ymonmean<span class="w"> </span>spi3_data.nc<span class="w"> </span>spi3_clim.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>ymonstd<span class="w"> </span>spi3_data.nc<span class="w"> </span>spi3_std.nc
+
+<span class="c1"># For SPI-6</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>ymonmean<span class="w"> </span>spi6_data.nc<span class="w"> </span>spi6_clim.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>ymonstd<span class="w"> </span>spi6_data.nc<span class="w"> </span>spi6_std.nc
+
+<span class="c1"># For SPI-12</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>ymonmean<span class="w"> </span>spi12_data.nc<span class="w"> </span>spi12_clim.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>ymonstd<span class="w"> </span>spi12_data.nc<span class="w"> </span>spi12_std.nc
+
+<span class="c1"># For SPI-24</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>ymonmean<span class="w"> </span>spi24_data.nc<span class="w"> </span>spi24_clim.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>ymonstd<span class="w"> </span>spi24_data.nc<span class="w"> </span>spi24_std.nc
+</pre></div>
+</div>
+</section>
+<section id="step-3-compute-spi-z-score-approximation">
+<h4>Step 3: Compute SPI (Z-Score Approximation)<a class="headerlink" href="#step-3-compute-spi-z-score-approximation" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># SPI-3: (accumulated - mean) / std</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>sub<span class="w"> </span>spi3_data.nc<span class="w"> </span>spi3_clim.nc<span class="w"> </span>spi3_anom.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>div<span class="w"> </span>spi3_anom.nc<span class="w"> </span>spi3_std.nc<span class="w"> </span>spi3_zscore.nc
+
+<span class="c1"># SPI-6</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>sub<span class="w"> </span>spi6_data.nc<span class="w"> </span>spi6_clim.nc<span class="w"> </span>spi6_anom.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>div<span class="w"> </span>spi6_anom.nc<span class="w"> </span>spi6_std.nc<span class="w"> </span>spi6_zscore.nc
+
+<span class="c1"># SPI-12</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>sub<span class="w"> </span>spi12_data.nc<span class="w"> </span>spi12_clim.nc<span class="w"> </span>spi12_anom.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>div<span class="w"> </span>spi12_anom.nc<span class="w"> </span>spi12_std.nc<span class="w"> </span>spi12_zscore.nc
+</pre></div>
+</div>
+</section>
+<section id="step-4-identify-drought-events">
+<h4>Step 4: Identify Drought Events<a class="headerlink" href="#step-4-identify-drought-events" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define drought thresholds</span>
+<span class="c1"># Moderate drought: SPI &lt; -1.0</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>ltc,-1.0<span class="w"> </span>spi12_zscore.nc<span class="w"> </span>moderate_drought.nc
+
+<span class="c1"># Severe drought: SPI &lt; -1.5</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>ltc,-1.5<span class="w"> </span>spi12_zscore.nc<span class="w"> </span>severe_drought.nc
+
+<span class="c1"># Extreme drought: SPI &lt; -2.0</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>ltc,-2.0<span class="w"> </span>spi12_zscore.nc<span class="w"> </span>extreme_drought.nc
+
+<span class="c1"># Drought months per year</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>yearsum<span class="w"> </span>moderate_drought.nc<span class="w"> </span>drought_months_per_year.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>yearsum<span class="w"> </span>severe_drought.nc<span class="w"> </span>severe_months_per_year.nc
+
+<span class="c1"># Total drought months over the record</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>timsum<span class="w"> </span>moderate_drought.nc<span class="w"> </span>total_drought.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>div<span class="w"> </span>total_drought.nc<span class="w"> </span>-ntime<span class="w"> </span>spi12_zscore.nc<span class="w"> </span>drought_fraction.nc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="approach-b-percentile-based-spi">
+<h3>Approach B: Percentile-Based SPI<a class="headerlink" href="#approach-b-percentile-based-spi" title="Link to this heading">#</a></h3>
+<p>An alternative approach uses percentile thresholds to map to SPI values:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute percentile thresholds for each calendar month</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>ydaypctl,2.3<span class="w"> </span>spi12_data.nc<span class="w"> </span>spi12_p2.nc<span class="w"> </span>-ydaymin<span class="w"> </span>spi12_data.nc<span class="w"> </span>-ydaymax<span class="w"> </span>spi12_data.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>ydaypctl,15.9<span class="w"> </span>spi12_data.nc<span class="w"> </span>spi12_p16.nc<span class="w"> </span>-ydaymin<span class="w"> </span>spi12_data.nc<span class="w"> </span>-ydaymax<span class="w"> </span>spi12_data.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>ydaypctl,84.1<span class="w"> </span>spi12_data.nc<span class="w"> </span>spi12_p84.nc<span class="w"> </span>-ydaymin<span class="w"> </span>spi12_data.nc<span class="w"> </span>-ydaymax<span class="w"> </span>spi12_data.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>ydaypctl,97.7<span class="w"> </span>spi12_data.nc<span class="w"> </span>spi12_p98.nc<span class="w"> </span>-ydaymin<span class="w"> </span>spi12_data.nc<span class="w"> </span>-ydaymax<span class="w"> </span>spi12_data.nc
+
+<span class="c1"># Map to SPI categories</span>
+<span class="c1"># SPI &lt; -2: precip &lt; P2.3</span>
+<span class="c1"># SPI -2 to -1: P2.3 &lt; precip &lt; P15.9</span>
+<span class="c1"># etc.</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The percentiles 2.3, 15.9, 84.1, and 97.7 correspond to -2, -1, +1, and +2 standard deviations in a normal distribution.</p>
+</div>
+</section>
+<section id="approach-c-full-gamma-distribution-spi-python">
+<h3>Approach C: Full Gamma Distribution SPI (Python)<a class="headerlink" href="#approach-c-full-gamma-distribution-spi-python" title="Link to this heading">#</a></h3>
+<p>The most accurate SPI computation uses the gamma distribution. Use this Python script:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Full Gamma-based SPI computation using scipy.</span>
+<span class="sd">Requires: numpy, scipy, xarray, netCDF4</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">norm</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">compute_spi_gamma</span><span class="p">(</span><span class="n">precip</span><span class="p">,</span> <span class="n">timescale</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute SPI using gamma distribution fitting.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    precip : numpy array (time, lat, lon)</span>
+<span class="sd">        Monthly precipitation data</span>
+<span class="sd">    timescale : int</span>
+<span class="sd">        Accumulation period in months</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    --------</span>
+<span class="sd">    spi : numpy array (time, lat, lon)</span>
+<span class="sd">        SPI values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Compute running sum</span>
+    <span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">uniform_filter1d</span>
+    <span class="n">accum</span> <span class="o">=</span> <span class="n">uniform_filter1d</span><span class="p">(</span><span class="n">precip</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">timescale</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span>
+                             <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">origin</span><span class="o">=-</span><span class="p">(</span><span class="n">timescale</span><span class="o">//</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="n">timescale</span>
+
+    <span class="c1"># Adjust for incomplete accumulations</span>
+    <span class="n">accum</span><span class="p">[:</span><span class="n">timescale</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="c1"># Fit gamma distribution for each grid cell and month</span>
+    <span class="n">nt</span><span class="p">,</span> <span class="n">nlat</span><span class="p">,</span> <span class="n">nlon</span> <span class="o">=</span> <span class="n">accum</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">spi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">accum</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nlat</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nlon</span><span class="p">):</span>
+            <span class="n">ts</span> <span class="o">=</span> <span class="n">accum</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
+                <span class="c1"># Select values for this calendar month</span>
+                <span class="n">month_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">nt</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+                <span class="n">month_data</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[</span><span class="n">month_indices</span><span class="p">]</span>
+                <span class="n">month_data</span> <span class="o">=</span> <span class="n">month_data</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">month_data</span><span class="p">)]</span>
+
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">month_data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># Fit gamma distribution</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># Remove zeros for fitting</span>
+                    <span class="n">non_zero</span> <span class="o">=</span> <span class="n">month_data</span><span class="p">[</span><span class="n">month_data</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">non_zero</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+                        <span class="n">spi</span><span class="p">[</span><span class="n">month_indices</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span>  <span class="c1"># extreme drought</span>
+                        <span class="k">continue</span>
+
+                    <span class="n">alpha</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">gamma</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">non_zero</span><span class="p">,</span> <span class="n">floc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="c1"># Compute CDF for all values</span>
+                    <span class="n">cdf</span> <span class="o">=</span> <span class="n">gamma</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">month_data</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
+                    <span class="c1"># Handle zeros</span>
+                    <span class="n">p_zero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">month_data</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">p_zero</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">cdf</span> <span class="o">=</span> <span class="n">p_zero</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p_zero</span><span class="p">)</span> <span class="o">*</span> <span class="n">cdf</span>
+                    <span class="c1"># Clip to avoid infinity</span>
+                    <span class="n">cdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">cdf</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.9999</span><span class="p">)</span>
+                    <span class="c1"># Transform to standard normal</span>
+                    <span class="n">spi</span><span class="p">[</span><span class="n">month_indices</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">cdf</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+    <span class="k">return</span> <span class="n">spi</span>
+
+<span class="c1"># Load precipitation data</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;monthly_precip.nc&quot;</span><span class="p">)</span>
+<span class="n">precip_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">precip</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">precip_var</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Compute SPI at different timescales</span>
+<span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">24</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Computing SPI-</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+    <span class="n">spi_values</span> <span class="o">=</span> <span class="n">compute_spi_gamma</span><span class="p">(</span><span class="n">precip</span><span class="p">,</span> <span class="n">timescale</span><span class="o">=</span><span class="n">ts</span><span class="p">)</span>
+
+    <span class="c1"># Save to NetCDF</span>
+    <span class="n">ds_out</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">ds_out</span><span class="p">[</span><span class="n">precip_var</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">spi_values</span>
+    <span class="n">ds_out</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;spi_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">_gamma.nc&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Saved: spi_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">_gamma.nc&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gamma SPI computation complete.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="step-5-spatial-analysis-of-drought">
+<h3>Step 5: Spatial Analysis of Drought<a class="headerlink" href="#step-5-spatial-analysis-of-drought" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Map mean SPI over entire period</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>timmean<span class="w"> </span>spi12_zscore.nc<span class="w"> </span>mean_spi12.nc
+
+<span class="c1"># Map minimum SPI (most extreme drought)</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>timmin<span class="w"> </span>spi12_zscore.nc<span class="w"> </span>min_spi12.nc
+
+<span class="c1"># Number of drought events (SPI &lt; -1 for 3+ consecutive months)</span>
+<span class="c1"># First identify drought months</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>ltc,-1.0<span class="w"> </span>spi12_zscore.nc<span class="w"> </span>drought_mask.nc
+
+<span class="c1"># Use runsum to find consecutive drought months</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>runsum,3<span class="w"> </span>drought_mask.nc<span class="w"> </span>drought3consec.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>gec,3<span class="w"> </span>drought3consec.nc<span class="w"> </span>drought_events.nc
+
+<span class="c1"># Drought event frequency</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>yearsum<span class="w"> </span>drought_events.nc<span class="w"> </span>drought_events_per_year.nc
+
+<span class="c1"># Export spatial drought frequency</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>drought_events_per_year.nc
+</pre></div>
+</div>
+</section>
+<section id="step-6-regional-drought-time-series">
+<h3>Step 6: Regional Drought Time Series<a class="headerlink" href="#step-6-regional-drought-time-series" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract regional average SPI</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>fldmean<span class="w"> </span>spi3_zscore.nc<span class="w"> </span>regional_spi3.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>fldmean<span class="w"> </span>spi6_zscore.nc<span class="w"> </span>regional_spi6.nc
+cdo<span class="w"> </span>-O<span class="w"> </span>fldmean<span class="w"> </span>spi12_zscore.nc<span class="w"> </span>regional_spi12.nc
+
+<span class="c1"># Export time series</span>
+cdo<span class="w"> </span>output<span class="w"> </span>regional_spi3.nc<span class="w"> </span>&gt;<span class="w"> </span>spi3_timeseries.csv
+cdo<span class="w"> </span>output<span class="w"> </span>regional_spi12.nc<span class="w"> </span>&gt;<span class="w"> </span>spi12_timeseries.csv
+
+<span class="c1"># Identify drought periods from time series</span>
+python<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">import numpy as np</span>
+
+<span class="s">spi = np.loadtxt(&quot;spi12_timeseries.csv&quot;)</span>
+<span class="s"># Find consecutive drought periods</span>
+<span class="s">drought = spi &lt; -1.0</span>
+<span class="s">changes = np.diff(np.concatenate(([0], drought.astype(int), [0])))</span>
+<span class="s">starts = np.where(changes == 1)[0]</span>
+<span class="s">ends = np.where(changes == -1)[0]</span>
+<span class="s">durations = ends - starts</span>
+
+<span class="s">print(&quot;Drought Events (SPI-12 &lt; -1.0):&quot;)</span>
+<span class="s">print(f&quot;{&#39;Start&#39;:&lt;10} {&#39;End&#39;:&lt;10} {&#39;Duration&#39;:&lt;10} {&#39;Min SPI&#39;:&lt;10}&quot;)</span>
+<span class="s">print(&quot;-&quot; * 40)</span>
+
+<span class="s"># If you have year information</span>
+<span class="s">years = np.arange(1970, 1970 + len(spi) // 12)</span>
+<span class="s">for i, (s, e) in enumerate(zip(starts, ends)):</span>
+<span class="s">    duration = e - s</span>
+<span class="s">    min_spi = np.min(spi[s:e])</span>
+<span class="s">    start_year = years[s // 12] if s // 12 &lt; len(years) else 0</span>
+<span class="s">    end_year = years[(e-1) // 12] if (e-1) // 12 &lt; len(years) else 0</span>
+<span class="s">    if duration &gt;= 3:  # Only events lasting 3+ months</span>
+<span class="s">        print(f&quot;{start_year:&lt;10} {end_year:&lt;10} {duration:&lt;10} {min_spi:&lt;10.2f}&quot;)</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+</section>
+<section id="step-7-visualization">
+<h3>Step 7: Visualization<a class="headerlink" href="#step-7-visualization" title="Link to this heading">#</a></h3>
+<section id="spi-time-series-comparison-python">
+<h4>SPI Time Series Comparison (Python)<a class="headerlink" href="#spi-time-series-comparison-python" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Load SPI time series</span>
+<span class="n">spi3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;spi3_timeseries.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;spi3&quot;</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">)</span>
+<span class="n">spi6</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;spi6_timeseries.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;spi6&quot;</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">)</span>
+<span class="n">spi12</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;spi12_timeseries.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;spi12&quot;</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create date range</span>
+<span class="n">start_date</span> <span class="o">=</span> <span class="s2">&quot;1970-01&quot;</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">spi3</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;MS&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+    <span class="n">axes</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">spi3</span><span class="p">[</span><span class="s2">&quot;spi3&quot;</span><span class="p">],</span> <span class="n">spi6</span><span class="p">[</span><span class="s2">&quot;spi6&quot;</span><span class="p">],</span> <span class="n">spi12</span><span class="p">[</span><span class="s2">&quot;spi12&quot;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="s2">&quot;SPI-1 (Agricultural Drought)&quot;</span><span class="p">,</span> <span class="s2">&quot;SPI-6 (Hydrological Drought)&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;SPI-12 (Long-term Drought)&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;steelblue&quot;</span><span class="p">,</span> <span class="s2">&quot;crimson&quot;</span><span class="p">]</span>
+<span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">data</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">),</span>
+                    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Wet&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">data</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">),</span>
+                    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Dry&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Drought thresholds</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Moderate&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Severe&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkred&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Extreme&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;SPI&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Standardized Precipitation Index (SPI) at Multiple Timescales&quot;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;spi_multi_timescale.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Figure saved: spi_multi_timescale.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="drought-severity-map-python">
+<h4>Drought Severity Map (Python)<a class="headerlink" href="#drought-severity-map-python" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">min_spi</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;min_spi12.nc&quot;</span><span class="p">)</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;drought_fraction.nc&quot;</span><span class="p">)</span>
+
+<span class="n">spi_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">min_spi</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">freq_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">freq</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+                                 <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()})</span>
+
+<span class="c1"># Minimum SPI (most extreme drought)</span>
+<span class="n">im1</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">min_spi</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">min_spi</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">min_spi</span><span class="p">[</span><span class="n">spi_var</span><span class="p">],</span>
+                    <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+                    <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlOrRd&quot;</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Minimum SPI-12 (Most Extreme Drought)&quot;</span><span class="p">)</span>
+<span class="n">cbar1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                     <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SPI&quot;</span><span class="p">)</span>
+
+<span class="c1"># Drought frequency</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">freq</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">freq</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">freq</span><span class="p">[</span><span class="n">freq_var</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>
+                    <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+                    <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlOrRd&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Drought Frequency (% months with SPI &lt; -1)&quot;</span><span class="p">)</span>
+<span class="n">cbar2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                     <span class="n">label</span><span class="o">=</span><span class="s2">&quot;%&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;drought_severity_map.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Figure saved: drought_severity_map.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="drought-event-timeline-python">
+<h4>Drought Event Timeline (Python)<a class="headerlink" href="#drought-event-timeline-python" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">spi12</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;spi12_timeseries.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;spi12&quot;</span><span class="p">],</span>
+                    <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">)</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s2">&quot;1970-01&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">spi12</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;MS&quot;</span><span class="p">)</span>
+
+<span class="c1"># Categorize each month</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">spi12</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">categories</span><span class="p">[</span><span class="n">spi12</span><span class="p">[</span><span class="s2">&quot;spi12&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>  <span class="c1"># Extreme drought</span>
+<span class="n">categories</span><span class="p">[(</span><span class="n">spi12</span><span class="p">[</span><span class="s2">&quot;spi12&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spi12</span><span class="p">[</span><span class="s2">&quot;spi12&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">)]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>  <span class="c1"># Severe</span>
+<span class="n">categories</span><span class="p">[(</span><span class="n">spi12</span><span class="p">[</span><span class="s2">&quot;spi12&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spi12</span><span class="p">[</span><span class="s2">&quot;spi12&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">)]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># Moderate</span>
+<span class="n">categories</span><span class="p">[(</span><span class="n">spi12</span><span class="p">[</span><span class="s2">&quot;spi12&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spi12</span><span class="p">[</span><span class="s2">&quot;spi12&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">1.5</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># Moderate wet</span>
+<span class="n">categories</span><span class="p">[(</span><span class="n">spi12</span><span class="p">[</span><span class="s2">&quot;spi12&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spi12</span><span class="p">[</span><span class="s2">&quot;spi12&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">2.0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">2</span>   <span class="c1"># Very wet</span>
+<span class="n">categories</span><span class="p">[</span><span class="n">spi12</span><span class="p">[</span><span class="s2">&quot;spi12&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">2.0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># Extreme wet</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;darkred&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;lightgray&quot;</span><span class="p">,</span> <span class="s2">&quot;lightblue&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;darkblue&quot;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Extreme Drought&quot;</span><span class="p">,</span> <span class="s2">&quot;Severe Drought&quot;</span><span class="p">,</span> <span class="s2">&quot;Moderate Drought&quot;</span><span class="p">,</span> <span class="s2">&quot;Near Normal&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Moderately Wet&quot;</span><span class="p">,</span> <span class="s2">&quot;Very Wet&quot;</span><span class="p">,</span> <span class="s2">&quot;Extremely Wet&quot;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">cat</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                                              <span class="n">colors</span><span class="p">,</span> <span class="n">labels</span><span class="p">)):</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">categories</span> <span class="o">==</span> <span class="n">cat</span> <span class="k">if</span> <span class="n">cat</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">categories</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span> <span class="k">if</span> <span class="n">cat</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">cat</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="n">where</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+                    <span class="n">label</span><span class="o">=</span><span class="n">label</span> <span class="k">if</span> <span class="n">label</span> <span class="o">!=</span> <span class="s2">&quot;Near Normal&quot;</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Drought Category&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Drought Timeline from SPI-12&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="c1"># Legend</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Patch</span>
+<span class="n">legend_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">Patch</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
+                   <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="k">if</span> <span class="n">l</span> <span class="o">!=</span> <span class="s2">&quot;Near Normal&quot;</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_elements</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;drought_timeline.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Figure saved: drought_timeline.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="complete-bash-workflow-script">
+<h2>Complete Bash Workflow Script<a class="headerlink" href="#complete-bash-workflow-script" title="Link to this heading">#</a></h2>
+<p>Save as <code class="docutils literal notranslate"><span class="pre">spi_analysis.sh</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># =============================================================================</span>
+<span class="c1"># SPI Drought Index Computation Pipeline</span>
+<span class="c1"># Climate Data Operators (CDO) Training</span>
+<span class="c1"># =============================================================================</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="c1"># Configuration</span>
+<span class="nv">INPUT_DATA</span><span class="o">=</span><span class="s2">&quot;monthly_precip.nc&quot;</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;spi_output&quot;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== SPI Computation ===&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Input: </span><span class="nv">$INPUT_DATA</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=========================&quot;</span>
+
+<span class="c1"># Step 1: Remove incomplete years at start (for runsum)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[1/6] Preparing data...&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>selyear,1972/2020<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT_DATA</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/precip_clean.nc&quot;</span>
+
+<span class="c1"># Step 2: Compute running sums</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[2/6] Computing running sums...&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>runsum,3<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/precip_clean.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/accum3.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>runsum,6<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/precip_clean.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/accum6.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>runsum,12<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/precip_clean.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/accum12.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>runsum,24<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/precip_clean.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/accum24.nc&quot;</span>
+
+<span class="c1"># Step 3: Compute monthly climatology and std for each timescale</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[3/6] Computing climatology...&quot;</span>
+<span class="k">for</span><span class="w"> </span>ts<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">24</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>ymonmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/accum</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/clim_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>ymonstd<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/accum</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/std_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># Step 4: Compute SPI (Z-score method)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[4/6] Computing SPI indices...&quot;</span>
+<span class="k">for</span><span class="w"> </span>ts<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">24</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>sub<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/accum</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/clim_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/anom_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>div<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/anom_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/std_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/spi_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># Step 5: Drought identification</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[5/6] Identifying drought events...&quot;</span>
+<span class="k">for</span><span class="w"> </span>ts<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">24</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>ltc,-1.0<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/spi_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/drought_mod_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>ltc,-1.5<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/spi_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/drought_sev_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>ltc,-2.0<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/spi_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/drought_ext_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>timsum<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/drought_mod_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/total_drought_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>fldmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/spi_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/regional_spi_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># Step 6: Export time series</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[6/6] Exporting data...&quot;</span>
+<span class="k">for</span><span class="w"> </span>ts<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">24</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>cdo<span class="w"> </span>-s<span class="w"> </span>output<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/regional_spi_</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/spi</span><span class="si">${</span><span class="nv">ts</span><span class="si">}</span><span class="s2">_timeseries.csv&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># Summary statistics</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Summary ===&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;SPI-12 mean: </span><span class="k">$(</span>cdo<span class="w"> </span>-s<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>-timmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/spi_12.nc&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Drought fraction: </span><span class="k">$(</span>cdo<span class="w"> </span>-s<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>-timmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/drought_mod_12.nc&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Sample SPI-12 values: </span><span class="k">$(</span>cdo<span class="w"> </span>-s<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/spi_12.nc&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5<span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;===================&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="expected-outputs">
+<h2>Expected Outputs<a class="headerlink" href="#expected-outputs" title="Link to this heading">#</a></h2>
+<section id="multi-timescale-spi-time-series">
+<h3>1. Multi-Timescale SPI Time Series<a class="headerlink" href="#multi-timescale-spi-time-series" title="Link to this heading">#</a></h3>
+<p>Three-panel plot showing SPI-1, SPI-6, and SPI-12 with:</p>
+<ul class="simple">
+<li><p>Color-coded wet/dry periods</p></li>
+<li><p>Drought threshold lines (-1, -1.5, -2)</p></li>
+<li><p>Clear labeling of major drought events</p></li>
+</ul>
+</section>
+<section id="drought-severity-and-frequency-maps">
+<h3>2. Drought Severity and Frequency Maps<a class="headerlink" href="#drought-severity-and-frequency-maps" title="Link to this heading">#</a></h3>
+<p>Spatial maps showing:</p>
+<ul class="simple">
+<li><p>Minimum SPI value over the record (most extreme drought)</p></li>
+<li><p>Percentage of months with drought conditions</p></li>
+<li><p>Spatial patterns in drought vulnerability</p></li>
+</ul>
+</section>
+<section id="drought-event-timeline">
+<h3>3. Drought Event Timeline<a class="headerlink" href="#drought-event-timeline" title="Link to this heading">#</a></h3>
+<p>Color-coded timeline showing drought categories through time:</p>
+<ul class="simple">
+<li><p>Quick visual identification of drought periods</p></li>
+<li><p>Comparison of drought severity across decades</p></li>
+</ul>
+</section>
+<section id="drought-event-table">
+<h3>4. Drought Event Table<a class="headerlink" href="#drought-event-table" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Event #</p></th>
+<th class="head"><p>Start Year</p></th>
+<th class="head"><p>End Year</p></th>
+<th class="head"><p>Duration (months)</p></th>
+<th class="head"><p>Min SPI</p></th>
+<th class="head"><p>Category</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1984</p></td>
+<td><p>1985</p></td>
+<td><p>14</p></td>
+<td><p>-2.3</p></td>
+<td><p>Extreme</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>1991</p></td>
+<td><p>1992</p></td>
+<td><p>8</p></td>
+<td><p>-1.8</p></td>
+<td><p>Severe</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="interpretation-guidance">
+<h2>Interpretation Guidance<a class="headerlink" href="#interpretation-guidance" title="Link to this heading">#</a></h2>
+<section id="what-to-look-for">
+<h3>What to Look For<a class="headerlink" href="#what-to-look-for" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Timescale response</strong>: Short-term SPI fluctuates rapidly; long-term SPI shows sustained dry/wet periods</p></li>
+<li><p><strong>Drought onset</strong>: Watch for SPI dropping below -1 and persisting</p></li>
+<li><p><strong>Recovery</strong>: Drought ends when SPI returns to positive values</p></li>
+<li><p><strong>Frequency changes</strong>: Are droughts becoming more frequent or severe in recent decades?</p></li>
+<li><p><strong>Spatial coherence</strong>: Do large-scale droughts affect entire regions simultaneously?</p></li>
+</ol>
+</section>
+<section id="key-questions">
+<h3>Key Questions<a class="headerlink" href="#key-questions" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Which drought event was most severe in terms of duration? Minimum SPI?</p></li>
+<li><p>How do SPI-3 and SPI-12 compare in detecting the same drought event?</p></li>
+<li><p>Is there a trend toward more frequent or intense droughts?</p></li>
+<li><p>Which regions in your study area are most drought-prone?</p></li>
+</ul>
+</section>
+<section id="limitations-of-the-z-score-method">
+<h3>Limitations of the Z-Score Method<a class="headerlink" href="#limitations-of-the-z-score-method" title="Link to this heading">#</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The Z-score approximation assumes precipitation follows a normal distribution. Precipitation is typically gamma-distributed (positively skewed, bounded at zero). The gamma-based approach (Approach C) is preferred for:</p>
+<ul class="simple">
+<li><p>Accurate representation of extreme drought/wet events</p></li>
+<li><p>Regions with highly skewed precipitation distributions</p></li>
+<li><p>Scientific publications and operational drought monitoring</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="evaluation-criteria">
+<h2>Evaluation Criteria<a class="headerlink" href="#evaluation-criteria" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Criterion</p></th>
+<th class="head"><p>Weight</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Understanding SPI</p></td>
+<td><p>15%</p></td>
+<td><p>Correct interpretation of SPI theory and timescales</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDO workflow</p></td>
+<td><p>25%</p></td>
+<td><p>Proper use of runsum, ymonmean, ymonstd, and arithmetic operators</p></td>
+</tr>
+<tr class="row-even"><td><p>Drought identification</p></td>
+<td><p>20%</p></td>
+<td><p>Correct threshold application and event detection</p></td>
+</tr>
+<tr class="row-odd"><td><p>Z-score methodology</p></td>
+<td><p>15%</p></td>
+<td><p>Understanding limitations vs. gamma-based approach</p></td>
+</tr>
+<tr class="row-even"><td><p>Visualization</p></td>
+<td><p>15%</p></td>
+<td><p>Clear time series, maps, and event tables</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interpretation</p></td>
+<td><p>10%</p></td>
+<td><p>Insightful analysis of drought patterns</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="extension-activities">
+<h2>Extension Activities<a class="headerlink" href="#extension-activities" title="Link to this heading">#</a></h2>
+<section id="advanced-options">
+<h3>Advanced Options<a class="headerlink" href="#advanced-options" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>SPI for climate change detection</strong>: Analyze trends in SPI values over time</p></li>
+<li><p><strong>SPEI (Standardized Precipitation-Evapotranspiration Index)</strong>: Incorporate temperature for drought computation considering PET</p></li>
+<li><p><strong>Drought return period analysis</strong>: Fit extreme value distributions to drought characteristics</p></li>
+<li><p><strong>Agricultural drought impact</strong>: Correlate SPI with crop yield data</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Trend in drought frequency</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>trend<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/drought_months_per_year.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/drought_trend_intercept.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/drought_trend_slope.nc&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="cross-project-integration">
+<h3>Cross-Project Integration<a class="headerlink" href="#cross-project-integration" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use CHIRPS data processed in <strong>Project 1</strong> for SPI computation</p></li>
+<li><p>Compare drought patterns with temperature extremes from <strong>Project 4</strong></p></li>
+<li><p>Include drought analysis in the automated report from <strong>Project 8</strong></p></li>
+</ul>
+<div class="exercise admonition" id="projects/project_03_drought_index-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 135 </span></p>
+<section id="exercise-content">
+<p>Complete the drought index analysis. Compute SPI-1, SPI-3, SPI-6, and SPI-12 for your region. Identify the three most severe drought events in the record. Compare SPI-3 to SPI-12 — which detects drought earlier? Which is more useful for water resource management?</p>
+</section>
+</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>McKee, T.B., Doesken, N.J., &amp; Kleist, J. (1993). The relationship of drought frequency and duration to time scales. 8th Conference on Applied Climatology, 179-184.</p></li>
+<li><p>Svoboda, M., Hayes, M., &amp; Wood, D. (2012). Standardized Precipitation Index User Guide. WMO-No. 1090.</p></li>
+<li><p>Guttman, N.B. (1999). Accepting the standardized precipitation index. Journal of the American Water Resources Association, 35(2), 311-322.</p></li>
+<li><p>CDO Documentation: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo">https://code.mpimet.mpg.de/projects/cdo</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./projects"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="project_02_temperature_trend.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Project 2: Temperature Trend Mapping</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="project_04_climate_extremes.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Project 4: Climate Extremes Detection</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-background">Theoretical Background</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-spi">What is SPI?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-multiple-timescales">Why Multiple Timescales?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">Data Requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-workflow">Step-by-Step Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-a-cdo-based-spi-approximation-z-score-method">Approach A: CDO-Based SPI Approximation (Z-Score Method)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-compute-running-precipitation-sums">Step 1: Compute Running Precipitation Sums</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-compute-climatology-and-standard-deviation">Step 2: Compute Climatology and Standard Deviation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-compute-spi-z-score-approximation">Step 3: Compute SPI (Z-Score Approximation)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-identify-drought-events">Step 4: Identify Drought Events</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-b-percentile-based-spi">Approach B: Percentile-Based SPI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-c-full-gamma-distribution-spi-python">Approach C: Full Gamma Distribution SPI (Python)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-spatial-analysis-of-drought">Step 5: Spatial Analysis of Drought</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-regional-drought-time-series">Step 6: Regional Drought Time Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-visualization">Step 7: Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spi-time-series-comparison-python">SPI Time Series Comparison (Python)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#drought-severity-map-python">Drought Severity Map (Python)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#drought-event-timeline-python">Drought Event Timeline (Python)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-bash-workflow-script">Complete Bash Workflow Script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-outputs">Expected Outputs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-timescale-spi-time-series">1. Multi-Timescale SPI Time Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drought-severity-and-frequency-maps">2. Drought Severity and Frequency Maps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drought-event-timeline">3. Drought Event Timeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drought-event-table">4. Drought Event Table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-guidance">Interpretation Guidance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-look-for">What to Look For</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-questions">Key Questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-the-z-score-method">Limitations of the Z-Score Method</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-criteria">Evaluation Criteria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-activities">Extension Activities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-options">Advanced Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-project-integration">Cross-Project Integration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

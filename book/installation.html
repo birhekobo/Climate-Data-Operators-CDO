@@ -1,0 +1,1690 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Module 2: Installation and Setup &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/installation';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 3: Linux Basics for Climate Data Processing" href="basics.html" />
+    <link rel="prev" title="Module 1: Introduction to Climate Data Operators" href="introduction.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_06_cmip6_analysis.html">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./book/installation.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fbook/installation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/installation.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 2: Installation and Setup</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-requirements">System Requirements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-dependencies">Required Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-on-ubuntu-debian">Install on Ubuntu/Debian</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-with-full-format-support">Install with Full Format Support</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-package-version">Verify Package Version</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-on-fedora-centos-rhel">Install on Fedora/CentOS/RHEL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fedora">Fedora</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centos-rhel-8-with-epel">CentOS/RHEL 8+ with EPEL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enable-powertools-for-dependencies">Enable PowerTools for Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-supporting-libraries">Install Supporting Libraries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-on-macos-via-homebrew">Install on macOS via Homebrew</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-installation">Basic Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-with-all-options">Install with All Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-available-formula-options">Check Available Formula Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-cdo">Update CDO</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-on-windows-via-wsl">Install on Windows via WSL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-install-wsl">Step 1: Install WSL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-cdo-in-wsl">Step 2: Install CDO in WSL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-access-windows-files-from-wsl">Step 3: Access Windows Files from WSL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-using-git-bash">Alternative: Using Git BASH</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-via-conda">Install via Conda</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-miniconda-or-anaconda">Install Miniconda or Anaconda</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-cdo-from-conda-forge">Install CDO from conda-forge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-dedicated-environment">Create a Dedicated Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-additional-tools-in-the-environment">Install Additional Tools in the Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-cdo-version-in-conda">Check CDO Version in Conda</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-installation">Docker Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pull-an-existing-docker-image">Pull an Existing Docker Image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-cdo-in-docker">Run CDO in Docker</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-your-own-dockerfile">Create Your Own Dockerfile</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-from-source">Build from Source</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-download-source-code">Step 1: Download Source Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-build-dependencies">Step 2: Install Build Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-configure">Step 3: Configure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-compile-and-install">Step 4: Compile and Install</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-verify">Step 5: Verify</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-installation">Verify Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-version">Check Version</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-help">Check Help</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-a-simple-test">Run a Simple Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-format-support">Test Format Support</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-nco-tools">Install NCO Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-via-package-manager">Install via Package Manager</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-nco-commands">Key NCO Commands</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-python-dependencies">Install Python Dependencies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-virtual-environment">Create a Virtual Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-packages">Required Packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-packages">Optional Packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-python-setup">Verify Python Setup</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variables">Environment Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-specific-variables">CDO-Specific Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-to-shell-configuration">Add to Shell Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#path-configuration">Path Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-common-issues">Troubleshooting Common Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-command-not-found-cdo">Problem: “command not found: cdo”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-grib-api-functions-not-found">Problem: “GRIB API functions not found”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-cdo-version-is-too-old">Problem: CDO version is too old</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-cannot-allocate-memory-error">Problem: “Cannot allocate memory” error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-netcdf-not-a-valid-netcdf-id">Problem: “NetCDF: Not a valid NetCDF ID”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-slow-performance-on-large-files">Problem: Slow performance on large files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-install-cdo-on-your-platform">Exercise 1: Install CDO on Your Platform</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-compare-installation-methods">Exercise 2: Compare Installation Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-set-up-a-complete-environment">Exercise 3: Set Up a Complete Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-docker-setup">Exercise 4: Docker Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-troubleshooting-scenarios">Exercise 5: Troubleshooting Scenarios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-2-installation-and-setup">
+<h1>Module 2: Installation and Setup<a class="headerlink" href="#module-2-installation-and-setup" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this module, you will be able to:</p>
+<ul class="simple">
+<li><p>Install CDO on Linux, macOS, and Windows systems</p></li>
+<li><p>Install CDO using package managers and conda</p></li>
+<li><p>Build CDO from source code</p></li>
+<li><p>Install and configure supporting tools (NCO, Python libraries)</p></li>
+<li><p>Verify your CDO installation is working correctly</p></li>
+<li><p>Troubleshoot common installation issues</p></li>
+<li><p>Set up environment variables for optimal CDO usage</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="system-requirements">
+<h2>System Requirements<a class="headerlink" href="#system-requirements" title="Link to this heading">#</a></h2>
+<p>Before installing CDO, ensure your system meets these minimum requirements:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CDO is lightweight and runs on modest hardware, but large climate datasets benefit from more resources.</p>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Minimum</p></th>
+<th class="head"><p>Recommended</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Processor</strong></p></td>
+<td><p>1 GHz single-core</p></td>
+<td><p>4+ cores</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>RAM</strong></p></td>
+<td><p>1 GB</p></td>
+<td><p>16+ GB</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Storage</strong></p></td>
+<td><p>100 MB (CDO only)</p></td>
+<td><p>100+ GB (for datasets)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>OS</strong></p></td>
+<td><p>Linux, macOS, Windows</p></td>
+<td><p>Linux</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Python</strong></p></td>
+<td><p>3.7+ (optional)</p></td>
+<td><p>3.10+</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="required-dependencies">
+<h3>Required Dependencies<a class="headerlink" href="#required-dependencies" title="Link to this heading">#</a></h3>
+<p>CDO depends on several libraries for format support:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Library</p></th>
+<th class="head"><p>Purpose</p></th>
+<th class="head"><p>Required</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">libnetcdf</span></code></p></td>
+<td><p>NetCDF read/write</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">libgrib_api</span></code> / <code class="docutils literal notranslate"><span class="pre">eccodes</span></code></p></td>
+<td><p>GRIB read/write</p></td>
+<td><p>Yes (for GRIB)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">libhdf5</span></code></p></td>
+<td><p>HDF5 support</p></td>
+<td><p>Optional</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">libproj</span></code></p></td>
+<td><p>Projections</p></td>
+<td><p>Optional</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">libszip</span></code></p></td>
+<td><p>Compression</p></td>
+<td><p>Optional</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">libudunits2</span></code></p></td>
+<td><p>Unit conversion</p></td>
+<td><p>Optional</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="install-on-ubuntu-debian">
+<h2>Install on Ubuntu/Debian<a class="headerlink" href="#install-on-ubuntu-debian" title="Link to this heading">#</a></h2>
+<p>The simplest method on Debian-based systems:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>cdo
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">apt-cache</span> <span class="pre">search</span> <span class="pre">cdo</span></code> to check available versions before installing.</p>
+</div>
+<section id="install-with-full-format-support">
+<h3>Install with Full Format Support<a class="headerlink" href="#install-with-full-format-support" title="Link to this heading">#</a></h3>
+<p>For complete format support including GRIB and HDF5:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>cdo<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libnetcdf-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libgrib-api-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libeccodes-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libhdf5-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libproj-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libudunits2-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libszip-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>nco<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>netcdf-bin<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gdal-bin
+</pre></div>
+</div>
+</section>
+<section id="verify-package-version">
+<h3>Verify Package Version<a class="headerlink" href="#verify-package-version" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-cache<span class="w"> </span>policy<span class="w"> </span>cdo
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ubuntu LTS repositories sometimes have older CDO versions. For the latest version, consider using conda or building from source.</p>
+</div>
+</section>
+</section>
+<section id="install-on-fedora-centos-rhel">
+<h2>Install on Fedora/CentOS/RHEL<a class="headerlink" href="#install-on-fedora-centos-rhel" title="Link to this heading">#</a></h2>
+<section id="fedora">
+<h3>Fedora<a class="headerlink" href="#fedora" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>cdo
+</pre></div>
+</div>
+</section>
+<section id="centos-rhel-8-with-epel">
+<h3>CentOS/RHEL 8+ with EPEL<a class="headerlink" href="#centos-rhel-8-with-epel" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>epel-release
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>cdo
+</pre></div>
+</div>
+</section>
+<section id="enable-powertools-for-dependencies">
+<h3>Enable PowerTools for Dependencies<a class="headerlink" href="#enable-powertools-for-dependencies" title="Link to this heading">#</a></h3>
+<p>On CentOS/RHEL 8:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>config-manager<span class="w"> </span>--set-enabled<span class="w"> </span>PowerTools
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>cdo
+</pre></div>
+</div>
+</section>
+<section id="install-supporting-libraries">
+<h3>Install Supporting Libraries<a class="headerlink" href="#install-supporting-libraries" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>netcdf-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>eccodes-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>hdf5-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>proj-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>udunits2-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>nco
+</pre></div>
+</div>
+</section>
+</section>
+<section id="install-on-macos-via-homebrew">
+<h2>Install on macOS via Homebrew<a class="headerlink" href="#install-on-macos-via-homebrew" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Homebrew is the recommended package manager for macOS. Install it from <a class="reference external" href="https://brew.sh">https://brew.sh</a> if you don’t have it.</p>
+</div>
+<section id="basic-installation">
+<h3>Basic Installation<a class="headerlink" href="#basic-installation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>cdo
+</pre></div>
+</div>
+</section>
+<section id="install-with-all-options">
+<h3>Install with All Options<a class="headerlink" href="#install-with-all-options" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>cdo<span class="w"> </span>--with-hdf5<span class="w"> </span>--with-eccodes<span class="w"> </span>--with-proj<span class="w"> </span>--with-udunits
+</pre></div>
+</div>
+</section>
+<section id="check-available-formula-options">
+<h3>Check Available Formula Options<a class="headerlink" href="#check-available-formula-options" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>options<span class="w"> </span>cdo
+</pre></div>
+</div>
+</section>
+<section id="update-cdo">
+<h3>Update CDO<a class="headerlink" href="#update-cdo" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>upgrade<span class="w"> </span>cdo
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>On Apple Silicon (M1/M2/M3) Macs, Homebrew installs to <code class="docutils literal notranslate"><span class="pre">/opt/homebrew/</span></code> instead of <code class="docutils literal notranslate"><span class="pre">/usr/local/</span></code>. Ensure this is in your PATH.</p>
+</div>
+</section>
+</section>
+<section id="install-on-windows-via-wsl">
+<h2>Install on Windows via WSL<a class="headerlink" href="#install-on-windows-via-wsl" title="Link to this heading">#</a></h2>
+<p>Windows does not natively support CDO, but Windows Subsystem for Linux (WSL) provides a Linux environment.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>WSL 2 is recommended for better performance and full Linux kernel compatibility.</p>
+</div>
+<section id="step-1-install-wsl">
+<h3>Step 1: Install WSL<a class="headerlink" href="#step-1-install-wsl" title="Link to this heading">#</a></h3>
+<p>Open PowerShell as Administrator:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span> <span class="p">-</span><span class="n">-install</span>
+</pre></div>
+</div>
+<p>This installs Ubuntu as the default distribution. Reboot when prompted.</p>
+</section>
+<section id="step-2-install-cdo-in-wsl">
+<h3>Step 2: Install CDO in WSL<a class="headerlink" href="#step-2-install-cdo-in-wsl" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>cdo
+</pre></div>
+</div>
+</section>
+<section id="step-3-access-windows-files-from-wsl">
+<h3>Step 3: Access Windows Files from WSL<a class="headerlink" href="#step-3-access-windows-files-from-wsl" title="Link to this heading">#</a></h3>
+<p>Your Windows files are available under <code class="docutils literal notranslate"><span class="pre">/mnt/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Access C:\ drive</span>
+<span class="nb">cd</span><span class="w"> </span>/mnt/c/Users/YourName/
+
+<span class="c1"># Access D:\ drive</span>
+<span class="nb">cd</span><span class="w"> </span>/mnt/d/
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Processing files on Windows drives from WSL can be slower. For large datasets, copy files into the WSL filesystem (<code class="docutils literal notranslate"><span class="pre">~/</span></code>) for better performance.</p>
+</div>
+</section>
+<section id="alternative-using-git-bash">
+<h3>Alternative: Using Git BASH<a class="headerlink" href="#alternative-using-git-bash" title="Link to this heading">#</a></h3>
+<p>For simple CDO operations, you can also use Git BASH on Windows, but WSL is strongly recommended for full functionality.</p>
+</section>
+</section>
+<section id="install-via-conda">
+<h2>Install via Conda<a class="headerlink" href="#install-via-conda" title="Link to this heading">#</a></h2>
+<p>Conda provides a cross-platform installation method that works on Linux, macOS, and Windows.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Conda installation works on Windows natively without WSL, though WSL is still recommended for best performance.</p>
+</div>
+<section id="install-miniconda-or-anaconda">
+<h3>Install Miniconda or Anaconda<a class="headerlink" href="#install-miniconda-or-anaconda" title="Link to this heading">#</a></h3>
+<p>If you don’t have conda installed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download Miniconda (recommended)</span>
+wget<span class="w"> </span>https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash<span class="w"> </span>Miniconda3-latest-Linux-x86_64.sh
+</pre></div>
+</div>
+</section>
+<section id="install-cdo-from-conda-forge">
+<h3>Install CDO from conda-forge<a class="headerlink" href="#install-cdo-from-conda-forge" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>cdo
+</pre></div>
+</div>
+</section>
+<section id="create-a-dedicated-environment">
+<h3>Create a Dedicated Environment<a class="headerlink" href="#create-a-dedicated-environment" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>cdo_env<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>cdo<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
+conda<span class="w"> </span>activate<span class="w"> </span>cdo_env
+</pre></div>
+</div>
+</section>
+<section id="install-additional-tools-in-the-environment">
+<h3>Install Additional Tools in the Environment<a class="headerlink" href="#install-additional-tools-in-the-environment" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>nco<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>netcdf4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>xarray<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>matplotlib<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>jupyter
+</pre></div>
+</div>
+</section>
+<section id="check-cdo-version-in-conda">
+<h3>Check CDO Version in Conda<a class="headerlink" href="#check-cdo-version-in-conda" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>list<span class="w"> </span>cdo
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use conda environments to isolate different versions of CDO or to avoid dependency conflicts.</p>
+</div>
+</section>
+</section>
+<section id="docker-installation">
+<h2>Docker Installation<a class="headerlink" href="#docker-installation" title="Link to this heading">#</a></h2>
+<p>Docker provides a containerized environment with CDO pre-installed.</p>
+<section id="pull-an-existing-docker-image">
+<h3>Pull an Existing Docker Image<a class="headerlink" href="#pull-an-existing-docker-image" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>joesfer/cdo
+</pre></div>
+</div>
+</section>
+<section id="run-cdo-in-docker">
+<h3>Run CDO in Docker<a class="headerlink" href="#run-cdo-in-docker" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Interactive session</span>
+docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/data<span class="w"> </span>joesfer/cdo<span class="w"> </span>bash
+
+<span class="c1"># Run a CDO command directly</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/data<span class="w"> </span>joesfer/cdo<span class="w"> </span>cdo<span class="w"> </span>--version
+</pre></div>
+</div>
+</section>
+<section id="create-your-own-dockerfile">
+<h3>Create Your Own Dockerfile<a class="headerlink" href="#create-your-own-dockerfile" title="Link to this heading">#</a></h3>
+<div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>cdo<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>nco<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>netcdf-bin<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>python3-pip<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+
+<span class="k">RUN</span><span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>xarray<span class="w"> </span>netcdf4<span class="w"> </span>matplotlib
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/data</span>
+
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;bash&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Build and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>cdo-env<span class="w"> </span>.
+docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/data<span class="w"> </span>cdo-env
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Mount your data directory with <code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">$(pwd):/data</span></code> to access local files inside the container.</p>
+</div>
+</section>
+</section>
+<section id="build-from-source">
+<h2>Build from Source<a class="headerlink" href="#build-from-source" title="Link to this heading">#</a></h2>
+<p>Building from source gives you the latest features and full control over compilation options.</p>
+<section id="step-1-download-source-code">
+<h3>Step 1: Download Source Code<a class="headerlink" href="#step-1-download-source-code" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://code.mpimet.mpg.de/attachments/download/29643/cdo-2.4.0.tar.gz
+tar<span class="w"> </span>-xzf<span class="w"> </span>cdo-2.4.0.tar.gz
+<span class="nb">cd</span><span class="w"> </span>cdo-2.4.0
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Check <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo/files">https://code.mpimet.mpg.de/projects/cdo/files</a> for the latest version.</p>
+</div>
+</section>
+<section id="step-2-install-build-dependencies">
+<h3>Step 2: Install Build Dependencies<a class="headerlink" href="#step-2-install-build-dependencies" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ubuntu/Debian</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>libnetcdf-dev<span class="w"> </span>libeccodes-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libhdf5-dev<span class="w"> </span>libproj-dev<span class="w"> </span>libudunits2-dev<span class="w"> </span>libszip-dev
+
+<span class="c1"># Fedora</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>gcc<span class="w"> </span>gcc-c++<span class="w"> </span>make<span class="w"> </span>netcdf-devel<span class="w"> </span>eccodes-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>hdf5-devel<span class="w"> </span>proj-devel<span class="w"> </span>udunits2-devel<span class="w"> </span>szip-devel
+</pre></div>
+</div>
+</section>
+<section id="step-3-configure">
+<h3>Step 3: Configure<a class="headerlink" href="#step-3-configure" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure<span class="w"> </span>--prefix<span class="o">=</span>/usr/local<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--with-netcdf<span class="o">=</span>/usr<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--with-eccodes<span class="o">=</span>/usr<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--with-hdf5<span class="o">=</span>/usr<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--with-proj<span class="o">=</span>/usr<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--with-udunits2<span class="o">=</span>/usr
+</pre></div>
+</div>
+</section>
+<section id="step-4-compile-and-install">
+<h3>Step 4: Compile and Install<a class="headerlink" href="#step-4-compile-and-install" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
+sudo<span class="w"> </span>make<span class="w"> </span>install
+</pre></div>
+</div>
+</section>
+<section id="step-5-verify">
+<h3>Step 5: Verify<a class="headerlink" href="#step-5-verify" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>which<span class="w"> </span>cdo
+cdo<span class="w"> </span>--version
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-j$(nproc)</span></code> flag speeds up compilation by using all CPU cores.</p>
+</div>
+</section>
+</section>
+<section id="verify-installation">
+<h2>Verify Installation<a class="headerlink" href="#verify-installation" title="Link to this heading">#</a></h2>
+<p>After installation, verify CDO is working correctly:</p>
+<section id="check-version">
+<h3>Check Version<a class="headerlink" href="#check-version" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Climate</span> <span class="n">Data</span> <span class="n">Operators</span> <span class="n">version</span> <span class="mf">2.4.0</span> <span class="p">(</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mpimet</span><span class="o">.</span><span class="n">mpg</span><span class="o">.</span><span class="n">de</span><span class="o">/</span><span class="n">cdo</span><span class="p">)</span>
+<span class="n">Copyright</span><span class="p">:</span> <span class="mi">2005</span><span class="o">-</span><span class="mi">2024</span> <span class="n">Max</span> <span class="n">Planck</span> <span class="n">Institute</span> <span class="k">for</span> <span class="n">Meteorology</span>
+<span class="o">...</span>
+
+<span class="n">Compiled</span> <span class="k">with</span><span class="p">:</span> <span class="o">...</span>
+<span class="n">Features</span><span class="p">:</span> <span class="mi">32</span><span class="n">GB</span> <span class="n">HDF5</span> <span class="n">NC2</span> <span class="n">NC4</span> <span class="n">NC5</span> <span class="n">SZIP</span> <span class="n">UDUNITS2</span> <span class="n">PROJ2</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Check the “Features” line - it shows which formats and capabilities are enabled.</p>
+</div>
+</section>
+<section id="check-help">
+<h3>Check Help<a class="headerlink" href="#check-help" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>--help<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+</pre></div>
+</div>
+</section>
+<section id="run-a-simple-test">
+<h3>Run a Simple Test<a class="headerlink" href="#run-a-simple-test" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a test file</span>
+cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-random,10,5,3<span class="w"> </span>test.nc
+
+<span class="c1"># Display info</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>test.nc
+
+<span class="c1"># Clean up</span>
+rm<span class="w"> </span>test.nc
+</pre></div>
+</div>
+</section>
+<section id="test-format-support">
+<h3>Test Format Support<a class="headerlink" href="#test-format-support" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test NetCDF</span>
+cdo<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;NC4\|HDF5&quot;</span>
+
+<span class="c1"># Test GRIB support</span>
+cdo<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;eccodes\|grib&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="install-nco-tools">
+<h2>Install NCO Tools<a class="headerlink" href="#install-nco-tools" title="Link to this heading">#</a></h2>
+<p>The NetCDF Operators (NCO) toolkit complements CDO with additional capabilities.</p>
+<section id="install-via-package-manager">
+<h3>Install via Package Manager<a class="headerlink" href="#install-via-package-manager" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ubuntu/Debian</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>nco
+
+<span class="c1"># Fedora</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>nco
+
+<span class="c1"># macOS</span>
+brew<span class="w"> </span>install<span class="w"> </span>nco
+
+<span class="c1"># Conda</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>nco
+</pre></div>
+</div>
+</section>
+<section id="key-nco-commands">
+<h3>Key NCO Commands<a class="headerlink" href="#key-nco-commands" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ncdump</span></code></p></td>
+<td><p>Display NetCDF file contents in text form</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ncgen</span></code></p></td>
+<td><p>Generate NetCDF file from text description</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ncks</span></code></p></td>
+<td><p>Extract, hyperslab, and manipulate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ncatted</span></code></p></td>
+<td><p>Edit attributes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ncrename</span></code></p></td>
+<td><p>Rename dimensions and variables</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ncwa</span></code></p></td>
+<td><p>Weighted averages</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CDO and NCO are complementary. CDO excels at climate-specific operations, while NCO provides low-level NetCDF manipulation.</p>
+</div>
+</section>
+</section>
+<section id="install-python-dependencies">
+<h2>Install Python Dependencies<a class="headerlink" href="#install-python-dependencies" title="Link to this heading">#</a></h2>
+<p>Python is often used alongside CDO for analysis and visualization.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Install Python packages in a virtual environment or conda environment to avoid conflicts.</p>
+</div>
+<section id="create-a-virtual-environment">
+<h3>Create a Virtual Environment<a class="headerlink" href="#create-a-virtual-environment" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>cdo_venv
+<span class="nb">source</span><span class="w"> </span>cdo_venv/bin/activate
+</pre></div>
+</div>
+</section>
+<section id="required-packages">
+<h3>Required Packages<a class="headerlink" href="#required-packages" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>xarray<span class="w"> </span>netcdf4<span class="w"> </span>matplotlib<span class="w"> </span>cartopy<span class="w"> </span>jupyter
+</pre></div>
+</div>
+</section>
+<section id="optional-packages">
+<h3>Optional Packages<a class="headerlink" href="#optional-packages" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>scipy<span class="w"> </span>seaborn<span class="w"> </span>dask<span class="w"> </span>cfgrib<span class="w"> </span>pygrib
+</pre></div>
+</div>
+</section>
+<section id="verify-python-setup">
+<h3>Verify Python Setup<a class="headerlink" href="#verify-python-setup" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;xarray version: </span><span class="si">{</span><span class="n">xr</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;numpy version: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading">#</a></h2>
+<p>Set these environment variables to optimize CDO behavior:</p>
+<section id="cdo-specific-variables">
+<h3>CDO-Specific Variables<a class="headerlink" href="#cdo-specific-variables" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set number of threads for parallel operations</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CDO_NTHREADS</span><span class="o">=</span><span class="m">4</span>
+
+<span class="c1"># Set temporary directory (ensure enough space)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CDO_TEMPDIR</span><span class="o">=</span>/scratch/tmp
+
+<span class="c1"># Show verbose warnings</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CDO_VERBOSE</span><span class="o">=</span><span class="m">1</span>
+
+<span class="c1"># Set memory limit (in GB)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CDO_MEMORY</span><span class="o">=</span><span class="m">8</span>
+</pre></div>
+</div>
+</section>
+<section id="add-to-shell-configuration">
+<h3>Add to Shell Configuration<a class="headerlink" href="#add-to-shell-configuration" title="Link to this heading">#</a></h3>
+<p>Add these lines to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> or <code class="docutils literal notranslate"><span class="pre">~/.zshrc</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># CDO Configuration</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CDO_NTHREADS</span><span class="o">=</span><span class="k">$(</span>nproc<span class="k">)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CDO_TEMPDIR</span><span class="o">=</span>/tmp/cdo
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$CDO_TEMPDIR</span>
+
+<span class="c1"># NCO Configuration</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">NCARG_ROOT</span><span class="o">=</span>/usr/local
+</pre></div>
+</div>
+</section>
+<section id="path-configuration">
+<h3>Path Configuration<a class="headerlink" href="#path-configuration" title="Link to this heading">#</a></h3>
+<p>Ensure CDO is in your PATH:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if CDO is accessible</span>
+which<span class="w"> </span>cdo
+
+<span class="c1"># Add to PATH if needed (for custom installations)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/bin:<span class="nv">$PATH</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="troubleshooting-common-issues">
+<h2>Troubleshooting Common Issues<a class="headerlink" href="#troubleshooting-common-issues" title="Link to this heading">#</a></h2>
+<section id="problem-command-not-found-cdo">
+<h3>Problem: “command not found: cdo”<a class="headerlink" href="#problem-command-not-found-cdo" title="Link to this heading">#</a></h3>
+<div class="note admonition">
+<p class="admonition-title">Solution</p>
+<ol class="arabic simple">
+<li><p>Verify installation: <code class="docutils literal notranslate"><span class="pre">dpkg</span> <span class="pre">-l</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">cdo</span></code> (Ubuntu) or <code class="docutils literal notranslate"><span class="pre">rpm</span> <span class="pre">-qa</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">cdo</span></code> (Fedora)</p></li>
+<li><p>Check PATH: <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$PATH</span></code></p></li>
+<li><p>Reinstall if necessary: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">--reinstall</span> <span class="pre">cdo</span></code></p></li>
+</ol>
+</div>
+</section>
+<section id="problem-grib-api-functions-not-found">
+<h3>Problem: “GRIB API functions not found”<a class="headerlink" href="#problem-grib-api-functions-not-found" title="Link to this heading">#</a></h3>
+<div class="note admonition">
+<p class="admonition-title">Solution</p>
+<ol class="arabic simple">
+<li><p>Install eccodes: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">libeccodes-dev</span></code></p></li>
+<li><p>Reinstall CDO: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">--reinstall</span> <span class="pre">cdo</span></code></p></li>
+<li><p>Verify: <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">--version</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">-i</span> <span class="pre">grib</span></code></p></li>
+</ol>
+</div>
+</section>
+<section id="problem-cdo-version-is-too-old">
+<h3>Problem: CDO version is too old<a class="headerlink" href="#problem-cdo-version-is-too-old" title="Link to this heading">#</a></h3>
+<div class="note admonition">
+<p class="admonition-title">Solution</p>
+<p>Option 1: Install via conda for latest version:
+conda install -c conda-forge cdo</p>
+<p>Option 2: Build from source (see Build from Source section)</p>
+<p>Option 3: Use Docker: docker pull joesfer/cdo</p>
+</div>
+</section>
+<section id="problem-cannot-allocate-memory-error">
+<h3>Problem: “Cannot allocate memory” error<a class="headerlink" href="#problem-cannot-allocate-memory-error" title="Link to this heading">#</a></h3>
+<div class="note admonition">
+<p class="admonition-title">Solution</p>
+<ol class="arabic simple">
+<li><p>Reduce CDO memory usage:
+export CDO_MEMORY=4</p></li>
+<li><p>Use chunking: cdo -z zip_5 <a class="reference external" href="http://input.nc">input.nc</a> <a class="reference external" href="http://output.nc">output.nc</a></p></li>
+<li><p>Process smaller temporal subsets:
+cdo seldate,2020-01-01,2020-12-31 <a class="reference external" href="http://bigfile.nc">bigfile.nc</a> <a class="reference external" href="http://subset.nc">subset.nc</a></p></li>
+<li><p>Use CDO’s streaming with pipes instead of intermediate files</p></li>
+</ol>
+</div>
+</section>
+<section id="problem-netcdf-not-a-valid-netcdf-id">
+<h3>Problem: “NetCDF: Not a valid NetCDF ID”<a class="headerlink" href="#problem-netcdf-not-a-valid-netcdf-id" title="Link to this heading">#</a></h3>
+<div class="note admonition">
+<p class="admonition-title">Solution</p>
+<ol class="arabic simple">
+<li><p>Check file integrity: <code class="docutils literal notranslate"><span class="pre">ncdump</span> <span class="pre">-h</span> <span class="pre">file.nc</span></code></p></li>
+<li><p>Verify file format: <code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">file.nc</span></code></p></li>
+<li><p>Try opening with different format flag: <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">-f</span> <span class="pre">nc</span> <span class="pre">copy</span> <span class="pre">damaged.nc</span> <span class="pre">fixed.nc</span></code></p></li>
+<li><p>File may be corrupted - check source</p></li>
+</ol>
+</div>
+</section>
+<section id="problem-slow-performance-on-large-files">
+<h3>Problem: Slow performance on large files<a class="headerlink" href="#problem-slow-performance-on-large-files" title="Link to this heading">#</a></h3>
+<div class="note admonition">
+<p class="admonition-title">Solution</p>
+<ol class="arabic simple">
+<li><p>Enable parallel processing:
+export CDO_NTHREADS=8</p></li>
+<li><p>Use compression to reduce I/O:
+cdo -z zip_5 -f nc copy input.grib <a class="reference external" href="http://output.nc">output.nc</a></p></li>
+<li><p>Use faster storage (SSD instead of HDD)</p></li>
+<li><p>Avoid processing across WSL filesystem boundaries</p></li>
+</ol>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For the best performance, always process files inside the Linux filesystem (not on mounted Windows drives) when using WSL.</p>
+</div>
+</section>
+</section>
+<section id="hands-on-exercises">
+<h2>Hands-On Exercises<a class="headerlink" href="#hands-on-exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-1-install-cdo-on-your-platform">
+<h3>Exercise 1: Install CDO on Your Platform<a class="headerlink" href="#exercise-1-install-cdo-on-your-platform" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-installation-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 10 </span></p>
+<section id="exercise-content">
+<p>Install CDO using the method appropriate for your operating system.</p>
+<p>After installation, record:</p>
+<ol class="arabic simple">
+<li><p>The installation method you used</p></li>
+<li><p>The installed CDO version</p></li>
+<li><p>The compiled features (from <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">--version</span></code>)</p></li>
+<li><p>Whether GRIB support is enabled</p></li>
+</ol>
+</section>
+</div>
+</section>
+<section id="exercise-2-compare-installation-methods">
+<h3>Exercise 2: Compare Installation Methods<a class="headerlink" href="#exercise-2-compare-installation-methods" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-installation-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 11 </span></p>
+<section id="exercise-content">
+<p>If possible, install CDO using two different methods (e.g., package manager and conda) and compare:</p>
+<ol class="arabic simple">
+<li><p>Version numbers</p></li>
+<li><p>Compiled features</p></li>
+<li><p>File sizes (<code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">cdo</span></code> then <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-lh</span></code>)</p></li>
+<li><p>Performance (time <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">-random,1000000,100,10</span> <span class="pre">test.nc</span></code>)</p></li>
+</ol>
+<p>Create a table comparing the methods.</p>
+</section>
+</div>
+</section>
+<section id="exercise-3-set-up-a-complete-environment">
+<h3>Exercise 3: Set Up a Complete Environment<a class="headerlink" href="#exercise-3-set-up-a-complete-environment" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-installation-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 12 </span></p>
+<section id="exercise-content">
+<p>Set up a complete climate data processing environment:</p>
+<ol class="arabic simple">
+<li><p>Install CDO</p></li>
+<li><p>Install NCO tools</p></li>
+<li><p>Create a Python virtual environment with xarray, netcdf4, and matplotlib</p></li>
+<li><p>Set up environment variables in your shell config</p></li>
+<li><p>Verify everything works with a simple test:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cdo<span class="w"> </span>-f<span class="w"> </span>nc<span class="w"> </span>-random,100,10,5<span class="w"> </span>test.nc
+ncdump<span class="w"> </span>-h<span class="w"> </span>test.nc
+python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import xarray as xr; print(xr.open_dataset(&#39;test.nc&#39;))&quot;</span>
+rm<span class="w"> </span>test.nc
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="exercise-4-docker-setup">
+<h3>Exercise 4: Docker Setup<a class="headerlink" href="#exercise-4-docker-setup" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-installation-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 13 </span></p>
+<section id="exercise-content">
+<p>If you have Docker installed, create a portable CDO environment:</p>
+<ol class="arabic simple">
+<li><p>Pull the joesfer/cdo image</p></li>
+<li><p>Run CDO inside a container</p></li>
+<li><p>Mount a local directory and process a file</p></li>
+<li><p>Create a Dockerfile with CDO + Python support</p></li>
+<li><p>Build and test your image</p></li>
+</ol>
+</section>
+</div>
+</section>
+<section id="exercise-5-troubleshooting-scenarios">
+<h3>Exercise 5: Troubleshooting Scenarios<a class="headerlink" href="#exercise-5-troubleshooting-scenarios" title="Link to this heading">#</a></h3>
+<div class="exercise admonition" id="ex-installation-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 14 </span></p>
+<section id="exercise-content">
+<p>Simulate and resolve common issues:</p>
+<ol class="arabic simple">
+<li><p><strong>Missing GRIB support</strong>: Run <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">--version</span></code> and check the Features line</p>
+<ul class="simple">
+<li><p>If GRIB support is missing, install the necessary libraries</p></li>
+</ul>
+</li>
+<li><p><strong>PATH issue</strong>: Temporarily rename CDO with <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">mv</span> <span class="pre">$(which</span> <span class="pre">cdo)</span> <span class="pre">/usr/local/bin/cdo_backup</span></code></p>
+<ul class="simple">
+<li><p>Then find it again and restore it</p></li>
+</ul>
+</li>
+<li><p><strong>Version check</strong>: Check your CDO version against the latest release at <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo">https://code.mpimet.mpg.de/projects/cdo</a></p>
+<ul class="simple">
+<li><p>If outdated, plan an upgrade strategy</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</div>
+</section>
+</section>
+<section id="quiz">
+<h2>Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Quiz</p>
+<p>Test your knowledge of CDO installation and setup.</p>
+</div>
+<div class="exercise admonition" id="q-installation-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 15 </span> (Question 1: Which command installs CDO on Ubuntu/Debian systems?)</p>
+<section id="exercise-content">
+<p>A. <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">cdo</span></code><br />
+B. <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">cdo</span></code><br />
+C. <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dnf</span> <span class="pre">install</span> <span class="pre">cdo</span></code><br />
+D. <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">cdo</span></code></p>
+</section>
+</div>
+<div class="solution admonition" id="book/installation-solution-6">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-installation-1"> Exercise 15 (Question 1: Which command installs CDO on Ubuntu/Debian systems?)</a></p>
+<section id="solution-content">
+<p>B. <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">cdo</span></code></p>
+</section>
+</div>
+<div class="exercise admonition" id="q-installation-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 16 </span> (Question 2: What is the recommended way to install CDO on Windows?)</p>
+<section id="exercise-content">
+<p>A. Direct Windows installer<br />
+B. Windows Subsystem for Linux (WSL)<br />
+C. Chocolatey<br />
+D. Cygwin</p>
+</section>
+</div>
+<div class="solution admonition" id="book/installation-solution-8">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-installation-2"> Exercise 16 (Question 2: What is the recommended way to install CDO on Windows?)</a></p>
+<section id="solution-content">
+<p>B. Windows Subsystem for Linux (WSL)</p>
+</section>
+</div>
+<div class="exercise admonition" id="q-installation-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 17 </span> (Question 3: Which environment variable controls CDO’s thread count for parallel operations?)</p>
+<section id="exercise-content">
+<p>A. <code class="docutils literal notranslate"><span class="pre">CDO_THREADS</span></code><br />
+B. <code class="docutils literal notranslate"><span class="pre">OMP_NUM_THREADS</span></code><br />
+C. <code class="docutils literal notranslate"><span class="pre">CDO_NTHREADS</span></code><br />
+D. <code class="docutils literal notranslate"><span class="pre">NPROC</span></code></p>
+</section>
+</div>
+<div class="solution admonition" id="book/installation-solution-10">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-installation-3"> Exercise 17 (Question 3: Which environment variable controls CDO's thread count for parallel operations?)</a></p>
+<section id="solution-content">
+<p>C. <code class="docutils literal notranslate"><span class="pre">CDO_NTHREADS</span></code></p>
+</section>
+</div>
+<div class="exercise admonition" id="q-installation-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 18 </span> (Question 4: Which command correctly installs CDO via conda?)</p>
+<section id="exercise-content">
+<p>A. <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">cdo</span></code><br />
+B. <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">cdo</span></code><br />
+C. <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">mpimet</span> <span class="pre">cdo</span></code><br />
+D. <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">cdo</span></code></p>
+</section>
+</div>
+<div class="solution admonition" id="book/installation-solution-12">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#q-installation-4"> Exercise 18 (Question 4: Which command correctly installs CDO via conda?)</a></p>
+<section id="solution-content">
+<p>B. <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">cdo</span></code></p>
+</section>
+</div>
+<p>```{exercise} Question 5: Which feature line in <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">--version</span></code> output indicates GRIB2 support?
+:label: q-installation-5</p>
+<p>A. <code class="docutils literal notranslate"><span class="pre">GRIB2</span></code><br />
+B. <code class="docutils literal notranslate"><span class="pre">ECCODES</span></code><br />
+C. <code class="docutils literal notranslate"><span class="pre">GRIB</span></code><br />
+D. <code class="docutils literal notranslate"><span class="pre">GRIB_API</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+```{solution} q-installation-5
+B. `ECCODES` (or `GRIB_API` in older versions)
+</pre></div>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this module, we covered:</p>
+<ul class="simple">
+<li><p><strong>System requirements</strong>: CDO runs on Linux, macOS, and Windows (via WSL)</p></li>
+<li><p><strong>Package manager installation</strong>:</p>
+<ul>
+<li><p>Ubuntu/Debian: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">cdo</span></code></p></li>
+<li><p>Fedora/CentOS: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dnf</span> <span class="pre">install</span> <span class="pre">cdo</span></code></p></li>
+<li><p>macOS: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">cdo</span></code></p></li>
+<li><p>Windows: WSL + <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">cdo</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Conda installation</strong>: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">cdo</span></code></p></li>
+<li><p><strong>Docker</strong>: <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">joesfer/cdo</span></code></p></li>
+<li><p><strong>Build from source</strong>: For latest features and customization</p></li>
+<li><p><strong>Verification</strong>: <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">--version</span></code> and <code class="docutils literal notranslate"><span class="pre">cdo</span> <span class="pre">--help</span></code></p></li>
+<li><p><strong>Supporting tools</strong>: NCO (<code class="docutils literal notranslate"><span class="pre">ncdump</span></code>, <code class="docutils literal notranslate"><span class="pre">ncgen</span></code>, <code class="docutils literal notranslate"><span class="pre">ncks</span></code>), Python (xarray, netcdf4)</p></li>
+<li><p><strong>Environment variables</strong>: <code class="docutils literal notranslate"><span class="pre">CDO_NTHREADS</span></code>, <code class="docutils literal notranslate"><span class="pre">CDO_TEMPDIR</span></code>, <code class="docutils literal notranslate"><span class="pre">CDO_MEMORY</span></code></p></li>
+<li><p><strong>Troubleshooting</strong>: Common issues and solutions</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Key Points</p>
+<ul class="simple">
+<li><p>Package manager installation is simplest for most users</p></li>
+<li><p>Conda provides cross-platform consistency and latest versions</p></li>
+<li><p>WSL is required for full CDO functionality on Windows</p></li>
+<li><p>Always verify compiled features after installation</p></li>
+<li><p>Set up environment variables for optimal performance</p></li>
+</ul>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>CDO Download Page: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo/files">https://code.mpimet.mpg.de/projects/cdo/files</a></p></li>
+<li><p>Conda-Forge CDO: <a class="reference external" href="https://anaconda.org/conda-forge/cdo">https://anaconda.org/conda-forge/cdo</a></p></li>
+<li><p>Docker CDO Image: <a class="reference external" href="https://hub.docker.com/r/joesfer/cdo">https://hub.docker.com/r/joesfer/cdo</a></p></li>
+<li><p>WSL Installation Guide: <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install">https://docs.microsoft.com/en-us/windows/wsl/install</a></p></li>
+<li><p>NCO Toolkit: <a class="reference external" href="http://nco.sourceforge.net/">http://nco.sourceforge.net/</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Module 1: Introduction to Climate Data Operators</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="basics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Module 3: Linux Basics for Climate Data Processing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-requirements">System Requirements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-dependencies">Required Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-on-ubuntu-debian">Install on Ubuntu/Debian</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-with-full-format-support">Install with Full Format Support</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-package-version">Verify Package Version</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-on-fedora-centos-rhel">Install on Fedora/CentOS/RHEL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fedora">Fedora</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centos-rhel-8-with-epel">CentOS/RHEL 8+ with EPEL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enable-powertools-for-dependencies">Enable PowerTools for Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-supporting-libraries">Install Supporting Libraries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-on-macos-via-homebrew">Install on macOS via Homebrew</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-installation">Basic Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-with-all-options">Install with All Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-available-formula-options">Check Available Formula Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-cdo">Update CDO</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-on-windows-via-wsl">Install on Windows via WSL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-install-wsl">Step 1: Install WSL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-cdo-in-wsl">Step 2: Install CDO in WSL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-access-windows-files-from-wsl">Step 3: Access Windows Files from WSL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-using-git-bash">Alternative: Using Git BASH</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-via-conda">Install via Conda</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-miniconda-or-anaconda">Install Miniconda or Anaconda</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-cdo-from-conda-forge">Install CDO from conda-forge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-dedicated-environment">Create a Dedicated Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-additional-tools-in-the-environment">Install Additional Tools in the Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-cdo-version-in-conda">Check CDO Version in Conda</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-installation">Docker Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pull-an-existing-docker-image">Pull an Existing Docker Image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-cdo-in-docker">Run CDO in Docker</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-your-own-dockerfile">Create Your Own Dockerfile</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-from-source">Build from Source</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-download-source-code">Step 1: Download Source Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-build-dependencies">Step 2: Install Build Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-configure">Step 3: Configure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-compile-and-install">Step 4: Compile and Install</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-verify">Step 5: Verify</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-installation">Verify Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-version">Check Version</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-help">Check Help</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-a-simple-test">Run a Simple Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-format-support">Test Format Support</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-nco-tools">Install NCO Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-via-package-manager">Install via Package Manager</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-nco-commands">Key NCO Commands</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-python-dependencies">Install Python Dependencies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-virtual-environment">Create a Virtual Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-packages">Required Packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-packages">Optional Packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-python-setup">Verify Python Setup</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variables">Environment Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdo-specific-variables">CDO-Specific Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-to-shell-configuration">Add to Shell Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#path-configuration">Path Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-common-issues">Troubleshooting Common Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-command-not-found-cdo">Problem: “command not found: cdo”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-grib-api-functions-not-found">Problem: “GRIB API functions not found”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-cdo-version-is-too-old">Problem: CDO version is too old</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-cannot-allocate-memory-error">Problem: “Cannot allocate memory” error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-netcdf-not-a-valid-netcdf-id">Problem: “NetCDF: Not a valid NetCDF ID”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-slow-performance-on-large-files">Problem: Slow performance on large files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-exercises">Hands-On Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-install-cdo-on-your-platform">Exercise 1: Install CDO on Your Platform</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-compare-installation-methods">Exercise 2: Compare Installation Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-set-up-a-complete-environment">Exercise 3: Set Up a Complete Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-docker-setup">Exercise 4: Docker Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-troubleshooting-scenarios">Exercise 5: Troubleshooting Scenarios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

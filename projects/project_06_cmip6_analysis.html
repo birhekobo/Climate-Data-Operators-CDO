@@ -1,0 +1,1584 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Project 6: CMIP6 Multi-Model Analysis &#8212; Climate Data Operators (CDO): Complete Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=90f4557f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'projects/project_06_cmip6_analysis';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Project 7: Climate Dashboard" href="project_07_climate_dashboard.html" />
+    <link rel="prev" title="Project 5: ERA5 Data Processing Pipeline" href="project_05_era5_pipeline.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../book/introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Climate Data Operators (CDO): Complete Training - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../book/introduction.html">
+                    Module 1: Introduction to Climate Data Operators
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/installation.html">Module 2: Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/basics.html">Module 3: Linux Basics for Climate Data Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Core CDO Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/operators.html">Module 4: CDO Operators and File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/netcdf.html">Module 5: Working with NetCDF Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/grib.html">Module 6: Working with GRIB Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis Techniques</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/temporal.html">Module 7: Temporal Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/spatial.html">Module 8: Spatial Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/statistics.html">Module 9: Statistical Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/climate_indices.html">Module 10: Climate Indices and Extremes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/workflows.html">Module 11: Advanced Workflows and Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../book/projects.html">Module 12: Capstone Projects</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book/references.html">References and Further Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_01_intro.html">Exercise 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_02_file_ops.html">Exercise 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_03_temporal.html">Exercise 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_04_spatial.html">Exercise 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/exercise_05_statistics.html">Exercise 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_intro_to_cdo.html">Getting Started with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_temporal_analysis.html">Temporal Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_spatial_analysis.html">Spatial Analysis with CDO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_statistics_and_indices.html">Climate Statistics and Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_python_cdo_workflow.html">Python + CDO Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_visualization.html">Climate Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="project_01_rainfall_trend.html">Project 1: Rainfall Trend Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_02_temperature_trend.html">Project 2: Temperature Trend Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_03_drought_index.html">Project 3: Drought Index Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_04_climate_extremes.html">Project 4: Climate Extremes Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_05_era5_pipeline.html">Project 5: ERA5 Data Processing Pipeline</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 6: CMIP6 Multi-Model Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_07_climate_dashboard.html">Project 7: Climate Dashboard</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quizzes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_01.html">Quiz 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_02.html">Quiz 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_03.html">Quiz 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_04.html">Quiz 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quizzes/quiz_05.html">Quiz 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_01_intro.html">Solution 1: CDO Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_02_file_ops.html">Solution 2: File Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_03_temporal.html">Solution 3: Temporal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_04_spatial.html">Solution 4: Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/solution_05_statistics.html">Solution 5: Statistics and Climate Indices</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/edit/main/./projects/project_06_cmip6_analysis.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO/issues/new?title=Issue%20on%20page%20%2Fprojects/project_06_cmip6_analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/projects/project_06_cmip6_analysis.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Project 6: CMIP6 Multi-Model Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">Data Requirements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cmip6-data-overview">CMIP6 Data Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-models">Recommended Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-organization">Data Organization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-cmip6-data-access">Real CMIP6 Data Access</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-workflow">Step-by-Step Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-inventory-and-inspection">Step 1: Data Inventory and Inspection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-check-model-grids">Step 2: Check Model Grids</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-regrid-all-models-to-common-grid">Step 3: Regrid All Models to Common Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-select-common-time-period">Step 4: Select Common Time Period</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-compute-multi-model-ensemble-statistics">Step 5: Compute Multi-Model Ensemble Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-compute-future-changes">Step 6: Compute Future Changes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-model-agreement-analysis">Step 7: Model Agreement Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-time-series-extraction">Step 8: Time Series Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-9-visualization">Step 9: Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-mean-maps-python">Multi-Model Mean Maps (Python)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-time-series-python">Multi-Model Time Series (Python)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-spread-uncertainty-map">Model Spread/Uncertainty Map</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-bash-workflow-script">Complete Bash Workflow Script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-outputs">Expected Outputs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-ensemble-mean-maps">1. Multi-Model Ensemble Mean Maps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-spread-uncertainty-maps">2. Model Spread / Uncertainty Maps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-agreement-maps">3. Model Agreement Maps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-plots">4. Time Series Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics-table">5. Summary Statistics Table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-guidance">Interpretation Guidance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-look-for">What to Look For</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-questions">Key Questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls">Common Pitfalls</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-criteria">Evaluation Criteria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-activities">Extension Activities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-options">Advanced Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-project-integration">Cross-Project Integration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="project-6-cmip6-multi-model-analysis">
+<h1>Project 6: CMIP6 Multi-Model Analysis<a class="headerlink" href="#project-6-cmip6-multi-model-analysis" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Climate projections from multiple models are essential for understanding future climate change and its uncertainties. This project guides you through processing CMIP6 data from multiple climate models, regridding to a common grid, computing multi-model ensemble statistics, and analyzing projected changes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Estimated time</strong>: 3-4 hours
+<strong>Prerequisites</strong>: Modules 1-11, understanding of climate modeling concepts</p>
+</div>
+</section>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After completing this project, you will be able to:</p>
+<ul class="simple">
+<li><p>Organize and manage multi-model CMIP6 datasets</p></li>
+<li><p>Regrid different models to a common grid using CDO interpolation</p></li>
+<li><p>Compute multi-model ensemble mean and spread</p></li>
+<li><p>Compare different SSP scenarios (SSP2-4.5 vs SSP5-8.5)</p></li>
+<li><p>Compute and visualize projected climate changes</p></li>
+<li><p>Quantify model agreement and uncertainty</p></li>
+<li><p>Create publication-quality ensemble summary figures</p></li>
+</ul>
+</section>
+<section id="data-requirements">
+<h2>Data Requirements<a class="headerlink" href="#data-requirements" title="Link to this heading">#</a></h2>
+<section id="cmip6-data-overview">
+<h3>CMIP6 Data Overview<a class="headerlink" href="#cmip6-data-overview" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Variables</strong></p></td>
+<td><p>tas (surface temperature), pr (precipitation), ps (surface pressure)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Experiments</strong></p></td>
+<td><p>historical, ssp245, ssp585</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Models</strong></p></td>
+<td><p>Minimum 3-5 models recommended</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Temporal resolution</strong></p></td>
+<td><p>Monthly or annual</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Time periods</strong></p></td>
+<td><p>Historical (1850-2014), Future (2015-2100)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="recommended-models">
+<h3>Recommended Models<a class="headerlink" href="#recommended-models" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Model</p></th>
+<th class="head"><p>Institution</p></th>
+<th class="head"><p>Resolution (lat x lon)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ACCESS-CM2</p></td>
+<td><p>CSIRO/BoM (Australia)</p></td>
+<td><p>1.25 x 1.875</p></td>
+</tr>
+<tr class="row-odd"><td><p>CanESM5</p></td>
+<td><p>CCCma (Canada)</p></td>
+<td><p>2.8 x 2.8</p></td>
+</tr>
+<tr class="row-even"><td><p>CNRM-CM6-1</p></td>
+<td><p>CNRM/CERFACS (France)</p></td>
+<td><p>1.4 x 1.4</p></td>
+</tr>
+<tr class="row-odd"><td><p>HadGEM3-GC31-LL</p></td>
+<td><p>MOHC (UK)</p></td>
+<td><p>1.25 x 1.875</p></td>
+</tr>
+<tr class="row-even"><td><p>MPI-ESM1-2-LR</p></td>
+<td><p>MPI-M (Germany)</p></td>
+<td><p>1.9 x 1.9</p></td>
+</tr>
+<tr class="row-odd"><td><p>MRI-ESM2-0</p></td>
+<td><p>MRI (Japan)</p></td>
+<td><p>1.1 x 1.1</p></td>
+</tr>
+<tr class="row-even"><td><p>NorESM2-LM</p></td>
+<td><p>NCC (Norway)</p></td>
+<td><p>1.9 x 2.5</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="data-organization">
+<h3>Data Organization<a class="headerlink" href="#data-organization" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>cmip6_data/<span class="o">{</span>raw,processed,output<span class="o">}</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>cmip6_data/raw/<span class="o">{</span>historical,ssp245,ssp585<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="real-cmip6-data-access">
+<h3>Real CMIP6 Data Access<a class="headerlink" href="#real-cmip6-data-access" title="Link to this heading">#</a></h3>
+<p>Use real CMIP6 model output from the Earth System Grid Federation (ESGF). The example below uses <code class="docutils literal notranslate"><span class="pre">intake-esm</span></code> to discover real model data from the Pangeo CMIP6 catalog:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="sd">&quot;&quot;&quot;Discover real CMIP6 model output from an ESGF catalog.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">intake</span>
+
+<span class="c1"># Real CMIP6 catalog served by Pangeo/ESGF</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">intake</span><span class="o">.</span><span class="n">open_esm_datastore</span><span class="p">(</span>
+    <span class="s2">&quot;https://storage.googleapis.com/cmip6/pangeo-cmip6.json&quot;</span>
+<span class="p">)</span>
+
+<span class="n">subset</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">experiment_id</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;historical&quot;</span><span class="p">,</span> <span class="s2">&quot;ssp245&quot;</span><span class="p">,</span> <span class="s2">&quot;ssp585&quot;</span><span class="p">],</span>
+    <span class="n">table_id</span><span class="o">=</span><span class="s2">&quot;Amon&quot;</span><span class="p">,</span>
+    <span class="n">variable_id</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;tas&quot;</span><span class="p">,</span> <span class="s2">&quot;pr&quot;</span><span class="p">],</span>
+    <span class="n">member_id</span><span class="o">=</span><span class="s2">&quot;r1i1p1f1&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">subset</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> real CMIP6 datasets&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load real model output into xarray datasets for the CDO workflow</span>
+<span class="n">dsets</span> <span class="o">=</span> <span class="n">subset</span><span class="o">.</span><span class="n">to_dataset_dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">dsets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">sizes</span><span class="p">))</span>
+    <span class="k">break</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CMIP6 files must be obtained from ESGF (or the catalog above) before running the CDO workflow. Do not substitute artificially generated fields for published multi-model results.</p>
+</div>
+</section>
+</section>
+<section id="step-by-step-workflow">
+<h2>Step-by-Step Workflow<a class="headerlink" href="#step-by-step-workflow" title="Link to this heading">#</a></h2>
+<section id="step-1-data-inventory-and-inspection">
+<h3>Step 1: Data Inventory and Inspection<a class="headerlink" href="#step-1-data-inventory-and-inspection" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inventory of available models and scenarios</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Data Inventory ===&quot;</span>
+<span class="k">for</span><span class="w"> </span>scenario<span class="w"> </span><span class="k">in</span><span class="w"> </span>historical<span class="w"> </span>ssp245<span class="w"> </span>ssp585<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--- </span><span class="nv">$scenario</span><span class="s2"> ---&quot;</span>
+<span class="w">    </span>ls<span class="w"> </span>cmip6_data/raw/<span class="nv">$scenario</span>/
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Models available: </span><span class="k">$(</span>ls<span class="w"> </span>cmip6_data/raw/<span class="nv">$scenario</span>/*.nc<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># Inspect individual model output</span>
+cdo<span class="w"> </span>sinfo<span class="w"> </span>cmip6_data/raw/historical/ACCESS-CM2_historical_tas_pr.nc
+cdo<span class="w"> </span>griddes<span class="w"> </span>cmip6_data/raw/historical/ACCESS-CM2_historical_tas_pr.nc
+cdo<span class="w"> </span>showyear<span class="w"> </span>cmip6_data/raw/historical/ACCESS-CM2_historical_tas_pr.nc
+cdo<span class="w"> </span>ntime<span class="w"> </span>cmip6_data/raw/historical/ACCESS-CM2_historical_tas_pr.nc
+</pre></div>
+</div>
+</section>
+<section id="step-2-check-model-grids">
+<h3>Step 2: Check Model Grids<a class="headerlink" href="#step-2-check-model-grids" title="Link to this heading">#</a></h3>
+<p>Different CMIP6 models have different native grids. Check before regridding:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Model Grids ===&quot;</span>
+<span class="k">for</span><span class="w"> </span>model<span class="w"> </span><span class="k">in</span><span class="w"> </span>ACCESS-CM2<span class="w"> </span>CanESM5<span class="w"> </span>CNRM-CM6-1<span class="w"> </span>MPI-ESM1-2-LR<span class="w"> </span>MRI-ESM2-0<span class="w"> </span>NorESM2-LM<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">file</span><span class="o">=</span><span class="s2">&quot;cmip6_data/raw/historical/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_historical_tas_pr.nc&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nv">nlon</span><span class="o">=</span><span class="k">$(</span>cdo<span class="w"> </span>-s<span class="w"> </span>griddes<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;xsize&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $3}&#39;</span><span class="k">)</span>
+<span class="w">        </span><span class="nv">nlat</span><span class="o">=</span><span class="k">$(</span>cdo<span class="w"> </span>-s<span class="w"> </span>griddes<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;ysize&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $3}&#39;</span><span class="k">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$model</span><span class="s2">: </span><span class="si">${</span><span class="nv">nlon</span><span class="si">}</span><span class="s2">x</span><span class="si">${</span><span class="nv">nlat</span><span class="si">}</span><span class="s2"> grid points&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="step-3-regrid-all-models-to-common-grid">
+<h3>Step 3: Regrid All Models to Common Grid<a class="headerlink" href="#step-3-regrid-all-models-to-common-grid" title="Link to this heading">#</a></h3>
+<p>Use a standard 2.5 x 2.5 degree grid for the ensemble:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Regrid all models to common grid</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;cmip6_data/processed&quot;</span>
+<span class="nv">TARGET_GRID</span><span class="o">=</span><span class="s2">&quot;r144x73&quot;</span><span class="w">  </span><span class="c1"># 2.5 degree grid (144x73)</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Regridding Models ===&quot;</span>
+
+<span class="c1"># Create target grid description</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/target_grid.txt&quot;</span><span class="w"> </span><span class="s">&lt;&lt; EOF</span>
+<span class="s">gridtype = lonlat</span>
+<span class="s">xsize = 144</span>
+<span class="s">ysize = 73</span>
+<span class="s">xfirst = 0</span>
+<span class="s">xinc = 2.5</span>
+<span class="s">yfirst = -90</span>
+<span class="s">yinc = 2.5</span>
+<span class="s">EOF</span>
+
+<span class="k">for</span><span class="w"> </span>model<span class="w"> </span><span class="k">in</span><span class="w"> </span>ACCESS-CM2<span class="w"> </span>CanESM5<span class="w"> </span>CNRM-CM6-1<span class="w"> </span>MPI-ESM1-2-LR<span class="w"> </span>MRI-ESM2-0<span class="w"> </span>NorESM2-LM<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>scenario<span class="w"> </span><span class="k">in</span><span class="w"> </span>historical<span class="w"> </span>ssp245<span class="w"> </span>ssp585<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nv">infile</span><span class="o">=</span><span class="s2">&quot;cmip6_data/raw/</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_tas_pr.nc&quot;</span>
+<span class="w">        </span><span class="nv">outfile</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_regrid.nc&quot;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  WARNING: </span><span class="nv">$infile</span><span class="s2"> not found, skipping&quot;</span>
+<span class="w">            </span><span class="k">continue</span>
+<span class="w">        </span><span class="k">fi</span>
+
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  Regridding </span><span class="nv">$model</span><span class="s2"> (</span><span class="nv">$scenario</span><span class="s2">)...&quot;</span>
+
+<span class="w">        </span><span class="c1"># Conservative remapping recommended for precipitation</span>
+<span class="w">        </span><span class="c1"># Bilinear for temperature</span>
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-remapbil,<span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/target_grid.txt&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-selname,tas<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/tmp_</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_tas.nc&quot;</span>
+
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-remapcon,<span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/target_grid.txt&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-selname,pr<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/tmp_</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_pr.nc&quot;</span>
+
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-merge<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/tmp_</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_tas.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/tmp_</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_pr.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="s2">&quot;</span><span class="nv">$outfile</span><span class="s2">&quot;</span>
+
+<span class="w">        </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/tmp_</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_tas.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">              </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/tmp_</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_pr.nc&quot;</span>
+
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;    -&gt; </span><span class="nv">$outfile</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="k">done</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Regridding complete!&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">remapbil</span></code> (bilinear) for smooth fields like temperature and <code class="docutils literal notranslate"><span class="pre">remapcon</span></code> (conservative) for precipitation to preserve mass balance.</p>
+</div>
+</section>
+<section id="step-4-select-common-time-period">
+<h3>Step 4: Select Common Time Period<a class="headerlink" href="#step-4-select-common-time-period" title="Link to this heading">#</a></h3>
+<p>All models must have data for the same time period for ensemble statistics:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select 1981-2014 for historical and 2081-2100 for future</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/clim_periods&quot;</span>
+
+<span class="k">for</span><span class="w"> </span>model<span class="w"> </span><span class="k">in</span><span class="w"> </span>ACCESS-CM2<span class="w"> </span>CanESM5<span class="w"> </span>CNRM-CM6-1<span class="w"> </span>MPI-ESM1-2-LR<span class="w"> </span>MRI-ESM2-0<span class="w"> </span>NorESM2-LM<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="c1"># Historical baseline (1981-2014)</span>
+<span class="w">    </span><span class="nv">infile</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_historical_regrid.nc&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-selyear,1981/2014<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/clim_periods/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_historical_1981-2014.nc&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+
+<span class="w">    </span><span class="c1"># Future periods (2081-2100)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>scenario<span class="w"> </span><span class="k">in</span><span class="w"> </span>ssp245<span class="w"> </span>ssp585<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nv">infile</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_regrid.nc&quot;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-selyear,2081/2100<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/clim_periods/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_2081-2100.nc&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="step-5-compute-multi-model-ensemble-statistics">
+<h3>Step 5: Compute Multi-Model Ensemble Statistics<a class="headerlink" href="#step-5-compute-multi-model-ensemble-statistics" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensemble mean and spread for historical period</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Multi-Model Ensemble Statistics ===&quot;</span>
+
+<span class="k">for</span><span class="w"> </span>scenario<span class="w"> </span><span class="k">in</span><span class="w"> </span>historical<span class="w"> </span>ssp245<span class="w"> </span>ssp585<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">period</span><span class="o">=</span><span class="s2">&quot;1981-2014&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$scenario</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;historical&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nv">period</span><span class="o">=</span><span class="s2">&quot;2081-2100&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Computing ensemble for </span><span class="nv">$scenario</span><span class="s2"> (</span><span class="nv">$period</span><span class="s2">)...&quot;</span>
+
+<span class="w">    </span><span class="c1"># Collect all model files for this scenario/period</span>
+<span class="w">    </span><span class="nv">files</span><span class="o">=</span><span class="k">$(</span>ls<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/clim_periods/&quot;</span>*_<span class="si">${</span><span class="nv">scenario</span><span class="si">}</span>_<span class="si">${</span><span class="nv">period</span><span class="si">}</span>.nc<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span>
+<span class="w">    </span><span class="nv">nfiles</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$files</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-w<span class="k">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nfiles</span><span class="s2">&quot;</span><span class="w"> </span>-lt<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  WARNING: Only </span><span class="nv">$nfiles</span><span class="s2"> models available for </span><span class="nv">$scenario</span><span class="s2">, need &gt;= 3&quot;</span>
+<span class="w">        </span><span class="k">continue</span>
+<span class="w">    </span><span class="k">fi</span>
+
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  Using </span><span class="nv">$nfiles</span><span class="s2"> models&quot;</span>
+
+<span class="w">    </span><span class="c1"># Compute annual means first</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>model<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$files</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nv">basename</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$model</span><span class="s2">&quot;</span><span class="w"> </span>.nc<span class="k">)</span>
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-yearmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$model</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/tmp_</span><span class="si">${</span><span class="nv">basename</span><span class="si">}</span><span class="s2">_annual.nc&quot;</span>
+<span class="w">    </span><span class="k">done</span>
+
+<span class="w">    </span><span class="c1"># Ensemble mean</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-ensmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>/tmp_*_<span class="si">${</span><span class="nv">scenario</span><span class="si">}</span>_<span class="si">${</span><span class="nv">period</span><span class="si">}</span>_annual.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensmean_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_annual.nc&quot;</span>
+
+<span class="w">    </span><span class="c1"># Ensemble standard deviation (model spread)</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-ensstd<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>/tmp_*_<span class="si">${</span><span class="nv">scenario</span><span class="si">}</span>_<span class="si">${</span><span class="nv">period</span><span class="si">}</span>_annual.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensstd_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_annual.nc&quot;</span>
+
+<span class="w">    </span><span class="c1"># Ensemble min and max</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-ensmin<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>/tmp_*_<span class="si">${</span><span class="nv">scenario</span><span class="si">}</span>_<span class="si">${</span><span class="nv">period</span><span class="si">}</span>_annual.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensmin_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_annual.nc&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-ensmax<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>/tmp_*_<span class="si">${</span><span class="nv">scenario</span><span class="si">}</span>_<span class="si">${</span><span class="nv">period</span><span class="si">}</span>_annual.nc<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensmax_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_annual.nc&quot;</span>
+
+<span class="w">    </span><span class="c1"># Coefficient of variation (spread / mean)</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-div<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensstd_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_annual.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensmean_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_annual.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/enscv_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_annual.nc&quot;</span>
+
+<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>/tmp_*_<span class="si">${</span><span class="nv">scenario</span><span class="si">}</span>_<span class="si">${</span><span class="nv">period</span><span class="si">}</span>_annual.nc
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="step-6-compute-future-changes">
+<h3>Step 6: Compute Future Changes<a class="headerlink" href="#step-6-compute-future-changes" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Future Changes ===&quot;</span>
+
+<span class="c1"># Change = future - historical</span>
+<span class="k">for</span><span class="w"> </span>scenario<span class="w"> </span><span class="k">in</span><span class="w"> </span>ssp245<span class="w"> </span>ssp585<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Change for </span><span class="nv">$scenario</span><span class="s2">...&quot;</span>
+
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-sub<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensmean_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_annual.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensmean_historical_annual.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/change_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+
+<span class="w">    </span><span class="c1"># Signal-to-noise ratio</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-div<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/change_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensstd_historical_annual.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/snr_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+
+<span class="w">    </span><span class="c1"># Relative change for precipitation (percent)</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-mulc,100<span class="w"> </span>-div<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/change_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensmean_historical_annual.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/change_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_percent.nc&quot;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="step-7-model-agreement-analysis">
+<h3>Step 7: Model Agreement Analysis<a class="headerlink" href="#step-7-model-agreement-analysis" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Model Agreement ===&quot;</span>
+
+<span class="k">for</span><span class="w"> </span>scenario<span class="w"> </span><span class="k">in</span><span class="w"> </span>ssp245<span class="w"> </span>ssp585<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="c1"># For each model, compute sign of change</span>
+<span class="w">    </span><span class="nv">sign_dir</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/sign_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sign_dir</span><span class="s2">&quot;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>model<span class="w"> </span><span class="k">in</span><span class="w"> </span>ACCESS-CM2<span class="w"> </span>CanESM5<span class="w"> </span>CNRM-CM6-1<span class="w"> </span>MPI-ESM1-2-LR<span class="w"> </span>MRI-ESM2-0<span class="w"> </span>NorESM2-LM<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nv">his_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/clim_periods/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_historical_1981-2014.nc&quot;</span>
+<span class="w">        </span><span class="nv">fut_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/clim_periods/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_2081-2100.nc&quot;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$his_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$fut_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nv">his_mean</span><span class="o">=</span><span class="k">$(</span>cdo<span class="w"> </span>-s<span class="w"> </span>-timmean<span class="w"> </span>-yearmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$his_file</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">            </span><span class="nv">fut_mean</span><span class="o">=</span><span class="k">$(</span>cdo<span class="w"> </span>-s<span class="w"> </span>-timmean<span class="w"> </span>-yearmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$fut_file</span><span class="s2">&quot;</span><span class="k">)</span>
+
+<span class="w">            </span><span class="c1"># Sign of change for temperature (warming = positive)</span>
+<span class="w">            </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-gec,0<span class="w"> </span>-sub<span class="w"> </span>-timmean<span class="w"> </span>-yearmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$fut_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                </span>-timmean<span class="w"> </span>-yearmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$his_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                </span><span class="s2">&quot;</span><span class="nv">$sign_dir</span><span class="s2">/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_sign_tas.nc&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">done</span>
+
+<span class="w">    </span><span class="c1"># Fraction of models agreeing</span>
+<span class="w">    </span><span class="nv">sign_files</span><span class="o">=</span><span class="k">$(</span>ls<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sign_dir</span><span class="s2">&quot;</span>/*_sign_tas.nc<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span>
+<span class="w">    </span><span class="nv">nsign</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sign_files</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-w<span class="k">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nsign</span><span class="s2">&quot;</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-ensmean<span class="w"> </span><span class="nv">$sign_files</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/agreement_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+
+<span class="w">        </span><span class="c1"># Convert to percentage</span>
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-mulc,100<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/agreement_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/agreement_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_percent.nc&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="step-8-time-series-extraction">
+<h3>Step 8: Time Series Extraction<a class="headerlink" href="#step-8-time-series-extraction" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Time Series Extraction ===&quot;</span>
+
+<span class="c1"># Full ensemble time series for variables</span>
+<span class="k">for</span><span class="w"> </span>scenario<span class="w"> </span><span class="k">in</span><span class="w"> </span>historical<span class="w"> </span>ssp245<span class="w"> </span>ssp585<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="c1"># Collect model annual means</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>model<span class="w"> </span><span class="k">in</span><span class="w"> </span>ACCESS-CM2<span class="w"> </span>CanESM5<span class="w"> </span>CNRM-CM6-1<span class="w"> </span>MPI-ESM1-2-LR<span class="w"> </span>MRI-ESM2-0<span class="w"> </span>NorESM2-LM<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nv">infile</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_regrid.nc&quot;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-yearmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ts_</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="k">done</span>
+
+<span class="c1"># Ensemble mean time series for each scenario</span>
+<span class="k">for</span><span class="w"> </span>scenario<span class="w"> </span><span class="k">in</span><span class="w"> </span>historical<span class="w"> </span>ssp245<span class="w"> </span>ssp585<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">files</span><span class="o">=</span><span class="k">$(</span>ls<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>/ts_*_<span class="si">${</span><span class="nv">scenario</span><span class="si">}</span>.nc<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span>
+<span class="w">    </span><span class="nv">nfiles</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$files</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-w<span class="k">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nfiles</span><span class="s2">&quot;</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-ensmean<span class="w"> </span><span class="nv">$files</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ts_ensmean_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-ensstd<span class="w"> </span><span class="nv">$files</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ts_ensstd_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-ensmin<span class="w"> </span><span class="nv">$files</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ts_ensmin_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-ensmax<span class="w"> </span><span class="nv">$files</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ts_ensmax_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+
+<span class="w">        </span><span class="c1"># Global average</span>
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-fldmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ts_ensmean_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ts_ensmean_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_global.nc&quot;</span>
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-fldmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ts_ensstd_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ts_ensstd_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_global.nc&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="step-9-visualization">
+<h3>Step 9: Visualization<a class="headerlink" href="#step-9-visualization" title="Link to this heading">#</a></h3>
+<section id="multi-model-mean-maps-python">
+<h4>Multi-Model Mean Maps (Python)<a class="headerlink" href="#multi-model-mean-maps-python" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Load ensemble outputs</span>
+<span class="n">ensmean_his</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;cmip6_data/processed/ensmean_historical_annual.nc&quot;</span><span class="p">)</span>
+<span class="n">ensmean_ssp585</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;cmip6_data/processed/ensmean_ssp585_annual.nc&quot;</span><span class="p">)</span>
+<span class="n">change_ssp585</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;cmip6_data/processed/change_ssp585.nc&quot;</span><span class="p">)</span>
+<span class="n">agreement</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;cmip6_data/processed/agreement_ssp585_percent.nc&quot;</span><span class="p">)</span>
+
+<span class="n">tas_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ensmean_his</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="c1"># Historical mean</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">im1</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">ensmean_his</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">ensmean_his</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span>
+                    <span class="n">ensmean_his</span><span class="p">[</span><span class="n">tas_var</span><span class="p">]</span> <span class="o">-</span> <span class="mf">273.15</span><span class="p">,</span>
+                    <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+                    <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Historical Temperature (1981-2014, C)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># Future mean</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">ensmean_ssp585</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">ensmean_ssp585</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span>
+                    <span class="n">ensmean_ssp585</span><span class="p">[</span><span class="n">tas_var</span><span class="p">]</span> <span class="o">-</span> <span class="mf">273.15</span><span class="p">,</span>
+                    <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+                    <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Future Temperature (2081-2100, SSP5-8.5, C)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># Temperature change</span>
+<span class="n">change_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">change_ssp585</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">im3</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">change_ssp585</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">change_ssp585</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span>
+                    <span class="n">change_ssp585</span><span class="p">[</span><span class="n">change_var</span><span class="p">],</span>
+                    <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+                    <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlOrRd&quot;</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Temperature Change (C, SSP5-8.5)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im3</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># Model agreement</span>
+<span class="n">agree_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">agreement</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax4</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">im4</span> <span class="o">=</span> <span class="n">ax4</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">agreement</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">agreement</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">agreement</span><span class="p">[</span><span class="n">agree_var</span><span class="p">],</span>
+                    <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+                    <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlGn&quot;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Model Agreement on Warming (%)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im4</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax4</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;CMIP6 Multi-Model Analysis - Temperature&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;cmip6_temperature_maps.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saved: cmip6_temperature_maps.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="multi-model-time-series-python">
+<h4>Multi-Model Time Series (Python)<a class="headerlink" href="#multi-model-time-series-python" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
+<span class="c1"># Load global time series</span>
+<span class="n">scenarios</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Historical&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;historical&quot;</span><span class="p">,</span> <span class="s2">&quot;gray&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;SSP2-4.5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;ssp245&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;SSP5-8.5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;ssp585&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Temperature</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="p">(</span><span class="n">scenario</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span> <span class="ow">in</span> <span class="n">scenarios</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;cmip6_data/processed/ts_ensmean_</span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">_global.nc&quot;</span><span class="p">)</span>
+        <span class="n">std</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;cmip6_data/processed/ts_ensstd_</span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">_global.nc&quot;</span><span class="p">)</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mean</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">years</span> <span class="o">=</span> <span class="n">mean</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">mean_vals</span> <span class="o">=</span> <span class="n">mean</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">-</span> <span class="mf">273.15</span>  <span class="c1"># K to C</span>
+        <span class="n">std_vals</span> <span class="o">=</span> <span class="n">std</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">mean_vals</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">mean_vals</span> <span class="o">-</span> <span class="n">std_vals</span><span class="p">,</span> <span class="n">mean_vals</span> <span class="o">+</span> <span class="n">std_vals</span><span class="p">,</span>
+                          <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Could not load </span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Global Mean Temperature (C)&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;CMIP6 Multi-Model Ensemble Temperature Projections&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Historical end&quot;</span><span class="p">)</span>
+
+<span class="c1"># Precipitation (change relative to 1981-2010)</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="p">(</span><span class="n">scenario</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span> <span class="ow">in</span> <span class="n">scenarios</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;cmip6_data/processed/ts_ensmean_</span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">_global.nc&quot;</span><span class="p">)</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mean</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">scenario</span> <span class="o">==</span> <span class="s2">&quot;historical&quot;</span><span class="p">:</span>
+            <span class="c1"># Use historical baseline</span>
+            <span class="n">his_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">mean</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="mi">34</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">years</span> <span class="o">=</span> <span class="n">mean</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">values</span>
+            <span class="n">fut_mean</span> <span class="o">=</span> <span class="n">mean</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+            <span class="c1"># Express as anomaly relative to historical</span>
+            <span class="c1"># This would need precipitation data loaded separately</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+<span class="c1"># For the time series, also plot individual models</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Temperature Anomaly (C)&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Scenario Comparison - Global Mean Temperature&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Plot anomaly from 1981-2010</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="p">(</span><span class="n">scenario</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span> <span class="ow">in</span> <span class="n">scenarios</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;cmip6_data/processed/ts_ensmean_</span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">_global.nc&quot;</span><span class="p">)</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mean</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">vals</span> <span class="o">=</span> <span class="n">mean</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">-</span> <span class="mf">273.15</span>
+
+        <span class="k">if</span> <span class="n">scenario</span> <span class="o">==</span> <span class="s2">&quot;historical&quot;</span><span class="p">:</span>
+            <span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vals</span><span class="p">[:</span><span class="mi">30</span><span class="p">])</span>  <span class="c1"># 1981-2010</span>
+            <span class="n">vals</span> <span class="o">=</span> <span class="n">vals</span> <span class="o">-</span> <span class="n">baseline</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">vals</span> <span class="o">=</span> <span class="n">vals</span> <span class="o">-</span> <span class="n">baseline</span>
+
+        <span class="n">years</span> <span class="o">=</span> <span class="n">mean</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">vals</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not process </span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;1.5C warming&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;2C warming&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;cmip6_timeseries.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saved: cmip6_timeseries.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="model-spread-uncertainty-map">
+<h4>Model Spread/Uncertainty Map<a class="headerlink" href="#model-spread-uncertainty-map" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Compare SSP2-4.5 and SSP5-8.5</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+                          <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mi">0</span><span class="p">)})</span>
+
+<span class="n">scenarios</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;ssp245&quot;</span><span class="p">,</span> <span class="s2">&quot;SSP2-4.5&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;ssp585&quot;</span><span class="p">,</span> <span class="s2">&quot;SSP5-8.5&quot;</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="p">(</span><span class="n">scenario</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scenarios</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">change</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cmip6_data/processed/change_</span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="p">)</span>
+        <span class="n">std</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cmip6_data/processed/ensstd_</span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">_annual.nc&quot;</span><span class="p">)</span>
+
+        <span class="n">var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">change</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">std_var</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">std</span><span class="o">.</span><span class="n">data_vars</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Change map</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">change</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">change</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">change</span><span class="p">[</span><span class="n">var</span><span class="p">],</span>
+                          <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+                          <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlOrRd&quot;</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> Temperature Change (C)&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+        <span class="c1"># Spread (uncertainty)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">im2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">std</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">std</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">std</span><span class="p">[</span><span class="n">std_var</span><span class="p">],</span>
+                           <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+                           <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;OrRd&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> Model Spread (C)&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                          <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;CMIP6 Scenario Comparison - Change and Uncertainty&quot;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;cmip6_uncertainty.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saved: cmip6_uncertainty.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="complete-bash-workflow-script">
+<h2>Complete Bash Workflow Script<a class="headerlink" href="#complete-bash-workflow-script" title="Link to this heading">#</a></h2>
+<p>Save as <code class="docutils literal notranslate"><span class="pre">cmip6_analysis.sh</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># =============================================================================</span>
+<span class="c1"># CMIP6 Multi-Model Analysis Pipeline</span>
+<span class="c1"># Climate Data Operators (CDO) Training</span>
+<span class="c1"># =============================================================================</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+config<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nv">RAW_DIR</span><span class="o">=</span><span class="s2">&quot;cmip6_data/raw&quot;</span>
+<span class="w">    </span><span class="nv">PROC_DIR</span><span class="o">=</span><span class="s2">&quot;cmip6_data/processed&quot;</span>
+<span class="w">    </span><span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;cmip6_data/output&quot;</span>
+<span class="w">    </span><span class="nv">TARGET_GRID</span><span class="o">=</span><span class="s2">&quot;r144x73&quot;</span>
+
+<span class="w">    </span><span class="nv">MODELS</span><span class="o">=</span><span class="s2">&quot;ACCESS-CM2 CanESM5 CNRM-CM6-1 MPI-ESM1-2-LR MRI-ESM2-0 NorESM2-LM&quot;</span>
+<span class="w">    </span><span class="nv">SCENARIOS</span><span class="o">=</span><span class="s2">&quot;historical ssp245 ssp585&quot;</span>
+<span class="w">    </span><span class="nv">HIST_PERIOD</span><span class="o">=</span><span class="s2">&quot;1981-2014&quot;</span>
+<span class="w">    </span><span class="nv">FUT_PERIOD</span><span class="o">=</span><span class="s2">&quot;2081-2100&quot;</span>
+
+<span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PROC_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== CMIP6 Multi-Model Analysis ===&quot;</span>
+config
+
+<span class="c1"># Step 1-3: Regrid all models</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[1/5] Regridding models...&quot;</span>
+<span class="k">for</span><span class="w"> </span>model<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$MODELS</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>scenario<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$SCENARIOS</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nv">infile</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$RAW_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_tas_pr.nc&quot;</span>
+<span class="w">        </span><span class="nv">outfile</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PROC_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_regrid.nc&quot;</span>
+<span class="w">        </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">continue</span>
+
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-remapbil,<span class="nv">$TARGET_GRID</span><span class="w"> </span>-selname,tas<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">outfile</span><span class="si">}</span><span class="s2">_tas.nc&quot;</span>
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-remapcon,<span class="nv">$TARGET_GRID</span><span class="w"> </span>-selname,pr<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">outfile</span><span class="si">}</span><span class="s2">_pr.nc&quot;</span>
+<span class="w">        </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-merge<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">outfile</span><span class="si">}</span><span class="s2">_tas.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">outfile</span><span class="si">}</span><span class="s2">_pr.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$outfile</span><span class="s2">&quot;</span>
+<span class="w">        </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">outfile</span><span class="si">}</span><span class="s2">_tas.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">outfile</span><span class="si">}</span><span class="s2">_pr.nc&quot;</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="k">done</span>
+
+<span class="c1"># Step 4: Select common periods</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[2/5] Selecting common periods...&quot;</span>
+<span class="k">for</span><span class="w"> </span>model<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$MODELS</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>scenario<span class="w"> </span><span class="k">in</span><span class="w"> </span>historical<span class="w"> </span>ssp245<span class="w"> </span>ssp585<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nv">infile</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PROC_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_regrid.nc&quot;</span>
+<span class="w">        </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">continue</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$scenario</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;historical&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-selyear,<span class="nv">$HIST_PERIOD</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                </span><span class="s2">&quot;</span><span class="nv">$PROC_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">HIST_PERIOD</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-selyear,<span class="nv">$FUT_PERIOD</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$infile</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                </span><span class="s2">&quot;</span><span class="nv">$PROC_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">model</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">FUT_PERIOD</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="k">done</span>
+
+<span class="c1"># Step 5: Ensemble statistics</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[3/5] Computing ensemble statistics...&quot;</span>
+<span class="k">for</span><span class="w"> </span>scenario<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$SCENARIOS</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">period</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HIST_PERIOD</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$scenario</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;historical&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nv">period</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$FUT_PERIOD</span><span class="s2">&quot;</span>
+
+<span class="w">    </span><span class="nv">files</span><span class="o">=</span><span class="k">$(</span>ls<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PROC_DIR</span><span class="s2">&quot;</span>/*_<span class="si">${</span><span class="nv">scenario</span><span class="si">}</span>_<span class="si">${</span><span class="nv">period</span><span class="si">}</span>.nc<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span><span class="k">)</span>
+<span class="w">    </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$files</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">continue</span>
+
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-ensmean<span class="w"> </span><span class="nv">$files</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensmean_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-ensstd<span class="w">  </span><span class="nv">$files</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensstd_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># Step 6: Future changes</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[4/5] Computing future changes...&quot;</span>
+<span class="k">for</span><span class="w"> </span>scenario<span class="w"> </span><span class="k">in</span><span class="w"> </span>ssp245<span class="w"> </span>ssp585<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-sub<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensmean_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensmean_historical.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/change_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>-O<span class="w"> </span>-s<span class="w"> </span>-div<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/change_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensmean_historical.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/rel_change_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># Step 7: Summary</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[5/5] Summary...&quot;</span>
+<span class="k">for</span><span class="w"> </span>scenario<span class="w"> </span><span class="k">in</span><span class="w"> </span>ssp245<span class="w"> </span>ssp585<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--- </span><span class="nv">$scenario</span><span class="s2"> ---&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Global mean change:&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>-s<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>-timmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/change_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Mean temperature:&quot;</span>
+<span class="w">    </span>cdo<span class="w"> </span>-s<span class="w"> </span>output<span class="w"> </span>-fldmean<span class="w"> </span>-timmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensmean_</span><span class="si">${</span><span class="nv">scenario</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="k">done</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Analysis Complete ===&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="expected-outputs">
+<h2>Expected Outputs<a class="headerlink" href="#expected-outputs" title="Link to this heading">#</a></h2>
+<section id="multi-model-ensemble-mean-maps">
+<h3>1. Multi-Model Ensemble Mean Maps<a class="headerlink" href="#multi-model-ensemble-mean-maps" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Historical mean temperature (1981-2014)</p></li>
+<li><p>Future mean temperature (2081-2100, both scenarios)</p></li>
+<li><p>Temperature change map (future minus historical)</p></li>
+</ul>
+</section>
+<section id="model-spread-uncertainty-maps">
+<h3>2. Model Spread / Uncertainty Maps<a class="headerlink" href="#model-spread-uncertainty-maps" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Inter-model standard deviation</p></li>
+<li><p>Coefficient of variation</p></li>
+<li><p>Model min/max range</p></li>
+</ul>
+</section>
+<section id="model-agreement-maps">
+<h3>3. Model Agreement Maps<a class="headerlink" href="#model-agreement-maps" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Percentage of models showing warming</p></li>
+<li><p>Regions of consensus vs. disagreement</p></li>
+</ul>
+</section>
+<section id="time-series-plots">
+<h3>4. Time Series Plots<a class="headerlink" href="#time-series-plots" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Global mean temperature from all models (individual + ensemble mean)</p></li>
+<li><p>Scenario comparison (Historical, SSP2-4.5, SSP5-8.5)</p></li>
+<li><p>Uncertainty envelope (ensemble ± 1 std)</p></li>
+</ul>
+</section>
+<section id="summary-statistics-table">
+<h3>5. Summary Statistics Table<a class="headerlink" href="#summary-statistics-table" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Scenario</p></th>
+<th class="head"><p>Global T change (C)</p></th>
+<th class="head"><p>Range (C)</p></th>
+<th class="head"><p>Model agreement (%)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SSP2-4.5</p></td>
+<td><p>2.1</p></td>
+<td><p>1.5 - 2.8</p></td>
+<td><p>95</p></td>
+</tr>
+<tr class="row-odd"><td><p>SSP5-8.5</p></td>
+<td><p>4.3</p></td>
+<td><p>3.2 - 5.6</p></td>
+<td><p>99</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="interpretation-guidance">
+<h2>Interpretation Guidance<a class="headerlink" href="#interpretation-guidance" title="Link to this heading">#</a></h2>
+<section id="what-to-look-for">
+<h3>What to Look For<a class="headerlink" href="#what-to-look-for" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Spatial patterns of warming</strong>: Land warms faster than ocean; high latitudes warm fastest (polar amplification)</p></li>
+<li><p><strong>Scenario dependence</strong>: Compare SSP2-4.5 (moderate mitigation) with SSP5-8.5 (high emissions)</p></li>
+<li><p><strong>Model agreement</strong>: High in tropics, lower in some regions (e.g., Amazon, Southern Ocean)</p></li>
+<li><p><strong>Uncertainty sources</strong>: Internal variability, model structural differences, scenario uncertainty</p></li>
+</ol>
+</section>
+<section id="key-questions">
+<h3>Key Questions<a class="headerlink" href="#key-questions" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Where is the warming strongest? Where is it weakest?</p></li>
+<li><p>How much does model spread vary by region?</p></li>
+<li><p>Which scenario leads to 2°C vs 3°C global warming?</p></li>
+<li><p>How does model agreement relate to the magnitude of change?</p></li>
+</ul>
+</section>
+<section id="common-pitfalls">
+<h3>Common Pitfalls<a class="headerlink" href="#common-pitfalls" title="Link to this heading">#</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p><strong>Inconsistent grids</strong>: Always verify that all models are on the same grid after regridding</p></li>
+<li><p><strong>Different calendar types</strong>: CMIP6 models use different calendars (365_day, standard, noleap)</p></li>
+<li><p><strong>Missing variables</strong>: Not all models provide all variables — check availability</p></li>
+<li><p><strong>Scenario availability</strong>: Some models may only have certain scenarios</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="evaluation-criteria">
+<h2>Evaluation Criteria<a class="headerlink" href="#evaluation-criteria" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Criterion</p></th>
+<th class="head"><p>Weight</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Data management</p></td>
+<td><p>20%</p></td>
+<td><p>Proper organization of multi-model, multi-scenario data</p></td>
+</tr>
+<tr class="row-odd"><td><p>Regridding</p></td>
+<td><p>20%</p></td>
+<td><p>Correct use of remapbil/remapcon for different variables</p></td>
+</tr>
+<tr class="row-even"><td><p>Ensemble statistics</p></td>
+<td><p>20%</p></td>
+<td><p>Correct computation of mean, spread, and agreement</p></td>
+</tr>
+<tr class="row-odd"><td><p>Scenario comparison</p></td>
+<td><p>15%</p></td>
+<td><p>Clear comparison between different SSP scenarios</p></td>
+</tr>
+<tr class="row-even"><td><p>Visualization</p></td>
+<td><p>15%</p></td>
+<td><p>Publication-quality maps and time series</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interpretation</p></td>
+<td><p>10%</p></td>
+<td><p>Understanding of model uncertainty and agreement</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="extension-activities">
+<h2>Extension Activities<a class="headerlink" href="#extension-activities" title="Link to this heading">#</a></h2>
+<section id="advanced-options">
+<h3>Advanced Options<a class="headerlink" href="#advanced-options" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Seasonal analysis</strong>: Compute changes for DJF and JJA separately</p></li>
+<li><p><strong>Extreme indices</strong>: Compute ETCCDI indices for each model and analyze changes</p></li>
+<li><p><strong>Emergent constraints</strong>: Use present-day variability to constrain future projections</p></li>
+<li><p><strong>Weighted ensembles</strong>: Weight models based on historical performance</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Seasonal analysis</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-seasmean<span class="w"> </span>-timmean<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/ensmean_ssp585.nc&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/seasonal_ssp585.nc&quot;</span>
+cdo<span class="w"> </span>-O<span class="w"> </span>-selseas,3<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/seasonal_ssp585.nc&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/jja_ssp585.nc&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="cross-project-integration">
+<h3>Cross-Project Integration<a class="headerlink" href="#cross-project-integration" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use observed trends from <strong>Projects 1 and 2</strong> to evaluate CMIP6 models</p></li>
+<li><p>Compare CMIP6 extreme projections with <strong>Project 4</strong> historical extremes</p></li>
+<li><p>Include CMIP6 analysis in <strong>Project 8</strong> automated report</p></li>
+<li><p>Feed CMIP6 data into <strong>Project 7</strong> dashboard for interactive exploration</p></li>
+</ul>
+<div class="exercise admonition" id="projects/project_06_cmip6_analysis-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 138 </span></p>
+<section id="exercise-content">
+<p>Complete the multi-model analysis. Compute the ensemble mean and spread for at least 3 models under SSP2-4.5 and SSP5-8.5. Create the change maps and time series. Compare the warming in your region under both scenarios. Discuss: What is the range of uncertainty? Which regions show the highest model agreement?</p>
+</section>
+</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Eyring, V., et al. (2016). Overview of the Coupled Model Intercomparison Project Phase 6. Geoscientific Model Development, 9, 1937-1958.</p></li>
+<li><p>IPCC (2021). Climate Change 2021: The Physical Science Basis. Cambridge University Press.</p></li>
+<li><p>Tebaldi, C., &amp; Knutti, R. (2007). The use of the multi-model ensemble in probabilistic climate projections. Philosophical Transactions of the Royal Society A, 365(1857), 2053-2075.</p></li>
+<li><p>CDO Documentation: <a class="reference external" href="https://code.mpimet.mpg.de/projects/cdo">https://code.mpimet.mpg.de/projects/cdo</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./projects"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="project_05_era5_pipeline.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Project 5: ERA5 Data Processing Pipeline</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="project_07_climate_dashboard.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Project 7: Climate Dashboard</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">Data Requirements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cmip6-data-overview">CMIP6 Data Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-models">Recommended Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-organization">Data Organization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-cmip6-data-access">Real CMIP6 Data Access</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-workflow">Step-by-Step Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-inventory-and-inspection">Step 1: Data Inventory and Inspection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-check-model-grids">Step 2: Check Model Grids</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-regrid-all-models-to-common-grid">Step 3: Regrid All Models to Common Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-select-common-time-period">Step 4: Select Common Time Period</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-compute-multi-model-ensemble-statistics">Step 5: Compute Multi-Model Ensemble Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-compute-future-changes">Step 6: Compute Future Changes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-model-agreement-analysis">Step 7: Model Agreement Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-time-series-extraction">Step 8: Time Series Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-9-visualization">Step 9: Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-mean-maps-python">Multi-Model Mean Maps (Python)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-time-series-python">Multi-Model Time Series (Python)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-spread-uncertainty-map">Model Spread/Uncertainty Map</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-bash-workflow-script">Complete Bash Workflow Script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-outputs">Expected Outputs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-model-ensemble-mean-maps">1. Multi-Model Ensemble Mean Maps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-spread-uncertainty-maps">2. Model Spread / Uncertainty Maps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-agreement-maps">3. Model Agreement Maps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-plots">4. Time Series Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics-table">5. Summary Statistics Table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-guidance">Interpretation Guidance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-look-for">What to Look For</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-questions">Key Questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls">Common Pitfalls</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-criteria">Evaluation Criteria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-activities">Extension Activities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-options">Advanced Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-project-integration">Cross-Project Integration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Birhanu Asmerom, Department of Physics, Wollo University
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
