@@ -130,7 +130,7 @@ All files under `data/` are derived from real observational or reanalysis datase
 
 ## Contributing
 
-Contributions are welcome. Please open an issue or submit a pull request on [GitHub](https://github.com/climate-data-science/Climate-Data-Operators-CDO).
+Contributions are welcome. Please open an issue or submit a pull request on [GitHub](https://github.com/birhekobo/Climate-Data-Operators-CDO).
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/my-feature`)
@@ -149,16 +149,16 @@ If you use this course in your work, please cite it as:
 
 ```bibtex
 @misc{cdo_training_2025,
-  author       = {Climate Data Science Community},
+  author       = {Birhanu Asmerom},
   title        = {{Climate Data Operators (CDO): Complete Training for Climate Data Processing, Analysis, and Visualization}},
   year         = {2025},
   version      = {1.0.0},
-  url          = {https://github.com/climate-data-science/Climate-Data-Operators-CDO}
+  url          = {https://github.com/birhekobo/Climate-Data-Operators-CDO}
 }
 ```
 
 ---
 
 <p align="center">
-  <b>Climate Data Science Community</b> — <a href="https://github.com/climate-data-science/Climate-Data-Operators-CDO">github.com/climate-data-science/Climate-Data-Operators-CDO</a>
+  <b>Birhanu Asmerom</b> — <a href="https://github.com/birhekobo/Climate-Data-Operators-CDO">github.com/birhekobo/Climate-Data-Operators-CDO</a>
 </p>
